@@ -3,14 +3,16 @@
 namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use AdminBundle\Form\Type\ImageType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -60,11 +62,11 @@ class BookAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('genre.basic', ['class' => 'col-md-4', 'name' => null])
+            ->with('book.basic', ['class' => 'col-md-8', 'name' => null])
                 ->add('name', TextType::class, [
                     'label' => 'book.fields.name',
                 ])
-                ->add('description', TextareaType::class, [
+                ->add('description', CKEditorType::class, [
                     'label' => 'book.fields.description',
                     'attr' => [
                         'rows' => 5,
@@ -75,10 +77,23 @@ class BookAdmin extends Admin
                     'required' => false,
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
+                ->add('image', FileType::class, [
+                    'label' => 'book.fields.image',
+                    'required' => false,
+                    'help' => $this->getSubject()->getImage() ?: false,
+                ])
             ->end()
-            ->with('genre.second_basic', ['class' => 'col-md-4', 'name' => null])
+            ->with('book.additional', ['class' => 'col-md-4', 'name' => null])
+                ->add('isActive', null, [
+                    'label' => 'book.fields.is_active',
+                    'required' => false,
+                ])
                 ->add('author', ModelListType::class, [
                     'label' => 'book.fields.author',
+                    'required' => true,
+                ])
+                ->add('series', ModelListType::class, [
+                    'label' => 'book.fields.series',
                     'required' => true,
                 ])
                 ->add('year', IntegerType::class, [
@@ -91,12 +106,6 @@ class BookAdmin extends Admin
                     'multiple' => true,
                     'attr' => ['class' => 'form-control'],
                 ])
-            ->end()
-            ->with('genre.additional', ['class' => 'col-md-4', 'name' => null])
-                ->add('isActive', null, [
-                    'label' => 'book.fields.is_active',
-                    'required' => false,
-                ])
                 ->add('download', IntegerType::class, [
                     'label' => 'book.fields.download',
                     'required' => false,
@@ -108,6 +117,29 @@ class BookAdmin extends Admin
                     'format' => 'YYYY-MM-dd HH:mm',
                     'attr' => ['readonly' => true],
                 ])
-            ->end();
+            ->end()
+            ->with('book.files', ['class' => 'col-md-4', 'name' => null])
+                ->add('fileFb2', FileType::class, [
+                    'label' => 'book.fields.fileFb2',
+                    'required' => false,
+                ])
+                ->add('fileEpub', FileType::class, [
+                    'label' => 'book.fields.fileEpub',
+                    'required' => false,
+                ])
+                ->add('fileRtf', FileType::class, [
+                    'label' => 'book.fields.fileRtf',
+                    'required' => false,
+                ])
+                ->add('fileDjvu', FileType::class, [
+                    'label' => 'book.fields.fileDjvu',
+                    'required' => false,
+                ])
+                ->add('filePdf', FileType::class, [
+                    'label' => 'book.fields.filePdf',
+                    'required' => false,
+                ])
+            ->end()
+        ;
     }
 }

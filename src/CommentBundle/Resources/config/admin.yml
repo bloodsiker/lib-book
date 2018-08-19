@@ -1,0 +1,7 @@
+services:
+    comment_admin:
+        class: CommentBundle\Admin\CommentAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: "group.comment", label: Комментарии }
+        arguments: [~, CommentBundle\Entity\Comment, ~]
+        public: true

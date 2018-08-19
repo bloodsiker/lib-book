@@ -5,6 +5,7 @@ namespace BookBundle\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Book
@@ -30,6 +31,13 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $image;
 
     /**
      * @var string
@@ -61,11 +69,54 @@ class Book
     protected $author;
 
     /**
+     * @var \SeriesBundle\Entity\Series
+     *
+     * @ORM\ManyToOne(targetEntity="SeriesBundle\Entity\Series")
+     * @ORM\JoinColumn(name="series_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $series;
+
+    /**
      * @var integer
      *
      * @ORM\Column(type="integer", length=4, nullable=true)
      */
     protected $pages;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $fileFb2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $fileEpub;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $fileRtf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $fileDjvu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $filePdf;
 
     /**
      * @var boolean
@@ -174,6 +225,30 @@ class Book
     }
 
     /**
+     * Set image
+     *
+     * @param UploadedFile $image
+     *
+     * @return Book
+     */
+    public function setImage(UploadedFile $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Set slug
      *
      * @param string $slug
@@ -270,6 +345,126 @@ class Book
     }
 
     /**
+     * Set fileFb2
+     *
+     * @param UploadedFile $fileFb2
+     *
+     * @return Book
+     */
+    public function setFileFb2(UploadedFile $fileFb2 = null)
+    {
+        $this->fileFb2 = $fileFb2;
+
+        return $this;
+    }
+
+    /**
+     * Get fileFb2
+     *
+     * @return integer
+     */
+    public function getFileFb2()
+    {
+        return $this->fileFb2;
+    }
+
+    /**
+     * Set fileFb2
+     *
+     * @param UploadedFile $fileEpub
+     *
+     * @return Book
+     */
+    public function setFileEpub(UploadedFile $fileEpub = null)
+    {
+        $this->fileEpub = $fileEpub;
+
+        return $this;
+    }
+
+    /**
+     * Get fileEpub
+     *
+     * @return integer
+     */
+    public function getFileEpub()
+    {
+        return $this->fileEpub;
+    }
+
+    /**
+     * Set fileRtf
+     *
+     * @param UploadedFile $fileRtf
+     *
+     * @return Book
+     */
+    public function setFileRtf(UploadedFile $fileRtf = null)
+    {
+        $this->fileRtf = $fileRtf;
+
+        return $this;
+    }
+
+    /**
+     * Get fileRtf
+     *
+     * @return integer
+     */
+    public function getFileRtf()
+    {
+        return $this->fileRtf;
+    }
+
+    /**
+     * Set fileDjvu
+     *
+     * @param UploadedFile $fileDjvu
+     *
+     * @return Book
+     */
+    public function setFileDjvu(UploadedFile $fileDjvu = null)
+    {
+        $this->fileDjvu = $fileDjvu;
+
+        return $this;
+    }
+
+    /**
+     * Get fileDjvu
+     *
+     * @return integer
+     */
+    public function getFileDjvu()
+    {
+        return $this->fileDjvu;
+    }
+
+    /**
+     * Set filePdf
+     *
+     * @param UploadedFile $filePdf
+     *
+     * @return Book
+     */
+    public function setFilePdf(UploadedFile $filePdf = null)
+    {
+        $this->filePdf = $filePdf;
+
+        return $this;
+    }
+
+    /**
+     * Get filePdf
+     *
+     * @return integer
+     */
+    public function getFilePdf()
+    {
+        return $this->filePdf;
+    }
+
+    /**
      * Set author
      *
      * @param \AuthorBundle\Entity\Author $author
@@ -291,6 +486,30 @@ class Book
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set series
+     *
+     * @param \SeriesBundle\Entity\Series $series
+     *
+     * @return Book
+     */
+    public function setSeries(\SeriesBundle\Entity\Series $series = null)
+    {
+        $this->series = $series;
+
+        return $this;
+    }
+
+    /**
+     * Get series
+     *
+     * @return \SeriesBundle\Entity\Series
+     */
+    public function getSeries()
+    {
+        return $this->series;
     }
 
     /**

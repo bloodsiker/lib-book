@@ -25,9 +25,18 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
 
             // Sonata PageBundle ant it dependencies
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle(),
+
+            // Sonata EasyExtendsBundle
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
             // Doctrine2 Behaviors
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+
+            // User bundle
+            new UserBundle\UserBundle(),
 
             // Custom admin controllers, templates, etc.
             new AdminBundle\AdminBundle(),
@@ -38,6 +47,7 @@ class AppKernel extends Kernel
             new AuthorBundle\AuthorBundle(),
             new SeriesBundle\SeriesBundle(),
             new BookBundle\BookBundle(),
+            new CommentBundle\CommentBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

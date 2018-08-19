@@ -4,6 +4,8 @@ imports:
     - { resource: services.yml }
     - { resource: sonata/core.yml }
     - { resource: sonata/admin.yml }
+    - { resource: sonata/user.yml }
+    - { resource: fos/user.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -24,6 +26,8 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
+    templating:
+        engines: ['twig']
     #serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~

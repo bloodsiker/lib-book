@@ -3,7 +3,7 @@ sonata_admin:
     title_logo: /bundles/admin/images/admin_logo.png
     show_mosaic_button: false
     security:
-#        handler: sonata.admin.security.handler.acl
+        handler: sonata.admin.security.handler.acl
         information:
             GUEST:    [VIEW, LIST]
             STAFF:    [EDIT, LIST, CREATE]
@@ -33,12 +33,13 @@ sonata_admin:
                 label: group.series
                 label_catalogue: SeriesBundle
                 icon: <i class="fa fa-list-alt"></i>
+            group.comment:
+                label: group.comments
+                label_catalogue: CommentBundle
+                icon: <i class="fa fa-comment"></i>
 
         blocks:
-            -
-                position: top
-                class: col-md-12
-                type: sonata.admin.block.admin_list
+             - { position: center, type: sonata.admin.block.admin_list }
 
 sonata_block:
     blocks:
