@@ -1,0 +1,71 @@
+{% import 'AppBundle:Block:_articles_macro.html.twig' as article %}
+
+{% if category %}
+    {# build category URL #}
+    {% if category.parent %}
+        {% set category_url = path('articles_with_subcategory', {'category': category.parent.slug, 'subcategory': category.slug}) %}
+    {% else %}
+        {% set category_url = path('articles_without_subcategory', {'category': category.slug}) %}
+    {% endif %}
+
+    {# category title#}
+    {% set category_title = category.translate.title %}
+{% endif %}
+
+{% if settings.dark_header|default(false) and top_article %}
+    </div> {# close .container block  to show fill-width dark block#}
+    <div class="dark-block">
+        <div class="container">
+
+            <section class="content-block content-block--transparent">
+                <div class="row">
+                    <article class="col-xs-12">
+                        {% set top_article_category = top_article.articleHasCategories|first.category %}
+                        <a href="{{ article.article_url(top_article, top_article_category) }}" class="post__photo post__photo--big-title ">
+                            <img src="{{ top_article.image990 ? top_article.image990|imagine_filter('article_990x') : null }}" alt="{{ top_article.translate.title }}">
+                            <div class="img-text--above">
+                                <em class="text__photo__sub-title">{{ top_article_category.translate.title }}</em>
+                                <span class="text__photo__main-title">{{ top_article.translate.title }}</span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+<div class="container"> {# open .container block for sentered content #}
+{% endif %}
+
+<section class="{{ ['content-block', settings.bg_style, settings.cols_type]|join(' ') }}">
+    {% if settings.show_title %}
+        {% if category and settings.filter_by_category is defined and settings.filter_by_category %}
+            {% if settings.last_articles is defined and settings.last_articles %}
+                <h2 class="content-block__title">{{ 'category.fields.title_for_last_article'|trans({}, 'AppBundle') }} <strong>{{ category_title }}</strong></h2>
+            {% else %}
+                {{ article.title(category_title, category_url) }}
+            {% endif %}
+        {% else %}
+            {{ article.title('frontend.block.popular.title'|trans({}, 'AppBundle')) }}
+        {% endif %}
+    {% endif %}
+
+    {% if category.translate.h1Title is defined and category.translate.h1Title is not empty and settings.show_h1_title is defined and settings.show_h1_title %}
+        <h1 class="content-block__title col-xs-12">{{ category.translate.h1Title }}</h1>
+    {% endif %}
+
+    <div class="row" id="category_{{ block.id }}_{{ random() }}">
+        {% include 'AppBundle:Block:_articles_content.html.twig' %}
+    </div>
+
+    {# if set "show load more" -show btn with fake ajax #}
+    {% if( settings.show_more_btn and settings.items_count is defined and articles is defined and settings.items_count <= articles|length + (banner is not null ? 1 : 0) + (banner_second is not null ? 1 : 0)) %}
+        <div class="more-btn-wr">
+            <span class="more-btn" data-big-image="{{ (not settings.dark_header and settings.show_big_image is defined and settings.show_big_image and top_article) ? 1 : 0 }}" data-limit="{{ (settings.items_count is defined and settings.items_count) ? settings.items_count : 0 }}"
+                  data-url="{{ sonata_page_ajax_url(block) }}" data-page="2" data-category="{{ category ? category.id : null }}"
+                  id="more_{{ block.id }}_{{ random() }}">
+                {{ 'frontend.app.more'|trans([], 'AppBundle') }} {{ category_title|default("") }}
+            </span>
+            <a href="#" class="more-btn -hide">Перейти в {{ category_title|default("") }}</a>
+        </div>
+    {% endif %}
+</section>

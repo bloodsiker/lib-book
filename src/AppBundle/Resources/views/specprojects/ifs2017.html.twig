@@ -1,0 +1,46 @@
+{% set requestUri = app.request.requestUri %}
+{% set usingPages =
+    [
+        '/',
+        '/article/ifs2017',
+        '/tags/787-ifs.html',
+        '/article/fashion/tendencii/zachem-london-nuzhen-ukrainskim-dizayneram.html',
+        '/article/fashion/brend/sem-ukrainskih-dizaynerov-pokazhut-kollekcii-v-londone.html'
+    ]
+%}
+
+{# TODO: Remove it after end of specproject ifs-2017 (30 march 2017) #}
+{% if (requestUri in usingPages or '/ifs2017/' in requestUri) and (date() < date('30 march 2017')) %}
+    <!-- START OF SmartSource Data Collector TAG v10.2.29 -->
+    <!-- Copyright (c) 2012 Webtrends Inc.  All rights reserved. -->
+    <script>
+        window.webtrendsAsyncInit=function(){
+            var dcs=new Webtrends.dcs().init({
+                dcsid:"dcs222cuh83x4cqgmljbqcib2_9m4l",
+                domain:"statse.webtrendslive.com",
+                timezone:0,
+                i18n:true,
+                adimpressions:true,
+                adsparam:"WT.ac",
+                download:true,
+                downloadtypes:"xls,doc,pdf,txt,csv,zip,docx,xlsx,rar,gzip,swf,mid,mp3",
+                mailto:true,
+                offsite:true,
+                onsitedoms:"vogue.ua",
+                fpcdom:".vogue.ua",
+                plugins:{
+                    hm:{src:"//s.webtrends.com/js/webtrends.hm.js"}
+                }
+            });
+            dcs.track();
+        };
+        (function(){
+            var s=document.createElement("script"); s.async=true; s.src="/bundles/app/js/specprojects/ifs2017/webtrends.min.js";
+            var s2=document.getElementsByTagName("script")[0]; s2.parentNode.insertBefore(s,s2);
+        }());
+    </script>
+    <noscript>
+        <img alt="DCSIMG" id="DCSIMG" width="1" height="1" src="http://statse.webtrendslive.com/dcs222cuh83x4cqgmljbqcib2_9m4l/njs.gif?dcssip=vogue.ua&amp;dcsuri=/nojavascript&amp;WT.dl=0&amp;WT.es=vogue.ua/nojavascript&amp;WT.js=No&amp;WT.tv=BC.nojs.1"/>
+    </noscript>
+    <!-- END OF SmartSource Data Collector TAG v10.2.29 -->
+{% endif %}

@@ -1,0 +1,45 @@
+{% import 'AppBundle:Block:_magazines_macro.html.twig' as magazine %}
+
+{% if magazines is not empty %}
+    </div> {# close .container block  to show fill-width dark block#}
+    <div class="magazines-list--wrapper">
+        <div class="container">
+            {% if settings.show_title %}
+                <h2 class="magazines-archive-title">
+                    <a class="magazines-archive-title__link" href="{{ path('magazines') }}">{{ 'frontend.magazine.archive'|trans([], 'AppBundle') }}</a>
+                </h2>
+            {% endif %}
+
+            {% set years = [] %}
+
+            {# ready to deploy list of magazine years list#}
+
+            {#<ul class="magazines-years-list">#}
+                {#{% for key, item in magazines %}#}
+                    {#{% set year = item.releasedAt|format_date('Y') %}#}
+                    {#{% if year not in years %}#}
+                        {#{% set years = years|merge([year]) %}#}
+                        {#<li><a href="">{{ year }}</a></li>#}
+                    {#{% endif %}#}
+                {#{% endfor %}#}
+            {#</ul>#}
+
+
+            {% for key, item in magazines %}
+                {% set isActive = false %}
+                {% if current is not empty and (current.releasedAt|date('Y-m-d')) == (item.releasedAt|date('Y-m-d')) %}
+                    {% set isActive = true %}
+                {% endif %}
+                <a href="{{ magazine.magazine_url(item) }}" class="{{ isActive ? 'active' : null }}">
+
+                    {% set image = item.imageSmall ? item.imageSmall|imagine_filter(isActive ? 'magazine_107x140' : 'magazine_60x76') : null %}
+                    {% if image %}
+                        <img src="{{ image }}"/>
+                    {% endif %}
+                    {#<p>{{ magazine.magazine_title(item) }}</p>#}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container"> {# open .container block for sentered content #}
+{% endif %}

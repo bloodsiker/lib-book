@@ -1,0 +1,35 @@
+{% import 'AppBundle:Block:_tags_macro.html.twig' as tag_helper %}
+
+<section class="content-block" style="margin-top: 0;">
+    {% if tag %}
+        <div class="tag-header {%if tag.getDescription() or tag.gallery %}tag-header-with-gallery{% endif %}">
+            {% set tag_url = path('articles_by_tag', {'id': tag.id, 'slug': tag.slug}) %}
+            {% set tag_title = tag.translate.name %}
+
+            {{ tag_helper.title(tag_title, tag_url) }}
+                {% if tag.getDescription() %}
+                    <div class="tag_description">{{ tag.getDescription() }}</div>
+                {% endif %}
+                {% if tag.gallery %}
+                    {% include 'AppBundle:shortcode:gallery.html.twig' with { 'shortcode_data' : tag } %}
+                {% endif %}
+        </div>
+        <h2 class="tags_articles__title">{{ 'frontend.tags.articles'|trans({}, 'AppBundle') }}</h2>
+        <div class="row" id="tag_{{ block.id }}_{{ random() }}">
+            {% if content %}
+                {% include 'AppBundle:Block:_tags_content.html.twig' %}
+            {% endif %}
+        </div>
+        {% if(settings.items_count is defined and content is defined and settings.items_count <= (content|length + (banner_320x475 is not null ? 1 : 0))) %}
+            <div class="more-btn-wr">
+                <span class="more-btn" data-url="{{ sonata_page_ajax_url(block) }}" data-page="2"
+                      data-limit="{{ settings.items_count }}" data-big-image="0"
+                      data-id="{{ tag.id }}" data-slug="{{ tag.slug }}" id="more_{{ block.id }}_{{ random() }}">
+                    {{ 'frontend.tags.show_more_btn'|trans({}, 'AppBundle') }} {{ tag_title }}
+                </span>
+            </div>
+        {% endif %}
+    {% else %}
+        {{ 'frontend.tags.not_found'|trans({}, 'AppBundle') }}
+    {% endif %}
+</section>

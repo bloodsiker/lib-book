@@ -1,0 +1,55 @@
+.scroller{
+  border: 1px solid #000;
+  font-size: 18px;
+  overflow: hidden;
+  padding: 5px 0;
+  max-height: 468px;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+  &__wrap{
+    overflow-y: auto;
+    margin-right: -35px;
+    padding: 0 50px 0 15px;
+  }
+  &__list-wrap{
+    padding: 5px 0 15px;
+  }
+  &__search{
+    letter-spacing: 2.1px;
+    font-size: 14px;
+    font-family: Neutra, Arial, sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    @include transition(color .2s);
+    &:hover{
+      color: #bb8f56;
+    }
+    span{
+      margin-right: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+  &__bar{
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    bottom: 0;
+    &.is-hide{
+      display: none;
+    }
+  }
+  &__cursor{
+    position: relative;
+    top: 0;
+    width: 8px;
+    height: 130px;
+    background-color: #000000;
+    cursor: pointer;
+  }
+  &__list{
+    margin-top: 15px;
+  }
+}

@@ -1,0 +1,142 @@
+# old links redirect #
+old_search:
+  path: /search.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: search
+    permanent: true
+
+old_suzy_menkes:
+  path: /Menkes.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: suzy_menkes
+    permanent: true
+
+old_suzy_menkes_blog:
+  path: /Menkes/{slug}.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: suzy_menkes_blog
+    permanent: true
+
+old_events:
+  path: /events.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: events
+    permanent: true
+
+old_event_gallery:
+  path: /events/{slug}.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: event_gallery
+    permanent: true
+
+old_horoscopes:
+  path: /goroskop.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: horoscopes
+    permanent: true
+
+old_horoscope:
+  path: /goroskop/{slug}
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: horoscope
+    permanent: true
+
+old_contacts:
+  path: /magazines/contacts.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: contacts
+    permanent: true
+
+old_team:
+  path: /magazines/team.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: team
+    permanent: true
+
+old_subscribe:
+  path: /magazines/subscribe.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: subscribe
+    permanent: true
+
+old_advertisement:
+  path: /magazines/advertisment.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: advertisement
+    permanent: true
+
+old_article_with_subcategory:
+  path: /{category}/{subcategory}/{slug}.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: article_with_subcategory
+    permanent: true
+
+old_article_other:
+  path: /{page}/{slug}.html
+  defaults: { _controller: AppBundle:Redirect:goToArticlesPage }
+
+old_articles_without_subcategory:
+  path: /{category}.html
+  defaults: { _controller: AppBundle:Redirect:goToArticlesPage }
+
+old_magazines:
+  path: /magazines.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: magazines
+    permanent: true
+
+old_collections:
+  path: /collections.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: collections
+
+old_magazines_archive:
+  path: /magazines/all.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: magazines
+    permanent: true
+
+old_magazines_contacts:
+  path: /magazines/contacts.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: contacts
+    permanent: true
+
+old_magazines_team:
+  path: /magazines/team.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: team
+    permanent: true
+
+old_magazines_subscribe:
+  path: /magazines/subscribe.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: subscribe
+    permanent: true
+
+old_magazines_advertisment:
+  path: /magazines/advertisment.html
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: advertisment
+    permanent: true
+
+# end of old links redirect #

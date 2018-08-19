@@ -1,0 +1,88 @@
+{% import 'AppBundle:Block:_collections_macro.html.twig' as collection %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banners %}
+
+{% set data_slug = null %}
+{% set collection_url = null %}
+{% set collection_title = 'frontend.collections.last_collections'|trans([], 'AppBundle') %}
+
+{% if collection_data is defined and collection_data is not empty %}
+    {% set data_slug = collection_data.slug %}
+    {% set collection_title = collection_data.translate.title %}
+{% elseif settings.title_for_main_collections %}
+    {% set collection_url = path('collections') %}
+    {% set collection_title = 'frontend.collections.collections'|trans([], 'AppBundle') %}
+{% endif %}
+
+{#{% if top_collections is defined and top_collections is not empty and settings.show_top %}#}
+    {#</div> #}{# close .container block  to show fill-width dark block#}
+        {#{% include 'AppBundle:Block:collections_top.html.twig' %}#}
+    {#<div class="container"> #}{# open .container block for sentered content #}
+{#{% endif %}#}
+
+<div class="content-block">
+    {% if collection_data is not defined and not settings.title_for_main_collections %}
+        <h1 class="content-block__title">
+            {{ 'frontend.collections.collections_h1'|trans([], 'AppBundle') }}
+        </h1>
+    {% endif %}
+    {% if settings.show_filters is defined and settings.show_filters %}
+        <div class="row collections-filters">
+            {{ collection.filter('frontend.collections.choose_season'|trans([], 'AppBundle'), seasons) }}
+            {{ collection.filter('frontend.collections.choose_designer'|trans([], 'AppBundle'), designers_collections, true) }}
+            {{ collection.filter('frontend.collections.choose_fashionweek'|trans([], 'AppBundle'), weeks) }}
+        </div>
+    {% endif %}
+
+    {% set type = null %}
+    {% if items is not empty %}
+        {% if block_title_entity is defined and block_title_entity is not empty %}
+            {% set collection_title = block_title_entity is instanceof('\\AppBundle\\Entity\\CollectionDesigner') ? block_title_entity.translate.name : block_title_entity.translate.title %}
+            {% set data_slug = block_title_entity.slug %}
+
+            {% if block_title_entity is instanceof('\\AppBundle\\Entity\\CollectionSeason') %}
+                {% set type = 'season' %}
+            {% elseif block_title_entity is instanceof('\\AppBundle\\Entity\\CollectionCategory') %}
+                {% set type = 'category' %}
+            {% elseif block_title_entity is instanceof('\\AppBundle\\Entity\\CollectionFashionWeek') %}
+                {% set type = 'fashionweek' %}
+            {% elseif block_title_entity is instanceof('\\AppBundle\\Entity\\CollectionDesigner') %}
+                {% set type = 'designer' %}
+            {% endif %}
+        {% endif %}
+
+        <div class="collections-list">
+            {% set hasBanner = (banner is defined and banner is not empty) %}
+            {% if( settings.show_title) %}
+                {{ collection.title(collection_title, collection_url) }}
+            {% endif %}
+            
+            <section class="row">
+                {% set blockClass = hasBanner ? 'col-xs-12 col-sm-12 col-md-12 col-lg-8' : 'col-xs-12' %}
+
+                <div class="{{ blockClass }}">
+                    <div class="row" id="slug_{{ block.id }}_{{ random() }}">
+                        {% include 'AppBundle:Block:_collections_content.html.twig' %}
+                    </div>
+
+                    {# if set "show load more" -show btn with fake ajax #}
+                    {% if( settings.show_more_btn and settings.items_count == items|length) %}
+                        <div class="more-btn-wr">
+                            <span class="more-btn" data-url="{{ sonata_page_ajax_url(block) }}" data-page="2"
+                                  data-limit="{{ settings.items_count }}" data-big-image="0"
+                                  data-type="{{ type }}" data-slug="{{ data_slug }}" id="more_{{ block.id }}_{{ random() }}">
+                                {{ 'frontend.collections.show_more_btn'|trans([], 'AppBundle') }}
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if hasBanner %}
+                    <div class="col-xs-4 collections__banners">
+                        {{ banners.banner_content(banner) }}
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+    {% endif %}
+
+</div>

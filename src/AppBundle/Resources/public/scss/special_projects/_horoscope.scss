@@ -1,0 +1,54 @@
+$horoscope: 'horoscope';
+.#{$horoscope}{
+  padding-top: 40px;
+  @include tablet(){
+  }
+  &__item{
+    margin-bottom: 50px;
+    text-align: center;
+    &__img{
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    &__title{
+      margin: 20px 0 0;
+      padding: 0;
+      text-align: center;
+      letter-spacing: 2px;
+      @include transition_cubic_effect(color);
+      @include tablet(){
+        font-size:18px;
+      }
+    }
+    &__date{
+      text-align: center;
+      color: $black;
+      text-align: center;
+      font-size: 12px;
+    }
+    
+    
+    &:hover{
+      .#{$horoscope}__item__title{
+        color: $gold;
+      }
+    }
+  }
+}
+
+aside{
+  .#{$horoscope}{
+    padding-top: 0;
+    &__item{
+      @include tablet(){
+        flex-basis: 33%;
+        max-width: 33%;
+      }
+      @include mobile(){
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}

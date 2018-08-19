@@ -1,0 +1,50 @@
+Action: Действия
+Genre List: Список жанров
+Genre Create: Создать жанр
+
+basic: Основные
+additional: Дополнительные
+
+group:
+    quiz: Викторины
+    quiz.quiz_editor: Викторина
+    quiz.quiz_result_window_editor: Окно результата
+    quiz.quiz_question_editor: Вопрос
+    quiz.quiz_answer_editor: Ответ
+
+quiz:
+    fields:
+        title: Название
+        is_active: Активен
+        created_by: Создан
+        created_at: Дата создания
+        meta_title: Meta title
+        meta_description: Meta Description
+        is_repeatable: Многоразовый
+        image: Изображение
+        image_remove: Удалить
+        image_social: Изображение для социальных сетей
+        image_social_remove: Удалить
+        content: Контент
+        min_count: Минимальный бал
+        max_count: Максимальный бал
+        quiz: Викторина
+        is_correct: Правильный
+        question: Вопрос
+        answer: Ответ
+        order_num: Порядок
+        statistic_start: Кол-во начавших тест
+        statistic_end: Кол-во окончивших тест
+        id: ID
+
+    tab:
+        main: Основная информация
+        gallery: Изображения
+
+    frontend:
+        quiz: Тест
+        take_test: Пройти тест
+        continue: Продолжить
+        result: Результат
+        question_count: Вы ответили правильно на %count% вопрос | Вы ответили правильно на %count% вопроса | Вы ответили правильно на %count% вопросов
+        share: Поделиться

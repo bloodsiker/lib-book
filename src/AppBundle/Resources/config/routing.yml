@@ -1,0 +1,167 @@
+#articles_by_tag:
+#  path: /tags/{id}-{slug}.html
+#  defaults: { _controller: AppBundle:Article:listByTag }
+#
+#article_with_subcategory:
+#  path: /article/{category}/{subcategory}/{slug}.html
+#  defaults: { _controller: AppBundle:Article:show }
+#
+#article_without_subcategory:
+#  path: /article/{category}/{slug}.html
+#  defaults: { _controller: AppBundle:Article:show }
+#
+#article:
+#  path: /article/{slug}.html
+#  defaults: { _controller: AppBundle:Article:show }
+#
+#articles_list_tsum:
+#  path: /article/fashion/tsum
+#  defaults: { _controller: AppBundle:Article:list, category: fashion, subcategory: tsum  }
+#
+#articles_with_subcategory:
+#  path: /article/{category}/{subcategory}
+#  defaults: { _controller: AppBundle:Article:list }
+#
+#articles_without_subcategory:
+#  path: /article/{category}
+#  defaults: { _controller: AppBundle:Article:list }
+#
+#events:
+#  path: /events
+#  defaults: { _controller: AppBundle:Event:list }
+#
+#event_gallery:
+#  path: /gallery/events/{slug}.html
+#  defaults: { _controller: AppBundle:Event:showGallery }
+#
+#horoscopes:
+#  path: /goroskop
+#  defaults: { _controller: AppBundle:Horoscope:list }
+#
+#horoscope:
+#  path: /goroskop/{slug}.html
+#  defaults: { _controller: AppBundle:Horoscope:show }
+#
+#informer:
+#  path: /informer
+#  defaults: { _controller: AppBundle:Informer:stream }
+#
+#rss_facebook_articles:
+#  path: /rss/facebook.xml
+#  defaults: { _controller: AppBundle:Rss:facebookArticles }
+#
+#rss_ukrnet_articles:
+#  path: /rss/ukrnet/articles.xml
+#  defaults: { _controller: AppBundle:Rss:ukrnetArticles }
+#
+#rss_ukrnet_events:
+#  path: /rss/ukrnet/events.xml
+#  defaults: { _controller: AppBundle:Rss:ukrnetEvents }
+#
+#rss_ukrnet_videos:
+#   path: /rss/ukrnet/videos.xml
+#   defaults: { _controller: AppBundle:Rss:ukrnetVideos }
+#
+#rss_ukrnet_blogs:
+#   path: /rss/ukrnet/blogs.xml
+#   defaults: { _controller: AppBundle:Rss:ukrnetBlogs }
+#
+#sitemap_collections:
+#   path: /rss/ukrnet/collections.xml
+#   defaults: { _controller: AppBundle:Rss:ukrnetCollections }
+#
+#sitemap_articles:
+#   path: /sitemap/articles.xml
+#   defaults: { _controller: AppBundle:Rss:sitemapArticles }
+#
+#sitemap_videos:
+#   path: /sitemap/videos.xml
+#   defaults: { _controller: AppBundle:Rss:sitemapVideos }
+#
+#sitemap_blogs:
+#   path: /sitemap/blogs.xml
+#   defaults: { _controller: AppBundle:Rss:sitemapBlogs }
+#
+#voguetv_video:
+#  path: /voguetv/{slug}.html
+#  defaults: { _controller: AppBundle:Tv:show }
+#
+#voguetv_with_category:
+#  path: /voguetv/{category}
+#  defaults: { _controller: AppBundle:Tv:list }
+#
+#voguetv:
+#  path: /voguetv
+#  defaults: { _controller: AppBundle:Tv:list }
+#
+#suzy_menkes:
+#  path: /menkes
+#  defaults: { _controller: AppBundle:Blog:menkesList }
+#
+#suzy_menkes_blog:
+#  path: /menkes/{slug}.html
+#  defaults: { _controller: AppBundle:Blog:menkesShow }
+#
+#contacts:
+#  path: /contacts
+#  defaults: { _controller: AppBundle:Default:contacts }
+#
+#team:
+#  path: /team
+#  defaults: { _controller: AppBundle:Default:team }
+#
+#subscribe:
+#  path: /subscribe
+#  defaults: { _controller: AppBundle:Default:subscribe }
+#
+#advertisement:
+#  path: /advertisement
+#  defaults: { _controller: AppBundle:Default:advertisement }
+#
+#magazines:
+#  path: /magazines
+#  defaults: { _controller: AppBundle:Magazine:index }
+#
+#magazine:
+#  path: /magazines/{slug}.html
+#  defaults: { _controller: AppBundle:Magazine:index }
+#
+#collections:
+#  path: /collections
+#  defaults: { _controller: AppBundle:Collection:list }
+#
+#collection:
+#  path: /collections/{slug}.html
+#  defaults: { _controller: AppBundle:Collection:show }
+#
+#collection_gallery:
+#  path: /gallery/collections/{slug}.html
+#  defaults: { _controller: AppBundle:Collection:showGallery }
+#
+#collections_category:
+#  path: /collections/{category}
+#  defaults: { _controller: AppBundle:Collection:list }
+#
+#collections_season:
+#  path: /collections/season/{season}
+#  defaults: { _controller: AppBundle:Collection:list }
+#
+##collections_designer:
+##  path: /collections/designer/{designer}
+##  defaults: { _controller: AppBundle:Collection:list }
+#
+#collections_fashionweek:
+#  path: /collections/fashionweek/{fashionweek}
+#  defaults: { _controller: AppBundle:Collection:list }
+#
+#search:
+#  path: /search
+#  defaults: { _controller: AppBundle:Default:search }
+#
+#search_type:
+#  path: /search/{type}
+#  defaults: { _controller: AppBundle:Default:search }
+#
+#newsletter:
+#  path: /newsletter
+#  defaults: { _controller: AppBundle:Default:newsletter }

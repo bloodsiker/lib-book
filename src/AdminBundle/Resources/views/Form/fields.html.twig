@@ -1,0 +1,93 @@
+{#{% block image_row %}#}
+    {##}
+{#{% endblock %}#}
+
+{% block image_label %}
+    <hr style="margin-bottom: 5px;"/>
+    <label class=" control-label" for="{{ full_name }}" id="{{ name }}_label">
+        {{ label|trans({}, translation_domain|default(sonata_admin.admin.translationDomain)) }} {{ (attr.class is defined and 'required' in attr.class) ? '*' }}
+    </label>
+{% endblock %}
+
+{% block image_widget %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="pull-left" style="margin-right: 15px; width: 300px;">
+                <a id="{{ id }}_fullsize_link" href="javascript:void(0);">
+                    {% set v = sonata_admin.field_description.help %}
+                    {% set fixed_value = (v starts with '/' or v is empty) ? v : '/' ~ v %}
+                    <img id="{{ id }}_preview" src="{{ fixed_value|default(asset('bundles/admin/images/preview_placeholder.png')) }}" class="img-thumbnail" style="max-height: 200px;">
+                </a>
+            </div>
+
+            <label>
+                <span class="btn btn-default">
+                    <i class="fa fa-plus-circle"></i>
+                    {{ 'image.btn.upload'|trans({}, 'AdminBundle') }}
+                </span>
+                <input {{ block('widget_attributes') }} value="{{ value }}" type="file" style="display: none;">
+            </label>
+        </div>
+    </div>
+
+    <div class="help-block sonata-ba-field-error-messages-image" id="{{ name }}_error" style="display: none;">
+        <ul class="list-unstyled">
+            <li style="color: #f56954;">
+                <i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i> {{ 'image.validation.required'|trans({}, 'AdminBundle') }}
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        (function() {
+            'use strict';
+
+            var preview = document.getElementById('{{ id }}_preview'),
+                preview_src = '{{ asset('bundles/admin/images/preview_placeholder.png') }}',
+                form = document.getElementsByClassName('sonata-ba-form')[0].getElementsByTagName('form')[0];
+
+            document.getElementById('{{ id }}').addEventListener('change', function() {
+                if (this.files && this.files[0] && this.files[0].type.match(/image.*/)) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.setAttribute('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    preview.setAttribute('src', preview_src);
+                }
+            });
+
+            document.getElementById('{{ id }}_fullsize_link').addEventListener('click', function() {
+                if (preview.getAttribute('src') !== preview_src) {
+                    window.open(preview.getAttribute('src'), 'Image preview', 'width=800,height=600,resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no');
+                }
+            });
+
+            {% if attr.class is defined and 'required' in attr.class %}
+                form.addEventListener('submit', function(event) {
+                    var group = document.getElementById('sonata-ba-field-container-{{ id }}');
+                    var error = document.getElementById('{{ name }}_error');
+                    var tab_content = jQuery(group).closest('.tab-pane');
+
+                    if (preview.getAttribute('src') === preview_src) {
+                        group.classList.add("has-error");
+                        error.style.display = 'block';
+                        jQuery('a[href="#' + tab_content.attr('id') + '"] span').removeClass('hide');
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return false;
+                    }
+
+                    jQuery('a[href="#' + tab_content.attr('id') + '"] span').addClass('hide');
+                    group.classList.remove("has-error");
+                    error.style.display = 'none';
+                    return true;
+                });
+            {% endif %}
+        }());
+    </script>
+{% endblock %}

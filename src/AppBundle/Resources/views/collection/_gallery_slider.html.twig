@@ -1,0 +1,49 @@
+<style>
+    html, body{
+        background: #000 !important;
+    }
+</style>
+<div class="gallery-layout__description">
+    <a href="/">
+        {% include "AppBundle:Block:logo.svg.twig" %}
+    </a>
+    <h1 class="gallery__title">{{ collection.translate.title }}</h1>
+    <p class="gallery__count"></p>
+    <p class="gallery__description"></p>
+    <p class="gallery__copyright"></p>
+    <p class="gallery__soc-wr">
+        {# fixme: use social network's SDK #}
+        {% set current_url = url(app.request.get('_route'), app.request.get('_route_params')) %}
+        <a href="http://www.facebook.com/sharer.php?u={{ current_url }}" rel="nofollow" class="gallery__soc-wr__item fa fa-facebook"></a>
+        <a href="http://vkontakte.ru/share.php?url={{ current_url }}&title={{ collection.translate.title }}" rel="nofollow" class="gallery__soc-wr__item fa fa-vk"></a>
+        <a href="http://twitter.com/share?url={{ current_url }}&text={{ collection.translate.title }}" rel="nofollow" class="gallery__soc-wr__item fa fa-twitter"></a>
+    </p>
+</div>
+<div class="gallery-layout__content">
+    {% if collection.gallery and collection.gallery.galleryHasImage %}
+        <div class="slider">
+            <div class="slider__img-holder">
+                <div class="slider__slide-block">
+                    {%  for key, item in collection.gallery.galleryHasImage %}
+                        <div class="slider__item" data-description="{{ item.image.translate.title }}" data-copyright="{{ item.image.translate.copyright }}">
+                            <img class="slider__item__img" src="{{ item.image.path|imagine_filter('gallery_x1160') }}" alt="{{ item.image.translate.title }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <span class="nav nav--left">
+                    {% include "AppBundle:default/svg:left.svg.twig"%}
+                </span>
+                <span class="nav nav--right">
+                    {% include "AppBundle:default/svg:right.svg.twig"%}
+                </span>
+            </div>
+            <div class="slider__description"></div>
+        </div>
+    {% endif %}
+</div>
+{% if banner is not empty %}
+    <div class="gallery-layout__promo">
+        {% import 'BannerBundle:Block:_banners_macro.html.twig' as banners %}
+        {{ banners.banner_content(banner) }}
+    </div>
+{% endif %}

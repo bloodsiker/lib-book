@@ -1,0 +1,95 @@
+{% import 'AppBundle:Block:_videos_macro.html.twig' as video %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banner %}
+
+{# voguetv title#}
+{% set category_title = 'frontend.video.voguetv'|trans([], 'AppBundle') %}
+
+{# voguetv URL #}
+{% set category_url = path('voguetv') %}
+
+{% if category %}
+    {# build category URL #}
+    {% set category_url = path('voguetv_with_category', {'category': category.slug}) %}
+
+    {# category title#}
+    {% set category_title = category_title~' '~category.translate.title %}
+{% endif %}
+
+{% if settings.dark_header|default(false) and top_videos is not empty and not app.request.attributes.get('is_main_page') %}
+    </div> {# close .container block  to show fill-width dark block#}
+    <div class="dark-block -slider">
+        <div class="container">
+            <div class="slider">
+                <div class="slider__img-holder">
+                    <div class="slider__slide-block">
+                        {% for key, item in top_videos %}
+                            <div class="slider__item" data-description="bundles/app/i/tmp/voguetv/1.jpg">
+                                <a href="{{ video.video_url(item) }}" class="post__photo post__photo--big-title" >
+                                    <div class="post__photo__img-holder">
+                                        <img src="{{ item.image990 ? item.image990|imagine_filter('video_990x') : item.image|imagine_filter('video_990x') }}" alt="{{ item.translate.title }}">
+                                    </div>
+                                    <div class="img-text--above">
+                                        <em class="text__photo__sub-title">{{ item.publishAt|format_date('dd MMMM yyyy') }}</em>
+                                        <span class="text__photo__main-title">{{ item.translate.title }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {% if top_videos|length > 1 %}
+                        <span class="nav nav--left">
+                            <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><g fill="#181818" fill-rule="evenodd"><path d="M1.075 25.01L14.51 11.575l1.415 1.415L2.49 26.425z"/><path d="M1.075 24.99L14.51 38.425l1.415-1.415L2.49 23.575z"/></g></svg>
+                        </span>
+                        <span class="nav nav--right">
+                            <svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><g fill="#181818" fill-rule="evenodd"><path d="M48.925 25.01L35.49 11.575l-1.415 1.415L47.51 26.425z"/><path d="M48.925 24.99L35.49 38.425l-1.415-1.415L47.51 23.575z"/></g></svg>
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container"> {# open .container block for sentered content #}
+{% endif %}
+
+<section class="{{ ['content-block video-elements', settings.bg_style, settings.cols_type]|join(' ') }}">
+    {% if settings.show_title %}
+        {{ video.title(category_title, category_url) }} {# show title #}
+    {% endif %}
+
+
+    <div class="row" id="category_{{ block.id }}_{{ random() }}">
+        {% set top_main_video = app.request.attributes.get('is_main_page') and top_videos[0] is defined ? top_videos[0] : false %}
+        {% if top_main_video %}
+            {# block top main video #}
+            {{
+            video.content(
+            top_main_video.translate.title,
+            top_main_video.image990 ? top_main_video.image990|imagine_filter('video_990x') : top_main_video.image|imagine_filter('video_990x'),
+            video.video_url(top_main_video),
+            top_main_video.category.translate.title is defined ? top_main_video.category.translate.title : '',
+            video.category_url(top_main_video.category),
+            'col-xs-12 article--big',
+            null
+            )
+            }}
+            {# block top main video #}
+        {% elseif banner_990x200 is defined and banner_990x200 is not empty %}
+            {# block banner_990x200 #}
+            <article class="article col-xs-12 article--big with-banner_990-200">{{ banner.banner_content(banner_990x200) }}</article>
+        {% endif %}
+
+        {% include 'AppBundle:Block:_videos_content.html.twig' %}
+    </div>
+
+    {# if set "show load more" -show btn with fake ajax #}
+    {% if( settings.show_more_btn and settings.items_count is defined and videos is defined and settings.items_count <= videos|length) %}
+        <div class="more-btn-wr">
+            <span class="more-btn" data-url="{{ sonata_page_ajax_url(block) }}" data-big-image="0" data-limit="{{ (settings.items_count is defined and settings.items_count) ? settings.items_count : 0 }}"
+                  data-page="2" data-category="{{ category ? category.id : null }}" id="more_{{ block.id }}_{{ random() }}">
+                {{ 'frontend.app.more'|trans([], 'AppBundle') }} {{ category_title|default("") }}
+            </span>
+            <a href="#" class="more-btn -hide">Перейти в {{ category_title|default("") }}</a>
+        </div>
+    {% endif %}
+</section>

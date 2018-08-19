@@ -1,0 +1,6 @@
+{# render title #}
+{% macro title(tag_title, tag_url) %}
+    <h1 class="content-block__title">
+        <a class="content-block__title__link" href="{{ tag_url }}">{{ tag_title }}</a>
+    </h1>
+{% endmacro %}

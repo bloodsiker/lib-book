@@ -1,0 +1,10 @@
+<div class="static-page">
+    <div class="magazine-subscribe-wr">
+        {% if settings.show_title %}
+            <h1 class="content-block__title">{{ RTFBlock.translate.title }}</h1>
+        {% endif %}
+        <div class="static-page__text">
+            {{ RTFBlock.translate.content|raw }}
+        </div>
+    </div>
+</div>

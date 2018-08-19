@@ -1,0 +1,75 @@
+{% import 'AppBundle:Block:_videos_macro.html.twig' as video_macro %}
+
+{% set blockId = block.id ~'_'~random() %}
+<div class="video-main-page">
+    <section class="category video" id="videos_{{ blockId }}">
+        {% set top = top_videos|length ? top_videos|first : videos|first %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% if settings.show_title %}
+                        <h2 class="content-block__title">
+                            {% set title = app.request.getLocale() == 'ru' ? settings.title_ru : settings.title_ua %}
+                            {{ title is empty ? 'frontend.video.video'|trans([], 'AppBundle') : title }}
+                        </h2>
+                    {% else %}
+                        <h2 class="content-block__title"></h2>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="video__wrapper">
+                        <iframe src="" frameborder="0" allowfullscreen></iframe>
+                        <a class="video__wrapper__big-preview"
+                           href="{{ src_from_iframe(top.code) }}?autoplay=1"
+                           data-link="{{ video_macro.video_url(top) }}"
+                           data-type="video"
+                           data-video-id="video_{{ top.id }}"
+                           data-from="videos_{{ blockId }}"
+                           style="background: url({{ (top.image990 ? top.image990 : top.image )|imagine_filter('video_990x557') }})">
+                            <i class="video-slider__play-icon"></i>
+                        </a>
+                    </div>
+                    <div class="video__txt">
+                        <h3 class="video__title">
+                            <a class="content-block__title__link" href="{{ video_macro.video_url(top, true) }}">
+                                {{ top.getTitle() }}
+                            </a>
+                        </h3>
+                        <div class="share__wrapper">
+                            {% for key, share in top_videos %}
+                                <div {{ key ? 'class="is-hide"' }} data-video-id="video_{{ share.id }}">
+                                    {% include 'AppBundle:partials:sharing.html.twig' with {'share_url':  video_macro.video_url(share, true), 'share_title': share.getTitle() } %}
+                                </div>
+                            {% endfor %}
+                            {% for key, share in videos %}
+                                <div {{ (key or not key and top_videos|length) ? 'class="is-hide"' }} data-video-id="video_{{ share.id }}">
+                                    {% include 'AppBundle:partials:sharing.html.twig' with {'share_url':  video_macro.video_url(share, true), 'share_title': share.getTitle() } %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <section class="video-slider">
+                        <div class="video-slider__wrapper">
+                            <ul class="video-slider__list">
+                                {% include 'AppBundle:partials:videos_content.html.twig' with {videos: top_videos, blockId: blockId} %}
+                                {% include 'AppBundle:partials:videos_content.html.twig' with {videos: videos, blockId: blockId} %}
+                            </ul>
+                        </div><!-- /.video-slider__wrapper -->
+                        <!-- slider controls -->
+                        <div class="video-slider__btn video-slider__btn--left is-hide"></div>
+                        <div class="video-slider__btn video-slider__btn--right is-hide"></div>
+                    </section><!-- /.c-slider -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- /.video -->

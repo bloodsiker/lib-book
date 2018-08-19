@@ -1,0 +1,394 @@
+parameters:
+#    liip_imagine.filter.manager.class: ImageBundle\Imagine\LiipImagineFilterManager
+#    language_check_date: '2018-01-31'
+
+services:
+#    sonata.block.service.articles_list:
+#        class: AppBundle\Block\ArticlesListBlockService
+#        arguments:
+#            - sonata.block.service.articles_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.last_articles_list:
+#        class: AppBundle\Block\LastArticlesBlockService
+#        arguments:
+#            - sonata.block.service.last_articles_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.events_list:
+#        class: AppBundle\Block\EventsListBlockService
+#        arguments:
+#            - sonata.block.service.events_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.footer:
+#        class: AppBundle\Block\FooterBlockService
+#        arguments:
+#            - sonata.block.service.footer
+#            - '@templating'
+#            - '@doctrine'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.header:
+#        class: AppBundle\Block\HeaderBlockService
+#        arguments:
+#            - sonata.block.service.header
+#            - '@templating'
+#            - '@app.entity_manager'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.collection_fashion_week:
+#        class: AppBundle\Block\CollectionsFashionWeekBlockService
+#        arguments:
+#            - sonata.block.service.collection_fashion_week
+#            - '@templating'
+#            - '@app.entity_manager'
+#            - '@translator'
+#        tags:
+#            - { name: sonata.block }
+#        calls:
+#            - [ setRequestStack, [@request_stack] ]
+#            - [ setCollectionFashionWeekAdmin, [@collection_admin.fashionweek] ]
+#
+#    sonata.block.service.horoscopes_list:
+#        class: AppBundle\Block\HoroscopesListBlockService
+#        arguments:
+#            - sonata.block.service.horoscopes_list
+#            - '@templating'
+#            - '@doctrine'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.content_by_tag:
+#        class: AppBundle\Block\ContentByTagBlockService
+#        arguments:
+#            - sonata.block.service.content_by_tag
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.videos_list:
+#        class: AppBundle\Block\VideosListBlockService
+#        arguments:
+#            - sonata.block.service.videos_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.videos_hp:
+#        class: AppBundle\Block\VideosHpBlockService
+#        arguments:
+#            - sonata.block.service.videos_hp
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.videos_related_list:
+#        class: AppBundle\Block\RelatedVideosListBlockService
+#        arguments:
+#            - sonata.block.service.videos_related_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.social_buttons:
+#        class: AppBundle\Block\SocialButtonsBlockService
+#        arguments:
+#            - sonata.block.service.social_buttons
+#            - '@templating'
+#            - '@share.social'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.blogs_list:
+#        class: AppBundle\Block\BlogsListBlockService
+#        arguments:
+#            - sonata.block.service.blogs_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.blogger_block:
+#        class: AppBundle\Block\BloggerBlockService
+#        arguments:
+#            - sonata.block.service.blogger_block
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.team:
+#        class: AppBundle\Block\TeamBlockService
+#        arguments:
+#            - sonata.block.service.team
+#            - '@templating'
+#            - '@doctrine'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.rtf_block:
+#        class: AppBundle\Block\RTFBlockService
+#        arguments:
+#            - sonata.block.service.rtf_block
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.media_kit:
+#        class: AppBundle\Block\MediaKitBlockService
+#        arguments:
+#            - sonata.block.service.media_kit
+#            - '@templating'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.magazine:
+#        class: AppBundle\Block\MagazineBlockService
+#        arguments:
+#            - sonata.block.service.magazine
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.magazine_archive:
+#        class: AppBundle\Block\MagazineArchiveBlockService
+#        arguments:
+#            - sonata.block.service.magazine_archive
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.last_collections_list:
+#        class: AppBundle\Block\LastCollectionsBlockService
+#        arguments:
+#            - sonata.block.service.last_collections_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.collections_list:
+#        class: AppBundle\Block\CollectionsListBlockService
+#        arguments:
+#            - sonata.block.service.collections_list
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.collection_photos:
+#        class: AppBundle\Block\CollectionPhotosBlockService
+#        arguments:
+#            - sonata.block.service.collection_photos
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.collections_slider:
+#        class: AppBundle\Block\CollectionsSliderBlockService
+#        arguments:
+#            - sonata.block.service.collections_slider
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.search:
+#        class: AppBundle\Block\SearchBlockService
+#        arguments:
+#            - sonata.block.service.search
+#            - '@templating'
+#            - '@service_container'
+#        tags:
+#            - { name: sonata.block }
+#
+#    sonata.block.service.html_page:
+#        class: AppBundle\Block\HtmlPageBlockService
+#        arguments:
+#            - sonata.block.service.html_page
+#            - '@templating'
+#            - '@service_container'
+#            - '@sonata.page.site.selector'
+#        tags:
+#            - { name: sonata.block }
+#
+#    app.repository.helper:
+#        class: AppBundle\Entity\HelperRepository
+#        arguments:
+#            - '@database_connection'
+#
+#    app.shortcode.processor.gallery:
+#        class: AppBundle\Services\GalleryProcessorService
+#        arguments:
+#            - '@doctrine'
+#
+#    app.shortcode.processor.season:
+#        class: AppBundle\Services\SeasonProcessorService
+#        arguments:
+#            - '@translator'
+#
+#    app.shortcode.processor.read_also:
+#        class: AppBundle\Services\ReadAlsoProcessorService
+#        arguments:
+#            - '@doctrine'
+#            - '@translator'
+#
+#    app.imagine.loader.proxy:
+#        class: AppBundle\Services\ImagineProxyLoader
+#        arguments:
+#            - '@liip_imagine.mime_type_guesser'
+#            - '@liip_imagine.extension_guesser'
+#            - '%kernel.root_dir%/../web'
+#            - '%imagine_proxy_host%'
+#        tags:
+#            - { name: liip_imagine.binary.loader, loader: proxy_loader }
+#
+#    app.twig.extension:
+#        class: AppBundle\Twig\AppExtension
+#        public: false
+#        arguments:
+#            - '@app.facebook_instant_article'
+#            - '@app.entity_manager'
+#            - '%language_check_date%'
+#        tags:
+#            - { name: twig.extension }
+#
+#    app.entity_manager:
+#        class: Doctrine\ORM\EntityManager
+#        factory: ['@doctrine', getManager]
+#        public: false
+#
+#    app.views_statistics:
+#        class: AppBundle\Services\ViewsStatisticsService
+#        arguments:
+#            - '@app.entity_manager'
+#
+#    informer.validation:
+#        class: AppBundle\Validator\Constraints\InformerValidator
+#        arguments: ['@translator', '%kernel.default_locale%']
+#        tags:
+#            -
+#                name: validator.constraint_validator
+#                alias: validation_informer
+#
+#    app.event_sitemap_service:
+#        class: AppBundle\Iterator\EventSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Event
+#            - '@router'
+#            - event_gallery
+#            - '@liip_imagine.cache.manager'
+#
+#    app.horoscope_sitemap_service:
+#        class: AppBundle\Iterator\HoroscopeSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Horoscope
+#            - '@router'
+#            - horoscope
+#
+#    app.article_category_sitemap_service:
+#        class: AppBundle\Iterator\ArticleCategorySitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Article
+#            - '@router'
+#            - article_without_subcategory
+#            - '@liip_imagine.cache.manager'
+#
+#    app.article_subcategory_sitemap_service:
+#        class: AppBundle\Iterator\ArticleSubcategorySitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Article
+#            - '@router'
+#            - article_with_subcategory
+#            - '@liip_imagine.cache.manager'
+#
+#    app.video_sitemap_service:
+#        class: AppBundle\Iterator\TvVideoSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\TvVideo
+#            - '@router'
+#            - voguetv_video
+#            - '@liip_imagine.cache.manager'
+#
+#    app.blog_sitemap_service:
+#        class: AppBundle\Iterator\BlogSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Blog
+#            - '@router'
+#            - suzy_menkes_blog
+#            - '@liip_imagine.cache.manager'
+#
+#    app.magazine_sitemap_service:
+#        class: AppBundle\Iterator\MagazineSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Magazine
+#            - '@router'
+#            - magazine
+#            - '@liip_imagine.cache.manager'
+#
+#    app.collection_sitemap_service:
+#        class: AppBundle\Iterator\CollectionSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Collection
+#            - '@router'
+#            - collection
+#            - '@liip_imagine.cache.manager'
+#
+#    app.article_sitemap_service:
+#        class: AppBundle\Iterator\ArticleSitemapIterator
+#        arguments:
+#            - '@doctrine'
+#            - AppBundle\Entity\Collection
+#            - '@router'
+#            - article_without_subcategory
+#            - '@liip_imagine.cache.manager'
+#            - '@doctrine.orm.entity_manager'
+#
+#    app.facebook_instant_article:
+#        class: AppBundle\Services\FacebookInstantArticle
+#        arguments:
+#            - '@doctrine.orm.entity_manager'
+#            - '@twig'
+#
+#    jms_i18n_routing.loader:
+#        class: AppBundle\Routing\LocaleLoader
+#        arguments: ['@jms_i18n_routing.pattern_generation_strategy', '%replacement_locales%']
+#
+#    app.listener:
+#        class: AppBundle\EventListener\AppListener
+#        arguments: ['%replacement_locales%', '%locale%']
+#        tags:
+#            - { name: kernel.event_subscriber }
+#
+#    app.twig.extension.loader:
+#        class: Twig_Extension_StringLoader
+#        tags:
+#            - { name: 'twig.extension' }

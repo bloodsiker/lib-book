@@ -1,0 +1,138 @@
+{% import 'AppBundle:Block:_articles_macro.html.twig' as article %}
+{% import 'AppBundle:Block:_videos_macro.html.twig' as video %}
+{% import 'AppBundle:Block:_events_macro.html.twig' as event %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banners %}
+
+{# block banner_990x500 #}
+{% if banner_990x500 is defined and banner_990x500 is not empty %}
+    <article class="article col-xs-12 article--big with-banner_990-500">{{ banners.banner_content(banner_990x500) }}</article>
+{% endif %}
+{# end block banner_990x500 #}
+
+{% if settings.dark_header is defined and not settings.dark_header and top_article is defined and top_article %}
+    {% set top_is_article = top_article is instanceof('\\AppBundle\\Entity\\Article') %}
+    {% set top_is_video = top_article is instanceof('\\AppBundle\\Entity\\TvVideo') %}
+    {% set top_is_collection = top_article is instanceof('\\AppBundle\\Entity\\Collection') %}
+    {% if top_is_collection %}
+        <article class="article col-xs-12 article--big">
+            {% include 'AppBundle:Block:collections_top.html.twig' with {'top_collections': [top_article], 'slider_class': 'white-block'}  %}
+        </article>
+    {% else %}
+        {% if top_is_article %}
+            {% set top_category = top_article.articleHasCategories|first.category %}
+            {% set top_category_title = top_category.translate.title %}
+            {% set category_url = article.category_url(top_category) %}
+            {% set top_url = article.article_url(top_article, top_category) %}
+        {% elseif top_is_video %}
+            {% set top_category = top_article.category %}
+            {% set top_category_title = top_category.translate.title %}
+            {% set category_url = video.category_url(top_category) %}
+            {% set top_url = video.video_url(top_article, top_category) %}
+        {% else %}
+            {% set top_category = null %}
+            {% set top_category_title = 'Event List'|trans([], 'AppBundle') %}
+            {% set category_url = path('events', {}) %}
+            {% set top_url = event.event_url(top_article) %}
+        {% endif %}
+
+        {{
+        article.content(
+            top_article.translate.title,
+            null,
+            top_article.image990 ? top_article.image990|imagine_filter('article_990x') : (top_article.image ? top_article.image|imagine_filter('article_990x') : null),
+            top_url,
+            top_category_title,
+            category_url,
+            top_is_video ? 'video-elements col-xs-12 article--big' : 'col-xs-12 article--big',
+            null,
+            false
+        )
+        }}
+    {% endif %}
+{% endif %}
+
+{# block banner_990x200 #}
+{% if banner_990x200 is defined and banner_990x200 is not empty %}
+    <article class="article col-xs-12 article--big with-banner_990-200">{{ banners.banner_content(banner_990x200) }}</article>
+{% endif %}
+{# end block banner_990x200 #}
+
+{% set bannerPosition = null %}
+{% set bannerSecondPosition = null %}
+
+{% if settings.banner is defined and banner is not empty %}
+    {% set bannerPosition = settings.banner_position - 1 %}
+{% endif %}
+
+{% if settings.banner_second_position is defined and banner_second is not empty %}
+    {% set bannerSecondPosition = settings.banner_second_position - (bannerPosition ? 3 : 2) %}
+{% endif %}
+
+{% for key, item in articles if item and item.translate %}
+    {% set is_article = item is instanceof('\\AppBundle\\Entity\\Article') %}
+
+    {# article title #}
+    {% set title = item.translate.title %}
+
+    {# show content #}
+    {% set short = null %}
+    {% if settings.cols_type == "content-block--inline" %}
+        {% set short = item.translate.header|raw %}
+        {% if short is empty and item.translate.content %}
+            {% set short = shortcode(item.translate.content, item, false)|striptags|raw|split('.')|slice(0,2)|join('.') %}
+        {% endif %}
+
+        {% set width_class = 'col-xs-12' %}
+        {% set image = item.image ? item.image|imagine_filter('article_155x228') : null %}
+    {% elseif settings.cols_type == "content-block--small" %}
+        {% set width_class = 'col-xs-6 col-sm-6 col-md-2' %}
+        {% set image = item.image ? item.image|imagine_filter('article_155x228') : null %}
+    {% elseif settings.cols_type == "content-block--short" %}
+        {% if item.imageSmall %}
+            {% set image = item.imageSmall ? item.imageSmall|imagine_filter('article_320x180') : null %}
+        {% else %}
+            {% set image = item.image ? item.image|imagine_filter('article_320x180') : null %}
+        {% endif %}
+        {% set width_class = null %}
+    {% else %}
+        {# show default article item #}
+        {% set width_class = settings.popular_articles is defined and settings.popular_articles ? 'col-xs-12 col-sm-6 col-md-6 col-lg-12' : null %}
+        {% set image = item.image ? item.image|imagine_filter('article_320x475') : null %}
+    {% endif %}
+
+    {% if is_article %}
+        {% set article_category = item.articleHasCategories|first ? item.articleHasCategories|first.category : null %}
+    {% else %}
+        {% set article_category = null %}
+    {% endif %}
+
+    {# show banner first by position #}
+    {% if bannerPosition is not empty and key == bannerPosition %}
+        <article class="multipage-item article promo_320 col-xs-12 col-sm-6 col-md-4">{{ banners.banner_content(banner) }}</article>
+    {% endif %}
+
+    {{
+        article.content(
+            title,
+            short,
+            image,
+            is_article ? article.article_url(item, article_category) : event.event_url(item),
+            (is_article and article_category) ? article_category.translate.title : (is_article ? '' : 'Event List'|trans([], 'AppBundle')),
+            (is_article and article_category) ? article.category_url(article_category) : (is_article ? '' : path('events', {})),
+            width_class,
+            null,
+            (settings.last_articles is defined and settings.last_articles) ? true : false
+    )
+    }}
+
+    {# show banner second by position #}
+    {% if bannerSecondPosition is not empty and key == bannerSecondPosition %}
+        <article class="multipage-item article promo_320 col-xs-12 col-sm-6 col-md-4">{{ banners.banner_content(banner_second) }}</article>
+    {% endif %}
+
+    {# show banner by block place #}
+    {% if key == 1 and block.type == 'sonata.block.service.last_articles_list' and banner is not empty %}
+        <article class="multipage-item article promo_320 col-xs-12 col-sm-6 col-md-4">{{ banners.banner_content(banner) }}</article>
+    {% endif %}
+
+{% endfor %}

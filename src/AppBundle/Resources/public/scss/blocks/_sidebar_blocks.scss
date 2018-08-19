@@ -1,0 +1,51 @@
+aside{
+  .banner__item{
+    margin-bottom: 55px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    @media screen and (max-width: 1070px) {
+      font-size: initial;
+      display: inline-block;
+      vertical-align: top;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      width: 50%;
+      text-align: center;
+    }
+    @media screen and (max-width: 380px){
+      width: 100%;
+      padding:0;
+    }
+    div{
+      @media screen and (max-width: 1070px) {
+        margin: 0 auto;
+        max-width: 320px;
+      }
+      @media screen and (max-width: 380px){
+        width: 100%;
+        max-width: initial;
+      }
+    }
+    a{
+      @media screen and (max-width: 1070px) {
+        display: inline-block;
+      }
+      @media screen and (max-width: 380px){
+        width: 100%;
+      }
+    }
+    img{
+      @media screen and (max-width: 380px){
+        width: 100%;
+      }
+    }
+  }
+  .content-block{
+    padding: 0!important;
+  }
+  @media screen and (max-width: 1070px) {
+    font-size: 0;
+    text-align: center;
+  }
+}

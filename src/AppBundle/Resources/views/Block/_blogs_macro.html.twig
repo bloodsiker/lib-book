@@ -1,0 +1,31 @@
+{% macro suzy_url() %}
+    {{ path('suzy_menkes') }}
+{% endmacro %}
+
+{% macro suzy_blog_url(slug) %}
+    {{ path('suzy_menkes_blog', {'slug': slug}) }}
+{% endmacro %}
+
+{# render content item #}
+{% macro content(title, image, url, blogger_name, blogger_url, blogger_image) %}
+    <article class="article col-xs-12 blogger-article">
+        <a class="article__img blogger-article__img" href="{{ url }}">
+            <img class="article__img__src" src="{{ image }}" alt="">
+        </a>
+        <div class="blogger-article-right-block">
+            <div>
+                <h3 class="article__title">
+                    <a class="article__title__link" href="{{ url }}">{{ title }}</a>
+                </h3>
+
+                {% if blogger_image %}
+                    <img src="{{ blogger_image|imagine_filter('blogger_50x50') }}"/>
+                {% endif %}
+
+                {% if blogger_name and blogger_url %}
+                    <a class="article__category" href="{{ blogger_url }}">{{ blogger_name}}</a>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+{% endmacro %}

@@ -1,0 +1,31 @@
+.partners-wr{
+  border-bottom: $gold solid 2px;
+  border-top: #fff solid 1px;
+}
+.partners-list{
+  @extend %row;
+  @extend %justify-around;
+  @extend %vertical-align-middle;
+  margin-bottom: 35px;
+}
+.partner{
+  @extend %col-3;
+  &__logo{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: $screen-md){
+  .partner{
+    @include mq-col(6);
+    margin-bottom: 40px;
+  }
+}
+@media screen and (max-width: $screen-xs){
+  .partner{
+    @include mq-col(12);
+    margin-bottom: 40px;
+  }
+}

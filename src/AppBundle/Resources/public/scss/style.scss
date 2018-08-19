@@ -1,0 +1,49 @@
+*, *:before, *:after{box-sizing: border-box;}
+//@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700|Playfair+Display:400,700,700i|Roboto:300&subset=cyrillic');
+
+@import "fonts";
+@import "flexboxgrid";
+@import "partials/variable";
+@import "partials/mixins";
+@import "fontawsome/font-awesome";
+
+@import "partials/default"; // default tags style and helpers
+@import "partials/404";
+@import "partials/slick";
+@import "partials/jquery.mCustomScrollbar";
+//@import "partials/instagram";
+
+@import "partials/layout"; // main blocks
+
+@import "blocks/search"; // all social buttons
+@import "blocks/social_btns"; // all social buttons
+@import "blocks/sidebar_blocks"; // all elements in sidebar
+@import "blocks/menu"; // all menus
+@import "blocks/slider"; // all menus
+@import "blocks/content_block"; // main page
+@import "blocks/promo"; //
+@import "blocks/article_detail"; // styles of detail article
+@import "blocks/gallery_fullscreen"; // styles of detail article
+@import "blocks/voguetv"; // styles of detail article
+@import "blocks/menkes"; // styles of suzy menkes blocks
+@import "blocks/static_page";
+@import "blocks/collections";
+@import "blocks/slick_theme";
+@import "blocks/magazine"; /*magazine styles*/
+@import "blocks/popup"; /* popup styles */
+@import "blocks/fix_height";
+@import "blocks/newsletter";
+@import "blocks/carousel";
+@import "blocks/carousel_fashion_collections";
+@import "blocks/scroller";
+
+@import "blocks/gallery_fullscreen"; // styles of detail article
+@import "adaptive/tablet";
+@import "adaptive/mobile";
+@import "adaptive/menkes_adaptive";
+@import "adaptive/magazines_adaptive";
+
+@import "special_projects/horoscope";
+@import "special_projects/quiz";
+
+@import "partials/branding"; // main blocks

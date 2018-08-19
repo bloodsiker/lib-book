@@ -1,0 +1,25 @@
+<div class="scroller__list-wrap">
+    <span data-url="{{ sonata_page_ajax_url(block) }}" data-order="{{ order }}" class="scroller__search">
+        {% if order == 'name' %}
+            {#<span>{{ 'frontend.collections.by_list'|trans([], 'AppBundle') }}</span> А-Z#}
+            <span> А-Z</span>&nbsp;&nbsp;{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}
+        {% elseif order == 'date' %}
+            {#<span>{{ 'frontend.collections.by_list'|trans([], 'AppBundle') }}</span>{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}#}
+            А-Z&nbsp;&nbsp;<span>{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}</span>
+        {% endif %}
+    </span>
+    <ul class="scroller__list">
+        {% for designer in designers %}
+            {% if designer is instanceof('\\AppBundle\\Entity\\Collection') %}
+                {% set slug = designer.getSlug() %}
+                {% set name = designer.getDesigner().getName() %}
+            {% else %}
+                {% set slug = designer.getSlug() %}
+                {% set name = designer.getName() %}
+            {% endif %}
+            <li>
+                <a href="{{ path('collection', {'slug': slug}) }}">{{ name }}</a>
+            </li>
+        {% endfor %}
+    </ul><!-- /.scroller__list -->
+</div><!-- /.scroller__list-wrap -->

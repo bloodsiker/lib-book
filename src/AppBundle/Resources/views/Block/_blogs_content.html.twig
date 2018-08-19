@@ -1,0 +1,24 @@
+{% import 'AppBundle:Block:_blogs_macro.html.twig' as blog %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banners %}
+
+{% for key, item in blogs %}
+    {% set blogger_name = '' %}
+    {% set blogger_image = null %}
+    {% if item.blogger %}
+        {% set blogger_name = item.blogger.translate.name %}
+        {% set blogger_image = item.blogger.image %}
+    {% endif %}
+
+
+    {{
+        blog.content(
+            item.translate.title,
+            item.image ? item.image|imagine_filter('blog_320x') : null,
+            blog.suzy_blog_url(item.slug),
+            blogger_name,
+            blog.suzy_url(),
+            blogger_image
+    )
+    }}
+
+{% endfor %}

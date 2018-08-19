@@ -1,0 +1,73 @@
+.price-list{
+  @extend %row;
+  @extend %justify-between;
+}
+.price{
+  position: relative;
+  width:276px;
+  margin: 0 15px;
+  &__title{
+    margin: 0 0 10px 0;
+    padding-bottom: 10px;
+    color: $gold;
+    font-size: 26px;
+    border-bottom: solid 2px;
+  }
+  &.-hide{
+    &:before{
+      content: 'Скоро';
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(#fff, .95);
+      text-align: center;
+      padding-top: 30%;
+      font-style: italic;
+      font-size: 24px;
+      font-family: 'VogueSerifRagular', 'Arial', sans-serif;
+    }
+  }
+}
+
+.type-list{
+  @extend %row;
+  @extend %vertical-align-bottom;
+  margin-bottom: 10px;
+  font-family: Neutra, Arial, sans-serif;
+  &__type{
+    @extend %col-7;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  &__price{
+    @extend %col-5;
+    text-align: right;
+    font-size: 30px;
+  }
+}
+
+.buy-ticket-wr{
+  border-top: white solid 1px;
+  .centered-btn{
+    margin: 40px 0px;
+  }
+}
+
+@media screen and (max-width: $screen-md){
+  .price-list{
+    @include mq-justify(around);
+  }
+  .price{
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .price{
+    width: 100%;
+  }
+}

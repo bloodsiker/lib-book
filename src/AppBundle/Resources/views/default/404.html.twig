@@ -1,0 +1,31 @@
+{% block page %}
+    <div class="page404">
+        <header>
+            <div class="logo-wr">
+                <a href="{{ path('index_multilang')}}" class="logo">
+                    <!-- <img width="540" src="{{ asset("bundles/app/i/logo.svg") }}" class="white_logo" alt=""> -->
+                    {% include "AppBundle:Block:logo.svg.twig" %}
+                </a>
+
+                {{ sonata_block_render({'type': 'sonata.block.service.social_buttons'}, {}) }}
+
+                {#<div class="icons icons--right">#}
+                    {#<a href="#" class="icons__item"><i class="fa fa-lock"></i></a>#}
+                {#</div>#}
+            </div>
+        </header>
+
+        <main class="table">
+            <div class="row">
+                <div class="cell">
+                    <h1>404</h1>
+                    <h2>{{ 'frontend.404.page_not_found'|trans({}, 'AppBundle') }}</h2>
+                    <p class="text404">
+                        {{ 'frontend.404.text'|trans({}, 'AppBundle') }}
+                    </p>
+                    <a href="{{ path('index_multilang') }}" class="btn">{{ 'frontend.404.to_main'|trans({}, 'AppBundle') }}</a>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

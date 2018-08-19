@@ -1,0 +1,7 @@
+services:
+    series_admin:
+        class: SeriesBundle\Admin\SeriesAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: "group.series", label: Серии }
+        arguments: [~, SeriesBundle\Entity\Series, ~]
+        public: true

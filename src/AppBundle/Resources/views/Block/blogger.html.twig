@@ -1,0 +1,44 @@
+{% import 'AppBundle:Block:_blogs_macro.html.twig' as blog %}
+
+{% if blogger is not empty %}
+    <div class="blogger-heading-wrapper">
+        {% if settings.show_description %}
+            <div class="blogger-heading">
+                <div class="blogger-heading-inner col-xs-12">
+
+                    <img src="{{ blogger.image ? blogger.image|imagine_filter('blogger_63x63') : null }}"/>
+
+                    <a href="{{ blog.suzy_url() }}">
+                        {{ blogger.translate.name }}
+                    </a>
+
+                    {% if blogger.translate.position  %}
+                        <span class="blogger-about">{{ blogger.translate.position }}</span>
+                    {% endif %}
+                </div>
+            {#</nav>#}
+            </div>
+            <div class="blogger-heading blogger-subheading">
+                <div class="blogger-heading-inner col-xs-12">
+                    {{ blogger.translate.content|raw }}
+                </div>
+            </div>
+        {% else %}
+            <div class="blogger-heading blogger-heading-small">
+                <div class="blogger-heading-inner">
+
+                    <img src="{{ blogger.image ? blogger.image|imagine_filter('blogger_76x76') : null }}"/>
+
+                    <a href="{{ blog.suzy_url() }}">
+                        {{ blogger.translate.name }}
+                    </a>
+
+                    {% if blogger.translate.position  %}
+                        <span class="blogger-about">{{ blogger.translate.position }}</span>
+                    {% endif %}
+                </div>
+                {#</nav>#}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

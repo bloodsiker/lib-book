@@ -1,0 +1,20 @@
+{% block page %}
+    <div class="gallery gallery-layout">
+
+        <div class="gallery__btn-wr">
+            <span id="one_photo">{% include "AppBundle:default/svg:one_photo.svg.twig"%}</span>
+            <span id="all_photo">{% include "AppBundle:default/svg:all_photos.svg.twig"%}</span>
+            <a href="{{ path('collection', {'slug' : collection.slug}) }}">{% include "AppBundle:default/svg:close.svg.twig"%}</a>
+        </div>
+
+
+        <div id="gallery_block">
+            {% include "AppBundle:collection:_gallery_slider.html.twig"%}
+        </div>
+        <div id="photo-list_block">
+            {% include "AppBundle:collection:_gallery_list.html.twig"%}
+        </div>
+
+
+    </div>
+{% endblock %}

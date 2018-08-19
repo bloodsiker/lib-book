@@ -1,0 +1,6 @@
+{% import 'AppBundle:Block:_articles_macro.html.twig' as article_helper %}
+
+{% if object.articleHasCategories|length > 0 %}
+    {% set url = article_helper.article_url(object, object.articleHasCategories|first.category ) %}
+    {{ object.translate('uk').getTitle()|raw }} {{ host }}{{ url }}
+{% endif %}

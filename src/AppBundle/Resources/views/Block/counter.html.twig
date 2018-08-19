@@ -1,0 +1,188 @@
+<a class="count_down" href="https://vogue.ua/fno" target="_blank" id="countdowntimer" style="display:none!important">
+    <div class="future_info">до <strong>#FNO2017UA</strong> {{ 'frontend.counter.left'|trans([], 'AppBundle') }}:</div>
+
+    <div id="future_date"></div>
+</a>
+
+<style>
+    .count_down{
+        display: inline-block;
+        position: absolute;
+        /*transform: translateX(-50%);*/
+        background:rgba(255, 255, 255, 0.3);
+        border-radius:2px;
+        top: 6px;
+        color: #000;
+        text-align: center;
+        z-index: 500;
+        transition: color 0.1s ease-in;
+        padding:5px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    #future_date {
+        display:inline-block;
+    }
+    .future_info {
+        display:inline-block;
+        text-align:right;
+        font-size:18px;
+        line-height:19px;
+        vertical-align:top;
+        margin:-2px 10px 0 0;
+    }
+    .future_info strong {
+        display:block;
+    }
+    .-branding .count_down{
+        color: #000;
+    }
+    .count_down:hover {
+        color: #BB8F56;
+    }
+    .count_down__main {
+        display:inline-block;
+    }
+    .count_down__item, .count_down__empty{
+        display: block;
+        margin: 0 8px;
+    }
+    .count_down__item em, .count_down__empty em {
+        display:inline-block;
+        font-family: Neutra, Arial, sans-serif;
+        text-align:center;
+        font-size:32px;
+        font-weight:bold;
+        font-style:normal;
+        background:#000;
+        color:#fff;
+        width:38px;
+        height:53px;
+        line-height:53px;
+        margin: 0 2px;
+    }
+    .count_down__empty em {
+        background:transparent;
+        color:#000;
+        width:auto;
+        margin-top:-3px;
+    }
+    @media screen and (max-width: 1070px){
+        .count_down{
+            display: none!important;
+        }
+    }
+    .padTop {
+        padding-top:0;
+    }
+    @media screen and (min-width: 1071px){
+        .padTop {
+            padding-top: 100px;
+        }
+    }
+</style>
+
+<script>
+    var endDate = new Date('{{ "October 13, 2017 18:00"|date() }}');
+
+    window.setInterval(function() {
+        var interval = diff(endDate, new Date());
+        var days = interval.days;
+        var hours = ('0' + interval.hours).substr(-2);
+        var minutes = ('0' + interval.minutes).substr(-2);
+        var seconds = ('0' + interval.seconds).substr(-2);
+
+        function diff(end, begin) {
+            var diff = Math.abs(Math.floor((end - begin) / 1000));
+            var days = Math.floor(diff/(24 * 60 * 60));
+            var left = diff - days * 24 * 60 * 60;
+            var hours = Math.floor(left / (60 * 60));
+            left = left - hours * 60 * 60;
+            var minutes = Math.floor(left / (60));
+            left = left - minutes * 60;
+
+            return {
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': (left > 60 ? (new Date()).getSeconds(): left)
+            }
+        }
+
+        function twoNumb(val) {
+            val = String(val);
+            var numbers;
+            numbers = '<em>' + val[0] + '</em>';
+            if(val[1]) {
+                numbers += '<em>' + val[1] + '</em>';
+            }
+            return numbers;
+        }
+
+        var counterTrans = {
+            days:
+                {
+                    'uk': ['день', 'дня', 'днів'],
+                    'ru': ['день', 'дня', 'дней']
+                },
+            hours:
+                {
+                    'uk': ['година', 'години', 'годин'],
+                    'ru': ['час', 'часа', 'часов']
+                },
+            minutes:
+                {
+                    'uk': ['хвилина', 'хвилини', 'хвилин'],
+                    'ru': ['минута', 'минуты', 'минут']
+                },
+            seconds:
+                {
+                    'uk': ['секунда', 'секунди', 'секунд'],
+                    'ru': ['секунда', 'секунды', 'секунд']
+                }
+        };
+        var couterLocale = '{{ app.request.getLocale() }}';
+        var text = '<div class="count_down__empty"><em><em></div>';
+        if (endDate > new Date()) {
+            text = '<div class="count_down__main">' + '<span class="count_down__item">' + twoNumb(days) + '</span>'
+                + '<span class="count_down__name">' + morph(days, counterTrans.days[couterLocale]) + '</span>' + '</div>'
+                + '<div class="count_down__main">' + '<span class="count_down__item">' + twoNumb(hours) + '</span>'
+                + '<span class="count_down__name">' + morph(hours, counterTrans.hours[couterLocale]) + '</span>' + '</div>'
+                + '<div class="count_down__main">' + '<span class="count_down__item">' + twoNumb(minutes) + '</span>'
+                + '<span class="count_down__name">' + morph(minutes, counterTrans.minutes[couterLocale]) + '</span>' + '</div>'
+                + '<div class="count_down__main">' + '<span class="count_down__item">' + twoNumb(seconds) + '</span>'
+                + '<span class="count_down__name">' + morph(seconds, counterTrans.seconds[couterLocale]) + '</span>' + '</div>';
+        } else {
+            document.getElementById('countdowntimer').style.display = 'none';
+            document.body.style.paddingTop = 0;
+            document.body.classList.remove("padTop");
+            return false;
+        }
+
+        document.getElementById('future_date').innerHTML = text;
+    }, 500);
+
+    function morph(value, dictionary) {
+        if (value > 14) {
+            value = parseInt(value.toString().slice(-1), 10);
+        }
+
+        if (value === 0) {
+            return dictionary[2];
+        }
+
+        if (value === 1) {
+            return dictionary[0];
+        } else if (value < 5) {
+            return dictionary[1];
+        } else {
+            return dictionary[2];
+        }
+    }
+    if (window.location.pathname.match('/article/fashion') && document.getElementById('countdowntimer') ||
+        window.location.pathname ==='/' && document.getElementById('countdowntimer') ||
+        window.location.pathname ==='/ua/' && document.getElementById('countdowntimer')) {
+        document.getElementById('countdowntimer').style.display = 'inline-block';
+        document.body.classList.add("padTop");
+    }
+</script>

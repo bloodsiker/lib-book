@@ -1,0 +1,11 @@
+{% extends 'IvoryCKEditorBundle:Form:ckeditor_widget.html.twig' %}
+
+{% block ckeditor_widget %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var editor_{{ id }} = CKEDITOR.instances["{{ id }}"];
+        editor_{{ id }}.config.fillEmptyBlocks = false;	// Prevent filler nodes in all empty blocks.
+        editor_{{ id }}.config.basicEntities = false;	// Prevent filler nodes in all empty blocks.
+    </script>
+{% endblock %}

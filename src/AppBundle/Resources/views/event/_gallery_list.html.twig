@@ -1,0 +1,27 @@
+<div class="gallery-layout__description">
+    <a href="/">
+        {% include "AppBundle:Block:logo.svg.twig" %}
+    </a>
+    <h1 class="gallery__title">{{ event.translate.title }}</h1>
+</div>
+<div class="clearfix"></div>
+<div class="gallery-list row middle-xs">
+
+    {#{{ dump( event.gallery.galleryHasImage) }}#}
+
+    {#{% for image in event.gallery.galleryHasImage %}#}
+    {#{{ dump(image.image.path) }}#}
+    {#{{ dump(image.image.translate.title) }}#}
+    {#{{ dump(image.image.translate.copyright) }}#}
+    {#{% endfor %}#}
+
+    {% if event.gallery and event.gallery.galleryHasImage %}
+        {% for item in event.gallery.galleryHasImage %}
+            <div class="col-xs-2 gallery-list__item">
+                <div class="gallery-list__item__img-wr">
+                    <img class="gallery-list__item__img" src="{{ item.image.path|imagine_filter('gallery_x315_watermark') }}">
+                </div>
+            </div>
+        {%  endfor %}
+    {% endif %}
+</div>

@@ -1,0 +1,197 @@
+.carousel{
+  @media screen and (max-width: 767px) {
+    padding-left: 15px;
+  }
+  &__wrapper{
+    position: relative;
+    //max-width: 615px;
+    width: 100%;
+    overflow: hidden;
+    @media screen and (max-width: 767px) {
+      max-width: 100%;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+  }
+  &__search{
+    letter-spacing: 2.1px;
+    font-size: 14px;
+    font-family: Neutra, Arial, sans-serif;
+    font-weight: 300;
+    margin-bottom: 10px;
+    display: none;
+    @media screen and (max-width: 767px) {
+      display: block;
+    }
+    span{
+      margin-right: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+  &__list{
+    position: relative;
+    left: 0;
+    overflow: hidden;
+    max-height: 525px;
+    width: 9999px;
+    &.no-transition{
+      transition-duration: 0s!important;
+    }
+  }
+  &__item{
+    float: left;
+    max-width: 300px;
+    margin-right: 15px;
+    @media screen and (max-width: 767px) {
+      max-width: 236px;
+    }
+    &--first{
+      margin-left: 0;
+    }
+  }
+  &__img{
+    max-width: 305px;
+    height: 450px;
+    width: 100%;
+    @media screen and (max-width: 767px) {
+      height: 331px;
+      width: 221px;
+    }
+  }
+  &__title{
+    font-family: Neutra, Arial, sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1.8px;
+    margin-top: 10px;
+  }
+  &__btn{
+    position: absolute;
+    display: inline-block;
+    width: 41px;
+    height: 41px;
+    background-color: #000000;
+    top: 43%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('/static/img/arrow-right.svg');
+    cursor: pointer;
+    @media screen and (max-width: 767px) {
+      display: none;
+      width: 31px;
+      height: 31px;
+      background-size: auto 13px;
+    }
+    &--prev{
+      left: 0;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    &--next{
+      right: 0;
+    }
+  }
+  &-article{
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 0;
+    .carousel__wrapper{
+      text-align: center;
+      @media screen and (max-width: 767px) {
+        overflow-x: hidden;
+      }
+    }
+    .carousel__list{
+      font-size: 0;
+      width: auto;
+      touch-action: manipulation;
+      white-space: nowrap;
+      overflow: visible;
+    }
+    .carousel__item{
+      display: inline-block;
+      width: 100%;
+      margin-right: 0;
+      float: none;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+    .carousel__img{
+      max-width: 100%;
+      width: auto;
+      max-height: 580px;
+    }
+    .carousel__link{
+      display: block;
+    }
+    .carousel__btn--prev{
+      left: -20px;
+    }
+    .carousel__btn--next{
+      right: -20px;
+    }
+  }
+  &-info{
+    margin-top: 10px;
+    position: relative;
+    background-color: #fff;
+    z-index: 20;
+    @media screen and (max-width: 767px) {
+      position: static;
+    }
+    &:before{
+      content: '';
+      width: 0;
+      height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &__count{
+      min-width: 70px;
+      font-size: 40px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 25px;
+      line-height: 44px;
+      transition: all .2s;
+      @media screen and (max-width: 991px) {
+        font-size: 30px;
+      }
+      @media screen and (max-width: 767px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 10px;
+        color: #ffffff;
+        font-size: 18px;
+        background-color: #000000;
+        min-width: 0;
+        line-height: normal;
+        font-family: Neutra, Arial, sans-serif;
+        padding: 2px 6px;
+        margin-right: 10px;
+      }
+    }
+    &__title{
+      width: calc(100% - 140px);
+      font-size: 16px;
+      color: #888888;
+      font-style: italic;
+      line-height: normal;
+      display: inline-block;
+      vertical-align: middle;
+      @media screen and (max-width: 991px) {
+        font-size: 16px;
+      }
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+}

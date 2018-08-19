@@ -1,0 +1,67 @@
+{# render title #}
+{% macro title(category_title, category_url) %}
+    <h2 class="content-block__title">
+        {% if category_url %}
+            <a class="content-block__title__link" href="{{ category_url }}">{{ category_title }}</a>
+        {% else %}
+            {{ category_title }}
+        {% endif %}
+    </h2>
+{% endmacro %}
+
+{# render content item #}
+{% macro content(title, short, image, url, category_title, category_url, col_width, hide, disableCategory) %}
+    <article class="multipage-item article {{ col_width|default("col-xs-12 col-sm-6 col-md-4") }} {{ hide|default("") }}">
+        <a class="article__img" href="{{ url }}">
+            <img class="article__img__src" src="{{ image }}" alt="">
+        </a>
+        {% if col_width != 'col-xs-6 col-sm-3 col-md-2' %}
+            {% if not disableCategory %}
+                <div>
+                    <a class="article__category" href="{{ category_url }}">{{ category_title }}</a>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <h3 class="article__title">
+            <a class="article__title__link" href="{{ url }}">{{ title }}</a>
+        </h3>
+        {% if col_width == 'col-xs-12' and short %}
+            <p class="article__short-description">
+                {% autoescape %}
+                    {{ short|raw }}
+                {% endautoescape %}
+            </p>
+        {% endif %}
+    </article>
+{% endmacro %}
+
+{# build article URL #}
+{% macro article_url(article, category, absolute) %}
+    {%- if article.html and article.html.isActive and article.html.path -%}
+        {{ html_page_path(article.html, app.request.scheme is defined ?  app.request.scheme : false) }}
+    {%- elseif category -%}
+        {%- if absolute -%}
+            {%- if category.parent -%}
+                {{ url('article_with_subcategory', {'category': category.parent.slug, 'subcategory': category.slug, 'slug': article.slug}) }}
+            {%- else -%}
+                {{ url('article_without_subcategory', {'category': category.slug, 'slug': article.slug}) }}
+            {%- endif -%}
+        {%- else -%}
+            {%- if category.parent -%}
+                {{- path('article_with_subcategory', {'category': category.parent.slug, 'subcategory': category.slug, 'slug': article.slug}) }}
+            {%- else -%}
+                {{ path('article_without_subcategory', {'category': category.slug, 'slug': article.slug}) }}
+            {%- endif -%}
+        {%- endif -%}
+    {%- endif -%}
+{% endmacro %}
+
+{# build category URL #}
+{% macro category_url(category) %}
+    {%- if category.parent -%}
+        {{ path('articles_with_subcategory', {'category': category.parent.slug, 'subcategory': category.slug}) }}
+    {%- else -%}
+        {{ path('articles_without_subcategory', {'category': category.slug}) }}
+    {%- endif -%}
+{% endmacro %}

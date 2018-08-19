@@ -1,0 +1,176 @@
+.collection-fashion-week {
+  .container {
+    max-width: 990px;
+  }
+  .carousel {
+    position: relative;
+    max-width: 625px;
+    &__wrapper {
+    }
+    &__list {
+      margin-top: 0;
+      margin-left: -40px;
+      list-style: none;
+    }
+    &__btn {
+      top: 50%;
+      margin-top: -58px;
+      &--prev {
+        left: -21px;
+      }
+      &--next {
+        right: -21px;
+      }
+    }
+    &__item {
+      margin-right: 25px;
+    }
+    &__img {
+      max-height: 450px;
+    }
+    &__title {
+      color: $black;
+      transition: color .2s;
+      &:hover,
+      &.active {
+        color: $gold;
+      }
+    }
+  }
+  .scroller {
+    &__wrap {
+      position: relative;
+      margin-right: -35px;
+      padding-right: 39px;
+      .mCustomScrollBox {
+        width: 100%;
+        .mCSB_scrollTools {
+          width: 10px;
+          opacity: 1;
+          .mCSB_draggerRail {
+            background-color: $white!important;
+          }
+          .mCSB_dragger {
+            .mCSB_dragger_bar {
+              width: 8px;
+              min-height: 40px;
+              background: $black;
+              border-radius: 0;
+            }
+          }
+        }
+      }
+    }
+    &__list {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+      li a {
+        display: block;
+        font-size: 18px;
+        line-height: 20px;
+        padding: 5px 0;
+        color: $black;
+        &:hover,
+        &:active {
+          color: $gold;
+        }
+      }
+    }
+    &__search {
+      color: #888;
+      font-size: 14px;
+      font-weight: 300;
+      font-family: Neutra, Arial, sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      span {
+        color: $black;
+        letter-spacing: 1.5px;
+        margin-right: 10px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+.wr.-branding .collection-fashion-week .container {
+  max-width: 990px!important;
+}
+@media screen and (max-width: 1070px) {
+  .collection-fashion-week {
+    .carousel {
+      &__btn {
+        &--prev {
+          left: -12px;
+        }
+        &--next {
+          right: -12px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1023px) {
+  .collection-fashion-week {
+    padding-left: 15px;
+    .carousel {
+    }
+    .scroller {
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .collection-fashion-week {
+    padding-left: 0;
+    .row {
+      max-width: 100%;
+      overflow-x: auto;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .col-md-8 {
+      max-width: 100%;
+      flex-basis: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .carousel {
+      max-width: 767px;
+      padding-left: 0!important;
+      .carousel__search {
+        color: $black;
+        font-size: 14px;
+        font-weight: 300;
+        font-family: Neutra, Arial, sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        span {
+          letter-spacing: 1.5px;
+          margin-right: 10px;
+          font-weight: 500;
+        }
+      }
+      &__title {
+        padding-left: 5px;
+      }
+      &__item {
+        margin-right: 0;
+        padding-right: 15px;
+        box-sizing: border-box;
+      }
+      &__link {
+      }
+      &__img {
+      }
+      &__btn {
+        display: none;
+        &--prev {
+          left: -10px;
+        }
+        &--next {
+          right: -10px;
+        }
+      }
+    }
+  }
+}

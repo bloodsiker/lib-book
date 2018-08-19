@@ -1,0 +1,24 @@
+{% import 'AppBundle:Block:_videos_macro.html.twig' as video %}
+
+<div class="video-elements">
+    {% set block_title = 'frontend.video.show_more_btn'|trans({}, 'AppBundle') %}
+    {% if( settings.show_title) %}
+        <h2 class="content-block__title">{{ 'frontend.video.show_recommend'|trans({}, 'AppBundle') }}</h2>
+    {% endif %}
+
+    <div class="row" id="category_{{ block.id }}_{{ random() }}">
+        {% include 'AppBundle:Block:_videos_content.html.twig' %}
+    </div>
+
+    {# if set "show load more" -show btn with fake ajax #}
+    {% if(settings.show_more_btn and records > settings.items_count) %}
+        <div class="more-btn-wr">
+            <span class="more-btn" data-url="{{ sonata_page_ajax_url(block) }}" data-page="2"
+                  data-limit="{{ settings.items_count }}" data-big-image="0"
+                  data-slug="{{ slug }}" id="more_{{ block.id }}_{{ random() }}">
+                {{ block_title|default("") }}
+            </span>
+            <a href="#" class="more-btn -hide">Перейти в {{ block_title|default("") }}</a>
+        </div>
+    {% endif %}
+</div>

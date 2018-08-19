@@ -1,0 +1,8 @@
+<div class="article-detail__tag">
+    {% for tag in tags if tag.isActive %}
+        <a href="{{ path('articles_by_tag', {'id': tag.id, 'slug': tag.slug}) }}" class="article-detail__tag__item">
+            {{- tag.translate.name -}}
+        </a>
+        <span class="article-detail__tag__middot">&middot;</span>
+    {% endfor %}
+</div>

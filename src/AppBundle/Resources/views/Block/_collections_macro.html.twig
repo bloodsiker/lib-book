@@ -1,0 +1,92 @@
+{# render title #}
+{% macro title(title, url) %}
+    <h2 class="content-block__title">
+        {% if url %}<a class="content-block__title__link" href="{{ url }}">{% endif %}
+            {{ title }}
+        {% if url %}</a>{% endif %}
+    </h2>
+{% endmacro %}
+
+{# render content item #}
+{% macro content(title, image, url, col_class) %}
+    <div class="{{ col_class }}">
+        <a href="{{ url }}" class="collections__item">
+            <div class="multipage-item collections__item__img-wr">
+                <img class="collections__item__img" src="{{ image }}" alt="">
+                {% if title %}
+                    <h2 class="collections__item__title">{{ title }}</h2>
+                {% endif %}
+            </div>
+        </a>
+    </div>
+{% endmacro %}
+
+{# render filter item #}
+{% macro filter(title, data, is_designer) %}
+    <div class="col-xs-12 col-sm-12 col-md-4 ">
+        <div class="custom-selector-wr">
+            <div class="custom-selector">
+                {{ title }}
+                <div class="custom-selector__ico">
+                    {% include "AppBundle:default/svg:down.svg.twig"%}
+                </div>
+            </div>
+            <ul class="custom-selector-list">
+                {% if data is not empty %}
+                    {% for item in data %}
+                        {% set is_season = item is instanceof('\\AppBundle\\Entity\\CollectionSeason') %}
+
+                        {% if is_designer %}
+                            {% set name = item.name %}
+                            {% set url = _self.collection_url(item) %}
+                        {% elseif is_season %}
+                            {% set name = item.translate.title %}
+                            {% set url = _self.collections_season_url(item.slug) %}
+                        {% else %}
+                            {% set name = item.translate.title %}
+                            {% set url = _self.collections_fashionweek_url(item.slug) %}
+                        {% endif %}
+
+                        <li class="custom-selector-list__item">
+                            <a class="custom-selector-list__link" href="{{ url }}">{{ name }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <div class="custom-selector-list-cover"></div>
+            <div class="custom-selector-list-cover__close">
+                {% include "AppBundle:default/svg:close.svg.twig"%}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{# build collection URL #}
+{% macro collection_url(collection) %}
+    {{ path('collection', {'slug': collection.slug}) }}
+{% endmacro %}
+
+{# build collection category URL #}
+{% macro collections_category_url(slug) %}
+    {{ path('collections_category', {'category': slug}) }}
+{% endmacro %}
+
+{# build gallery collection URL #}
+{% macro gallery_collection_url(collection) %}
+    {{ path('collection_gallery', {'slug': collection.slug}) }}
+{% endmacro %}
+
+{# build collection season URL #}
+{% macro collections_season_url(slug) %}
+    {{ path('collections_season', {'season': slug}) }}
+{% endmacro %}
+
+{# build collection fashionweek URL #}
+{% macro collections_fashionweek_url(slug) %}
+    {{ path('collections_fashionweek', {'fashionweek': slug}) }}
+{% endmacro %}
+
+{# build collection designer URL #}
+{#{% macro collections_designer_url(slug) %}#}
+    {#{{ path('collections_designer', {'designer': slug}) }}#}
+{#{% endmacro %}#}

@@ -1,0 +1,32 @@
+{% if not settings.aside %}
+    <BR><BR>
+    <h1 class="article-detail__title">{{ 'frontend.block.horoscope.title'|trans({}, 'AppBundle') }}</h1><BR>
+{% endif %}
+<div class="row horoscope">
+    {% for horoscope in horoscopes %}
+
+        <article class="
+                    {% if settings.aside %}
+                        col-xs-6
+                    {% else %}
+                        col-xs-6
+                        col-sm-4
+                        col-md-3
+                        col-lg-2
+                    {% endif %}
+
+                    horoscope__item">
+            <a href="{{ path('horoscope', {'slug': horoscope.slug}) }}">
+
+                <img class="horoscope__item__img" src="{{ asset('bundles/app/i/horoscope/' ~ horoscope.slug ~ '.png') }}" alt="">
+
+                <h3 class="horoscope__item__title">{{ horoscope.translate.title }}</h3>
+
+                <span class="horoscope__item__date">({{ horoscope.translate.subTitle }})</span>
+
+            </a>
+        </article>
+
+{% endfor %}
+
+</div>

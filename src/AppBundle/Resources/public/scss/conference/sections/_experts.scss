@@ -1,0 +1,195 @@
+.experts{
+  border-top: white solid 1px;
+}
+.experts-list{
+  @extend %row;
+  @extend %justify-center;
+}
+.expert{
+  @extend %col-4;
+  margin-bottom: 80px;
+  &-centered{
+    margin: 0 auto;
+    max-width: 250px;
+  }
+  &__img{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    max-width: 181px;
+    border-radius: 50%;
+  }
+  &__name{
+    margin: 15px 0;
+    padding: 0;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    font-family: "PT Serif", Arial, sans-serif;
+  }
+  &__description{
+    text-align: center;
+    margin: 0;
+    display: none;
+    padding: 0;
+    font-size: 26px;
+    font-family: Neutra, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 23px;
+  }
+}
+
+#baguetteBox-overlay{
+  .full-image{
+    figure{
+      display: inline-block;
+      margin: 0;
+      position: relative;
+      background: #fff;
+      width: 860px;
+      height: auto;
+      text-align: left;
+      background: #ffffff;
+      //padding: 35px;
+      img{
+        display: inline-block;
+        //width: auto;
+        //height: auto;
+        width: 433px;
+        height: 475px;
+        max-height: 100%;
+        max-width: 100%;
+        vertical-align: middle;
+        box-shadow: none;
+      }
+      figcaption{
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 50%;
+        left: 50%;
+        padding: 15px 35px;
+        top: 0;
+        text-align: left;
+        line-height: 1;
+        white-space: normal;
+        color: #000;
+        background: none;
+        h3{
+          margin: 0;
+          padding: 0;
+          text-align: left;
+          font-size: 25px;
+          font-weight: 400;
+          font-family: "PT Serif", Arial, sans-serif;
+        }
+        p{
+          font-size: 24px;
+          font-family: Neutra, Arial, sans-serif;
+          font-weight: 300;
+          line-height: normal;
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+  .baguetteBox-button{
+    background: none;
+    svg{
+      stroke: #ffffff !important;
+    }
+    &:hover{
+      svg{
+        stroke: #be925b !important;
+      }
+    }
+  }
+}
+
+
+
+
+@media screen and (max-width: 1000px ){
+  #baguetteBox-overlay{
+    .full-image{
+      figure{
+        width: auto;
+        max-width: initial;
+        margin: 0 70px;
+        padding: 20px;
+        text-align: center;
+        vertical-align: middle;
+        img{
+          max-height: inherit;
+          max-width: 100%;
+          width: auto;
+          height: auto;
+        }
+        figcaption{
+          position: static;
+          width: 100%;
+          padding: 20px 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+}
+@media screen and (max-width: 800px ){
+  #baguetteBox-overlay{
+      overflow-y: auto;
+    }
+}
+@media screen and (max-width: 480px ){
+  #baguetteBox-overlay{
+    overflow-y: auto;
+    .full-image{
+      figure{
+        margin: 40px 10px;
+        padding: 10px;
+        min-height: 750px;
+        figcaption{
+          h3{
+            font-size: 22px;
+          }
+          p{
+            font-size: 20px;
+            line-height: 18px;
+            margin:5px 0;
+          }
+        }
+      }
+    }
+    .baguetteBox-button#close-button{
+      top: 5px;
+      right: 5px;
+      svg{
+        stroke: #ffffff !important;
+      }
+    }
+  }
+  .baguetteBox-button#next-button{
+    right: 0;
+  }
+  .baguetteBox-button#previous-button{
+    left:0;
+  }
+
+}
+
+@media screen and (max-width: 800px ){
+  .expert{
+    @include mq-col(6);
+  }
+}
+
+@media screen and (max-width: $screen-xs ){
+  .expert{
+    @include mq-col(12);
+  }
+}

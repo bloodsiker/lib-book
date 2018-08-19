@@ -1,0 +1,75 @@
+.list_conferences {
+
+  .section-title {
+    text-transform:none;
+    letter-spacing:5px;
+  }
+
+  @mixin transition_cubic_effect( $type ){
+    transform-origin: center top;
+    transition: $type 0.3s cubic-bezier(.04,.72,.47,1);
+  }
+  .hover_cover_effect{
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(#000, .3);
+      opacity: 0;
+      z-index: 111;
+      @include transition_cubic_effect( opacity );
+    }
+  }
+
+  $article: "article";
+  .#{$article}{
+    text-align: center;
+    margin: 0 auto 35px;
+    &__img{
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      margin:0 auto 10px;
+      max-height: 475px;
+      @extend .hover_cover_effect;
+
+      &__src{
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        @include transition_cubic_effect( transform );
+      }
+
+      &:hover{
+        &:before{
+          opacity: 1;
+        }
+        .#{$article}__img__src{
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    &__title {
+      font-size:16px;
+      line-height:23px;
+      @media screen and (max-width: 1070px) {
+        font-size:14px;
+        line-height:18px;
+      }
+      padding:0 5px;
+      margin:0;
+      &__link{
+        color: $black;
+        transition: color 0.1s ease;
+        &:hover{
+          color: $gold;
+          text-decoration:none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{% import 'AppBundle:Block:_articles_macro.html.twig' as article %}
+{% import 'AppBundle:Block:_events_macro.html.twig' as event %}
+{% import 'AppBundle:Block:_videos_macro.html.twig' as video %}
+{% import 'AppBundle:Block:_blogs_macro.html.twig' as blog %}
+{% import 'AppBundle:Block:_collections_macro.html.twig' as collection %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banner %}
+
+{% for key, item in items %}
+    {% set is_article = item is instanceof('\\AppBundle\\Entity\\Article') %}
+    {% set is_blog = item is instanceof('\\AppBundle\\Entity\\Blog') %}
+    {% set is_video = item is instanceof('\\AppBundle\\Entity\\TvVideo') %}
+    {% set is_event = item is instanceof('\\AppBundle\\Entity\\Event') %}
+    {% set is_collection = item is instanceof('\\AppBundle\\Entity\\Collection') %}
+
+    {# item title #}
+    {% set title = item.translate.title %}
+
+    {# show content #}
+    {% set short = null %}
+    {% set filter_name = 'search_155x' %}
+
+    {% if is_article %}
+
+        {% set article_category = item.articleHasCategories|first ? item.articleHasCategories|first.category : null %}
+
+        {% set category_title = article_category ? article_category.translate.title : null %}
+        {% set category_url = article_category ? article.category_url(article_category) : null %}
+        {% set url = article_category ? article.article_url(item, article_category) : null %}
+        {% set image = item.image ? item.image|imagine_filter(filter_name) : null %}
+        {% set short = item.translate.header|striptags|raw %}
+
+    {% elseif is_blog %}
+        {% set category_title = item.blogger ? item.blogger.translate.name : null %}
+        {% set category_url = blog.suzy_blog_url(item.slug) %}
+        {% set url = blog.suzy_blog_url(item.slug) %}
+        {% set image = item.image ? item.image|imagine_filter(filter_name) : null %}
+        {% set short = item.translate.short|striptags|raw %}
+
+    {% elseif is_video %}
+
+        {% set category_title = item.category ? item.category.translate.title : null %}
+        {% set category_url = item.category ? video.category_url(item.category) : null %}
+        {% set url = video.video_url(item) %}
+        {% set image = item.image320x176 ? item.image320x176|imagine_filter(filter_name) : item.image|imagine_filter(filter_name) %}
+        {% set short = item.translate.header|striptags|raw %}
+
+    {% elseif is_event %}
+
+        {% set category_title = 'Event List'|trans([], 'AppBundle') %}
+        {% set category_url = path('events', {}) %}
+        {% set url = event.event_url(item) %}
+        {% set image = item.gallery ? item.gallery.galleryHasImage|first|imagine_filter(filter_name) : null %}
+
+    {% elseif is_collection %}
+
+        {% set category_title = 'Collection List'|trans([], 'AppBundle') %}
+        {% set category_url = path('collections', {}) %}
+        {% set url = collection.collection_url(item) %}
+        {% set image = item.gallery ? item.gallery.galleryHasImage|first|imagine_filter(filter_name) : null %}
+        {% set short = item.translate.header|striptags|raw %}
+
+    {% endif %}
+
+    {% if title is not empty and url is not empty %}
+        {{
+            article.content(
+                title,
+                short,
+                image,
+                url,
+                category_title,
+                category_url,
+                'col-xs-12',
+                null,
+                false
+            )
+        }}
+    {% endif %}
+
+{% endfor %}

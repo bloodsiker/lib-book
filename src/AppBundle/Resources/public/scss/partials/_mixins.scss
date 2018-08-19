@@ -1,0 +1,66 @@
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin tablet {
+  @media only screen and (max-width: 1070px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media only screen and (max-width: 640px) {
+    @content;
+  }
+}
+
+
+@mixin scr-lg {
+  @media only screen and (max-width: 850px) {
+    @content;
+  }
+}
+@mixin scr-md {
+  @media only screen and (max-width: 770px) {
+    @content;
+  }
+}
+@mixin scr-sm {
+  @media only screen and (max-width: 340px) {
+    @content;
+  }
+}
+
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+  $padding: unquote(( $y / $x ) * 100 + '%');
+  @if $pseudo {
+    &:before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  } @else {
+    padding-top: $padding;
+  }
+}
+/*usage @include responsive-ratio(16,9);*/
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  transition: $args;
+}
+/*usage @include transition(color .3s ease);*/
+
+@mixin transform($args...) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -ms-transform: $args;
+  transform: $args;
+}
+/*usage @include transform(rotate(90deg));*/

@@ -1,0 +1,92 @@
+<section class="category collection-fashion-week">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% if settings.show_title %}
+                    <h2 class="content-block__title">
+                        {% set title = app.request.getLocale() == 'ru' ? settings.title_ru : settings.title_ua %}
+                        {{ title is empty ? 'frontend.collections.fashion_week'|trans([], 'AppBundle') : title }}
+                    </h2>
+                {% else %}
+                    <h2 class="content-block__title"></h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <div class="carousel carousel-main">
+                    <div class="carousel__wrapper">
+                        <ul class="carousel__list">
+                            {% for key, collection in collections %}
+                                {% set src = collection.image ? collection.image|imagine_filter('collection_300x450') : null %}
+                                {% if collection.gallery and collection.gallery.galleryHasImage %}
+                                    {% for image in collection.gallery.galleryHasImage %}
+                                        {% if image.isCover %}
+                                            {% set src = image.image.path|imagine_filter('collection_300x450') %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if src is empty %}
+                                        {% set src = collection.gallery.galleryHasImage|first.image.path|imagine_filter('collection_300x450') %}
+                                    {% endif %}
+                                {% endif %}
+                                <li class="carousel__item carousel__item{{ key == 0 ? '--first' }}">
+                                    <a class="carousel__link" href="{{ path('collection', { 'slug': collection.slug }) }}">
+                                        <img class="carousel__img" src="{{ '://' in src ? '' : '/' }}{{ src }}" alt="slide">
+                                        <p class="carousel__title">{{ collection.getTitle() }}</p>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <span class="carousel__btn carousel__btn--prev" id="prev"></span>
+                    <span class="carousel__btn carousel__btn--next" id="next"></span>
+                </div><!-- /.carousel -->
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="scroller" style="height: 468px;">
+                    <div class="scroller__bar">
+                        {#<div class="scroller__cursor ui-draggable ui-draggable-handle"></div>#}
+                    </div>
+                    <div class="scroller__wrap" style="height: 468px;">
+                        <div class="scroller__list-wrap">
+                            <a class="scroller__search" data-url="{{ sonata_page_ajax_url(block) }}">
+                                {% if settings.order_designer == 'name' %}
+                                    {#<span>{{ 'frontend.collections.by_list'|trans([], 'AppBundle') }}</span> А-Z#}
+                                    <span>А-Z</span>&nbsp;&nbsp;{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}
+                                {% elseif settings.order_designer == 'date' %}
+                                    {#<span>{{ 'frontend.collections.by_list'|trans([], 'AppBundle') }}</span>{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}#}
+                                    А-Z&nbsp;&nbsp;<span>{{ 'frontend.collections.by_date'|trans([], 'AppBundle') }}</span>
+                                {% endif %}
+                            </a>
+                            <ul class="scroller__list">
+                                {% for designer in designers %}
+
+                                    {% set slug = designer.getSlug() %}
+                                    {% set name = showCollection
+                                        ? designer
+                                        : designer.getDesigner().getName()
+                                    %}
+
+                                    <li>
+                                        <a href="{{ path('collection', {'slug': slug}) }}">{{ name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul><!-- /.scroller__list -->
+                        </div><!-- /.scroller__list-wrap -->
+                    </div><!-- /.scroller__wrap -->
+                </div><!-- /.scroller -->
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            $('.collection-fashion-week .scroller__wrap').mCustomScrollbar({
+                live: "on",
+                advanced:{ updateOnSelectorChange: ".scroller__list-wrap" }
+            });
+        })
+    </script>
+</section>

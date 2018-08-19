@@ -1,0 +1,50 @@
+{% import 'AppBundle:Block:_blogs_macro.html.twig' as blog %}
+{% import 'BannerBundle:Block:_banners_macro.html.twig' as banner %}
+
+{% set blogger_title = null %}
+{% if blogger %}
+    {# blogger title #}
+    {% set blogger_title = blogger.translate.name %}
+{% endif %}
+
+<section class="content-block content-block--transparent blogger-content-wrapper">
+    <div class="row" id="blogger_{{ block.id }}_{{ random() }}">
+
+        {% if top_blog is not empty %}
+
+            <article class="article col-xs-12 article--big ">
+                <a class="article__img" href="{{ blog.suzy_blog_url(top_blog.slug) }}">
+                    <img class="article__img__src" src="{{ top_blog.image990 ? top_blog.image990|imagine_filter('blog_990x') : null }}" alt="{{ top_blog.translate.title }}">
+                    <div class="blogger-content-absolute-block">
+                        <h3 class="article__title">{{ top_blog.translate.title }}</h3>
+
+                        {% if top_blog.blogger is not empty %}
+                            <img src="{{ blogger.image ? blogger.image|imagine_filter('blogger_50x50') : null }}"/>
+                            <p>{{ top_blog.blogger.translate.name }}</p>
+                        {% endif %}
+                    </div>
+                </a>
+            </article>
+
+        {% endif %}
+
+
+        {# block banner_990x200 #}
+        {% if banner_990x200 is defined and banner_990x200 is not empty %}
+            <article class="article col-xs-12 article--big with-banner_990-200">{{ banner.banner_content(banner_990x200) }}</article>
+        {% endif %}
+        {# end block banner_990x200 #}
+
+        {% include 'AppBundle:Block:_blogs_content.html.twig' %}
+    </div>
+
+    {# if set "show load more" -show btn with fake ajax #}
+    {% if(settings.show_more_btn) %}
+        <div class="more-btn-wr">
+            <span class="more-btn" data-url="{{ sonata_page_ajax_url(block) }}" data-page="2" data-blogger="{{ blogger ? blogger.id : null }}" id="more_{{ block.id }}_{{ random() }}">
+                {{ 'frontend.app.more'|trans([], 'AppBundle') }} {{ blogger_title|default("") }}
+            </span>
+            <a href="#" class="more-btn -hide">Перейти в {{ blogger_title|default("") }}</a>
+        </div>
+    {% endif %}
+</section>

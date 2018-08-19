@@ -1,0 +1,21 @@
+.with-banner_990-200{
+  div {
+    width: 100% !important;
+    height: initial !important;
+    overflow: hidden;
+  }
+  > div > div{
+    &:after{
+      content: '';
+      display: block;
+      padding-top: 20.202020%;
+    }
+  }
+  iframe{
+    position: absolute!important;
+    left:0!important;
+    top: 0!important;
+    width: 100%!important;
+    height: 100%!important;
+  }
+}
