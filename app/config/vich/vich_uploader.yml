@@ -1,0 +1,15 @@
+vich_uploader:
+    db_driver: orm
+    storage: gaufrette
+    metadata:
+        auto_detection: true
+        cache: file
+
+    mappings:
+        fb2_file:
+            upload_destination: file
+            namer: book.upload_namer.book
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

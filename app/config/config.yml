@@ -7,13 +7,16 @@ imports:
     - { resource: sonata/user.yml }
     - { resource: fos/user.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+    - { resource: knplabs/gaufrette.yml }
+    - { resource: oneup/oneup-upload.yml }
+    - { resource: vich/vich_uploader.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: ru
     locales: [ru, uk]
-    route_locales: ru|en|ua|uk
+    route_locales: ru|ua
     replacement_locales: [{ from: uk, to: ua }]
 
 framework:
@@ -49,6 +52,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
+        server_version: '%server_version%'
         driver: pdo_mysql
         host: '%database_host%'
         port: '%database_port%'

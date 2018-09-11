@@ -1,0 +1,5 @@
+services:
+    book.upload_namer.book:
+        class: "BookBundle\\Naming\\BookNamer"
+        calls:
+          - [ setPathImage, ["books/[ID/100]/[FILE]"]]

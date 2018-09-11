@@ -1,4 +1,4 @@
-.idea
+/.idea/
 /.web-server-pid
 /app/config/parameters.yml
 /build/
@@ -13,8 +13,6 @@
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
 phpunit.xml.dist
-.idea

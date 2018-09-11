@@ -18,23 +18,23 @@ sonata_admin:
     dashboard:
         groups:
             group.book:
-                label: group.book
+                label: Книги
                 label_catalogue: BookBundle
                 icon: <i class="fa fa-book"></i>
             group.genre:
-                label: group.genre
+                label: Жанры
                 label_catalogue: GenreBundle
                 icon: <i class="fa fa-object-group"></i>
             group.author:
-                label: group.author
+                label: Авторы
                 label_catalogue: AuthorBundle
                 icon: <i class="fa fa-universal-access"></i>
             group.series:
-                label: group.series
+                label: Серии
                 label_catalogue: SeriesBundle
                 icon: <i class="fa fa-list-alt"></i>
             group.comment:
-                label: group.comments
+                label: Коментарии
                 label_catalogue: CommentBundle
                 icon: <i class="fa fa-comment"></i>
 

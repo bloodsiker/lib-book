@@ -5,7 +5,9 @@ namespace BookBundle\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class Book
@@ -13,6 +15,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Entity()
  * @ORM\Table(name="books")
  * @ORM\HasLifecycleCallbacks
+ *
+ * @Vich\Uploadable
  */
 class Book
 {
@@ -84,11 +88,18 @@ class Book
     protected $pages;
 
     /**
+     * Unmapped property to handle file uploads
+     *
+     * @Vich\UploadableField(mapping="fb2_file", fileNameProperty="fb2")
+     */
+    protected $fileFb2;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $fileFb2;
+    protected $fb2;
 
     /**
      * @var string
@@ -345,13 +356,37 @@ class Book
     }
 
     /**
+     * Set fb2
+     *
+     * @param string $fb2
+     *
+     * @return $this
+     */
+    public function setFb2($fb2)
+    {
+        $this->fb2 = $fb2;
+
+        return $this;
+    }
+
+    /**
+     * Get fb2
+     *
+     * @return integer
+     */
+    public function getFb2()
+    {
+        return $this->fb2;
+    }
+
+    /**
      * Set fileFb2
      *
-     * @param UploadedFile $fileFb2
+     * @param File $fileFb2
      *
      * @return Book
      */
-    public function setFileFb2(UploadedFile $fileFb2 = null)
+    public function setFileFb2(File $fileFb2 = null)
     {
         $this->fileFb2 = $fileFb2;
 

@@ -3,7 +3,6 @@
 namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
-use AdminBundle\Form\Type\ImageType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -14,6 +13,7 @@ use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 /**
  * Class BookAdmin
@@ -119,9 +119,11 @@ class BookAdmin extends Admin
                 ])
             ->end()
             ->with('book.files', ['class' => 'col-md-4', 'name' => null])
-                ->add('fileFb2', FileType::class, [
-                    'label' => 'book.fields.fileFb2',
-                    'required' => false,
+                ->add('file', VichFileType::class, [
+                    'label'             => 'book.fields.fileFb2',
+                    'allow_delete'      => true,
+                    'download_uri'      => true,
+                    'download_link'         => true,
                 ])
                 ->add('fileEpub', FileType::class, [
                     'label' => 'book.fields.fileEpub',
