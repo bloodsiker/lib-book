@@ -26,7 +26,6 @@ class BookNamer implements NamerInterface
      */
     public function name($object, PropertyMapping $mapping): string
     {
-        dump($object);die;
         $file = $mapping->getFile($object);
         $name = $file->getClientOriginalName();
         $name = uniqid().'_'.Transliterator::transliterate($name);

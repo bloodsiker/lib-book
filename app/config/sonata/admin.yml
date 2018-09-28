@@ -18,7 +18,7 @@ sonata_admin:
     dashboard:
         groups:
             group.book:
-                label: Книги
+                label: group.book
                 label_catalogue: BookBundle
                 icon: <i class="fa fa-book"></i>
             group.genre:

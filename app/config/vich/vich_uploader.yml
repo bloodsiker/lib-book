@@ -6,7 +6,15 @@ vich_uploader:
         cache: file
 
     mappings:
-        fb2_file:
+        book_image:
+            upload_destination: image
+            namer: book.upload_namer.book_poster
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        book_file:
             upload_destination: file
             namer: book.upload_namer.book
 

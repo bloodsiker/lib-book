@@ -3,17 +3,18 @@
 namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use AdminBundle\Form\Type\UploadVichImageType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * Class BookAdmin
@@ -27,12 +28,19 @@ class BookAdmin extends Admin
         '_sort_order' => 'DESC',
     ];
 
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'genre.fields.ID',
+                'label' => 'book.fields.id',
             ])
+            ->add('poster', null, array(
+                'label'     => 'book.fields.poster',
+                'template'  => 'BookBundle:Admin:list_image.html.twig',
+            ))
             ->addIdentifier('name', null, [
                 'label' => 'book.fields.name',
             ])
@@ -46,11 +54,17 @@ class BookAdmin extends Admin
             ]);
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name', null, [
-                'label' => 'book.fields.title',
+                'label' => 'book.fields.name',
+            ])
+            ->add('author', null, [
+                'label' => 'book.fields.author',
             ])
             ->add('isActive', null, [
                 'label' => 'book.fields.is_active',
@@ -59,10 +73,16 @@ class BookAdmin extends Admin
                 'label' => 'book.fields.created_at',
             ]);
     }
+
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $context = $this->getPersistentParameter('context');
+
         $formMapper
-            ->with('book.basic', ['class' => 'col-md-8', 'name' => null])
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
                 ->add('name', TextType::class, [
                     'label' => 'book.fields.name',
                 ])
@@ -77,16 +97,27 @@ class BookAdmin extends Admin
                     'required' => false,
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
-                ->add('image', FileType::class, [
-                    'label' => 'book.fields.image',
+                ->add('bookHasFiles', CollectionType::class, [
+                    'label' => 'book.fields.files',
                     'required' => false,
-                    'help' => $this->getSubject()->getImage() ?: false,
+                    'constraints' => new Valid(),
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'orderNum',
+                    'link_parameters' => ['context' => $context],
+                    'admin_code' => 'sonata.admin.book_has_files',
                 ])
             ->end()
-            ->with('book.additional', ['class' => 'col-md-4', 'name' => null])
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
                 ->add('isActive', null, [
                     'label' => 'book.fields.is_active',
                     'required' => false,
+                ])
+                ->add('file', UploadVichImageType::class, [
+                    'label' => 'book.fields.poster',
+                    'preview_width' => 250,
                 ])
                 ->add('author', ModelListType::class, [
                     'label' => 'book.fields.author',
@@ -94,7 +125,11 @@ class BookAdmin extends Admin
                 ])
                 ->add('series', ModelListType::class, [
                     'label' => 'book.fields.series',
-                    'required' => true,
+                    'required' => false,
+                ])
+                ->add('pages', IntegerType::class, [
+                    'label' => 'book.fields.pages',
+                    'required' => false,
                 ])
                 ->add('year', IntegerType::class, [
                     'label' => 'book.fields.year',
@@ -111,35 +146,17 @@ class BookAdmin extends Admin
                     'required' => false,
                     'attr' => ['readonly' => true],
                 ])
-                ->add('createdAt', DateTimePickerType::class, [
-                    'label'     => 'book.fields.created_by',
+                ->add('updatedAt', DateTimePickerType::class, [
+                    'label'     => 'book.fields.updated_at',
                     'required' => true,
-                    'format' => 'YYYY-MM-dd HH:mm',
+                    'format' => 'dd-MM-YYYY HH:mm',
                     'attr' => ['readonly' => true],
                 ])
-            ->end()
-            ->with('book.files', ['class' => 'col-md-4', 'name' => null])
-                ->add('file', VichFileType::class, [
-                    'label'             => 'book.fields.fileFb2',
-                    'allow_delete'      => true,
-                    'download_uri'      => true,
-                    'download_link'         => true,
-                ])
-                ->add('fileEpub', FileType::class, [
-                    'label' => 'book.fields.fileEpub',
-                    'required' => false,
-                ])
-                ->add('fileRtf', FileType::class, [
-                    'label' => 'book.fields.fileRtf',
-                    'required' => false,
-                ])
-                ->add('fileDjvu', FileType::class, [
-                    'label' => 'book.fields.fileDjvu',
-                    'required' => false,
-                ])
-                ->add('filePdf', FileType::class, [
-                    'label' => 'book.fields.filePdf',
-                    'required' => false,
+                ->add('createdAt', DateTimePickerType::class, [
+                    'label'     => 'book.fields.created_at',
+                    'required' => true,
+                    'format' => 'dd-MM-YYYY HH:mm',
+                    'attr' => ['readonly' => true],
                 ])
             ->end()
         ;

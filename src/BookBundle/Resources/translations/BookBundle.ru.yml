@@ -1,0 +1,31 @@
+Action: Действия
+Book List: Книги
+Book Create: Создать книгу
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    book: Книги
+    book_editor: Книги
+    book_file_editor: Файлы книг
+    book_has_file_editor: Файлы для книги
+
+book:
+    fields:
+        id: ID
+        name: Название книги
+        description: Краткое описание
+        slug: Сегмент URL (slug)
+        files: Файлы книги
+        is_active: Активно
+        poster: Изображение книги
+        author: Автор
+        series: Серия
+        pages: Страниц
+        year: Год издания
+        genres: Жанр(ы)
+        download: Скачиваний
+        updated_at: Изменена
+        created_at: Создана

@@ -3,5 +3,9 @@ services:
         class: GenreBundle\Admin\GenreAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: "group.genre", label: Жанры }
-        arguments: [~, GenreBundle\Entity\Genre, ~]
-        public: true
+        arguments:
+          - ~
+          - GenreBundle\Entity\Genre
+          - ~
+        calls:
+          - [ setTranslationDomain, [GenreBundle] ]

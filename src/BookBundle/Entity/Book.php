@@ -21,7 +21,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Book
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -41,7 +41,14 @@ class Book
      *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $image;
+    protected $poster;
+
+    /**
+     * Unmapped property to handle file uploads
+     *
+     * @Vich\UploadableField(mapping="book_image", fileNameProperty="poster")
+     */
+    private $file;
 
     /**
      * @var string
@@ -58,7 +65,7 @@ class Book
     protected $description;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", length=4, nullable=true)
      */
@@ -81,63 +88,21 @@ class Book
     protected $series;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", length=4, nullable=true)
      */
     protected $pages;
 
     /**
-     * Unmapped property to handle file uploads
-     *
-     * @Vich\UploadableField(mapping="fb2_file", fileNameProperty="fb2")
-     */
-    protected $fileFb2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $fb2;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $fileEpub;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $fileRtf;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $fileDjvu;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $filePdf;
-
-    /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isActive;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=false)
      */
@@ -155,11 +120,28 @@ class Book
     protected $genres;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BookBundle\Entity\BookHasFile",
+     *     mappedBy="book", cascade={"all"}, orphanRemoval=true
+     * )
+     * @ORM\OrderBy({"orderNum" = "ASC"})
+     */
+    protected $bookHasFiles;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
      */
     protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $updatedAt;
 
     /**
      * Constructor
@@ -168,8 +150,9 @@ class Book
     {
         $this->isActive = true;
         $this->download = 0;
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = $this->updatedAt = new \DateTime('now');
         $this->genres = new ArrayCollection();
+        $this->bookHasFiles = new ArrayCollection();
     }
 
     /**
@@ -236,15 +219,15 @@ class Book
     }
 
     /**
-     * Set image
+     * Set poster
      *
-     * @param UploadedFile $image
+     * @param string $poster
      *
      * @return Book
      */
-    public function setImage(UploadedFile $image = null)
+    public function setPoster($poster = null)
     {
-        $this->image = $image;
+        $this->poster = $poster;
 
         return $this;
     }
@@ -254,9 +237,34 @@ class Book
      *
      * @return integer
      */
-    public function getImage()
+    public function getPoster()
     {
-        return $this->image;
+        return $this->poster;
+    }
+
+    /**
+     * Sets file
+     *
+     * @param File|null $file
+     *
+     * @throws \Exception
+     */
+    public function setFile(File $file = null)
+    {
+        $this->file = $file;
+        if (null !== $file) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
@@ -353,150 +361,6 @@ class Book
     public function getPages()
     {
         return $this->pages;
-    }
-
-    /**
-     * Set fb2
-     *
-     * @param string $fb2
-     *
-     * @return $this
-     */
-    public function setFb2($fb2)
-    {
-        $this->fb2 = $fb2;
-
-        return $this;
-    }
-
-    /**
-     * Get fb2
-     *
-     * @return integer
-     */
-    public function getFb2()
-    {
-        return $this->fb2;
-    }
-
-    /**
-     * Set fileFb2
-     *
-     * @param File $fileFb2
-     *
-     * @return Book
-     */
-    public function setFileFb2(File $fileFb2 = null)
-    {
-        $this->fileFb2 = $fileFb2;
-
-        return $this;
-    }
-
-    /**
-     * Get fileFb2
-     *
-     * @return integer
-     */
-    public function getFileFb2()
-    {
-        return $this->fileFb2;
-    }
-
-    /**
-     * Set fileFb2
-     *
-     * @param UploadedFile $fileEpub
-     *
-     * @return Book
-     */
-    public function setFileEpub(UploadedFile $fileEpub = null)
-    {
-        $this->fileEpub = $fileEpub;
-
-        return $this;
-    }
-
-    /**
-     * Get fileEpub
-     *
-     * @return integer
-     */
-    public function getFileEpub()
-    {
-        return $this->fileEpub;
-    }
-
-    /**
-     * Set fileRtf
-     *
-     * @param UploadedFile $fileRtf
-     *
-     * @return Book
-     */
-    public function setFileRtf(UploadedFile $fileRtf = null)
-    {
-        $this->fileRtf = $fileRtf;
-
-        return $this;
-    }
-
-    /**
-     * Get fileRtf
-     *
-     * @return integer
-     */
-    public function getFileRtf()
-    {
-        return $this->fileRtf;
-    }
-
-    /**
-     * Set fileDjvu
-     *
-     * @param UploadedFile $fileDjvu
-     *
-     * @return Book
-     */
-    public function setFileDjvu(UploadedFile $fileDjvu = null)
-    {
-        $this->fileDjvu = $fileDjvu;
-
-        return $this;
-    }
-
-    /**
-     * Get fileDjvu
-     *
-     * @return integer
-     */
-    public function getFileDjvu()
-    {
-        return $this->fileDjvu;
-    }
-
-    /**
-     * Set filePdf
-     *
-     * @param UploadedFile $filePdf
-     *
-     * @return Book
-     */
-    public function setFilePdf(UploadedFile $filePdf = null)
-    {
-        $this->filePdf = $filePdf;
-
-        return $this;
-    }
-
-    /**
-     * Get filePdf
-     *
-     * @return integer
-     */
-    public function getFilePdf()
-    {
-        return $this->filePdf;
     }
 
     /**
@@ -599,6 +463,7 @@ class Book
      * Add genres
      *
      * @param \GenreBundle\Entity\Genre $genres
+     *
      * @return Book
      */
     public function addGenre(\GenreBundle\Entity\Genre $genres)
@@ -629,6 +494,43 @@ class Book
     }
 
     /**
+     * Add bookHasFiles.
+     *
+     * @param \BookBundle\Entity\BookHasFile $bookHasFiles
+     *
+     * @return Book
+     */
+    public function addBookHasFile(\BookBundle\Entity\BookHasFile $bookHasFiles)
+    {
+        $bookHasFiles->setBook($this);
+        $this->bookHasFiles[] = $bookHasFiles;
+
+        return $this;
+    }
+
+    /**
+     * Remove bookHasFiles.
+     *
+     * @param \BookBundle\Entity\BookHasFile $bookHasFiles
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeBookHasFile(\BookBundle\Entity\BookHasFile $bookHasFiles)
+    {
+        return $this->bookHasFiles->removeElement($bookHasFiles);
+    }
+
+    /**
+     * Get articleHasAuthors.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBookHasFiles()
+    {
+        return $this->bookHasFiles;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -650,5 +552,29 @@ class Book
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Book
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

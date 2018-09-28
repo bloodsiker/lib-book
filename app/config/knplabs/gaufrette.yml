@@ -1,17 +1,13 @@
-parameters:
-    files_folder: "%media_base_path%/files/"
-    image_folder: "%media_base_path%/images/"
-
 knp_gaufrette:
     stream_wrapper: ~
     adapters:
         file:
             local:
-                directory: "%files_folder%"
+                directory: "%media_base_path%"
                 create: true
         image:
             local:
-                directory: "%image_folder%"
+                directory: "%media_base_path%"
                 create: true
 
     filesystems:

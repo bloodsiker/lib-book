@@ -15,4 +15,6 @@
 !var/sessions/.gitkeep
 /vendor/
 /web/bundles/
+/web/files/
+/web/images/
 phpunit.xml.dist
