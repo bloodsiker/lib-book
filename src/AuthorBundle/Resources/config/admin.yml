@@ -2,6 +2,10 @@ services:
     author_admin:
         class: AuthorBundle\Admin\AuthorAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: "group.author", label: Авторы }
-        arguments: [ ~, AuthorBundle\Entity\Author, ~]
-        public: true
+          - { name: sonata.admin, manager_type: orm, group: "group.author", label: "group.author_editor" }
+        arguments:
+          - ~
+          - AuthorBundle\Entity\Author
+          - ~
+        calls:
+          - [ setTranslationDomain, [AuthorBundle] ]

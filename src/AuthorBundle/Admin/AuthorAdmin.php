@@ -21,58 +21,68 @@ class AuthorAdmin extends Admin
         '_sort_order' => 'DESC',
     ];
 
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'genre.fields.ID',
+                'label' => 'author.fields.ID',
             ])
             ->addIdentifier('name', null, [
-                'label' => 'genre.fields.name',
+                'label' => 'author.fields.name',
             ])
             ->add('isActive', null, [
-                'label' => 'genre.fields.is_active',
+                'label' => 'author.fields.is_active',
                 'editable'  => true,
             ])
             ->add('createdAt', null, [
-                'label' => 'genre.fields.created_at',
+                'label' => 'author.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ]);
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name', null, [
-                'label' => 'genre.fields.title',
+                'label' => 'author.fields.name',
             ])
             ->add('isActive', null, [
-                'label' => 'genre.fields.is_active',
+                'label' => 'author.fields.is_active',
             ])
             ->add('createdAt', null, [
-                'label' => 'genre.fields.created_at',
+                'label' => 'author.fields.created_at',
             ]);
     }
+
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('genre.basic', ['class' => 'col-md-8', 'name' => false])
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => false])
                 ->add('name', TextType::class, [
-                    'label' => 'genre.fields.name',
+                    'label' => 'author.fields.name',
                 ])
                 ->add('slug', TextType::class, [
-                    'label' => 'genre.fields.slug',
+                    'label' => 'author.fields.slug',
                     'required' => false,
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
             ->end()
-            ->with('genre.additional', ['class' => 'col-md-4', 'name' => false])
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])
                 ->add('isActive', null, [
-                    'label' => 'genre.fields.is_active',
+                    'label' => 'author.fields.is_active',
                     'required' => false,
                 ])
                 ->add('createdAt', DateTimePickerType::class, [
-                    'label'     => 'genre.fields.created_by',
+                    'label'     => 'author.fields.created_at',
                     'required' => true,
                     'format' => 'YYYY-MM-dd HH:mm',
                     'attr' => ['readonly' => true],

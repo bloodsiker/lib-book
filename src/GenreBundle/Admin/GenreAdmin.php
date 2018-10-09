@@ -22,6 +22,9 @@ class GenreAdmin extends Admin
         '_sort_order' => 'ASC',
     ];
 
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -44,6 +47,9 @@ class GenreAdmin extends Admin
             ]);
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -60,10 +66,14 @@ class GenreAdmin extends Admin
                 'label' => 'genre.fields.created_at',
             ]);
     }
+
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('genre.basic', ['class' => 'col-md-8', 'name' => false])
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => false])
                 ->add('name', TextType::class, [
                     'label' => 'genre.fields.name',
                 ])
@@ -73,7 +83,7 @@ class GenreAdmin extends Admin
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
             ->end()
-            ->with('genre.additional', ['class' => 'col-md-4', 'name' => false])
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])
                 ->add('isActive', null, [
                     'label' => 'genre.fields.is_active',
                     'required' => false,
@@ -83,7 +93,7 @@ class GenreAdmin extends Admin
                     'required' => false,
                 ))
                 ->add('createdAt', DateTimePickerType::class, [
-                    'label'     => 'genre.fields.created_by',
+                    'label'     => 'genre.fields.created_at',
                     'required' => true,
                     'format' => 'YYYY-MM-dd HH:mm',
                     'attr' => ['readonly' => true],
