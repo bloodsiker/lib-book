@@ -2,6 +2,7 @@
 
 namespace BookBundle\Admin;
 
+use BookBundle\Entity\BookFile;
 use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -72,9 +73,22 @@ class BookHasFileAdmin extends Admin
                     'attr' => [
                         'readonly' => true,
                         'disabled' => true,
+                        'value'    => $this->getType($this->getSubject()->getBookFile()->getType()),
                     ],
                 ])
             ;
         }
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return mixed
+     */
+    protected function getType($type)
+    {
+        $types = BookFile::getTypeList();
+
+        return $types[$type];
     }
 }

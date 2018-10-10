@@ -30,11 +30,11 @@ sonata_admin:
                 label_catalogue: AuthorBundle
                 icon: <i class="fa fa-universal-access"></i>
             group.series:
-                label: Серии
+                label: group.series
                 label_catalogue: SeriesBundle
                 icon: <i class="fa fa-list-alt"></i>
             group.comment:
-                label: Коментарии
+                label: group.comment
                 label_catalogue: CommentBundle
                 icon: <i class="fa fa-comment"></i>
 

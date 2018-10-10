@@ -17,6 +17,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class CommentAdmin extends Admin
 {
+    /**
+     * @var array
+     */
     protected $datagridValues = [
         '_page'       => 1,
         '_per_page'   => 25,
@@ -24,11 +27,14 @@ class CommentAdmin extends Admin
         '_sort_order' => 'ASC',
     ];
 
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'comment.fields.ID',
+                'label' => 'comment.fields.id',
             ])
             ->addIdentifier('book', null, [
                 'label' => 'comment.fields.book',
@@ -46,6 +52,9 @@ class CommentAdmin extends Admin
             ]);
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -59,10 +68,14 @@ class CommentAdmin extends Admin
                 'label' => 'comment.fields.created_at',
             ]);
     }
+
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('genre.basic', ['class' => 'col-md-8', 'name' => false])
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => false])
                 ->add('comment', TextareaType::class, [
                     'label' => 'comment.fields.comment',
                     'attr' => [
@@ -70,7 +83,7 @@ class CommentAdmin extends Admin
                     ],
                 ])
             ->end()
-            ->with('genre.additional', ['class' => 'col-md-4', 'name' => false])
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])
                 ->add('isActive', null, [
                     'label' => 'comment.fields.is_active',
                     'required' => false,

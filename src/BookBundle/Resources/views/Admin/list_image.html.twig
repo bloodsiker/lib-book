@@ -1,7 +1,30 @@
 {% extends admin.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% set v = asset('bundles/admin/images/preview_placeholder.png') %}
-    {% set image_preview_path = value %}
-    <img src="{{ image_preview_path|default(v) }}?{{ random() }}" style="max-height: 100px;"/>
+    {% if object is instanceof('\\BookBundle\\Entity\\Book') %}
+        {% if field_description.name == 'type' %}
+            {% set redirectType = object.getTypeList[object.type] %}
+            {% set transLabel = 'form.types.'~redirectType %}
+            {% set typeTrans = transLabel|trans({}, 'SonataPageBundle') %}
+            <small><b>{{ typeTrans }}</b></small>
+        {% elseif field_description.name == 'fromPath' %}
+            <a href="{{ admin.generateUrl('edit', { id : object.id }) }}" class="sonata-link-identifier">{{ object.fromPath }}</a>
+            {% if object.help is not empty %}
+                <br>
+                <small>{{ object.help }}</small>
+            {% endif %}
+        {% elseif field_description.name == 'files' %}
+            {% set files = object.bookHasFiles.getValues() %}
+            {#{{ dump(files) }}#}
+            <div class="btn-group" role="group" aria-label="...">
+                {% for file in files %}
+                    <button type="button" class="btn btn-default">{{ file.bookFile.getTypeList[file.bookFile.type] }}</button>
+                {% endfor %}
+            </div>
+        {% elseif field_description.name == 'poster' %}
+            {% set v = asset('bundles/admin/images/preview_placeholder.png') %}
+            {% set image_preview_path = value %}
+            <img src="{{ image_preview_path|default(v) }}?{{ random() }}" style="max-height: 100px;"/>
+        {% endif %}
+    {% endif %}
 {% endblock %}

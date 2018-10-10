@@ -44,6 +44,10 @@ class BookAdmin extends Admin
             ->addIdentifier('name', null, [
                 'label' => 'book.fields.name',
             ])
+            ->add('files', null, [
+                'label' => 'book.fields.files',
+                'template'  => 'BookBundle:Admin:list_image.html.twig',
+            ])
             ->add('isActive', null, [
                 'label' => 'book.fields.is_active',
                 'editable'  => true,
