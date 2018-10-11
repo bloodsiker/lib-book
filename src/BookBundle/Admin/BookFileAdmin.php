@@ -33,21 +33,21 @@ class BookFileAdmin extends Admin
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'genre.fields.ID',
+                'label' => 'book_file.fields.id',
             ])
             ->addIdentifier('origName', null, [
-                'label' => 'book.fields.name',
+                'label' => 'book_file.fields.orig_name',
             ])
             ->add('type', null, [
-                'label' => 'book.fields.type',
+                'label' => 'book_file.fields.type',
                 'editable'  => true,
             ])
             ->add('isActive', null, [
-                'label' => 'book.fields.is_active',
+                'label' => 'book_file.fields.is_active',
                 'editable'  => true,
             ])
             ->add('createdAt', null, [
-                'label' => 'book.fields.created_at',
+                'label' => 'book_file.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ]);
     }
@@ -59,16 +59,16 @@ class BookFileAdmin extends Admin
     {
         $datagridMapper
             ->add('origName', null, [
-                'label' => 'book.fields.title',
+                'label' => 'book_file.fields.orig_name',
             ])
             ->add('type', null, [
-                'label' => 'book.fields.type',
+                'label' => 'book_file.fields.type',
             ])
             ->add('isActive', null, [
-                'label' => 'book.fields.is_active',
+                'label' => 'book_file.fields.is_active',
             ])
             ->add('createdAt', null, [
-                'label' => 'book.fields.created_at',
+                'label' => 'book_file.fields.created_at',
             ]);
     }
 
@@ -78,37 +78,37 @@ class BookFileAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('book.basic', ['class' => 'col-md-8', 'name' => null])
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
                 ->add('origName', TextType::class, [
-                    'label' => 'book.fields.origName',
+                    'label' => 'book_file.fields.orig_name',
                 ])
                 ->add('type', ChoiceType::class, [
-                    'label' => 'book.fields.type',
-                    'choices' => $this->getType(),
-                    'required' => true,
+                    'label'     => 'book_file.fields.type',
+                    'choices'   => $this->getType(),
+                    'required'  => true,
                 ])
                 ->add('file', VichFileType::class, [
-                    'label'             => 'book.fields.file',
-                    'required'           => false,
-                    'help' => $this->getSubject()->getBookFile() ?: false,
+                    'label'     => 'book_file.fields.file',
+                    'required'  => false,
+                    'help'      => $this->getSubject()->getBookFile() ?: false,
                 ])
             ->end()
-            ->with('book.additional', ['class' => 'col-md-4', 'name' => null])
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
                 ->add('isActive', null, [
-                    'label' => 'book.fields.is_active',
-                    'required' => false,
+                    'label'     => 'book_file.fields.is_active',
+                    'required'  => false,
                 ])
                 ->add('updatedAt', DateTimePickerType::class, [
-                    'label'     => 'book.fields.created_by',
-                    'required' => true,
-                    'format' => 'YYYY-MM-dd HH:mm',
-                    'attr' => ['readonly' => true],
+                    'label'     => 'book_file.fields.updated_at',
+                    'required'  => true,
+                    'format'    => 'YYYY-MM-dd HH:mm',
+                    'attr'      => ['readonly' => true],
                 ])
                 ->add('createdAt', DateTimePickerType::class, [
-                    'label'     => 'book.fields.created_by',
-                    'required' => true,
-                    'format' => 'YYYY-MM-dd HH:mm',
-                    'attr' => ['readonly' => true],
+                    'label'     => 'book_file.fields.created_at',
+                    'required'  => true,
+                    'format'    => 'YYYY-MM-dd HH:mm',
+                    'attr'      => ['readonly' => true],
                 ])
             ->end()
         ;

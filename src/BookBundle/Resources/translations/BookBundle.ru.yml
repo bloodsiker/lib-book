@@ -29,3 +29,19 @@ book:
         download: Скачиваний
         updated_at: Изменена
         created_at: Создана
+
+book_has_file:
+    fields:
+        book: Книга
+        file: Файл
+        type: Тип
+
+book_file:
+    fields:
+        id: ID
+        orig_name: Оригинальное название
+        type: Тип файла
+        file: Файл
+        is_active: Актовно
+        updated_at: Обновлено
+        created_at: Создано

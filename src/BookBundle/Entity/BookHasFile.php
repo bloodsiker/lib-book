@@ -55,9 +55,7 @@ class BookHasFile
      */
     public function __construct()
     {
-//        if (empty($this->orderNum)) {
-//            $this->orderNum = 0;
-//        }
+        $this->orderNum = 0;
     }
 
     /**

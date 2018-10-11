@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Author
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -38,7 +38,7 @@ class Author
     protected $slug;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */

@@ -20,6 +20,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
 
+            // Doctrine Migrations bundle
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+
             // Sonata AdminBundle and it dependencies
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),

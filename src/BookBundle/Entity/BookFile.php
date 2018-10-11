@@ -261,7 +261,7 @@ class BookFile
      *
      * @param \DateTime $updatedAt
      *
-     * @return Book
+     * @return BookFile
      */
     public function setUpdatedAt($updatedAt)
     {
