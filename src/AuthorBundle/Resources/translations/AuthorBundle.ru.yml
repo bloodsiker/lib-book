@@ -1,18 +1,18 @@
 Action: Действия
-Genre List: Список жанров
-Genre Create: Создать жанр
+Author List: Список авторов
+Author Create: Добавить автора
 
 form_group:
     basic: Основные
     additional: Дополнительные
 
 group:
-    genre: Жанры
-    genre_editor: Жанры
+    author: Авторы
+    author_editor: Авторы
 
-genre:
+author:
     fields:
-        name: Название
+        name: ФИО
         is_active: Активен
         created_at: Дата создания
         slug: Сегмент URL (slug)

@@ -22,19 +22,19 @@ sonata_admin:
                 label_catalogue: BookBundle
                 icon: <i class="fa fa-book"></i>
             group.genre:
-                label: Жанры
+                label: group.genre
                 label_catalogue: GenreBundle
                 icon: <i class="fa fa-object-group"></i>
             group.author:
-                label: Авторы
+                label: group.author
                 label_catalogue: AuthorBundle
                 icon: <i class="fa fa-universal-access"></i>
             group.series:
-                label: Серии
+                label: group.series
                 label_catalogue: SeriesBundle
                 icon: <i class="fa fa-list-alt"></i>
             group.comment:
-                label: Коментарии
+                label: group.comment
                 label_catalogue: CommentBundle
                 icon: <i class="fa fa-comment"></i>
 

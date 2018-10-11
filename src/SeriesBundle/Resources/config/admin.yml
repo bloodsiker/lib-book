@@ -2,6 +2,10 @@ services:
     series_admin:
         class: SeriesBundle\Admin\SeriesAdmin
         tags:
-          - { name: sonata.admin, manager_type: orm, group: "group.series", label: Серии }
-        arguments: [~, SeriesBundle\Entity\Series, ~]
-        public: true
+          - { name: sonata.admin, manager_type: orm, group: "group.series", label: "group.series_editor" }
+        arguments:
+          - ~
+          - SeriesBundle\Entity\Series
+          - ~
+        calls:
+          - [ setTranslationDomain, [SeriesBundle] ]

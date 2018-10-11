@@ -1,0 +1,19 @@
+Action: Действия
+Series List: Список серий
+Series Create: Создать серию
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    series: Серии
+    series_editor: Серии
+
+series:
+    fields:
+        title: Название
+        is_active: Активна
+        slug: Сегмент URL (slug)
+        created_at: Дата создания
+        id: ID

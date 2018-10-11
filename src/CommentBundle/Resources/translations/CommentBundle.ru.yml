@@ -1,0 +1,20 @@
+Action: Действия
+Comment List: Список комментариев
+Comment Create: Создать комментарий
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    comment: Комментарии
+    comment_editor: Комментарии
+
+comment:
+    fields:
+        comment: Комментарий
+        is_active: Активна
+        rating: Рейтинг комментария
+        book: Книга
+        created_at: Дата создания
+        id: ID

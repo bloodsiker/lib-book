@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Series
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -26,9 +26,9 @@ class Series
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=150, nullable=false)
      */
-    protected $name;
+    protected $title;
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class Series
     protected $slug;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -67,7 +67,7 @@ class Series
      */
     public function __toString()
     {
-        return (string) $this->name;
+        return (string) $this->title;
     }
 
     /**
@@ -77,7 +77,7 @@ class Series
     {
         if (is_null($this->slug)) {
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->getName());
+            $this->slug = $slugify->slugify($this->getTitle());
         }
     }
 
@@ -100,27 +100,27 @@ class Series
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      *
      * @return Series
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**

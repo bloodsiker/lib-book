@@ -2,12 +2,12 @@
 
 namespace BookBundle\Admin;
 
+use BookBundle\Entity\BookFile;
 use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -24,10 +24,10 @@ class BookHasFileAdmin extends Admin
     {
         $listMapper
             ->add('book', null, [
-                'label' => 'article_has_authors.fields.article',
+                'label' => 'book_has_file.fields.book',
             ])
             ->add('bookFile', null, [
-                'label' => 'article_has_authors.fields.author',
+                'label' => 'book_has_file.fields.file',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -58,7 +58,7 @@ class BookHasFileAdmin extends Admin
 
         $formMapper
             ->add('bookFile', ModelListType::class, [
-                'label' => 'article_has_authors.fields.author',
+                'label' => 'book_has_file.fields.file',
                 'required' => true,
                 'btn_edit' => true,
             ], ['link_parameters' => $linkParameters])
@@ -66,15 +66,28 @@ class BookHasFileAdmin extends Admin
         if ($this->getSubject() && $this->getSubject()->getId()) {
             $formMapper
                 ->add('bookFile.type', TextType::class, [
-                    'label' => 'quiz_has_answer.fields.percent',
+                    'label' => 'book_has_file.fields.type',
                     'required' => false,
-                    'empty_data' => 0,
+                    'empty_data' => $this->getSubject()->getBookFile()->getType(),
                     'attr' => [
                         'readonly' => true,
                         'disabled' => true,
+                        'value'    => $this->getType($this->getSubject()->getBookFile()->getType()),
                     ],
                 ])
             ;
         }
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return mixed
+     */
+    protected function getType($type)
+    {
+        $types = BookFile::getTypeList();
+
+        return $types[$type];
     }
 }

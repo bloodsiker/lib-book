@@ -51,6 +51,14 @@ class BookHasFile
     protected $orderNum;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orderNum = 0;
+    }
+
+    /**
      * "String" representation of class
      *
      * @return string
