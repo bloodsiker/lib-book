@@ -44,7 +44,6 @@ final class Version20181011151334 extends AbstractMigration
         $genre->addColumn('created_at', 'datetime', array('notnull' => true));
         $genre->addColumn('is_active', 'boolean', array('notnull' => true));
         $genre->setPrimaryKey(array('id'));
-        $genre->addUniqueIndex(array('slug'));
         $genre->addForeignKeyConstraint($schema->getTable('genres'), array('parent_id'), array('id'), array('onDelete' => 'set null'));
 
         // series

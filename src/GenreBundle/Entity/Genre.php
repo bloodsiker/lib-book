@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Entity()
  * @ORM\Table(name="genres")
- * @UniqueEntity("slug")
  * @ORM\HasLifecycleCallbacks
  */
 class Genre
@@ -35,7 +34,7 @@ class Genre
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50, nullable=false, unique=true)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
     protected $slug;
 

@@ -1,6 +1,7 @@
 /.idea/
 /.web-server-pid
 /app/config/parameters.yml
+/app/Resources/node/node_modules/
 /build/
 /phpunit.xml
 /var/*
@@ -17,4 +18,5 @@
 /web/bundles/
 /web/files/
 /web/images/
+/web/public/
 phpunit.xml.dist
