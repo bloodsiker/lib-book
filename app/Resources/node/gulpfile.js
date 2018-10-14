@@ -12,6 +12,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const remember = require('gulp-remember');
 const path = require('path');
 const cached = require('gulp-cached');
+const browserSync = require('browser-sync').create();
 const debug = require('gulp-debug');
 
 gulp.task('styles', function () {
@@ -45,6 +46,16 @@ gulp.task('watch', function () {
         remember.forget('styles', path.resolve(filepath));
         delete cached.caches.styles[path.resolve(filepath)];
     });
+
+    gulp.watch('../../../src/AppBundle/Resources/public/assets/**/*.*', gulp.series('assets'));
 });
 
-gulp.task('dev', gulp.series('build', 'watch'));
+gulp.task('server', function () {
+    browserSync.init({
+        server: '../../../web/public'
+    });
+
+    browserSync.watch('../../../web/public/**/*.*').on('change', browserSync.reload);
+});
+
+gulp.task('dev', gulp.series('build', gulp.parallel('watch', 'server')));
