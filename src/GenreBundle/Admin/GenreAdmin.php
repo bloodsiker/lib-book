@@ -29,7 +29,7 @@ class GenreAdmin extends Admin
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'genre.fields.ID',
+                'label' => 'genre.fields.id',
             ])
             ->addIdentifier('name', null, [
                 'label' => 'genre.fields.name',

@@ -13,9 +13,9 @@ final class Version20181011151334 extends AbstractMigration
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
-        return "Author (AuthorBundle)";
+        return "Author, Genre, Series (AuthorBundle, GenreBundle), SeriesBundle))";
     }
 
     /**
@@ -34,8 +34,28 @@ final class Version20181011151334 extends AbstractMigration
         $author->addColumn('is_active', 'boolean', array('notnull' => true));
         $author->setPrimaryKey(array('id'));
         $author->addUniqueIndex(array('slug'));
-//        $author->addForeignKeyConstraint($schema->getTable('user_users'), array('created_by'), array('id'), array('onDelete' => 'set null'));
-//        $author->addForeignKeyConstraint($schema->getTable('user_users'), array('modified_by'), array('id'), array('onDelete' => 'set null'));
+
+        // genre
+        $genre = $schema->createTable('genres');
+        $genre->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $genre->addColumn('parent_id', 'integer', array('unsigned' => true, 'notnull' => false));
+        $genre->addColumn('name', 'string', array('length' => 50, 'notnull' => true));
+        $genre->addColumn('slug', 'string', array('length' => 50, 'notnull' => true));
+        $genre->addColumn('created_at', 'datetime', array('notnull' => true));
+        $genre->addColumn('is_active', 'boolean', array('notnull' => true));
+        $genre->setPrimaryKey(array('id'));
+        $genre->addUniqueIndex(array('slug'));
+        $genre->addForeignKeyConstraint($schema->getTable('genres'), array('parent_id'), array('id'), array('onDelete' => 'set null'));
+
+        // series
+        $series = $schema->createTable('series');
+        $series->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $series->addColumn('title', 'string', array('length' => 150, 'notnull' => true));
+        $series->addColumn('slug', 'string', array('length' => 150, 'notnull' => true));
+        $series->addColumn('created_at', 'datetime', array('notnull' => true));
+        $series->addColumn('is_active', 'boolean', array('notnull' => true));
+        $series->setPrimaryKey(array('id'));
+        $series->addUniqueIndex(array('slug'));
 
         // tvVideo's data
 //        $tvVideoTranslation = $schema->createTable('tv_video_translation');
@@ -60,5 +80,7 @@ final class Version20181011151334 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         $schema->dropTable('authors');
+        $schema->dropTable('series');
+        $schema->dropTable('genres');
     }
 }

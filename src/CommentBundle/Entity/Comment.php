@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Comment
  *
  * @ORM\Entity()
- * @ORM\Table(name="comments")
+ * @ORM\Table(name="books_comments")
  * @ORM\HasLifecycleCallbacks
  */
 class Comment
@@ -89,7 +89,7 @@ class Comment
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -171,7 +171,7 @@ class Comment
     /**
      * Set rating
      *
-     * @param boolean $rating
+     * @param bool $rating
      *
      * @return Comment
      */
@@ -185,7 +185,7 @@ class Comment
     /**
      * Get isActive
      *
-     * @return integer
+     * @return int
      */
     public function getRating()
     {
@@ -195,7 +195,7 @@ class Comment
     /**
      * Set isActive
      *
-     * @param boolean $isActive
+     * @param bool $isActive
      *
      * @return Comment
      */
@@ -209,7 +209,7 @@ class Comment
     /**
      * Get isActive
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
