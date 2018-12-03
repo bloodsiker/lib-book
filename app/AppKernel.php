@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
 
             // Sonata PageBundle ant it dependencies
+            new Sonata\PageBundle\SonataPageBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle(),
