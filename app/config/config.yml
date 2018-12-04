@@ -3,9 +3,10 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: sonata/core.yml }
+    - { resource: sonata/block.yml }
     - { resource: sonata/admin.yml }
     - { resource: sonata/user.yml }
-    - { resource: sonata/page.yml }
+#    - { resource: sonata/page.yml }
     - { resource: fos/user.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
     - { resource: knplabs/gaufrette.yml }
@@ -72,7 +73,7 @@ doctrine:
         auto_mapping: true
         mappings:
 #            ApplicationSonataPageBundle: ~ # only once the ApplicationSonataPageBundle is generated
-            SonataPageBundle: ~
+#            SonataPageBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

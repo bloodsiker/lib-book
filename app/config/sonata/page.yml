@@ -29,24 +29,6 @@ sonata_page:
         - sonata_cache_js_sync
         - sonata_cache_apc
 
-        - tv_live
-        - longread
-        - media_get
-        - block__ajax
-        - remove_trailing_slash
-
-        - articles_xml_rss
-        - articles_sitemap
-        - articles_inc_views
-        - dossiers_inc_views
-        - google_news_feed
-        - google_feed
-        - bigmir_xml_rss
-        - article_category_rss
-        - rss_facebook
-        - rss_custom
-        - articles_amp
-        - articles_archive_calendar_dates
     ignore_uri_patterns:
         - "^/admin\\/"   # ignore admin route, ie route containing 'admin'
 

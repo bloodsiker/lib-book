@@ -1,0 +1,114 @@
+sonata_block:
+#    context_manager: sonata.page.block.context_manager
+#    default_contexts: [sonata_page_bundle]
+#    blocks:
+#        sonata.admin.block.admin_list:
+#            contexts: [admin]
+#        sonata.admin.block.search_result:
+#            contexts: [admin]
+#
+#        # PageBundle's Blocks
+#        sonata.page.block.container:
+#            contexts: [sonata_page_bundle]
+#        sonata.page.block.ajax:
+#            contexts: [sonata_page_bundle]
+#        sonata.page.block.context_manager:
+#            contexts: [sonata_page_bundle]
+#        page.block.site_variable:
+#            contexts: [sonata_page_bundle]
+
+#        # AppBundle's Blocks
+#        app.block.service.header:
+#            contexts: [cms]
+#        app.block.service.footer:
+#            contexts: [cms]
+#        app.block.service.breadcrumb:
+#            contexts: [cms]
+#        app.block.service.language_switcher:
+#            contexts: [cms]
+#        app.block.service.filter_letter:
+#            contexts: [cms]
+#        app.block.form.orphus:
+#            contexts: [cms]
+#        app.block.service.get_state_value:
+#            contexts: [cms]
+#        app.block.service.partners:
+#            contexts: [cms]
+#        app.block.service.partners_informer:
+#            contexts: [cms]
+#        app.block.service.lifestyle_projects:
+#            contexts: [cms]
+#        app.block.service.banner:
+#            contexts: [sonata_page_bundle]
+#        app.block.service.announce:
+#            contexts: [sonata_page_bundle]
+#        app.block.service.top_materials:
+#            contexts: [cms]
+#
+#        # ArticleBundle's Blocks
+#        article.block.service.hot_news_slider:
+#            contexts: [cms]
+#        article.block.service.opinion:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.opinion_list:
+#            contexts: [cms]
+#        article.block.service.authorsarts:
+#            contexts: [cms]
+#        article.block.service.list:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.video:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.photo_gallery:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.analytics:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.longread:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.articles_one_or_two_column:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.main_article:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.article:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.informer:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.interview:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.day_articles:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.horoscopes:
+#            contexts: [sonata_page_bundle]
+#        article.block.service.more_articles:
+#            contexts: [cms]
+#        article.block.service.calendar:
+#            contexts: [cms]
+#        # DossierBundle's Blocks
+#        dossier.block.service.dossier_list:
+#            contexts: [cms]
+#
+#        # TvVideoBundle's Blocks
+#        tv.block.service.tv_video:
+#            contexts: [cms]
+#
+#        # MediaBundle Block's
+#        media.block.player:
+#            contexts: [cms]
+#
+#        # UserBundle's Blocks
+#        sonata.user.block.account: # used to display menu option (login option)
+#            contexts: [user]
+#            cache: sonata.page.cache.js_async
+#        sonata.user.block.menu: # used to display the menu in profile pages
+#            contexts: [user]
+#
+#        # ShareBundleBundle's Blocks
+#        share.block.service.social_buttons:
+#            contexts: [cms]
+#        share.block.service.rtf:
+#            contexts: [sonata_page_bundle]
+#
+#        # QuizBundle
+#        quiz.block.service.quiz:
+#            contexts: [sonata_page_bundle]
+#        quiz.block.service.quiz_list:
+#            contexts: [cms]

@@ -31,8 +31,9 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
 
             // Sonata PageBundle ant it dependencies
-            new Sonata\PageBundle\SonataPageBundle(),
-            new FOS\CKEditorBundle\FOSCKEditorBundle(),
+//            new Sonata\PageBundle\SonataPageBundle(),
+
+            // Sonata UserBundle and it dependencies
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle(),
 
@@ -41,6 +42,9 @@ class AppKernel extends Kernel
 
             // Doctrine2 Behaviors
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+
+            // CKEditor integration
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
             // User bundle
             new UserBundle\UserBundle(),
