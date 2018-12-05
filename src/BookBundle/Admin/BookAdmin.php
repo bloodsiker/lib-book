@@ -141,7 +141,7 @@ class BookAdmin extends Admin
                 ->add('genres', ModelAutocompleteType::class, [
                     'label' => 'book.fields.genres',
                     'required' => false,
-                    'property' => ['name'],
+                    'property' => 'name',
                     'multiple' => true,
                     'attr' => ['class' => 'form-control'],
                 ])
