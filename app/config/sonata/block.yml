@@ -1,7 +1,7 @@
 sonata_block:
-#    context_manager: sonata.page.block.context_manager
-#    default_contexts: [sonata_page_bundle]
-#    blocks:
+    context_manager: sonata.page.block.context_manager
+    default_contexts: [sonata_page_bundle]
+    blocks:
 #        sonata.admin.block.admin_list:
 #            contexts: [admin]
 #        sonata.admin.block.search_result:

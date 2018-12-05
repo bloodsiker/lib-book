@@ -1,9 +1,9 @@
 sonata_page:
     class:
-        page: "PageBundle\\Entity\\Page"
-        site: "PageBundle\\Entity\\Site"
-        block: "PageBundle\\Entity\\Block"
-        snapshot: "PageBundle\\Entity\\Snapshot"
+        page: PageBundle\Entity\Page
+        site: PageBundle\Entity\Site
+        block: PageBundle\Entity\Block
+        snapshot: PageBundle\Entity\Snapshot
 
     multisite: host
     direct_publication: '%kernel.debug%'
