@@ -1,0 +1,5 @@
+services:
+    media.upload_namer.file:
+        class: "MediaBundle\\Naming\\MediaNamer"
+        calls:
+        - [ setPathImage, ["/files/media/[ID/100]/[FILE]"]]

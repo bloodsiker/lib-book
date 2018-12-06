@@ -1,9 +1,0 @@
-{% spaceless %}
-	<div class="{% if (position=='leftside') %}content-social-leftside{% else %}content-social{% endif %}">
-		<div>
-			<a href="http://www.facebook.com/sharer.php?s=100&p[title]={{ title|raw }}&p[url]={{ url }}" target="_blank" title="Поделиться ссылкой на Фейсбуке" class="content-social-fb"></a>
-			<a href="http://twitter.com/share?text={{ title|raw }}&url={{ url }}&counturl={{ url }}" target="_blank" title="Поделиться ссылкой в Твиттере" class="content-social-tw"></a>
-			<a href="https://telegram.me/share/url?url={{ url }}&text={{ title|raw }}" title="Поделиться ссылкой в Телеграм" class="content-social-tl"></a>
-		</div>
-	</div>
-{% endspaceless %}

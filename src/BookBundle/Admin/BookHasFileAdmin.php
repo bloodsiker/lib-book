@@ -60,7 +60,6 @@ class BookHasFileAdmin extends Admin
             ->add('bookFile', ModelListType::class, [
                 'label' => 'book_has_file.fields.file',
                 'required' => true,
-                'btn_edit' => true,
             ], ['link_parameters' => $linkParameters])
         ;
         if ($this->getSubject() && $this->getSubject()->getId()) {

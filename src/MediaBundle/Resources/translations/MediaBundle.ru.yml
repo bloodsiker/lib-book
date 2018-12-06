@@ -1,0 +1,20 @@
+Action: Действия
+Comment List: Список файлов
+Comment Create: Добавить файл
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    media: Медиа
+    media_editor: Медиа
+
+comment:
+    fields:
+        comment: Комментарий
+        is_active: Активна
+        rating: Рейтинг комментария
+        book: Книга
+        created_at: Дата создания
+        id: ID

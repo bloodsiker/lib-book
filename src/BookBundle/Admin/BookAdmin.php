@@ -137,6 +137,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('year', IntegerType::class, [
                     'label' => 'book.fields.year',
+                    'required' => false,
                 ])
                 ->add('genres', ModelAutocompleteType::class, [
                     'label' => 'book.fields.genres',

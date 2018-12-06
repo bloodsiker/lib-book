@@ -1,0 +1,11 @@
+services:
+    sonata.admin.media:
+        class: MediaBundle\Admin\MediaAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: "group.media", label: "group.media_editor" }
+        arguments:
+          - ~
+          - MediaBundle\Entity\Media
+          - ~
+        calls:
+          - [ setTranslationDomain, [MediaBundle] ]

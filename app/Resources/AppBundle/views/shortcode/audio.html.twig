@@ -1,9 +1,0 @@
-{% if shortcode_data.audio %}
-	{% if shortcode_data.audio.getPath() and '.mp3' in shortcode_data.audio.getPath() %}
-		<audio controls="controls">
-			<source src="{{ shortcode_data.audio.getPath() }}" type="audio/mpeg" />
-		</audio>
-	{% elseif shortcode_data.audio.getCode() %}
-		{{ shortcode_data.audio.getCode()|raw }}
-	{% endif %}
-{% endif %}

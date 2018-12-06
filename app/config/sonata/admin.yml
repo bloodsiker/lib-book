@@ -23,6 +23,10 @@ sonata_admin:
 
     dashboard:
         groups:
+            group.media:
+                label: group.media
+                label_catalogue: MediaBundle
+                icon: <i class="fa fa-file-image-o"></i>
             group.book:
                 label: group.book
                 label_catalogue: BookBundle

@@ -1,3 +1,0 @@
-{% if shortcode_data[0] is defined %}
-    <div class="video_frame">{{ shortcode_data|first|replace({'watch?v=': '/embed/'})|raw }}</div>
-{% endif %}
