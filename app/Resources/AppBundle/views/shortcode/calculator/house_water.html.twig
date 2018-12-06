@@ -1,0 +1,69 @@
+<div class="house_calc_cont">
+	<fieldset class="house_calc">
+		<legend>{{ app.request.locale == 'ru' ? 'Я трачу много воды?' : 'Я багато витрачаю води?' }}</legend>
+
+		<div>
+			<div><input type="radio" name="hcalc_w_heat" value="1"> {{ app.request.locale == 'ru' ? 'У меня есть центральное горячее водоснабжение' : 'У мене є центральне гаряче водопостачання' }}</div>
+			<div><input type="radio" name="hcalc_w_heat" value="2"> {{ app.request.locale == 'ru' ? 'Воду нагреваю бойлером' : 'Воду нагріваю бойлером' }}</div>
+		</div>
+
+		<div class="hcalc_w_flds hcalc_w_fld1 hcalc_w_fld2">{{ app.request.locale == 'ru' ? 'Сколько человек пользуется коммуналкой' : 'Скільки людей користується комуналкою' }}:<br><input type="text" id="housecalc_w_N" value=""></div>
+		<div class="hcalc_w_flds hcalc_w_fld1 hcalc_w_fld2">{{ app.request.locale == 'ru' ? 'Сколько кубометров холодной воды тратите' : 'Скільки кубометрів холодної води витрачаєте' }}:<br><input type="text" id="housecalc_w_C" value=""></div>
+		<div class="hcalc_w_flds hcalc_w_fld1">{{ app.request.locale == 'ru' ? 'Сколько кубометров горячей воды тратите' : 'Скільки кубометрів гарячої води витрачаєте' }}:<br><input type="text" id="housecalc_w_H" value=""></div>
+
+		<div><input type="button" id="housecalc_w_button" value="{{ app.request.locale == 'ru' ? 'Рассчитать' : 'Розрахувати' }}"></div>
+
+		<div><strong>{{ app.request.locale == 'ru' ? 'Горячая вода' : 'Гаряча вода' }}:</strong> <span id="housecalc_w_result_H">-</span></div>
+		<div><strong>{{ app.request.locale == 'ru' ? 'Холодная вода' : 'Холодна вода' }}:</strong> <span id="housecalc_w_result_C">-</span></div>
+
+		<div class="house_calc_hint">* {{ app.request.locale == 'ru' ? 'Расчеты произведены по показателям усредненного потребления НКРЭКУ и нормативам КМУ' : 'Розрахунки зроблені згідно усереднених показників споживання НКРЕКП і нормативів КМУ' }}</div>
+	</fieldset>
+</div>
+<script>
+    function housecalc_w_init() {
+        document.querySelectorAll('input[name=hcalc_w_heat]').forEach(function (inp) {
+            inp.addEventListener('click', function () {
+                document.querySelector('.hcalc_w_fld1:not(.hcalc_w_fld2)').style.display = (inp.value>1?'none':'block');
+            });
+        });
+        document.getElementById('housecalc_w_button').addEventListener('click', function () {
+            document.getElementById('housecalc_w_result_C').innerHTML = '-';
+            document.getElementById('housecalc_w_result_H').innerHTML = '-';
+
+            heat = parseInt(document.querySelector('input[name=hcalc_w_heat]:checked').value);
+            hcgN = parseInt(document.getElementById('housecalc_w_N').value);
+            hcgH = parseInt(document.getElementById('housecalc_w_H').value);
+            hcgC = parseInt(document.getElementById('housecalc_w_C').value);
+
+            if (heat > 0 && hcgN > 0 && hcgC > 0 && (heat == 1 && hcgH > 0 || heat == 2)) {
+                if (heat == 1) {
+                    if (hcgC <= hcgN * 1.5) {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Так держать! Вы явно экономите холодную воду и бережете природные ресурсы!' : 'Так тримати! Очевидно, ви економите холодну воду і бережете природні ресурси!' }}';
+                    } else if (hcgC <= hcgN * 2.4) {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы потребляете в пределах нормы!' : 'Ви споживаєте в межах норми!' }}';
+                    } else {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы тратите больше нормы. Стоит задуматься об экономии воды. Если поставить аэраторы, не спускать воду «впустую» - сможете экономить 30-40% воды.' : 'Ви витрачаєте більше норми. Варто подумати про економію води. Якщо встановите аератори, не спускатимете воду «даремно» - зможете економити 30-40% води.' }}';
+                    }
+
+                    if (hcgH <= hcgN * 1.5) {
+                        document.getElementById('housecalc_w_result_H').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы экономите и потребляете горячей воды меньше, чем положено по нормативу.' : 'Ви економите і споживаєте гарячої води менше, ніж передбачено нормативом.' }}';
+                    } else if (hcgH <= hcgN * 2) {
+                        document.getElementById('housecalc_w_result_H').innerHTML = '{{ app.request.locale == 'ru' ? 'Скорее всего, вы любите принимать горячую ванну. Вы тратите немного больше нормы, но большинство украинцев тратят примерно столько же воды.' : 'Найімовірніше, ви любите приймати горячу ванну. Ви витрачаєте трохи більше норми.' }}';
+                    } else {
+                        document.getElementById('housecalc_w_result_H').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы потребляете больше нормы. Если вместо ванны принимать душ и установить аэраторы на смеситель, сможете экономить.' : 'Ви споживаєте більше норми. Якщо замість ванни приймати душ і встановити аератори на змішувач, зможете економити.' }}';
+                    }
+
+                } else {
+                    if (hcgC <= hcgN * 3) {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Так держать! Вы явно экономите холодную воду и храните природные ресурсы!' : 'Так тримати! Очевидно, ви економите холодну воду і бережете природні ресурси!' }}';
+                    } else if (hcgC <= hcgN * 4) {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы потребляете в пределах нормы!' : 'Ви споживаєте в межах норми!' }}';
+                    } else {
+                        document.getElementById('housecalc_w_result_C').innerHTML = '{{ app.request.locale == 'ru' ? 'Вы тратите больше нормы. Самое время задуматься об экономии. Возможно, стоит починить смесители, установить аэраторы и не спускать воду «впустую» во время умывания и мытья посуды.' : 'Ви витрачаєте більше норми. Варто подумати про економію води. Якщо встановите аератори, не спускатимете воду «даремно» - зможете економити 30-40% води.' }}';
+                    }
+                }
+            }
+        });
+    }
+    housecalc_w_init();
+</script>

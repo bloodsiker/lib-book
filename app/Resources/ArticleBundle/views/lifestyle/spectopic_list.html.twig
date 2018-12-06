@@ -1,0 +1,30 @@
+<div class="section-title">
+    <h1>{{ spectopic }}</h1>
+</div>
+{{
+    sonata_block_render(
+        { 'type': 'article.block.service.list' },
+        {
+            'items_count': 18,
+            'skin': 'lifestyle',
+            'spectopic': spectopic|default,
+            'category': category|default,
+            'page': app.request.get('page') ? app.request.get('page')[2:] : 1,
+            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::SPECTOPIC_LIST')
+        }
+    )
+}}
+
+{{
+    sonata_block_render(
+        { 'type': 'article.block.service.list' },
+        {
+            'items_count': 16,
+            'skin': 'lifestyle',
+            'popular': true,
+            'category': category|default,
+            'show_paginator': false,
+            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::POPULAR_LIST')
+        }
+    )
+}}

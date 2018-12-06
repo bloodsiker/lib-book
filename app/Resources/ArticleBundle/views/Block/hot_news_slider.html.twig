@@ -1,0 +1,22 @@
+<div class="h-hot">
+    {% if live is empty %}
+        <div class="h-hotnews">
+            <label>{{ 'app.frontend.header.hot_news_slider.title'|trans({}, 'AppBundle') }}</label>
+            <div class="h-hotnews-prev"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 15 15" version="1.1"><g transform="translate(-167.000000, -19.000000)" fill="#000000"><g transform="translate(184.500000, 26.500000) scale(-1, 1) translate(-184.500000, -26.500000) translate(167.000000, 19.000000)"><path d="M35,1.99188419 C35,0.891796927 34.1066027,0 33.0081158,0 L21.9918842,0 C20.8917969,0 20,0.893397331 20,1.99188419 L20,13.0081158 C20,14.1082031 20.8933973,15 21.9918842,15 L33.0081158,15 C34.1082031,15 35,14.1066027 35,13.0081158 L35,1.99188419 L35,1.99188419 Z M31.2889773,7.5 L26.600929,12.9106074 L25.0893926,11.600929 L28.7131348,7.5 L25.0893926,3.39907099 L26.600929,2.08939257 L31.2889773,7.5 L31.2889773,7.5 Z"/></g></g></svg></div>
+            <div class="h-hotnews-next"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 15 15" version="1.1"><g transform="translate(-187.000000, -19.000000)" fill="#000000"><g transform="translate(184.500000, 26.500000) scale(-1, 1) translate(-184.500000, -26.500000) translate(167.000000, 19.000000)"><path d="M15,1.99188419 C15,0.891796927 14.1066027,0 13.0081158,0 L1.99188419,0 C0.891796927,0 0,0.893397331 0,1.99188419 L0,13.0081158 C0,14.1082031 0.893397331,15 1.99188419,15 L13.0081158,15 C14.1082031,15 15,14.1066027 15,13.0081158 L15,1.99188419 L15,1.99188419 Z M11.2889773,7.5 L6.60092901,12.9106074 L5.08939257,11.600929 L8.71313477,7.5 L5.08939257,3.39907099 L6.60092901,2.08939257 L11.2889773,7.5 L11.2889773,7.5 Z" id="Combined-Shape" transform="translate(7.500000, 7.500000) scale(-1, 1) translate(-7.500000, -7.500000) "/></g></g></svg></div>
+            <div class="h-hotnews-content">
+                {% set hot_ga = "ga('send', 'click', 'header', 'click', 'hot_news')" %}
+                {% for hot in articles %}
+                    <a href="{{ article_path(hot) }}" onclick="{{ hot_ga|raw }}">{{ hot.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <script>var hotNews=function(){var t=document.querySelector(".h-hotnews-content"),e=document.querySelectorAll(".h-hotnews-content a"),n=document.querySelector(".h-hotnews-prev"),o=document.querySelector(".h-hotnews-next"),r=e.length,c=1;return{init:function(){n.addEventListener("click",function(){c=1==c?r:c-1,t.style.transform="translateX("+100*(1-c)+"%)"}),o.addEventListener("click",function(){c=c==r?1:c+1,t.style.transform="translateX("+100*(1-c)+"%)"})}}}();hotNews.init();</script>
+    {% else %}
+        <a onclick="_gaq.push(['_trackEvent', 'header', 'click', '{{ path('tv') }}'])"
+           href="{{ path('tv') }}" class="h-broadcast">
+            <span>{{ 'app.frontend.header.hot_news_slider.news'|trans({}, 'AppBundle') }}</span>
+            <label>{{ 'app.frontend.header.hot_news_slider.live'|trans({}, 'AppBundle') }}</label>
+        </a>
+    {% endif %}
+</div>

@@ -56,6 +56,9 @@ class AppKernel extends Kernel
             // Custom admin controllers, templates, etc.
             new AdminBundle\AdminBundle(),
 
+            // Pagerfanta Bundle
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
             // Application bundles
             new AppBundle\AppBundle(),
             new PageBundle\PageBundle(),

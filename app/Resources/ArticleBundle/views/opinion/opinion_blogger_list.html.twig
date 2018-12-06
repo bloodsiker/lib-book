@@ -1,0 +1,29 @@
+{% block content %}
+    {% spaceless %}
+        <h1>{{ blogger.getName() }}</h1>
+        <div class="rubric-page-control">
+            {{ 'front.authors.filter_title'|trans([], 'ArticleBundle')}}:
+            {{
+            sonata_block_render(
+                { 'type': 'app.block.service.filter_letter' },
+                {
+                    'letters': filterLetter,
+                    'current': filterLetter|length ? filterLetter|keys|first : null,
+                    'currentName': blogger is not empty ? blogger.name : null,
+                }
+            )
+            }}
+        </div>
+
+        {% import "ArticleBundle:Block/macros:opinion_item.html.twig" as opinion %}
+
+        {% for article in articles %}
+            {{ opinion.item_middle(article) }}
+        {% endfor %}
+
+        <div class="br"></div>
+        {% if settings.show_paginator and articles.maxPerPage is defined and articles.count > articles.maxPerPage %}
+            {{ pagerfanta(articles) }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

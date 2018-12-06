@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+	{% for article in articles %}
+		<url>
+			<loc>{{ absolute_url(article_path(article)) }}</loc>
+			<news:news>
+				<news:publication>
+					<news:name>{{ 'front.rss.site_name'|trans([], 'ArticleBundle') }}</news:name>
+					<news:language>{{ app.request.locale }}</news:language>
+				</news:publication>
+				<news:publication_date>{{ article.publishAt | date('Y-m-d')}}T{{ article.publishAt | date('H:i+03:00')}}</news:publication_date>
+				<news:title>{{ article.title }}</news:title>
+				<news:keywords>
+					{% if article.tags is defined and article.tags is not empty %}
+						{% for tag in article.tags %}{{ tag.name }}{{ loop.last ? '' : ', ' }}{% endfor %}
+					{% endif %}
+				</news:keywords>
+			</news:news>
+		</url>
+	{% endfor %}
+</urlset>

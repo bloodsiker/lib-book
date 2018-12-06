@@ -1,0 +1,8 @@
+{% if shortcode_data.file is defined %}
+	<div class="inline-read-also">
+		<h3>{{ ('front.file')|trans({}, 'ArticleBundle') }}</h3>
+		<ul>
+			<li><a href="{{ shortcode_data.file.getPath() }}">{{ shortcode_data.file.getDescription()|default(shortcode_data.file.getName()) }}</a></li>
+		</ul>
+	</div>
+{% endif %}

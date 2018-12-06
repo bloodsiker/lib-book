@@ -1,0 +1,98 @@
+<div class="pension_cont">
+	<fieldset class="pens_compare_calc">
+		<legend>{{ ('app.frontend.calcs.pension_compare.title')|trans({}, 'AppBundle') }}:</legend>
+		<div>{{ ('app.frontend.calcs.pension_compare.pension')|trans({}, 'AppBundle') }}: <input type="text" id="pens_compare_calc_pension" value=""></div>
+
+		<div style="margin-top: 10px;">{{ ('app.frontend.calcs.pension_compare.type')|trans({}, 'AppBundle') }}: <span id="pens_compare_calc_area_cont"></span></div>
+
+		<div style="margin-top: 10px;">{{ ('app.frontend.calcs.pension_compare.region')|trans({}, 'AppBundle') }}: <span id="pens_compare_calc_region_cont"></span></div>
+
+		<div style="margin-top: 10px;"><input type="button" id="pens_compare_calc_button" value="{{ ('app.frontend.calcs.pension_compare.do')|trans({}, 'AppBundle') }}" style="cursor: pointer;"></div>
+
+		<div id="pens_compare_calc_result" style="margin-top: 10px;"></div>
+	</fieldset>
+</div>
+<script>
+    var pens_compare_calc_countryavg = 2517.82;
+
+    var pens_compare_calc_types = [
+        { '{{ ('app.frontend.calcs.pension_compare.by_age')|trans({}, 'AppBundle') }}': 2569.9 },
+        { '{{ ('app.frontend.calcs.pension_compare.by_invalid')|trans({}, 'AppBundle') }}': 1982.31 },
+        { '{{ ('app.frontend.calcs.pension_compare.by_loss')|trans({}, 'AppBundle') }}': 2200.84 },
+    ];
+
+    var pens_compare_calc_regions = [
+        { '{{ ('app.frontend.calcs.pension_compare.region1')|trans({}, 'AppBundle') }}': 2112.19 },
+        { '{{ ('app.frontend.calcs.pension_compare.region2')|trans({}, 'AppBundle') }}': 2126.13 },
+        { '{{ ('app.frontend.calcs.pension_compare.region3')|trans({}, 'AppBundle') }}': 2894.18 },
+        { '{{ ('app.frontend.calcs.pension_compare.region4')|trans({}, 'AppBundle') }}': 3331.03 },
+        { '{{ ('app.frontend.calcs.pension_compare.region5')|trans({}, 'AppBundle') }}': 2166.48 },
+        { '{{ ('app.frontend.calcs.pension_compare.region6')|trans({}, 'AppBundle') }}': 2025.97 },
+        { '{{ ('app.frontend.calcs.pension_compare.region7')|trans({}, 'AppBundle') }}': 2715.84 },
+        { '{{ ('app.frontend.calcs.pension_compare.region8')|trans({}, 'AppBundle') }}': 2175.38 },
+        { '{{ ('app.frontend.calcs.pension_compare.region9')|trans({}, 'AppBundle') }}': 3429.06 },
+        { '{{ ('app.frontend.calcs.pension_compare.region10')|trans({}, 'AppBundle') }}': 2532.69 },
+        { '{{ ('app.frontend.calcs.pension_compare.region11')|trans({}, 'AppBundle') }}': 2227.72 },
+        { '{{ ('app.frontend.calcs.pension_compare.region12')|trans({}, 'AppBundle') }}': 3042.22 },
+        { '{{ ('app.frontend.calcs.pension_compare.region13')|trans({}, 'AppBundle') }}': 2301.06 },
+        { '{{ ('app.frontend.calcs.pension_compare.region14')|trans({}, 'AppBundle') }}': 2345.77 },
+        { '{{ ('app.frontend.calcs.pension_compare.region15')|trans({}, 'AppBundle') }}': 2376.07 },
+        { '{{ ('app.frontend.calcs.pension_compare.region16')|trans({}, 'AppBundle') }}': 2443.37 },
+        { '{{ ('app.frontend.calcs.pension_compare.region17')|trans({}, 'AppBundle') }}': 2128.54 },
+        { '{{ ('app.frontend.calcs.pension_compare.region18')|trans({}, 'AppBundle') }}': 2285.34 },
+        { '{{ ('app.frontend.calcs.pension_compare.region19')|trans({}, 'AppBundle') }}': 1957.11 },
+        { '{{ ('app.frontend.calcs.pension_compare.region20')|trans({}, 'AppBundle') }}': 2566.13 },
+        { '{{ ('app.frontend.calcs.pension_compare.region21')|trans({}, 'AppBundle') }}': 2174.96 },
+        { '{{ ('app.frontend.calcs.pension_compare.region22')|trans({}, 'AppBundle') }}': 2090.91 },
+        { '{{ ('app.frontend.calcs.pension_compare.region23')|trans({}, 'AppBundle') }}': 2233.16 },
+        { '{{ ('app.frontend.calcs.pension_compare.region24')|trans({}, 'AppBundle') }}': 2025.33 },
+        { '{{ ('app.frontend.calcs.pension_compare.region25')|trans({}, 'AppBundle') }}': 2236.9 }
+    ];
+    function pensioncalc_init() {
+        document.getElementById('pens_compare_calc_button').addEventListener('click', function(){
+            document.getElementById('pens_compare_calc_result').innerHTML = '';
+
+            if(document.getElementById('pens_compare_calc_pension').value != '' && parseInt(document.getElementById('pens_compare_calc_region').value) > 0 && parseInt(document.getElementById('pens_compare_calc_type').value) > 0) {
+                pension = document.getElementById('pens_compare_calc_pension').value;
+                pension = pension.replace(",","");
+                pension = pension.replace(".","");
+                pension = pension.replace(" ","");
+                pension = parseInt(pension);
+
+                s_region = document.getElementById('pens_compare_calc_region').value;
+                s_type = document.getElementById('pens_compare_calc_type').value;
+                var s_type_title_select = document.getElementById('pens_compare_calc_type');
+                s_type_title = s_type_title_select.options[s_type_title_select.selectedIndex].text;
+
+                var s_less = '{{ ('app.frontend.calcs.pension_compare.less')|trans({}, 'AppBundle') }}';
+                var s_greater = '{{ ('app.frontend.calcs.pension_compare.more')|trans({}, 'AppBundle') }}';
+
+                result = '';
+                result += 'Ваша {{ ('app.frontend.calcs.pension_compare.pension_word')|trans({}, 'AppBundle') }} на ' + Math.abs(pension - pens_compare_calc_countryavg).toFixed(2) + ' грн, {{ ('app.frontend.calcs.pension_compare.or')|trans({}, 'AppBundle') }} на ' + Math.round(Math.abs(pension  * 100 / pens_compare_calc_countryavg - 100)).toFixed(1) + '% ' + (pension - pens_compare_calc_countryavg > 0 ? s_greater : s_less) + ', {{ ('app.frontend.calcs.pension_compare.than1')|trans({}, 'AppBundle') }}';
+                result += '<br><br>';
+                result += 'Ваша {{ ('app.frontend.calcs.pension_compare.pension_word')|trans({}, 'AppBundle') }} на ' + Math.abs(pension - s_type).toFixed(2) + ' грн, {{ ('app.frontend.calcs.pension_compare.or')|trans({}, 'AppBundle') }} на ' + Math.round(Math.abs(pension  * 100 / s_type - 100)).toFixed(1) + '% ' + (pension - s_type > 0 ? s_greater : s_less) + ', {{ ('app.frontend.calcs.pension_compare.than2')|trans({}, 'AppBundle') }}' + " " + s_type_title;
+                result += '<br><br>';
+                result += 'Ваша {{ ('app.frontend.calcs.pension_compare.pension_word')|trans({}, 'AppBundle') }} на ' + Math.abs(pension - s_region).toFixed(2) + ' грн, {{ ('app.frontend.calcs.pension_compare.or')|trans({}, 'AppBundle') }} на ' + Math.round(Math.abs(pension  * 100 / s_region - 100)).toFixed(1) + '% ' + (pension - s_region > 0 ? s_greater : s_less) + ', {{ ('app.frontend.calcs.pension_compare.than3')|trans({}, 'AppBundle') }}';
+
+                document.getElementById('pens_compare_calc_result').innerHTML = result;
+            }
+        });
+
+        select_html = '<select id="pens_compare_calc_region">';
+        select_html += '<option value="">{{ ('app.frontend.calcs.pension_compare.set_value')|trans({}, 'AppBundle') }}</option>';
+        for(var i in pens_compare_calc_regions) {
+            select_html += '<option value="' + Object.values(pens_compare_calc_regions[i])[0] + '">' + Object.keys(pens_compare_calc_regions[i])[0] + '</option>';
+        }
+        select_html += '</select>';
+        document.getElementById('pens_compare_calc_region_cont').innerHTML = select_html;
+
+        select_html = '<select id="pens_compare_calc_type">';
+        select_html += '<option value="">{{ ('app.frontend.calcs.pension_compare.set_value')|trans({}, 'AppBundle') }}</option>';
+        for(var i in pens_compare_calc_types) {
+            select_html += '<option value="' + Object.values(pens_compare_calc_types[i])[0] + '">' + Object.keys(pens_compare_calc_types[i])[0] + '</option>';
+        }
+        select_html += '</select>';
+        document.getElementById('pens_compare_calc_area_cont').innerHTML = select_html;
+    }
+    pensioncalc_init();
+</script>

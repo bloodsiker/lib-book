@@ -1,0 +1,34 @@
+<div class="orthographic_error">
+	<div class="fill-error">{{ 'app.frontend.orphus.error_text'|trans([], 'AppBundle') }}</div>
+</div>
+<div id="ctrl_enter">
+	<h6>{{ 'app.frontend.orphus.title'|trans([], 'AppBundle') }}:</h6>
+	<div id="orph_error_text"></div>
+	<div>{{ 'app.frontend.orphus.subtitle'|trans([], 'AppBundle') }}</div>
+	<form action="#" method="post" name="orph_form" id="orph_form">
+		{% if settings.articleId is defined %}
+			{% set articleId = settings.articleId %}
+		{% else %}
+			{% set articleId = '' %}
+		{% endif %}
+		{{ form_widget(form.article_id, { 'id': 'orph_article_id', 'value': articleId }) }}
+
+		<label for="orph_comment">{{ 'app.frontend.orphus.comment'|trans([], 'AppBundle') }}:</label>
+		{{ form_widget(form.comment, { 'id': 'orph_comment' }) }}
+		<div class="error">{{ 'app.frontend.orphus.validate.comment'|trans({}, 'AppBundle') }}</div>
+		{% if false and form.recaptcha.vars.ewz_recaptcha_enabled == true %}
+			<div class="fieldset">
+				{{
+				form_widget(form.recaptcha)
+				}}
+			</div>
+		{% endif %}
+		<div>
+			<button id="orph_cancel" class="btn" type="reset">{{ 'app.frontend.orphus.cancel'|trans([], 'AppBundle') }}</button>
+			<button id="orph_submit" class="btn" type="submit">{{ 'app.frontend.orphus.send'|trans([], 'AppBundle') }}</button>
+		</div>
+	</form>
+	<div id="orph_noselection_error">{{ 'app.frontend.orphus.mouse_hint'|trans([], 'AppBundle') }}</div>
+	<div id="orph_success_msg">{{ 'app.frontend.orphus.thanks'|trans([], 'AppBundle') }}</div>
+</div>
+<script>document.addEventListener("DOMContentLoaded", function() { orphErrorOnPage.init('{{ path('orphus') }}'); });</script>

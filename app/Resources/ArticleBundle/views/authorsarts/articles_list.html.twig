@@ -1,0 +1,89 @@
+{% block content %}
+    {% import "ArticleBundle:authorsarts/macro:article.html.twig" as macroArticle %}
+
+    {% spaceless %}
+        <h1>{{ 'front.authors.title'|trans([], 'ArticleBundle')}} {% if author %}{{ author.getNameOf() ?: author.getName() }}{% endif %}</h1>
+        <div class="rubric-page-control">
+            {{ 'front.authors.filter_title'|trans([], 'ArticleBundle')}}:
+            {{
+            sonata_block_render(
+                { 'type': 'app.block.service.filter_letter' },
+                {
+                    'letters': filterLetter,
+                    'current': filterLetter|length ? filterLetter|keys|first : null,
+                    'currentName': author ? author.name : null,
+                }
+            )
+            }}
+        </div>
+
+        {% if settings.show_popular_authors and popularAuthorsArts|length %}
+            <div class="br"></div>
+            <h3 class="sub-title">{{ 'front.authors.popular_authors'|trans([], 'ArticleBundle')}}</h3>
+
+            {% for article in popularAuthorsArts %}
+                {{ macroArticle.item(article) }}
+            {% endfor %}
+
+        {% endif %}
+
+        <div class="br"></div>
+        <div class="br"></div>
+
+        {% if settings.show_category %}
+            <div class="nav-list">
+                {% for category in categories %}
+                    {% set url = path('articles_authorsarts_category', { 'category': category.slug, 'id': category.id }) %}
+                    <a href="{{ url }}" class="nav-list-item {{ app.request.pathInfo == url ? 'active' : null }}">
+                        {{ category.getTitle() }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% include 'ArticleBundle:authorsarts:include/block_article.html.twig' %}
+
+        {% if authorsArts.nbPages > 1 %}
+            <a href="" class="more-news-btn" id="load-authors-article"
+               data-page="{{ authorsArts.currentPage == 1 ? 2 : 1 }}">
+                {{ 'front.authors.more_article'|trans([], 'ArticleBundle')}}
+            </a>
+
+            {% set block_ajax_path = block.page is defined ? sonata_page_ajax_url(block) : block_ajax_url(block) %}
+
+            <script>
+                document.getElementById('load-authors-article').addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    var _this = this,
+                        page = parseInt(_this.dataset.page),
+                        maxPage = parseInt('{{ authorsArts.nbPages }}'),
+                        author = '{{ author ? author.id : null }}',
+                        category = '{{ category ? category.id : null }}';
+
+                    _this.style.cursor = 'progress';
+
+                    xAjax({
+                        url:  '{{ block_ajax_path }}',
+                        type: 'GET',
+                        data: { page: page, author: author, category: category },
+                        async: false,
+                        success: function (response) {
+                            var range = document.createRange(),
+                                html = range.createContextualFragment(response),
+                                block = document.querySelectorAll('.page-content >.block'),
+                                last = block[block.length - 1];
+                            last.parentNode.insertBefore(html, last.nextSibling);
+                            document.getElementById('load-authors-article').dataset.page = page + 1;
+                            if (page < maxPage) {
+                                _this.removeAttribute("style");
+                            } else {
+                                _this.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            </script>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

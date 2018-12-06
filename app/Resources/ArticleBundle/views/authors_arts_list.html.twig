@@ -1,0 +1,13 @@
+<div class="page-content">
+    {{
+    sonata_block_render(
+        { 'type': 'article.block.service.authorsarts' },
+        {
+            'show_category': show_category,
+            'show_popular_authors': show_popular_authors,
+            'author': author,
+            'category': category,
+        }
+    )
+    }}
+</div>

@@ -1,0 +1,24 @@
+<div class="banner-3-wrapper">
+    <!-- For long ads add class banner-block-3-long to block below -->
+    <div class="banner-block-3 banner-block-3-long sidebar-ads" style="display: none;">
+        <small>Реклама</small>
+		{{
+            sonata_block_render(
+                { 'type': 'page.block.site_variable' },
+                {
+                    'placement': 'banner-premium1'
+                }
+            )
+		}}
+    </div>
+    <div class="banner-block-3 banner-block-3-long sidebar-ads" style="background: none;">
+		{{
+            sonata_block_render(
+                { 'type': 'article.block.service.horoscopes' },
+                {
+                    'show': true
+                }
+            )
+		}}
+    </div>
+</div>

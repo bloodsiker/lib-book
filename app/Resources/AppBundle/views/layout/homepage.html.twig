@@ -1,0 +1,100 @@
+{% extends 'AppBundle:layout:default.html.twig' %}
+
+{% block head_banners %}
+	{{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-init-index'
+            }
+        )
+	}}
+{% endblock %}
+
+{% block branding %}
+	{{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'branding-index'
+            }
+        )
+	}}
+{% endblock %}
+
+{% block main_class %}homepage{% endblock %}
+
+{% block banner_richmedia %}
+	{{
+		sonata_block_render(
+			{ 'type': 'page.block.site_variable' },
+			{
+				'placement': 'banner-richmedia-index'
+			}
+		)
+	}}
+{% endblock %}
+
+{% block content_main %}
+    <div class="br"></div>
+
+    {{
+        sonata_block_render(
+            { 'type': 'article.block.service.list' },
+            {
+                'show_title': 'article.title.last_news'|trans({}, 'ArticleBundle'),
+                'items_count': 100,
+                'article_type_exclude': 14,
+                'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::TEXT_LIST'),
+                'show_paginator': false,
+            }
+        )
+    }}
+
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="homepage-content">
+                {{
+                    sonata_block_render(
+                        { 'type': 'article.block.service.list' },
+                        {
+                            'items_count': 7,
+                            'category': null,
+                            'article_type': 1,
+                            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_SLIDER')
+                        }
+                    )
+                }}
+
+                {{ sonata_page_render_container('content', page) }}
+
+                {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.more_articles' },
+                    {
+                        'type': 18,
+                        'show_item' : true,
+                    }
+                )
+                }}
+
+                {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.more_articles' },
+                    {
+                        'type': 18,
+                        'show_more': true,
+                        'items_count' : 12
+                    }
+                )
+                }}
+
+            </div>
+        </div>
+    </div>
+
+    {{
+        sonata_block_render({ 'type': 'app.block.service.partners' })
+    }}
+{% endblock %}
+

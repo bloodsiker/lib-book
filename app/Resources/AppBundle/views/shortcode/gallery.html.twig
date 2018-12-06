@@ -1,0 +1,20 @@
+{% if shortcode_data and shortcode_data.gallery is defined and shortcode_data.gallery.galleryHasImage is defined and shortcode_data.gallery.galleryHasImage.count() %}
+    <div id="sig-{{ shortcode_data.id }}" class="segallery">
+        <ul>
+            {% for galleryMedia in shortcode_data.gallery.galleryHasImage %}
+                <li>
+                    <img src="{{ galleryMedia.image.getPath()|get_actual_image('gallery_small_113', ['tn']) }}" data-description="{{ galleryMedia.image.translate.description }}" data-img="{{ galleryMedia.image.getPath()|get_actual_image('gallery_big_640', ['main']) }}"/>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>window.addEventListener('load', function() { new SIGallery("#sig-{{ shortcode_data.id }}",{'thumbsInside':false, autoplay:false, autoplayTimeout:1000, maxHeight:450}); });</script>
+
+    {% if shortcode_data.gallery.galleryHasPhotographers.count() %}
+        <figcaption class="photos-sign">фото:
+            {% for photographer in shortcode_data.gallery.galleryHasPhotographers %}
+                {{ photographer.getPhotographer().getName() }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </figcaption>
+    {% endif %}
+{% endif %}

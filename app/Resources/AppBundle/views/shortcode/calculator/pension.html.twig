@@ -1,0 +1,39 @@
+<div class="pens_cont">
+	<fieldset class="pens_calc">
+		<legend>{{ app.request.locale == 'ru' ? 'Пенсионный калькулятор' : 'Пенсійний калькулятор' }}:</legend>
+		<div>{{ app.request.locale == 'ru' ? 'Сколько лет стажа Вы успеете наработать' : 'Скільки років стажу Ви встигнете напрацювати' }}:<br><input type="text" id="pcalc_years" value=""></div>
+		<div>{{ app.request.locale == 'ru' ? 'Размер зарплаты на данный момент' : 'Розмір зарплати на даний момент' }}:<br><input type="text" id="pcalc_salary" value=""></div>
+		<div><input type="button" id="pcalc_button" value="{{ app.request.locale == 'ru' ? 'Рассчитать' : 'Розрахувати' }}"></div>
+		<div>{{ app.request.locale == 'ru' ? 'Результат' : 'Результат' }}: <span id="pens_result">-</span></div>
+	</fieldset>
+</div>
+<script>
+    function penscalc_init() {
+        document.getElementById('pcalc_button').addEventListener('click', function(){
+            document.getElementById('pens_result').innerHTML = '0 грн';
+
+            years = parseInt(document.getElementById('pcalc_years').value);
+            salary = document.getElementById('pcalc_salary').value;
+
+            if(years < 15) {
+                document.getElementById('pens_result').innerHTML = '{{ app.request.locale == 'ru' ? 'Пенсия вам не положена' : 'Пенсія вам не покладена' }}';
+            } else {
+                salary = salary.replace(",","");
+                salary = salary.replace(".","");
+                salary = salary.replace(" ","");
+                salary = parseInt(salary);
+
+                result = (3764 * (salary / 6598) * years) * 0.01;
+                if(result < 1312) {
+                    result = 1312;
+                }
+                if(result > 10740) {
+                    result = 10740;
+                }
+
+                document.getElementById('pens_result').innerHTML = Math.round(result) + 'грн';
+            }
+        });
+    }
+    penscalc_init();
+</script>

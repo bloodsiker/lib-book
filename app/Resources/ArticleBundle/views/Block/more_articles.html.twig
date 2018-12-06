@@ -1,0 +1,44 @@
+{% if isAjax or settings.show_item %}
+
+    {% for article in articles %}
+        {% include 'ArticleBundle:Block:article.html.twig' %}
+    {% endfor %}
+
+{% elseif settings.show_more is defined and settings.show_more %}
+
+    <a href="" class="more-news-btn" id="load-more-news" data-page="1">{{ 'front.more_article'|trans([], 'ArticleBundle')}}</a>
+
+    {% set block_ajax_path = block.page is defined ? sonata_page_ajax_url(block) : block_ajax_url(block) %}
+
+    <script>
+        document.getElementById('load-more-news').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            var _this = this,
+                page = parseInt(_this.dataset.page),
+                maxPage = parseInt('{{ articles.getNbPages() }}');
+
+            _this.style.cursor = 'progress';
+
+            xAjax({
+                url: '{{ block_ajax_path }}',
+                type: 'GET',
+                data: { page: page },
+                async: false,
+                success: function (response) {
+                    var range = document.createRange(),
+                        html = range.createContextualFragment(response),
+                        block = document.querySelectorAll('.homepage-content >.block'),
+                        last = block[block.length - 1];
+                    last.parentNode.insertBefore(html, last.nextSibling);
+                    document.getElementById('load-more-news').dataset.page = page + 1;
+                    if (page < maxPage) {
+                        _this.removeAttribute("style");
+                    } else {
+                        _this.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+{% endif %}

@@ -1,823 +1,331 @@
-Article List: Статті
-Category List: Категорії
-Article Has Categories List: Категорії статей
-Event List: Події
-Collection Designer List: Дизайнери
-Collection Season List: Сезони
-Collection Type List: Типи
-Collection Category List: Категорії
-Collection Fashion Week List: Тижні моди
-Collection List: Покази
-World Vogue List: Vogue у світі
-Gallery List: Галереї
-Image List: Зображення
-Top List: Топ
-Blog List: Блоги
-Blogger List: Блогери
-Articles List: Статті
-Tv Category List: Категорії
-Tv Video List: Відео
+Lifestyle Project List: Спецпроекти
+Lifestyle Project Create: Створити
+Action: Дії
 
-Magazine List: Журнали
-Magazine Post List: Пости номера
-
-Horoscope List: Гороскоп
-
-Team Group List: Групи
-Team Member List: Команда
-
-R T F Block List: Текстові блоки
-
-Informer List: Інформери
-
-File List: Файли
-Image List: Зображення
-
-Action: Дія
-
-Collections Fashion Week: Тиждні моди
-
-admin:
-  action:
-    on_site: На сайті
-  alert:
-    no_translation: Переклад відсутній
-    no_translation_AppBundle:Article: <strong>%count% нова стаття </strong> без перекладу | <strong>%count% нових статті </strong> без перекладу | <strong>%count% нових статей </strong> без перекладу
-    no_translation_AppBundle:TvVideo: <strong>%count% нове відео </strong> без перекладу | <strong>%count% нових відео </strong> без перекладу | <strong>%count% нових відео </strong> без перекладу
-    no_translation_AppBundle:Event: <Strong>%count% нова подія </strong> без перекладу | <strong>%count% нові події </strong> без перекладу | <strong>%count% нових подій </ strong> без перекладу
 group:
-  article: Статті
-  article.category_editor: Категорії
-  article.article_editor: Статті
-  article.article_has_categories_editor: Категорії статей
-  event: Події
-  event.event_editor: Події
-  collection: Покази
-  collection.designer_editor: Дизайнери
-  collection.season_editor: Сезони
-  collection.type_editor: Типи
-  collection.category_editor: Категорії
-  collection.fashionweek_editor: Тижні моди
-  collection.collection_editor: Покази
-  world_vogue: Vogue у світі
-  gallery: Галереї
-  upload: Завантаження файлів
-  upload.image_editor: Зображення
-  upload.file_editor: Файли
-  upload.gallery_editor: Галереї
-  upload.gallery_has_image_editor: Зображення галереї
+  app_lifestyle: Lifestyle
+  app_lifestyle_projects: Спецпроекти
 
-  blog: Блоги
-  blog.blog_editor: Блоги
-  blog.blogger_editor: Блогери
-
-  tv: ТВ
-  tv.tv_video_editor: Відео
-  tv.tv_category_editor: Категорії
-
-  magazine: Журнали
-  magazine.magazine_editor: Журнали
-  magazine.magazine_post_editor: В номері
-
-  horoscope: Гороскоп
-  horoscope.horoscope_editor: Гороскоп
-
-  team: Команда
-  team.group_editor: Групи
-  team.member_editor: Команда
-
-  rtf_block: Текстові блоки
-  rtf_block.rtf_block_editor: Текстові блоки
-
-  html_page: HTML-сторінки
-  html_page.html_page_editor: HTML-сторінки
-
-  informer: Інформери
-  informer.informer_editor: Інформери
-
-  site: Сайти
-
-category:
-  fields:
-    title: Назва
-    tag_title: Title
-    h1_title: H1 тег
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    parent: Батьківська категорія
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    is_for_menu: В меню
-    order_num:
-    created_at: Створена
-    title_for_last_article: Ще в розділі
-    order_num: Позиція
-  block:
-    field:
-      category: Категорія
-      items_count: Кількість елементів
-      popular_articles: Популярні статті
-      popular_articles_days: Кіл-ть дній для вибірки популярних статей
-      bg_style: Стиль фону
-      cols_type: Стиль елементів
-      exclude_last_articles: Виключити останні статті
-      dark_header: "'Темний' заголовок"
-      show_title: Показати заголовок
-      show_h1_title: Показати H1 тег
-      show_big_image: Показати велику картинку
-      show_more_btn: "Показати кнопку 'Більше матеріалів'"
-      show_top: Показати ТОП контент
-      banner: Баннер
-      banner_position: Позиція баннера
-      banner_second: Другий баннер
-      banner_second_position: Позиція другого баннера
-      banner_990x200: Баннер 990х200
-      last_articles: Блок для останніх статей категорії
-      italic_title: Курсивний заголовок
-      template: Шаблон
-      template_top_list: Список відео
-      template_new: Новий для головної
-      top_items_count: Кількість ТОП елементів
-      title: Заголовок
-      title_uk: Заголовок (укр.)
-
-article:
-  block:
-    fields:
-      template: Шаблон
-      template.old: Старий дизайн
-      template.alternate: Блоки чергуються (квадратний / горизонтальний)
-      template.vertical: Вертикальні блоки (квадратні)
-      template.horizontal: Горизонтальні блоки (квадратні)
-      template.sidebar: Вертикальні у сайдбарі
-  fields:
-    title: Заголовок
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст знизу
-      1: Текст на білому фоні
-      2: Текст в прозорому блоці
-      3: Не виводити заголовки
-    header: Текст підзаголовка
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    content: Текст
-    category: Категорія
-    created_by: Створена користувачем
-    slug: Сегмент URL (slug)
-    image: Титульне зображення
-    image_remove: Видалити
-    image_990: Горизонтальне зображення
-    image_990_remove: Видалити
-    image_650: Зображення статті
-    image_650_remove: Видалити
-    image_small: Маленьке зображення
-    image_small_remove: Видалити
-    image_medium: Середнє зображення
-    image_medium_remove: Видалити
-    image_caption: Подпис зображення
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-    is_active: Активна
-    is_on_main: На головній
-    is_top: Топ
-    is_top_on_main: Топ на Головній
-    is_yandex_rss: Yandex RSS
-    is_auto_tweet: Автоматичний Tweet
-    tags: Теги
-    source: Джерело
-    source_url: URL джерела
-    views: Переглядів
-    order_num:
-    publish_at: Дата/час публікації
-    created_at: Створена
-    html: HTML
-    is_facebook_instant_article: Facebook Instant Articles
-    is_full_width: На всю ширину екрану
-    top_content: Верхній текст
-    team_member: Автор
-    articles_related: Статті
-    videos_related: Відео
-  tab:
-    article: Стаття
-    images: Зображення
-    related_content: Пов'язаний контент (Читай також)
-  error:
-    not_unique: URL сегмент статті повинен бути унікальним
-    empty_content: Контент статті не повинен бути порожнім
-
-article_has_categories:
-  fields:
-    category: Категорія
-    is_main: Головна
-
-article_has_related:
-  fields:
-    position: Позиція
-    article_related: Стаття
-    video_related: Відео
-
-placeholders:
-  content:
-    1: 'Контент блок #1'
-    2: 'Контент блок #2'
-    3: 'Контент блок #3'
-    4: 'Контент блок #4'
-    5: 'Контент блок #5'
-
-error:
-    not_unique: Поле повинно бути унікальним
-    not_unique.name: Назва повинна бути унікальною
-    empty: Поле повинно бути задано
-
-event:
-  fields:
-    title: Заголовок
-    header: Текст підзаголовка
-    content: Текст
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    date: Дата події
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    is_on_main: На головній
-    is_top_on_main: Топ на головній
-    is_yandex_rss: Yandex RSS
-    has_new_gallery: Нова галерея
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст знизу
-      1: Текст на білому фоні
-      2: Текст в прозорому блоці
-      3: Не виводити заголовки
-    tags: Теги
-    views: Переглядів
-    publish_at: Дата/час публікації
-    created_at: Створена
-    created_by: Створена користувачем
-    gallery: Галерея
-    image: Титульне зображення
-    image_remove: Видалити
-    image_990: Горизонтальне зображення
-    image_990_remove: Видалити
-    image_small: Маленьке зображення
-    image_small_remove: Видалити
-    image_medium: Середнє зображення
-    image_medium_remove: Видалити
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-  tab:
-    event: Подія
-    images: Зображення
-
-collection_designer:
-  fields:
-    name: "Ім’я"
-    slug: Сегмент URL (slug)
-    is_active: Активний
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-
-collection_season:
-  fields:
-    title: Назва
-    slug: Сегмент URL (slug)
-    is_active: Активний
-    image: Зображення
-    image_remove: Видалити
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    tag_title: Title
-  tab:
-    season: Сезон
-    images: Зображення
-
-collection_type:
-  fields:
-    title: Назва
-    slug: Сегмент URL (slug)
-    is_active: Активний
-    image: Зображення
-    image_remove: Видалити
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-  tab:
-    type: Тип
-    images: Зображення
-
-collection_fashionweek:
-  fields:
-    title: Назва
-    slug: Сегмент URL (slug)
-    is_active: Активний
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    tag_title: Title
-
-collection_category:
-  fields:
-    title: Назва
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    season: Сезон
-    type: Тип
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-
-collection:
-  fields:
-    title: Назва
-    header: Текст підзаголовка
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    designer: Дизайнер
-    category: Категорія
-    season: Сезон
-    type: Тип
-    gallery: Галерея
-    fashionweek: Неділя моди
-    slug: Сегмент URL (slug)
-    is_active: Актиний
-    is_top: Топ
-    is_top_on_main: Топ на головній
-    is_yandex_rss: Yandex RSS
-    image: Зображення
-    image_remove: Видалити
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-    tags: Теги
-    views: Переглядів
-    copyright: Копірайт
-    created_at: Створений
-    created_by: Створений користувачем
-    publish_at: Опубліковано
-    items_count: Кількість
-    order_designer: Порядок відображення дизайнерів
-    order_designer.name: За алфавітом
-    order_designer.date: За датою
-  tab:
-    collection: Показ
-    image: Зображення
-
-world_vogue:
-  fields:
-    title: Назва
-    url: URL
-    is_active: Активний
-
-gallery:
+app_lifestyle:
   fields:
     id: ID
-    is_active: Активна
-    name: Назва
-    image: Зображення
-    is_cover: Обкладинка
-    order_num: Позиція
-    created_at: Створена
-    created_by: Створена користувачем
-
-image:
-  fields:
-    file: Файл
-    path: Шлях
-    path_preview: Зображення
-    title: Назва
-    copyright: Копірайт
-    created_at: Створене
-    created_by: Створене користувачем
-    extension: Розширення
-
-  upload:
-    upload_files: Завантаження файлів
-    btn_update_all: Зберегти всі
-    btn_update_all_set_gallery: Зберегти все і додати в галерею
-
-  btn:
-    choose_images: Виберіть файли-зображення
-    back_to_list: Повернутися до списку
-    link_action_multi: Мультизавантаження нових
-
-blog:
-  tab:
-    blog: Блог
-    images: Зображення
-    blogger: Блогер
-
-  fields:
-    title: Назва
-    header: Підзаголовок content
-    short: Короткий опис
-    content: Опис
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    slug: Сегмент URL (slug)
-    is_active: Опублікувати
-    is_on_main: На Головній
-    is_top: ТОП
-    is_top_on_main: ТОП на Головній
-    is_yandex_rss: Yandex RSS
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст знизу
-      1: Текст на білому фоні
-      2: Текст в прозорому блоці
-      3: Не виводити заголовки
-    blogger: Блогер
-    tags: Теги
-    views: Переглядів
-    created_at: Дата створення
-    created_by: Створено
-    published_at: Опубліковано
-    image: Титульне зображення
-    image_990: Горизонтальне зображення
-    image_650: Зображення статті
-    image_small: Маленьке зображення
-    image_medium: Середнє зображення
-    image_remove: Видалити
-    image_990_remove: Видалити
-    image_650_remove: Видалити
-    image_small_remove: Видалити
-    image_medium_remove: Видалити
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-    is_facebook_instant_article: Facebook Instant Articles
-  error:
-    empty_content: Опис не повинен бути пустым
-    empty_short: Краткий опис не повинен бути пустым
-
-blogger:
-  tab:
-    blogger: Блогер
-    images: Зображення
-
-  fields:
-    name: ПІБ
-    content: Опис
-    position: Посада
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    slug: Сегмент URL (slug)
-    is_active: Відображати на сайті
-    views: Переглядів
-    created_at: Дата створення
-    created_by: Створено
-    published_at: Опубліковано
-    image: Велика аватарка
-    image_remove: Видалити
-    image_small: Маленька аватарка
-    image_small_remove: Видалити
-
-tv:
-  category:
-    fields:
-      title: Назва
-      meta_title: Meta title
-      meta_keywords: Meta keywords
-      meta_description: Meta description
-      tag_title: Title
-      created_at: Дата створення
-      created_by: Створено
-      is_active: Відображати на сайті
-      is_for_menu: В меню
-      slug: Сегмент URL (slug)
-
-  video:
-    tab:
-      video: Відео
-      images: Зображення
-      code: Код плеєра
-      related_content: Пов'язаний контент (Дивись також)
-
-    fields:
-      code: Код
-      title: Назва
-      header: Підзаголовок content
-      short: Короткий опис
-      content: Опис
-      meta_title: Meta title
-      meta_keywords: Meta keywords
-      meta_description: Meta description
-      slug: Сегмент URL (slug)
-      is_active: Опублікувати
-      is_on_main: На Головній
-      is_top: Топ
-      is_top_on_main: ТОП на Головній
-      is_yandex_rss: Yandex RSS
-      title_style:
-      title_style: Стиль заголовка
-      title_style_choice:
-        0: Текст знизу
-        1: Текст на білому фоні
-        2: Текст в прозорому блоці
-        3: Не виводити заголовки
-      category: Категорія
-      collections: Колекції
-      tags: Теги
-      views: Переглядів
-      created_at: Дата створення
-      created_by: Створено
-      publish_at: Опубліковано
-      image: Титульне зображення
-      image_remove: Видалити
-      image_990: Горизонтальне зображення
-      image_990_remove: Видалити
-      image_320x176: Зображення в списку
-      image_320x176_remove: Видалити
-      image_small: Маленьке зображення
-      image_small_remove: Видалити
-      image_medium: Середнє зображення
-      image_medium_remove: Видалити
-      image_social: Зображення для соц-мереж
-      image_social_remove: Видалити
-      articles_related: Статті
-      videos_related: Відео
-
-tv_video_has_related:
-  fields:
-    position: Позиція
-    article_related: Стаття
-    video_related: Відео
-
-magazine:
-  tab:
-    magazine: Журнал
-    images: Зображення
-    relations: Зв'язки
-
-  fields:
-    title: Назва
-    content: Опис
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    tag_title: Title
-    slug: Сегмент URL (slug)
-    is_active: Опублікувати
-    created_at: Дата створення
-    created_by: Створено
-    released_at: Дата випуску
-    publish_at: Дата/час публікації
-    month: Місяць випуску
-    year: Рік випуску
-    number: № журналу
-    main_editor: Головний редактор
-    main_photograph: Фотограф
-    dress: Одяг на обкладинці
-    models: Моделі
-    articles: Прив'язані статті
-    posts: Пости номера
-    image: Велике зображення
-    image_remove: Видалити
-    image_small: Маленьке зображення
-    image_small_remove: Видалити
-    image_top: Зображення в шапці сайту
-    image_top_remove: Видалити
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-    is_main_cover: Головна обкладинка
-
-  post:
-    fields:
-      title: Назва
-      content: Опис
-      created_at: Дата створення
-      created_by: Створено
-
-  magazine_has_post:
-    fields:
-      post: Пости
-
-  magazine_has_articles:
-     fields:
-        article: Cтаття
-
-horoscope:
-  fields:
-    title: Назва
-    sub_title: Період
-    content: Текст
-    is_active: Активен
-    slug: Сегмен URL (slug)
-    image: Зображення
-    image_remove: Видалити
-    image_social: Зображення для соц-мереж
-    image_social_remove: Видалити
-    image_title: Підпис зображення
-    tag_title: Title
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    created_at: Створен
-    created_by: Створен користувачем
-
-html_page:
-  fields:
-    title: Назва
-    is_active: Активен
-    created_at: Створен
-    created_by: Створен користувачем
-    html: HTML
-    page: Маршрут сторінки
-    article: Стаття
-    path: Шлях
-    site: Сайт
-  block:
-    fields:
-      html_page_title: Html сторінка
-  error:
-    empty_site: Сайт должен быть задан
-
-team_group:
-  fields:
-    name: Назва
-    show_title: Показувати назву
-    created_at: Створена
-    created_by: Створена користувачем
-
-team_member:
-  fields:
-    name: П.І.Б.
-    position: Посада
-    group: Група
-    created_at: Створен
-    created_by: Створен користувачем
-
-rtf_block:
-  fields:
     title: Заголовок
-    content: Вміст блоку
-    created_at: Створен
-    created_by: Створен користувачем
+    link: Посилання
+    is_active: Активний
+    order_num: Позиція
+  form_group:
+    basic: Основне
+    additional: Додаткове
 
-frontend:
-  article:
-    title: Новини
-    popular_title: Популярне
-    more: Більше новин
-    read_more: Читайте також
-  counter:
-    left: залишилось
-  index:
-    title: Журнал Vogue.ua. Українська версія модного журналу Vogue.ua
-    description: >-
-      Жіночий журнал про сучасну моду, тенденції в сфері моди та краси.
-    keywords: >-
-      Журнал Vogue.ua, мода, краса, жіноча мода, чоловіча мода, жіночий журнал, тренди та тенденції в сфері крас
-  footer:
-    vogue_worldwide: Vogue в світі
-    copyright: |
-      «Condé Nast» as to materials published on www.vogue.com. All Rights Reserved.
-    copyright2: |
-      Товарный знак VOGUE используется на основании лицензии/сублицензии Les Publications Condé Nast S. A. Copyright
-      /TRK MEDIA FINANCE LIMITED/ЧАО «СЕГОДНЯ МУЛЬТИМЕДИА»
-  events:
-    show_more_btn: Показати більше матеріалів
+app:
+  pager:
+    previous: Попередня сторінка
+    next: Наступна сторінка
+    page: Сторінка
+
   block:
-    horoscope:
-      title: Гороскоп 2018
-    popular:
-      title: Популярне
-  tags:
-    articles: Статті за темою
-    not_found: Тег не знайден
-    show_more_btn: Показати більше матеріалів за тегом
-    meta_title: %1$s. Всі статті та новини з %1$s.
-    meta_description: Статті %1$s, останні новини по темі %1$s. Головні події та новини по темі %1$s.
-    meta_keywords: %1$s, статті, новини, новини %1$s, останні новини по тегу %1$s
-  rss:
-    brend: Vogue.ua
-    ukrnet:
-      artiles:
-        title: Новини на Vogue.ua
-        description: Новини жіночого журналу про моду
-      events:
-        title: Події на Vogue.ua
-        description: Події на жіночому журналі про моду
-      videos:
-        title: Відео на Vogue.ua
-        description: Жіночий журнал про моду
-      blogs:
-        title: Блог Suzy Menkes на Vogue.ua
-        description: Жіночий журнал про моду
-      collections:
-        title: Покази на Vogue.ua
-        description: Покази жіночому журналі про моду
-  video:
-    show_recommend: Рекомендації
-    show_more_btn: Показати більше матеріалів
-    voguetv: Vogue TV
+    service:
+      header: 'Блок "Header"'
+      footer: 'Блок "Footer"'
+      player: 'Блок "Плеєр"'
+      language_switcher: 'Блок "Перемикач мов"'
+      banner: 'Блок "Банер"'
+      announce: 'Блок "Анонс"'
+    fields:
+      title_announce: Заголовок анонса
+      link: Посилання
+      image: Зображення
+      type_banner: Тип банера
+      premium_banner1: Преміум 1
+      premium_banner2: Преміум 2
+
+  frontend:
+    breadcrumb:
+      main: Головна
+      tv: Сьогодні TV
+      news: Усі новини
+      search: Пошук
+      contacts: Контакти редакції "Сьогодні"
+      rules: Умови використання матеріалів сайту СЬОГОДНІ.ua
+      rules_comments: Правила коментування на сайті Сьогодні.ua
+      privacy: Політика конфіденційності та захисту персональних даних
+      make_homepage: Зробити Сьогодні.ua стартовою сторінкою
+      feedback: Написати нам
+
+    title: СЬОГОДНІ
+    login: Увійти
+    make_as_homepage: Зробити стартовою
+    filter_all_letter: Всі
+    partners_news: Наші партнери
+    partners_informer: Новини партнерів
+    opinions: думка
     video: Відео
-    read_more: Дивіться також
+    top_materials: Популярне
+    actual_themes: Актуальні теми
+
+    meta:
+      sitename: СЬОГОДНІ
+      keywords: Газета Сьогодні, свіжі новини, новини політики, новини києва, новини світу, блог, форум, новини культури, ctujlyz, новини спорту, корисності, здоров'я, спецпроекти, репортажі, мультимедіа, інтерактив, архів випусків, гороскоп на сьогодні
+      description: Газета "Сьогодні". Щоденне українське видання. Україна сьогодні. Новини України, новини Києва, новини в світі.
+      meta_title_index: Новини. Останні новини %YEAR% сьогодні. Новини дня онлайн | СЕГОДНЯ
+      meta_description_index: Останні новини за сьогодні від порталу Сьогодні. Найважливіші новини дня з постійним оновленням. Читайте та дивіться новини %YEAR% року онлайн.
+      meta_keywords_index: Новини, останні новини, новини дня, новини за сьогодні, новини за сьогодні онлайн, новини від сьогодні, новини %YEAR%, новини %YEAR% року
+
+    socials:
+      we_are_in: Ми в
+
+    lang_switcher:
+      ru: РУС
+      uk: УКР
+
+    feedback:
+      title: Написати нам
+      dear_readers: Дорогие читатели!
+      text: Если Вам хочется прислать свою новость, что-то улучшить на нашем сайте или дать пару дружеских советов – пожалуйста, напишите нам. Заранее спасибо!
+      site_editing: Редакция сайту «Сегодня.ua»
+      name: Имя
+      email: Email
+      message: Сообщение
+      send: Отправить
+      send_message: Сообщение отправлено!
+      site: Сьогодні.ua
+      new_feedback: "Новий запит з форми зворотного зв'язку"
+      best_regards: "З найкращими побажаннями,<br/>команда сайту."
+      validate:
+        name: "Введіть ваше ім'я"
+        email: Введіть коректний email
+        message: Повідомлення повинно містити більше 15 символів
+
+    header:
+      hot_news_slider:
+        title: Гаряча новина
+        news: Новини Сьогодні
+        live: Прямий ефір
+
+    search:
+      title: Пошук
+      enter_text: введіть текст
+
+    footer:
+      site_copyright: ЧАО "Сегодня Мультимедиа"
+      photos_by: Стоковi фото вiд
+      links:
+        map: Мапа
+        rules: Правила цитування
+        rules_comments: Правила коментування
+        privacy: "Політика конфіденційності<br> та захисту персональних даних"
+        contacts: Контакти
+        feedback: Написати нам
+        advertising: Реклама на сайтi
+        subscription: Підписка на газету
+      info:
+        cookie:
+          using_site: Продовжуючи перегляд сайту, ви погоджуєтесь, що ознайомились з оновленою
+          politics: політикою конфіденційності
+          agree: і погоджуєтесь на використання файлів cookie.
+        buttons:
+          agree: Погоджуюсь
+
+    lifestyle:
+      to_homepage: Головна Сьогодні
+      go_to_homepage: На головну Сьогодні
+
+      lang_switcher:
+        ru: Ru
+        uk: Ua
+
+    quiz:
+      list:
+        title: Опитування
+
+      view:
+        title: Опитування
+        give_vote: Віддати голос
+        total_votes: Всього проголосувало
+        comments: коментарі
+
+    tv:
+      live_news: Новини Сьогоднi
+      live_stream: Прямий ефір
+      button_more: Больше видео
+      share_twitter: Поділитися посиланням в Твіттері
+      share_facebook: Поділитися посиланням на Фейсбуці
+      channel_youtube: Канал «Сьогодні» на
+
+    article:
+      read: Читайте також
+      view: Дивіться також
+
+    orphus:
+      error_text: Якщо ви знайшли помилку в тексті, виділіть її мишкою і натисніть Ctrl + Enter
+      title: Орфографічна помилка в тексті
+      subtitle: Послати повідомлення про помилку автору?
+      comment: Коментар для автора (не обов'язково)
+      cancel: Скасувати
+      send: Надіслати
+      mouse_hint: Виділіть некоректний текст мишкою
+      thanks: Дякуємо! Повідомлення відправлено.
+      subject: Помилка в тексті на сайті
+      site: Сьогодні.ua
+      best_regards: "З найкращими побажаннями,<br/>команда сайту."
+      message: Текст
+      url: Адреса
+      validate:
+        comment: Повідомлення повинно містити не більше 250 символів
+
+    calcs:
+      taxes:
+        title: Які податки платять з моєї зарплати
+        income: Скільки ви отримуєте на руки
+        uah: гривень
+        job: Де ви працюєте
+        kiev: Київ
+        other_city: Iнший населений пункт
+        do: Розрахувати
+        result: Результат
+        hint: Розрахунки актуальні за умови офіційного працевлаштування та «білої» зарплати
+        result1: Щомісяця до Пенсійного фонду з вашої зарплати надходить
+        result2: За рахунок вашої зарплати за рік виплачують приблизно
+        result21: мінімальних пенсій
+        result3: Щомісяця ви віддаєте
+        result31: гривень на утримання української армії
+        result4: Бюджет вашого міста отримує від вас
+        result41: гривень, а бюджет країни -
+        result42: гривень щомісяця
+        result5: «Брудними» ваша зарплата становить
+        error: Помилка. Вкажiть зарплату
+      pension_compare:
+        title: Яка у вас пенсія
+        pension: Вкажіть вашу пенсію
+        type: Виберіть вид вашої пенсії
+        region: Виберіть регіон проживання
+        do: Розрахувати
+        by_age: пенсія за віком
+        by_invalid: пенсія по інвалідності
+        by_loss: пенсія по втраті годувальника
+        region1: Вінницька область
+        region2: Волинська область
+        region3: Дніпропетровська область
+        region4: Донецька область
+        region5: Житомирська область
+        region6: Закарпатська область
+        region7: Запорізька область
+        region8: Івано-Франківська область
+        region9: м.Киев
+        region10: Київська область
+        region11: Кіровоградська область
+        region12: Луганська область
+        region13: Львівська область
+        region14: Миколаївська область
+        region15: Одеська область
+        region16: Полтавська область
+        region17: Рівненська область
+        region18: Сумська область
+        region19: Тернопільська область
+        region20: Харківська область
+        region21: Херсонська область
+        region22: Хмельницька область
+        region23: Черкаська область
+        region24: Чернівецька область
+        region25: Чернігівська область
+        less: менше
+        more: бiльше
+        pension_word: пенсiя
+        or: або
+        than1: ніж середня по країнi
+        than2: ніж середня
+        than3: ніж середня по регіону
+        set_value: Вкажіть значення
+      salary:
+        title: Яка у вас заробітня плата
+        salary: Вкажіть вашу зарплату
+        industry: Виберіть сферу зайнятості
+        region: Виберіть регіон проживання
+        do: Розрахувати
+        region1: Вінницька область
+        region2: Волинська область
+        region3: Дніпропетровська область
+        region4: Донецька область
+        region5: Житомирська область
+        region6: Закарпатська область
+        region7: Запорізька область
+        region8: Івано-Франківська область
+        region9: м.Киев
+        region10: Київська область
+        region11: Кіровоградська область
+        region12: Луганська область
+        region13: Львівська область
+        region14: Миколаївська область
+        region15: Одеська область
+        region16: Полтавська область
+        region17: Рівненська область
+        region18: Сумська область
+        region19: Тернопільська область
+        region20: Харківська область
+        region21: Херсонська область
+        region22: Хмельницька область
+        region23: Черкаська область
+        region24: Чернівецька область
+        region25: Чернігівська область
+        area1: Сільське, лісове або рибне господарство
+        area2: Промисловість
+        area2_1: Видобувна промисловість, розроблення кар`єрів
+        area2_2: Переробна промисловість
+        area2_3: Виробництво харчових продуктів, напоїв, тютюнових виробів
+        area2_4: Текстильне виробництво, виробництво одягу, виробництво виробів зі шкіри
+        area2_5: Поліграфія, виробництво паперу, виробів з деревини
+        area2_6: Виробництво коксу і продуктів нафтопереробки
+        area2_7: Виробництво хімічної продукції та речовин
+        area2_8: Виробництво фармацевтичних препаратів і продуктів
+        area2_9: Виробництво гумової, пластмасової, іншої неметалевої мінеральної продукції
+        area2_10: Металургія (крім машин і обладнання)
+        area2_11: Машинобудування, в т.ч.
+        area2_11_1: Виробництво комп`ютерів електронної та оптичної продукції
+        area2_11_2: Виробництво електричного обладнання
+        area2_11_3: Виробництво транспортних засобів
+        area2_11_4: Виробництво машин та обладнання, не віднесених до інших груп
+        area2_12: Виробництво меблів
+        area2_13: Ремонт і монтаж машин і обладнання
+        area2_14: Поставки електроенергії, газу, пари та ін.
+        area2_15: Водопостачання, каналізація, поводження з відходами
+        area3: Будівництво
+        area4: Оптова та роздрібна торгівля
+        area5: Ремонт автотранспорту
+        area6: Робота на транспорті
+        area7: Складське господарство, поштова та кур`єрська діяльність
+        area8: Організація харчування
+        area9: Інформація та телекомунікації
+        area10: Фінансова та страхова діяльність
+        area11: Операції з нерухомістю
+        area12: Наукова та технічна діяльність
+        area13: Адміністративне і допоміжне обслуговування
+        area14: Оборона
+        area15: Освіта
+        area16: Охорона здоров`я
+        area17: Соціальна допомога
+        area18: Мистецтво, спорт, розваги та відпочинок
+        area19: Інші види послуг
+        less: менше
+        more: бiльше
+        your_salary: Ваша зарплата на
+        or: або
+        than1: ніж середня по вашій сфері діяльності
+        than2: ніж середня по регіону
+        set_value: Вкажіть значення
+      taxespensback:
+        title: Податкове повернення за внески в недержавний пенсійний фонд
+        contribution: Внески на чию користь
+        whom1: на свою
+        whom2: родича
+        paid: Розмір щомісячного внеску
+        do: Рассчитать
+        result: Результат
+
+  datetime:
+    today: Сьогодні
+    yesterday: Вчора
+
+error:
   404:
-    to_main: До головної
-    page_not_found: Сторінку не знайдено
-    text: |
-      Можливо, лінк застарів. Скористайтеся пошуком. Якщо Ви впевнені, що такої сторінки не існує з нашої вини, будь ласка,
-      повідомте нас про це й не забудьте вказати адресу, з якої Ви сюди потрапили.
-  contacts:
-    title: Контакти
-    address: 01001 Київ, вул. Володимирська, 4
-  team:
-    title: Команда
-  newsletter:
-    title: Подпишись на Vogue UA
-  subscribe:
-    title: Підписка
-  advertisement:
-    title: Реклама
-    download_mediakit_magazine: СКАЧАТИ<BR> МЕДІА-КІТ (журнал)
-    download_mediakit_site: СКАЧАТИ<BR> МЕДІА-КІТ (сайт)
-  magazine:
-    main_editor: Головний редактор
-    on_poster: На обкладинці
-    model: Модель
-    main_photograph: Фотограф
-    dress: Одяг
-    read_in_number: Читайте в цьому номері
-    show_more_btn: Показати більше матеріалів
-    archive: Архів журналу
-    covers: Обкладинки
-    subscribe: Підписатися
-    magazine: Журнал
-  collections:
-    collections: Покази
-    collections_h1: Покази
-    last_collections: Останні покази
-    other_collections: Інші покази
-    show_more_btn: Показати більше матеріалів
-    choose_season: Виберіть сезон
-    choose_designer: Виберіть дизайнера
-    choose_fashionweek: Виберіть тиждень моди
-    meta_title: Нова колекція %s. Колекція жіночого/чоловічого одягу %s %s сезону.
-    meta_description: Нова колекція жіночої/чоловічої одягу %s %s сезону. Дивіться всі образи колекції %s.
-    meta_keywords: Колекції, нова колекція, нова колекція %s, колекція жіночого/чоловічого одягу %s, %s колекція %s сезону, %s, %s сезон
-    fashion_week: Тиждень моди
-    by_list: списком
-    by_date: за датою
-  search:
-    title: Пошук
-    enter_word_for_seach: Введіть слово для пошуку
-    enter_word_for_seach_title: Введіть слово для пошуку.
-    not_found: За вашим запитом нічого не знайдено.
-    placeholder:
-      search: пошук
-    tabs:
-      all: Всі матеріали
-      article: Статті
-      event: Події
-      collection: Покази
-      voguetv: Vogue TV
-      blog: Suzy Menkes
-  langs:
-    ru: РУС
-    en: ENG
-  app:
-    more: Більше
-
-informer:
-  tab:
-    informer: Інформер
-    images: Зображення
-
-  fields:
-    title: Назва
-    url: URL
-    article: Cтаття
-    is_active: Опублікувати
-    published_at: Дата/час публікації
-    created_at: Дата створення
-    created_by: Створено
-    articles: Стаття
-    image: Зображення
-    image_remove: Видалити
-
-  validation:
-    empty_title_or_article: Заповніть назву або статтю
-    empty_url_or_article: Заповніть URL або статтю
-
-shortcode:
-  season:
-    spring_summer: весна-літо
-    winter_autumn: зима-осінь
-
-top:
-  block:
-    field:
-      type: Тип
-      type.list: Список (3 статті)
-      type.single: Одна сутність (з заголовком)
-      type.no_title: Одна сутність (без заголовка)
-      article_1: Стаття 1
-      article_2: Стаття 2
-      article_3: Стаття 3
+    page_not_found: Помилка 404. Cторінка не знайдена
+    on_main_page: Перейти на головну

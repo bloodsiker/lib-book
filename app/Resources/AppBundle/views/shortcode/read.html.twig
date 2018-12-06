@@ -1,0 +1,8 @@
+{% if shortcode_data.article is defined %}
+	<div class="inline-read-also">
+		<h3>{{ ('app.frontend.article.read')|trans({}, 'AppBundle') }}</h3>
+		<ul>
+			<li><a href="{{ article_path(shortcode_data.article) }}">{{ shortcode_data.article.getTitle() }}</a></li>
+		</ul>
+	</div>
+{% endif %}

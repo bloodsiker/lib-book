@@ -1,0 +1,116 @@
+<div class="auto_cont">
+	<fieldset class="auto_calc">
+		<legend>{{ app.request.locale == 'ru' ? 'Расчет ставки акциза' : 'Розрахунок ставки акцизу' }}:</legend>
+
+		<div>{{ app.request.locale == 'ru' ? 'Тип автомобиля' : 'Тип автомобіля' }}:<br>
+			<div><input type="radio" name="acalc_v2_engine" value="1"> {{ app.request.locale == 'ru' ? 'ДВС' : 'ДВЗ' }}</div>
+			<div><input type="radio" name="acalc_v2_engine" value="2"> {{ app.request.locale == 'ru' ? 'Электро' : 'Електро' }}</div>
+			<div><input type="radio" name="acalc_v2_engine" value="3"> {{ app.request.locale == 'ru' ? 'Гибрид с электродвигателем' : 'Гiбрид з електродвигуном' }}</div>
+		</div>
+
+		<div id="dvs_block" class="car_type_block" style="display: none;">
+			<div>{{ app.request.locale == 'ru' ? 'Топливо' : 'Паливо' }}:<br>
+				<div><input type="radio" name="acalc_v2_fuel" value="1"> {{ app.request.locale == 'ru' ? 'Бензин' : 'Бензин' }}</div>
+				<div><input type="radio" name="acalc_v2_fuel" value="2"> Газ</div>
+				<div><input type="radio" name="acalc_v2_fuel" value="3"> {{ app.request.locale == 'ru' ? 'Дизель' : 'Дизель' }}</div>
+			</div>
+
+			<div>{{ app.request.locale == 'ru' ? 'Возраст автомобиля' : 'Вік автомобіля' }}:<br>
+				<div><input type="radio" name="acalc_v2_age" value="1"> {{ app.request.locale == 'ru' ? 'Новый' : 'Новий' }}</div>
+				<div>
+					<input type="radio" name="acalc_v2_age" value="2"> {{ app.request.locale == 'ru' ? 'Возраст, лет' : 'Вiк, рокiв' }} <input type="text" id="acalc_v2_age_number" value="" placeholder="">
+				</div>
+			</div>
+
+			<div>{{ app.request.locale == 'ru' ? 'Объем двигателя' : 'Об`єм двигуна' }}:<br><input type="text" id="acalc_v2_volume" value="" placeholder=""> куб. см</div>
+		</div>
+
+		<div id="electro_block" class="car_type_block" style="display: none;">
+			<div>{{ app.request.locale == 'ru' ? 'Мощность' : 'Потужнiсть' }}:<br><input type="text" id="acalc_v2_power" value="" placeholder=""> кВт</div>
+		</div>
+
+		<div id="hybrid_block" class="car_type_block" style="display: none;">
+
+		</div>
+
+		<div><input type="button" id="acalc_v2_button" value="{{ app.request.locale == 'ru' ? 'Рассчитать' : 'Розрахувати' }}"></div>
+
+		<div>{{ app.request.locale == 'ru' ? 'Результат' : 'Результат' }}: <span id="acalc_v2_result">-</span></div>
+	</fieldset>
+</div>
+<script>
+    function auto_calc_v2_init() {
+
+        document.querySelectorAll('input[name=acalc_v2_engine]').forEach(function (inp) {
+            inp.addEventListener('click', function () {
+                if(inp.value>2) {
+                    document.getElementById('dvs_block').style.display = 'none';
+                    document.getElementById('electro_block').style.display = 'none';
+                    document.getElementById('hybrid_block').style.display = 'block';
+                    document.getElementById('acalc_v2_button').click();
+                } else if(inp.value>1) {
+                    document.getElementById('dvs_block').style.display = 'none';
+                    document.getElementById('electro_block').style.display = 'block';
+                    document.getElementById('hybrid_block').style.display = 'none';
+                } else {
+                    document.getElementById('dvs_block').style.display = 'block';
+                    document.getElementById('electro_block').style.display = 'none';
+                    document.getElementById('hybrid_block').style.display = 'none';
+                }
+            });
+        });
+        document.getElementById('acalc_v2_button').addEventListener('click', function(){
+            a_engine = document.querySelector('input[name=acalc_v2_engine]:checked') ? document.querySelector('input[name=acalc_v2_engine]:checked').value : 0;
+            a_fuel = document.querySelector('input[name=acalc_v2_fuel]:checked') ? document.querySelector('input[name=acalc_v2_fuel]:checked').value : 0;
+            a_age = document.querySelector('input[name=acalc_v2_age]:checked') ? document.querySelector('input[name=acalc_v2_age]:checked').value : 0;
+
+            result = 0;
+
+            if(a_engine == 1) {
+                k_age = parseInt(document.getElementById('acalc_v2_age_number').value);
+                if(a_age != 1 && k_age > 0) {
+                    if(k_age > 15) {
+                        k_age = 15;
+                    }
+                } else {
+                    k_age = 1;
+                }
+
+                a_volume = document.getElementById('acalc_v2_volume').value;
+                a_volume = a_volume.replace(",",".");
+                a_volume = a_volume.replace(" ","");
+                a_volume = parseInt(a_volume);
+
+                if(a_fuel == 1 || a_fuel == 2) {
+                    if(a_volume > 3000) {
+                        k_base = 100;
+                    } else {
+                        k_base = 50;
+                    }
+                } else {
+                    if(a_volume > 3500) {
+                        k_base = 150;
+                    } else {
+                        k_base = 75;
+                    }
+                }
+
+                k_engine = a_volume / 1000;
+
+                result = Math.round(k_base * k_age * k_engine);
+            } else if (a_engine == 2) {
+                a_power = document.getElementById('acalc_v2_power').value;
+                a_power = a_power.replace(",",".");
+                a_power = a_power.replace(" ","");
+                a_power = parseInt(a_power);
+
+                result = a_power;
+            } else {
+                result = 100;
+            }
+
+            document.getElementById('acalc_v2_result').innerHTML = result + ' {{ app.request.locale == 'ru' ? 'евро' : 'євро' }}';
+        });
+    }
+    auto_calc_v2_init();
+</script>

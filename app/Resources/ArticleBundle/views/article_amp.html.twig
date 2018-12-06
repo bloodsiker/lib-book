@@ -1,0 +1,163 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+
+<!doctype html>
+<html amp lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="amp-google-client-id-api" content="googleanalytics">
+	<script async src="https://cdn.ampproject.org/v0.js"></script>
+	<script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+	<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+	<script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
+	<script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+	<script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
+	<script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+	<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+	<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+	<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+	{% if (article['isAdvHidden'] is not defined) or (not article['isAdvHidden']) %}
+		<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+	{% endif %}
+
+	<TITLE>
+		{% if article.getMetaTitle() %}
+			{{ article.getMetaTitle() }} - {{ 'front.meta.sitename'|trans([], 'AppBundle') }}
+		{% else %}
+			{{ item.item_title(article) }}
+			{%if article.category.getTitleHead()%} - {{ article.category.getTitleHead() }}{% endif %}
+			{%if article.getHeader() %} - {{ article.getHeader() }}{% endif %}
+			| {{ 'app.frontend.meta.sitename'|trans([], 'AppBundle') }}
+		{% endif %}
+	</TITLE>
+
+	<link rel="canonical" href="{{ absolute_url(article_path(article)) }}">
+	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+	<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	<style amp-custom>
+		body{background-color:#f0f3f5;font-family:"Arial",sans-serif;color:#000;padding-bottom:50px}amp-img{background-color:gray;border:0;margin-top:20px;max-height: 100%;}.article-page{max-width:600px;margin:0 auto;padding:55px 10px 0}.content{padding:5px 10px;background-color:#fff}a{text-decoration:none;color:#0085cf}a:hover{color:#d00}i{font-style:normal}h1,h2,h3,h5,h5,h6,p,ul{padding:0;margin:0}.social-likes{margin-top:20px}header{position:fixed;top:0;left:0;width:100%;height:41px;margin-bottom:15px;background-color:#0085cf;z-index:20}.logo{position:absolute;top:8px;left:0;width:100%;text-align:center}.logo svg{width:95px;height:27px}amp-sidebar{width:100%;background-color:#0085cf}nav{padding:30px 0 0 15px}nav li{margin-bottom:15px;list-style:none}nav a{font-size:13px;text-transform:uppercase;color:#fff;letter-spacing:1px;padding-bottom:5px;font-family:"Arial",sans-serif;font-weight:700;-webkit-transition:color .2s;-moz-transition:color .2s;-ms-transition:color .2s;-o-transition:color .2s;transition:color .2s}nav a:hover{color:rgba(255,255,255,.7)}.active-link a{-webkit-box-shadow:0 5px 0 rgba(255,255,255,.59);-moz-box-shadow:0 5px 0 rgba(255,255,255,.59);box-shadow:0 5px 0 rgba(255,255,255,.59)}.toggle-btn{position:fixed;top:13px;left:12px;width:23px;height:16px;background-color:transparent;border:0;background-repeat:no-repeat;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjNweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMjMgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA0MS4yICgzNTM5NykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+NTM3MkE2OUEtRENDOS00ODQ5LUI4NjAtNDNFMDU5NDVCNjZBPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJtYWluIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0ibW9iaWxlLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNS4wMDAwMDAsIC0xNS4wMDAwMDApIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgPGcgaWQ9ImJ1cmdlciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTUuMDAwMDAwLCAxNS4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0wLDAgTDIzLDAgTDIzLDIgTDAsMiBMMCwwIFogTTAsNyBMMTgsNyBMMTgsOSBMMCw5IEwwLDcgWiBNMCwxNCBMMjMsMTQgTDIzLDE2IEwwLDE2IEwwLDE0IFoiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+);cursor:pointer;z-index:20}.top-icon{position:relative;display:inline-block;color:#fff;font-size:11px;font-weight:400;letter-spacing:.5px;border-radius:2px;padding:0 4px;height:13px;line-height:13px;background-color:#4a90e2}.article-content ul{margin:15px 0 25px}.article-content ol{padding-left:20px}.article-content ul li,.article-content ol li{list-style:none;font-size:15px;line-height:20px;position:relative;margin-bottom:13px;padding-left:27px}.article-content ul li:before{content:"";position:absolute;width:12px;height:12px;background-color:#0085cf;top:4px;left:0;border-radius:100px}.article-content ol li{padding-left:7px;list-style-type:decimal}.bread-crumbs{margin:0 0 10px}@media screen and (max-width:767px){.bread-crumbs{margin-top:5px}}.bread-crumbs ul{font-size:0}.bread-crumbs ul li{display:inline-block;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iN3B4IiBoZWlnaHQ9IjExcHgiIHZpZXdCb3g9IjAgMCA3IDExIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IHNrZXRjaHRvb2wgNDEuMiAoMzUzOTcpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPkU0NzVBMUI3LTFBNzItNEUyMC05NDBCLUEyRkM0NjM2NUU1MTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggc2tldGNodG9vbC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0ibWFpbiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImJlYWRjcnVtYnMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03Ny4wMDAwMDAsIC0xNDMuMDAwMDAwKSIgZmlsbD0iIzQ2NDY0NiI+CiAgICAgICAgICAgIDxwb2x5Z29uIGlkPSJzaGV2cm9uLWxlZnQtc21hbGwiIHBvaW50cz0iODIuNTk5MjExMSAxNDcuODkyMTA0IDc4LjM3ODY3OTcgMTQzLjY3MTU3MyA3Ny42NzE1NzI5IDE0NC4zNzg2OCA4MS44OTIxMDQzIDE0OC41OTkyMTEgNzcuNjcxNTcyOSAxNTIuODE5NzQzIDc4LjM3ODY3OTcgMTUzLjUyNjg0OSA4Mi41OTkyMTExIDE0OS4zMDYzMTggODIuNjIxMzIwMyAxNDkuMzI4NDI3IDgzLjMyODQyNzEgMTQ4LjYyMTMyIDgzLjMwNjMxNzkgMTQ4LjU5OTIxMSA4My4zMjg0MjcxIDE0OC41NzcxMDIgODIuNjIxMzIwMyAxNDcuODY5OTk1Ij48L3BvbHlnb24+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=);background-repeat:no-repeat;background-position:calc(100% - 7px) center;padding-right:20px;padding-left:0}.bread-crumbs ul li:before{content:none}.bread-crumbs ul li:last-child{background-image:none}.bread-crumbs ul li a,.bread-crumbs a,.bread-crumbs span{font-size:13px;color:#888}.bread-crumbs ul li a.active,.bread-crumbs a.active,.bread-crumbs span.active{font-weight:700}.bread-crumbs img{height:9px;width:auto;padding:0 1px 0 5px;vertical-align:baseline;}h1{font-size:26px}h2{font-size:25px;text-align:center;margin-top:20px}p{font-size:15px;line-height:25px;margin-top:12px}.title div span{font-size:15px;color:rgba(0,0,0,.5)}.time{margin-top:10px}.sub-title{margin-top:15px}.sub-title p{font-size:19px;line-height:25px;color:#000}.table-responsive{overflow-y:auto}table{width:100%;min-width:300px;border-collapse:collapse}td{vertical-align:middle;padding:5px;border:1px solid #ccc}td p{line-height:normal;margin-top:0;font-size:12px}div.mini-read-also,div.inline-read-also{border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top:15px;margin-bottom:15px}div.mini-read-also h2,div.inline-read-also h2,div.mini-read-also h3,div.inline-read-also h3{text-transform:uppercase;font-weight:700;letter-spacing:2px;color:#000;margin-top:12px;margin-bottom:6px;font-size:11px;line-height:1em;text-align:left;}div.mini-read-also ul,div.inline-read-also ul{margin:0 0 3px}div.mini-read-also ul:before,div.mini-read-also ul:after,div.inline-read-also ul:before,div.inline-read-also ul:after{content:" ";display:table}div.mini-read-also ul:after,div.inline-read-also ul:after{clear:both}div.mini-read-also li,div.inline-read-also li{padding-left:0;margin-bottom:4px}div.mini-read-also li:before,div.inline-read-also li:before{display:none}div.mini-read-also a,div.inline-read-also a{display:block;font-size:15px;font-weight:700;line-height:1.2;text-align:left}amp-video,amp-youtube{margin-top:20px}amp-carousel button{width:50px;-webkit-appearance:none;appearance:none;margin:0;padding:0;border:none;cursor:pointer}amp-carousel amp-img{border:0}amp-carousel button amp-img{margin-top:0;border:1px solid #000}amp-carousel>div{margin-top:5px;padding-bottom:5px}.interviews-block{position:relative;margin:20px 0;}.interviews-block .faces{background:none;display: none;}.interviews-block .txt{padding-left:0;padding-top:5px;margin-top:0}.interviews-block .txt .title h2,.interviews-block .txt .title h3{color:#0085cf;font-size:15px;font-weight:700;margin:0;padding:0;text-align:left;}.interviews-block .txt .title span.position{margin:4px 0 12px;display:block;font-size:13px;color:#888}.interviews-block .txt .title p{margin-top:0;font-style:italic;}.faces amp-img{width:100%;height:100%;margin-top:0;border-radius:50%;border:0}blockquote{margin:15px 0 0;background-color:#f0f3f5;padding:10px 10px 10px 51px;background-repeat:no-repeat;background-position:14px 14px;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjdweCIgaGVpZ2h0PSIyMXB4IiB2aWV3Qm94PSIwIDAgMjcgMjEiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA0MC4yICgzMzgyNikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+Rjk3RkQ4MDEtNzMyQS00RDExLUJDNjctRTA5MkNBRjlBNTI1PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJhcnRpY2xlIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iMDA0X2JpZ19hcnRpY2xlXyZhbXA7X2FuYWx5dGljcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMxLjAwMDAwMCwgLTEzMzMuMDAwMDAwKSIgZmlsbD0iIzAwODVDRiI+CiAgICAgICAgICAgIDxnIGlkPSJHcm91cC01IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNy4wMDAwMDAsIDEzMTkuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTUuMDQyOTMwMiwzNC40OTA1MTEgTDE1LjA0MjkzMDIsMzIuOTU2NzkwMSBDMTcuMTQ5MjUwNywzMi4xNzk3MDEgMTguODA1NjUyNywzMC45NTc4NDg5IDIwLjAxMjE4NTksMjkuMjkxMTk3MiBDMjEuMjE4NzE5LDI3LjYyNDU0NTUgMjEuODIxOTc2NSwyNS44OTE0NTgyIDIxLjgyMTk3NjUsMjQuMDkxODgzNCBDMjEuODIxOTc2NSwyMy43MDMzMzg4IDIxLjc2MDYyODMsMjMuNDE3MDQ3MSAyMS42Mzc5MywyMy4yMzI5OTk3IEMyMS41NzY1ODA4LDIzLjExMDMwMTQgMjEuNDk0NzgzMiwyMy4wNDg5NTMyIDIxLjM5MjUzNDYsMjMuMDQ4OTUzMiBDMjEuMjkwMjg2MSwyMy4wNDg5NTMyIDIxLjEyNjY5MDgsMjMuMTMwNzUwOCAyMC45MDE3NDQsMjMuMjk0MzQ4NSBDMjAuMjQ3MzUzMSwyMy43NjQ2OTIgMTkuNDI5Mzc2OCwyMy45OTk4NjAxIDE4LjQ0Nzc5MDYsMjMuOTk5ODYwMSBDMTcuMjYxNzA3MSwyMy45OTk4NjAxIDE2LjIyMzg5OTcsMjMuNTI0NDExNCAxNS4zMzQzMzcyLDIyLjU3MzQ5OTcgQzE0LjQ0NDc3NDYsMjEuNjIyNTg4IDE0LDIwLjQ5Mjc1ODMgMTQsMTkuMTgzOTc2NiBDMTQsMTcuNzkzMzk2IDE0LjUxMTIzNTIsMTYuNTgxNzY4NiAxNS41MzM3MjA5LDE1LjU0OTA1ODEgQzE2LjU1NjIwNjYsMTQuNTE2MzQ3NSAxNy44MTM4NDUxLDE0IDE5LjMwNjY3NDIsMTQgQzIxLjAwNDAwMDUsMTQgMjIuNDgxNDcwMiwxNC43MDAzOTIyIDIzLjczOTEyNzYsMTYuMTAxMTk3NiBDMjQuOTk2Nzg1LDE3LjUwMjAwMyAyNS42MjU2MDQzLDE5LjM4ODQ2MDggMjUuNjI1NjA0MywyMS43NjA2Mjc3IEMyNS42MjU2MDQzLDI0LjUyMTMzOTEgMjQuNzc2OTUzOSwyNi45OTU3MTczIDIzLjA3OTYyNzYsMjkuMTgzODM2NyBDMjEuMzgyMzAxNCwzMS4zNzE5NTYxIDE4LjcwMzQyOSwzMy4xNDA4Mjk5IDE1LjA0MjkzMDIsMzQuNDkwNTExIEwxNS4wNDI5MzAyLDM0LjQ5MDUxMSBaIE0yOS43OTczMjUxLDM0LjQ5MDUxMSBMMjkuNzk3MzI1MSwzMi45NTY3OTAxIEMzMS45MDM2NDU2LDMyLjE3OTcwMSAzMy41NjAwNDc2LDMwLjk1Nzg0ODkgMzQuNzY2NTgwNywyOS4yOTExOTcyIEMzNS45NzMxMTM5LDI3LjYyNDU0NTUgMzYuNTc2MzcxNCwyNS44OTE0NTgyIDM2LjU3NjM3MTQsMjQuMDkxODgzNCBDMzYuNTc2MzcxNCwyMy43MDMzMzg4IDM2LjUxNTAyMzIsMjMuNDE3MDQ3MSAzNi4zOTIzMjQ5LDIzLjIzMjk5OTcgQzM2LjMzMDk3NTcsMjMuMTEwMzAxNCAzNi4yNDkxNzgxLDIzLjA0ODk1MzIgMzYuMTQ2OTI5NSwyMy4wNDg5NTMyIEMzNi4wNDQ2ODEsMjMuMDQ4OTUzMiAzNS44ODEwODU3LDIzLjEzMDc1MDggMzUuNjU2MTM4OCwyMy4yOTQzNDg1IEMzNS4wMDE3NDgsMjMuNzY0NjkyIDM0LjE4Mzc3MTcsMjMuOTk5ODYwMSAzMy4yMDIxODU0LDIzLjk5OTg2MDEgQzMyLjAxNjEwMiwyMy45OTk4NjAxIDMwLjk3ODI5NDYsMjMuNTI0NDExNCAzMC4wODg3MzIsMjIuNTczNDk5NyBDMjkuMTk5MTY5NSwyMS42MjI1ODggMjguNzU0Mzk0OSwyMC40OTI3NTgzIDI4Ljc1NDM5NDksMTkuMTgzOTc2NiBDMjguNzU0Mzk0OSwxNy43OTMzOTYgMjkuMjY1NjMwMSwxNi41ODE3Njg2IDMwLjI4ODExNTgsMTUuNTQ5MDU4MSBDMzEuMzEwNjAxNSwxNC41MTYzNDc1IDMyLjU2ODI0LDE0IDM0LjA2MTA2OTEsMTQgQzM1Ljc1ODM5NTQsMTQgMzcuMjM1ODY1MSwxNC43MDAzOTIyIDM4LjQ5MzUyMjUsMTYuMTAxMTk3NiBDMzkuNzUxMTc5OSwxNy41MDIwMDMgNDAuMzc5OTk5MiwxOS4zODg0NjA4IDQwLjM3OTk5OTIsMjEuNzYwNjI3NyBDNDAuMzc5OTk5MiwyNC41MjEzMzkxIDM5LjUzMTM0ODgsMjYuOTk1NzE3MyAzNy44MzQwMjI1LDI5LjE4MzgzNjcgQzM2LjEzNjY5NjIsMzEuMzcxOTU2MSAzMy40NTc4MjM5LDMzLjE0MDgyOTkgMjkuNzk3MzI1MSwzNC40OTA1MTEgTDI5Ljc5NzMyNTEsMzQuNDkwNTExIFoiIGlkPSJxdW90ZSI+PC9wYXRoPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=)}blockquote p{margin-top:0;font-size:15px;line-height:22px;color:#000}.tag{margin:20px 20px 0 0}.tag a{display:inline-block;position:relative;padding-left:22px;margin:3px 0 2px;font-size:13px;color:rgba(0,0,0,.5)}.tag a:before{content:"";position:absolute;background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTVweCIgaGVpZ2h0PSIxNXB4IiB2aWV3Qm94PSIwIDAgMTUgMTUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogc2tldGNodG9vbCA0MC4yICgzMzgyNikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+NzA3NkY1RDktRDg2Ni00RDE4LTgyQUUtNDY0OUY0RDQwMDBEPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJhcnRpY2xlIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iMDA0X2JpZ19hcnRpY2xlXyZhbXA7X2FuYWx5dGljcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE4LjAwMDAwMCwgLTUwMTMuMDAwMDAwKSIgZmlsbD0iIzAwODVDRiI+CiAgICAgICAgICAgIDxnIGlkPSJUQUdTIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOC4wMDAwMDAsIDUwMTMuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMC41LDcuNSBMOCwwLjAzMzQyNDM3NTYgTDE1LDAuMDMzNDI0Mzc1NiBMMTQuOTk2ODI2Miw3IEw3LjUsMTQuNSBMMC41LDcuNSBaIE0xMSw2IEMxMi4xMDQ1Njk1LDYgMTMsNS4xMDQ1Njk1IDEzLDQgQzEzLDIuODk1NDMwNSAxMi4xMDQ1Njk1LDIgMTEsMiBDOS44OTU0MzA1LDIgOSwyLjg5NTQzMDUgOSw0IEM5LDUuMTA0NTY5NSA5Ljg5NTQzMDUsNiAxMSw2IFoiIGlkPSJ0YWdzIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==);background-repeat:no-repeat;width:15px;height:15px;top:0;left:0;-webkit-transition:left .1s;-moz-transition:left .1s;-ms-transition:left .1s;-o-transition:left .1s;transition:left .1s}.read-also{font-size:0}.read-also .title{display:block;padding:0;margin-top:40px;margin-bottom:18px;text-align:left;text-transform:uppercase;letter-spacing:1.6px;font-size:18px;font-weight:700}.read-also .top-icon.red a{color:#FFF}.read-also .top-icon.red{float:left;display:block;position:relative;z-index:2;color:#fff;font-size:11px;font-weight:400;letter-spacing:.5px;border-radius:2px;padding:0 4px;margin:0 0 -6px 15px;height:13px;line-height:13px;background-color:#d0021b}.read-also amp-img{display:block;margin-top:0;margin-bottom:10px;border:0}.read-also .news-block{position:relative;display:block;font-size:13px;width:300px;height:400px;max-height:400px;overflow:hidden;margin:0 0 20px;vertical-align:top}.read-also .news-block:after{content:'';display:block;position:absolute;z-index:2;width:300px;height:50px;bottom:0;background:linear-gradient(to top,rgba(255,255,255,1) 10%,rgba(255,255,255,.5) 70%,rgba(255,255,255,0) 100%)}.read-also .overflow-wrap{clear:both}.read-also .overflow-wrap a{color:#000}.read-also .overflow-wrap h3{font-size:19px;line-height:25px;margin:0 0 8px;padding:0}.read-also .overflow-wrap p{margin:8px 0 0;padding:0;font-size:13px;line-height:20px}.read-also .overflow-wrap a .date{font-size:11px;color:#888;display:block;font-family:Verdana,sans-serif}img{max-width: 100%;height:auto;}.read-also .block{width: 300px;}.read-also .block img{max-width:300px;width: 300px;height:auto;}.read-also .block h2,.read-also .block h3,.read-also .block h4{margin:0;padding:10px 0;font-size:19px;font-weight:bold;line-height:25px;color:#000;}.read-also span{font-family: Verdana,sans-serif;font-size: 11px;color: #888;}.read-also p{font-size:13px;line-height:19px;padding:10px 0 20px;margin:0 0 20px;color:#000;}figure{margin:0;}audio{width:100%;}
+	</style>
+</head>
+<body>
+<header>
+	<div class="logo">
+		<a href="/">
+			{% if app.request.locale == 'ru' %}
+				<svg width="141px" height="21px" viewBox="0 0 141 21" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="seg_mobile_logo_rus" transform="translate(-90.000000, -12.000000)" fill="#FFFFFF"> <g id="SEG_LOGO" transform="translate(90.000000, 12.000000)"> <polygon id="Shape" points="40.8268657 0.420895522 58.0835821 0.420895522 58.0835821 5.57553372 54.2760504 5.57553372 54.2760504 3.68749764 48.7182823 3.68749764 48.7182823 16.0945919 51.4818134 16.0945919 51.4818134 19.361194 40.8268657 19.361194 40.8268657 16.0945919 43.5903968 16.0945919 43.5903968 3.68749764 40.8268657 3.68749764"></polygon> <path d="M121.638806,16.0945919 L123.41844,16.0945919 L126.609509,10.4604525 C124.308257,9.4714812 123.203657,7.91310221 123.203657,5.75534668 C123.203657,2.87833932 125.290125,0.420895522 129.09486,0.420895522 L141,0.420895522 L141,3.68749764 L138.361232,3.68749764 L138.361232,16.0945919 L141,16.0945919 L141,19.361194 L130.935861,19.361194 L130.935861,16.0945919 L133.237112,16.0945919 L133.237112,11.0897978 L131.119961,11.0897978 L126.854976,19.361194 L121.638806,19.361194 L121.638806,16.0945919 L121.638806,16.0945919 Z M133.237112,8.06294634 L133.237112,3.71746647 L130.813128,3.71746647 C129.033493,3.71746647 128.573243,5.06606367 128.573243,5.84525316 C128.573243,6.83422445 129.18691,8.06294634 131.334745,8.06294634 L133.237112,8.06294634 L133.237112,8.06294634 Z" id="Shape"></path> <polygon id="Shape" points="100.173134 19.361194 100.173134 16.0945919 102.428719 16.0945919 102.428719 3.68749764 100.173134 3.68749764 100.173134 0.420895522 109.40884 0.420895522 109.40884 3.68749764 107.519026 3.68749764 107.519026 7.82319573 112.609332 7.82319573 112.609332 3.68749764 110.719518 3.68749764 110.719518 0.420895522 119.955224 0.420895522 119.955224 3.68749764 117.699639 3.68749764 117.699639 16.0945919 119.955224 16.0945919 119.955224 19.361194 110.719518 19.361194 110.719518 16.0945919 112.609332 16.0945919 112.609332 11.0897978 107.519026 11.0897978 107.519026 16.0945919 109.40884 16.0945919 109.40884 19.361194"></polygon> <path d="M78.3169544,16.0945919 L80.5656097,16.0945919 L80.5656097,3.68749764 L80.5656097,3.68749764 L80.5656097,3.0881211 L83.2700736,0.420895522 L88.8005502,0.420895522 L88.8005502,3.68749764 L85.6402779,3.68749764 L85.6402779,16.0945919 L88.8005502,16.0945919 L88.8005502,19.361194 L78.2865672,19.361194 L78.2865672,16.0945919 L78.3169544,16.0945919 Z M88.8309375,0.420895522 L98.0686567,0.420895522 L98.0686567,3.68749764 L95.8200014,3.68749764 L95.8200014,16.0945919 L98.0686567,16.0945919 L98.0686567,19.361194 L88.8309375,19.361194 L88.8309375,16.0945919 L90.714946,16.0945919 L90.714946,3.68749764 L88.8309375,3.68749764 L88.8309375,0.420895522 L88.8309375,0.420895522 Z" id="Shape"></path> <polygon id="Shape" points="21.4656716 19.361194 21.4656716 16.0945919 23.7727193 16.0945919 23.7727193 3.68749764 21.4656716 3.68749764 21.4656716 0.420895522 38.7223881 0.420895522 38.7223881 6.47459853 34.9388299 6.47459853 34.9388299 3.68749764 28.9097454 3.68749764 28.9097454 8.06294634 33.7699258 8.06294634 33.7699258 11.2995796 28.9097454 11.2995796 28.9097454 16.0945919 34.9388299 16.0945919 34.9388299 13.3674287 38.7223881 13.3674287 38.7223881 19.361194"></polygon> <path d="M68.8163389,0 C63.3486622,0 58.9253731,4.42332437 58.9253731,9.89104478 C58.9253731,15.3587652 63.3486622,19.7820896 68.8163389,19.7820896 C74.2840157,19.7820896 78.7073048,15.3587652 78.7073048,9.89104478 C78.738022,4.42332437 74.2840157,0 68.8163389,0 Z M68.8163389,15.3587652 C65.806045,15.3587652 63.3793795,12.9320803 63.3793795,9.92176231 C63.3793795,6.91144433 65.806045,4.48475943 68.8163389,4.48475943 C71.8266329,4.48475943 74.2532984,6.91144433 74.2532984,9.92176231 C74.2840157,12.9013628 71.8266329,15.3587652 68.8163389,15.3587652 Z" id="Shape"></path> <path d="M9.99973758,15.7489432 C6.95633918,15.7489432 4.50298742,13.3222583 4.50298742,10.3119403 C4.50298742,7.30162232 6.95633918,4.87493742 9.99973758,4.87493742 C12.1735936,4.87493742 14.0368987,6.10363864 14.9374962,7.91597293 L19.7820896,7.91597293 L19.7820896,0.513048113 L16.0554793,0.513048113 L16.0554793,2.44825253 C14.3785047,1.18883378 12.2667588,0.420895522 9.99973758,0.420895522 C4.47193233,0.420895522 0,4.84421989 0,10.3119403 C0,15.7796607 4.47193233,20.2029851 9.99973758,20.2029851 C14.6890555,20.2029851 18.6019963,17.0083619 19.6889243,12.7386252 L14.9374962,12.7386252 C14.0058436,14.4895244 12.1425385,15.7489432 9.99973758,15.7489432 Z" id="Shape" fill-rule="nonzero"></path> </g> </g> </g> </svg>
+			{% else %}
+				<svg width="141px" height="19px" viewBox="0 0 141 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="seg_mobile_logo_rus" transform="translate(-90.000000, -13.000000)" fill="#FFFFFF"> <g id="SEG_LOGO_UKR" transform="translate(90.000000, 13.000000)"> <path d="M81.4522322,0.119650727 C76.3670763,0.119650727 72.2391263,4.2476008 72.2391263,9.33275668 C72.2391263,14.4179126 76.3670763,18.5458626 81.4522322,18.5458626 C86.5373881,18.5458626 90.6653382,14.4179126 90.6653382,9.33275668 C90.6653382,4.2476008 86.5373881,0.119650727 81.4522322,0.119650727 Z M81.4522322,14.4179126 C78.6404401,14.4179126 76.3670763,12.1445488 76.3670763,9.33275668 C76.3670763,6.52096461 78.6404401,4.2476008 81.4522322,4.2476008 C84.2640243,4.2476008 86.5373881,6.52096461 86.5373881,9.33275668 C86.5074754,12.1445488 84.2341116,14.4179126 81.4522322,14.4179126 Z" id="Shape"></path> <path d="M9.21310596,14.4179126 C6.40131388,14.4179126 4.12795007,12.1445488 4.12795007,9.33275668 C4.12795007,6.52096461 6.40131388,4.2476008 9.21310596,4.2476008 C11.2172556,4.2476008 12.9222785,5.41419538 13.7598336,7.08930556 L18.2168231,7.08930556 L18.2168231,0.329039498 L14.8067774,0.329039498 L14.8067774,2.00414967 C13.251318,0.807642405 11.3369064,0.119650727 9.21310596,0.119650727 C4.12795007,0.119650727 0,4.2476008 0,9.33275668 C0,14.4179126 4.12795007,18.5458626 9.21310596,18.5458626 C13.5205321,18.5458626 17.1399666,15.5845072 18.1270851,11.5762078 L13.7598336,11.5762078 C12.9222785,13.2812307 11.2172556,14.4179126 9.21310596,14.4179126 Z" id="Shape" fill-rule="nonzero"></path> <path d="M45.766403,0.119650727 C40.6812471,0.119650727 36.553297,4.2476008 36.553297,9.33275668 C36.553297,14.4179126 40.6812471,18.5458626 45.766403,18.5458626 C50.8515589,18.5458626 54.9795089,14.4179126 54.9795089,9.33275668 C54.9795089,4.2476008 50.8515589,0.119650727 45.766403,0.119650727 Z M45.766403,14.4179126 C42.9546109,14.4179126 40.6812471,12.1445488 40.6812471,9.33275668 C40.6812471,6.52096461 42.9546109,4.2476008 45.766403,4.2476008 C48.578195,4.2476008 50.8515589,6.52096461 50.8515589,9.33275668 C50.8216462,12.1445488 48.5482824,14.4179126 45.766403,14.4179126 Z" id="Shape"></path> <polygon id="Shape" points="55.6375879 0.299126817 71.7306107 0.299126817 71.7306107 5.23471929 68.2009142 5.23471929 68.2009142 3.41004571 62.9961076 3.41004571 62.9961076 15.2554677 65.5685982 15.2554677 65.5685982 18.3663865 55.6375879 18.3663865 55.6375879 15.2554677 58.2100785 15.2554677 58.2100785 3.41004571 55.6375879 3.41004571"></polygon> <polygon id="Shape" points="111.275176 18.3663865 111.275176 15.2554677 113.398976 15.2554677 113.398976 3.41004571 111.275176 3.41004571 111.275176 0.299126817 119.979766 0.299126817 119.979766 3.41004571 118.185005 3.41004571 118.185005 7.35851969 122.971034 7.35851969 122.971034 3.41004571 121.176273 3.41004571 121.176273 0.299126817 129.880864 0.299126817 129.880864 3.41004571 127.727151 3.41004571 127.727151 15.2554677 129.880864 15.2554677 129.880864 18.3663865 121.176273 18.3663865 121.176273 15.2554677 122.971034 15.2554677 122.971034 10.4993513 118.185005 10.4993513 118.185005 15.2554677 119.979766 15.2554677 119.979766 18.3663865"></polygon> <polygon id="Shape" points="138.794843 15.2554677 140.589604 15.2554677 140.589604 18.3663865 131.885014 18.3663865 131.885014 18.3663865 131.885014 15.2554677 134.008814 15.2554677 134.008814 3.41004571 131.885014 3.41004571 131.885014 0.299126817 140.589604 0.299126817 140.589604 3.41004571 138.794843 3.41004571"></polygon> <path d="M90.4858621,15.2554677 L92.6096625,15.2554677 L92.6096625,3.41004571 L92.6096625,3.41004571 L92.6096625,2.84170476 L95.1522404,0.299126817 L100.38696,0.299126817 L100.38696,3.41004571 L97.3956915,3.41004571 L97.3956915,15.2554677 L100.38696,15.2554677 L100.38696,18.3663865 L90.4858621,18.3663865 L90.4858621,15.2554677 L90.4858621,15.2554677 Z M100.38696,0.299126817 L109.061637,0.299126817 L109.061637,3.41004571 L106.937837,3.41004571 L106.937837,15.2554677 L109.061637,15.2554677 L109.061637,18.3663865 L100.38696,18.3663865 L100.38696,15.2554677 L102.181721,15.2554677 L102.181721,3.41004571 L100.38696,3.41004571 L100.38696,0.299126817 L100.38696,0.299126817 Z" id="Shape"></path> <path d="M34.1901952,8.82424109 C33.1432513,7.77729724 31.6775299,7.26878165 29.8229436,7.26878165 L26.9214135,7.26878165 L26.9214135,3.43995839 L28.8059125,3.43995839 L28.8059125,0.299126817 L20.1013221,0.299126817 L20.1013221,3.41004571 L22.2251225,3.41004571 L22.2251225,15.2554677 L20.1013221,15.2554677 L20.1013221,18.3663865 L29.2546027,18.3663865 C30.8100621,18.3663865 32.7543864,18.1869105 34.1303698,16.8707525 C35.1174883,15.9135467 35.6260039,14.5375633 35.6260039,12.7727151 C35.5960912,11.0078669 35.147401,9.78144691 34.1901952,8.82424109 Z M26.9214135,10.4694386 L28.6862617,10.4694386 C29.9425944,10.4694386 30.6904114,11.5163824 30.6904114,12.9222785 C30.6904114,14.3580872 29.8229436,15.2554677 28.4469603,15.2554677 L26.9214135,15.2554677 L26.9214135,10.4694386 L26.9214135,10.4694386 Z" id="Shape" fill-rule="nonzero"></path> </g> </g> </g> </svg>
+			{% endif %}
+		</a>
+	</div>
+</header>
+
+{{ knp_menu_render('main', {'template': 'AppBundle:Menu:amp_menu.html.twig'}) }}
+
+<button on="tap:sidebar-left.toggle" class="ampstart-btn caps m2 toggle-btn"></button>
+<section class="article-page">
+	<div class="container content">
+		{% block breadchumbs %}
+			{{
+				sonata_block_render(
+					{
+						'type': 'app.block.service.breadcrumb'
+					}
+				)
+			}}
+		{% endblock %}
+
+		<div class="article-wrapper main-content floating-container">
+			<div class="article-content">
+				<div class="title">
+					<h1>{{ item.item_title(article) }}{{ item.item_label(article) }}</h1>
+
+					{% if (article['isAdvHidden'] is not defined) or (not article['isAdvHidden']) %}
+						{{
+						sonata_block_render(
+							{ 'type': 'page.block.site_variable' },
+							{
+								'placement': 'banner-content-amp'
+							}
+						)
+						}}
+						{# <amp-auto-ads type="adsense" data-ad-client="ca-pub-4655607803669314"></amp-auto-ads> #}
+					{% endif %}
+
+					<div class="time">
+						<span>{{ article.publishAt|date_time_humanize() }}</span>
+					</div>
+				</div><!-- /.title -->
+
+				{% if article.getHeader() is not empty %}
+					<div class="sub-title">
+						<p>{{ article.getHeader()|striptags }}</p>
+					</div>
+				{% endif %}
+
+				{% include 'AppBundle:Block:social_share_amp.html.twig' %}
+
+				{% if article.showImage %}
+					{% set mainImage = article.getImage() %}
+					{% if mainImage %}
+						{% block article_image %}
+							{% set mainImagePath = mainImage.getPath() %}
+							<figure>
+								<amp-img src="{{ mainImagePath|get_actual_image('image_610x343', ['main_new', 'main']) }}" width="610" height="343" layout="responsive"></amp-img> <!-- amp-img -->
+							</figure>
+						{% endblock %}
+					{% endif %}
+				{% endif %}
+
+				<span>
+					{{ article.translate.description|shortcode(true, 'amp')|amp_text|raw }}
+
+					{% if article.tags is defined and article.tags is not empty %}
+						<div class="tag">
+							{% for tag in article.tags %}
+								<a href={{ path('articles_tag', {'slug' : tag.slug}) }}>{{ tag.name }}</a>{{ loop.last ? '' : ', ' }}
+							{% endfor %}
+						</div>
+					{% endif %}
+
+					{% include 'AppBundle:Block:social_share_amp.html.twig' %}
+				</span>
+
+				{% if article.related is not empty %}
+					<div class="read-also">
+						<h3 class="title">{{ 'front.read_also'|trans([], 'ArticleBundle') }}</h3>
+						{% for relatedArticle in article.related %}
+							{% if not loop.last or loop.last and loop.index % 2 == 0 %}
+								{{ item.item_middle(relatedArticle, loop) }}
+							{% endif %}
+						{% endfor %}
+					</div><!-- /.read-also -->
+				{% endif %}
+			</div><!-- /.article-content -->
+		</div><!-- /.article-wrapper -->
+	</div><!-- /.container -->
+</section><!-- /.article-page -->
+<amp-analytics id="analytics_liveinternet">
+	<script type="application/json">{
+			"requests": {
+				"pageview": "https://counter.yadro.ru/hit;SEGODNYA_UA?u${ampdocUrl};r${documentReferrer};s${screenWidth}*${screenHeight}*32;h${title};${random}"
+			},
+			"triggers": {
+				"track pageview": {
+					"on": "visible",
+					"request": "pageview"
+				}
+			}
+		}</script>
+</amp-analytics>
+<amp-analytics type="googleanalytics" id="analytics_page_view">
+	<script type="application/json"> { "vars": { "account": "UA-26299030-1", "ampdocUrl": "{{ absolute_url(article_path(article)) }}" }, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" } } } </script>
+</amp-analytics>
+<amp-analytics type="gemius">
+	<script type="application/json">{"vars": {"prefix": "gaua","identifier" : "B8zrEud.rKPGshUCwICOdqe1P8Ig5odmykCedtG2zar.z7"}, "triggers": {"trackPageview": {"on": "visible","request": "pageview"}}}</script>
+</amp-analytics>
+<amp-pixel src="//c.bigmir.net/?v153464&s153464&t6"></amp-pixel>
+
+{# <amp-pixel src="//www.segodnya.ua/exec/ajax/sunsite.php?articles[1161868]=1161868&artrate[1161868]=1161868&pixel=1"></amp-pixel> #}
+</body>
+</html>

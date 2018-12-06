@@ -1,0 +1,34 @@
+<div class="calc_cont hypothec_cont">
+	<fieldset class="hypothec_calc">
+		<legend>{{ app.request.locale == 'ru' ? 'Налоговый возврат за ипотечный кредит' : 'Податкове повернення за іпотечний кредит' }}:</legend>
+		<div>{{ app.request.locale == 'ru' ? 'Официальная зарплата за год' : 'Офіційна зарплата за рік' }}:<br><input type="text" id="hypotheccalc_salary" value=""></div>
+
+		<div>{{ app.request.locale == 'ru' ? 'Сумма уплаченных процентов по кредиту за год' : 'Сума сплачених відсотків за кредитом за рік' }}:<br><input type="text" id="hypotheccalc_paid" value=""></div>
+		<div>{{ app.request.locale == 'ru' ? 'Площадь жилья, кв. м' : 'Площа житла, кв. м' }}:<br><input type="text" id="hypotheccalc_square" value=""></div>
+
+		<div><input type="button" id="hypotheccalc_button" value="{{ app.request.locale == 'ru' ? 'Рассчитать' : 'Розрахувати' }}"></div>
+		<div>{{ app.request.locale == 'ru' ? 'Результат' : 'Результат' }}: <span id="hypotheccalc_result">-</span></div>
+	</fieldset>
+</div>
+<script>
+    function hypotheccalc_init() {
+        document.getElementById('hypotheccalc_button').addEventListener('click', function(){
+            salary = document.getElementById('hypotheccalc_salary').value+'';
+            paid = document.getElementById('hypotheccalc_paid').value+'';
+            square = document.getElementById('hypotheccalc_square').value+'';
+
+            salary = salary.replace(",",".");
+            salary = salary.replace(" ","");
+            salary = parseInt(salary);
+
+            paid = paid.replace(",",".");
+            paid = paid.replace(" ","");
+            paid = parseInt(paid);
+
+            square = (square > 100) ? square / 100 : 1;
+
+            document.getElementById('hypotheccalc_result').innerHTML = Math.round((salary > paid ? paid : salary) * square * 0.18) + 'грн';
+        });
+    }
+    hypotheccalc_init();
+</script>

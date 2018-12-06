@@ -2,11 +2,11 @@ sonata_block:
     context_manager: sonata.page.block.context_manager
     default_contexts: [sonata_page_bundle]
     blocks:
-#        sonata.admin.block.admin_list:
-#            contexts: [admin]
-#        sonata.admin.block.search_result:
-#            contexts: [admin]
-#
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+
 #        # PageBundle's Blocks
 #        sonata.page.block.container:
 #            contexts: [sonata_page_bundle]
@@ -18,10 +18,10 @@ sonata_block:
 #            contexts: [sonata_page_bundle]
 
 #        # AppBundle's Blocks
-#        app.block.service.header:
-#            contexts: [cms]
-#        app.block.service.footer:
-#            contexts: [cms]
+        app.block.service.header:
+            contexts: [cms]
+        app.block.service.footer:
+            contexts: [cms]
 #        app.block.service.breadcrumb:
 #            contexts: [cms]
 #        app.block.service.language_switcher:

@@ -1,7 +1,10 @@
+# Application =================================================================
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    resource: '@AppBundle/Resources/config/routing.yml'
+    options: { i18n: true }
+#==============================================================================
 
+# Sonata Admin ================================================================
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin
@@ -18,6 +21,12 @@ sonata_user_admin_security:
 sonata_user_admin_resetting:
     resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
     prefix: /admin/resetting
+# =============================================================================
+
+# Sonata Page =================================================================
+sonata_page:
+    resource: '@SonataPageBundle/Resources/config/routing/page.xml'
+    prefix: /
 
 sonata_page_exceptions:
     resource: '@SonataPageBundle/Resources/config/routing/exceptions.xml'
@@ -26,3 +35,9 @@ sonata_page_exceptions:
 sonata_page_cache:
     resource: '@SonataPageBundle/Resources/config/routing/cache.xml'
     prefix: /
+# =============================================================================
+
+# FOS User Bundle =============================================================
+fos_user_resetting_request:
+    path: /resetting/request
+# =============================================================================

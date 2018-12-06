@@ -1,0 +1,42 @@
+{% if articles|length %}
+    {% spaceless %}
+        <div class="slider slider-fullwidth owl-carousel">
+            {% for article in articles %}
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <div class="slider-fullwidth-img-wrap">
+                            <div class="slider-fullwidth-img">
+                                <a href="{{ article_path(article) }}">
+                                    <img src="{{  article.getImage() ? article.getImage().getPath()|get_actual_image('image_650x434', ['ls']) : ''}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 slider-fullwidth-blur">
+                        <a href="{{ article_path(article) }}">
+                            <div class="slider-fullwidth-descriptions">
+                                <div>
+                                    {% if article.marker %}
+                                        <div class="slider-fullwidth-descriptions-meta">
+                                            <span>{{ article.marker.title }}</span>
+                                            <div class="line-single"></div>
+                                        </div>
+                                    {% endif %}
+                                    <h3>{{ article.title }}</h3>
+                                </div>
+                            </div>
+                            <div class="slider-fullwidth-blur-item">
+                                <img src="{{  article.getImage() ? article.getImage().getPath()|get_actual_image('image_650x434', ['ls']) : ''}}">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                    <filter id="blur">
+                                        <feGaussianBlur stdDeviation="30" />
+                                    </filter>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endif %}

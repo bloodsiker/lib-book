@@ -1,0 +1,136 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="{% block site_wr__class %}{% endblock %}">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block header %}
+    <header>
+        {{
+            sonata_block_render(
+                {
+                    'type': 'app.block.service.header'
+                }
+            )
+        }}
+    </header>
+    <section class="header-wrapper"></section>
+
+    <script>var windowWidth=document.body.clientWidth,mainmenu=document.querySelector(".h-nav ul"),submenu=document.querySelector(".h-nav-submenu ul");collapseMenu(mainmenu),submenu&&(document.querySelector(".header-wrapper").classList.add("has-submenu"),collapseMenu(submenu)),window.addEventListener("resize",function(){windowWidth=document.body.clientWidth,collapseMenu(mainmenu),submenu&&collapseMenu(submenu)}),stickyNavbar(),document.querySelector(".mobile-menu-btn").addEventListener("click",function(){document.querySelector(".h-nav").classList.toggle("mobile-active"),document.querySelector("body").classList.toggle("no-scroll")});</script>
+
+    {% if page is defined %}
+        {% if page.name != 'global' %}
+            {{ sonata_page_render_container('header', 'global') }}
+        {% endif %}
+        {{ sonata_page_render_container('header', page) }}
+    {% endif %}
+
+    {#{{#}
+        {#sonata_block_render(#}
+            {#{ 'type': 'page.block.site_variable' },#}
+            {#{#}
+                {#'placement': 'banner-top'#}
+            {#}#}
+        {#)#}
+    {#}}#}
+{% endblock %}
+
+{% block content %}
+    <section class="container {% block main_class %}{% endblock %}">
+        {{ parent() }}
+    </section>
+
+    {% block banner_richmedia %}
+        {#{{#}
+            {#sonata_block_render(#}
+                {#{ 'type': 'page.block.site_variable' },#}
+                {#{#}
+                    {#'placement': 'banner-richmedia'#}
+                {#}#}
+            {#)#}
+        {#}}#}
+    {% endblock %}
+
+	{#{{#}
+        {#sonata_block_render(#}
+            {#{ 'type': 'page.block.site_variable' },#}
+            {#{#}
+                {#'placement': 'banner-admixer-request'#}
+            {#}#}
+        {#)#}
+	{#}}#}
+{% endblock %}
+
+{% block content_top %}
+    <div class="{% block content_top_class %}{% endblock %}">
+        {% if page is defined %}
+            {% if page.name != 'global' %}
+                {{ sonata_page_render_container('content_top', 'global') }}
+            {% endif %}
+            {{ sonata_page_render_container('content_top', page) }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content_main %}
+    <div class="content-wrapper">
+        <div class="content">
+            {% if content is defined and content|length > 0 %}
+                {{ content|raw }}
+            {% endif %}
+
+            {% if page is defined %}
+                {% if page.name != 'global' %}
+                    {{ sonata_page_render_container('content_main', 'global') }}
+                {% endif %}
+                {{ sonata_page_render_container('content_main', page) }}
+            {% endif %}
+        </div>
+        {{ block('content_side') }}
+    </div>
+{% endblock %}
+
+{% block content_side %}
+    <aside>
+        <div class="aside-content">
+
+            {# top_materials #}
+            {% if page is defined %}
+                {% if page.name != 'global' %}
+                    {{ sonata_page_render_container('content_side', 'global') }}
+                {% endif %}
+                {{ sonata_page_render_container('content_side', page) }}
+            {% endif %}
+
+        </div>
+        <script>var fluidAside = new fluidBlock(document.querySelector('.aside-content'));</script>
+    </aside>
+{% endblock %}
+
+{% block content_bottom %}
+    {% if page is defined %}
+        {% if page.name != 'global' %}
+            {{ sonata_page_render_container('content_bottom', 'global') }}
+        {% endif %}
+        {{ sonata_page_render_container('content_bottom', page) }}
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    <footer class="{% block footer_class %}{% endblock %}">
+        {% if page is defined %}
+            {% if page.name != 'global' %}
+                {{ sonata_page_render_container('footer', 'global') }}
+            {% endif %}
+            {{ sonata_page_render_container('footer', page) }}
+        {% endif %}
+
+        {{
+            sonata_block_render(
+                { 'type': 'app.block.service.footer' }
+            )
+        }}
+    </footer>
+{% endblock %}

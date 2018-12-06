@@ -1,0 +1,24 @@
+services:
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }
+
+  app.twig.extension:
+    class: "AppBundle\\Twig\\AppExtension"
+    arguments:
+      - '@translator'
+      - '@router'
+    tags:
+      - { name: twig.extension }
+
+  app.colors.twig.extension:
+    class: "AppBundle\\Twig\\ColorsExtension"
+    public: false
+    tags:
+      - { name: twig.extension }
+
+  app.twig.extension.sort:
+      class: "AppBundle\\Twig\\SortByFieldExtension"
+      tags:
+        - { name: twig.extension }

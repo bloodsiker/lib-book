@@ -1,0 +1,84 @@
+{% if statistics['authors']|length %}
+	Авторы: <table border=1>
+	<tr>
+		<td><b>Название статьи</b></td>
+		<td><b>Раздел</b></td>
+		<td><b>Авторы материала</b></td>
+		<td><b>Хиты</b></td>
+	</tr>
+	{% for article in statistics['authors']  %}
+		<tr>
+			<td>{{ article.getTitle() }}</td>
+			{% if article.getBlogger() %}
+				<td>{{ article.getBlogger().getName() }}</td>
+			{% elseif article.getCategory() %}
+				<td>{{ article.getCategory().getTitle() }}</td>
+			{% else %}
+				<td>Спецтема</td>
+			{% endif %}
+			<td>
+				{% if article.authors is not empty %}
+					{% set needCommaAuthor = null %}
+					{% for author in article.authors %}
+						{% if author.name %}
+							{{ needCommaAuthor ? ", " : "" }}
+							{{ author.name }}
+							{% set needCommaAuthor = true %}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</td>
+			<td>{{ article.views }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<br><br>
+{% endif %}
+
+{% if statistics['video']|length %}
+	Видео: <table border=1>
+	<tr>
+		<td><b>Название статьи</b></td>
+		<td><b>Раздел</b></td>
+		<td><b>Хиты</b></td>
+	</tr>
+	{% for article in statistics['video']  %}
+		<tr>
+			<td>{{ article.getTitle() }}</td>
+			{% if article.getBlogger() %}
+				<td>{{ article.getBlogger().getName() }}</td>
+			{% elseif article.getCategory() %}
+				<td>{{ article.getCategory().getTitle() }}</td>
+			{% else %}
+				<td>Спецтема</td>
+			{% endif %}
+			<td>{{ article.views }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<br><br>
+{% endif %}
+
+{% if statistics['other']|length %}
+	Без признаков: <table border=1>
+	<tr>
+		<td><b>Название статьи</b></td>
+		<td><b>Раздел</b></td>
+		<td><b>Хиты</b></td>
+	</tr>
+	{% for article in statistics['other']  %}
+		<tr>
+			<td>{{ article.getTitle() }}</td>
+			{% if article.getBlogger() %}
+				<td>{{ article.getBlogger().getName() }}</td>
+			{% elseif article.getCategory() %}
+				<td>{{ article.getCategory().getTitle() }}</td>
+			{% else %}
+				<td>Спецтема</td>
+			{% endif %}
+			<td>{{ article.views }}</td>
+		</tr>
+	{% endfor %}
+</table>
+	<br><br>
+{% endif %}

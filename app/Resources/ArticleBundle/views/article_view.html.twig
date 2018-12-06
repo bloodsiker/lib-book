@@ -1,0 +1,398 @@
+<article>
+
+    {% block blogger_header %}{% endblock %}
+
+    {% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+
+    <!-- Title -->
+    <h1>{{ item.item_title(article) }}</h1>
+
+    {% block article_label %}
+        {{ item.item_label(article) }}
+    {% endblock %}
+
+    <div class="article-meta">
+        <span>{{ article.publishAt|date_time_humanize() }}</span>
+        <span>Просмотров: 106</span>
+    </div>
+    <!-- End Title -->
+	
+	<!-- for placing fb post-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.11';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+    <!-- End for placing fb post-->
+
+    {# Social buttons #}
+    {% if article is instanceof('\\DossierBundle\\Entity\\Dossier') %}
+        {% set shareParams = {'url': absolute_url(dossier_path(article)), 'title': article.title} %}
+    {% else %}
+        {% set shareParams = {'url': absolute_url(article_path(article)), 'title': article.title} %}
+    {% endif %}
+    {% include 'AppBundle:Block:social_share.html.twig' with shareParams %}
+
+    {# Sub-title #}
+    {% if article.getHeader() is not empty %}
+        <p></p>
+        <h2 class="sub-title">{{ article.getHeader()|raw }}</h2>
+    {% endif %}
+
+	{% set mainImage = null %}
+    {% if article is not instanceof("\\ArticleBundle\\Entity\\Article") or article.showImage %}
+        {% set mainImage = article.getImage() %}
+        {% if mainImage %}
+            {% block article_image %}
+                {% set imageDescription = '' %}
+                {% if article.getImage().getDescription() %}
+                    {% set imageDescription = article.getImage().getDescription() %}
+                {% endif %}
+                {% set imagePhotographer = '' %}
+                {% if article.getImage().getPhotographer() %}
+                    {% set imagePhotographer = article.getImage().getPhotographer().getName() %}
+                {% endif %}
+                <figure>
+					<img src="{{ mainImage|get_actual_image('image_610x343', ['main_new', 'main']) }}" alt="{{ imageDescription }}"/>
+                </figure>
+                {% if imageDescription or imagePhotographer %}
+                    <figcaption>
+                        {{ imageDescription }}
+                        {% if imageDescription and imagePhotographer %}. {% endif %}
+                        {% if imagePhotographer %}
+                            {{ 'front.photo_author'|trans([], 'ShareBundle') }}: {{ imagePhotographer }}
+                        {% endif %}
+                    </figcaption>
+                {% endif %}
+            {% endblock %}
+        {% endif %}
+    {% endif %}
+
+    {% if mainImage is not null %}
+        {% set snippetParams = {'article': article, 'image_full': mainImage|get_actual_image('image_610x343', ['main_new', 'main']), 'image_tn': mainImage|get_actual_image('image_150x100', ['tn']) } %}
+    {% else %}
+        {% set snippetParams = {'article': article} %}
+    {% endif %}
+    {% include 'ArticleBundle:Block:article_snippet.html.twig' with snippetParams %}
+
+    {{ item.item_description(article) }}
+
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-article-self-promo'
+            }
+        )
+    }}
+
+    {% block tags %}
+        {# Tags #}
+        {% if article.tags is defined and article.tags is not empty %}
+            <div class="tag">
+                <img src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="%230085CF" fill-rule="evenodd" d="M.5 7.5L8 .033h7L14.997 7 7.5 14.5l-7-7zM11 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>' />
+                {% for tag in article.tags %}
+                    <a href={{ path('articles_tag', {'slug' : tag.slug}) }}>{{ tag.name }}</a>{{ loop.last ? '' : ', ' }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {# Social buttons #}
+    {% include 'AppBundle:Block:social_share.html.twig' with shareParams %}
+
+    {% block you_see_seo_block %}
+        <div class="what-you-see seo_hold"><p>{{ 'front.seo.you_see'|trans([], 'ArticleBundle') }} "{{ article.title }}". {{ 'front.seo.other'|trans([], 'ArticleBundle') }} <a href="/regions/krym.html"> Новости Крыма</a> {{ 'front.seo.see_in_block'|trans([], 'ArticleBundle') }}</p></div>
+        <div class="article-bottom-line"></div>
+    {% endblock %}
+
+    {% block authors_and_copyrights %}
+        {# Авторы / Источники #}
+        <div class="sign">
+            {% block authors %}
+                {% if article.authors is not empty %}
+                    <div class="authors">
+                        <h5>{{ ('author.front.author'~(article.authors|length > 1? 's' : ''))|trans([], 'ShareBundle') }}:</h5>
+                        <p>
+                            {% set needCommaAuthor = null %}
+                            {% for author in article.authors %}
+                                {% if author.name %}
+                                    {{ needCommaAuthor ? ", " : "" }}
+                                    {{ author.name }}
+                                    {% set needCommaAuthor = true %}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block copyrights %}
+                {% if article.copyrights is not empty %}
+                    <div class="source">
+                        <h5>{{ ('copyright.front.copyright'~(article.copyrights|length > 1? 's' : ''))|trans([], 'ShareBundle') }}:</h5>
+                        <p>
+                            {% set needCommaCopyright = null %}
+                            {% for copyright in article.copyrights %}
+                                {% if copyright.name %}
+                                    {{ needCommaCopyright ? ", " : "" }}
+                                    {% if copyright.link and (copyright.link|slice(0, 4) == 'http' or copyright.link|slice(0, 2) == '//') %}
+                                        <a {% if not copyright.nofollowDisabled %} rel="nofollow"{% endif %} href="{{ copyright.link }}" target="_blank">{{ copyright.name }}</a>
+                                    {% else %}
+                                        {{ copyright.name }}
+                                    {% endif %}
+                                    {% set needCommaCopyright = true %}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+            {% block orphus %}
+                {{
+                    sonata_block_render(
+                        {
+                            'type': 'app.block.form.orphus',
+                        },
+                        {
+                            'articleId': article.id
+                        }
+                    )
+                }}
+            {% endblock %}
+        </div><!-- /.sign -->
+    {% endblock %}
+    <div id="articleBottomAds">
+    {# <div style="margin-top: 25px;"></div> #}
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-content-roll'
+            }
+        )
+    }}
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-premium1-mobile'
+            }
+        )
+    }}
+    </div>
+
+    {% block article_related %}
+        {% set article_related_banners %}
+            <div id="articleBottomInformer">
+                {% if article is not instanceof("\\ArticleBundle\\Entity\\Article") or not article.isAdvHidden %}
+                    {{
+                        sonata_block_render(
+                            { 'type': 'page.block.site_variable' },
+                            {
+                                'placement': 'banner-article-read-also-1'
+                            }
+                        )
+                    }}
+                {% endif %}
+
+                {{
+                    sonata_block_render(
+                        { 'type': 'page.block.site_variable' },
+                        {
+                            'placement': 'banner-article-read-also-2'
+                        }
+                    )
+                }}
+            </div>
+        {% endset %}
+
+        {% if article.related is not empty %}
+            {# ЧИТАЙТЕ ТАКЖЕ #}
+            <div class="b-read_also">
+                <h3>{{ 'front.read_also'|trans([], 'ArticleBundle') }}</h3>
+                {% for relatedArticle in article.related %}
+                    {% if not loop.last or loop.last and loop.index % 2 == 0 %}
+                        {{ item.item_middle(relatedArticle, loop) }}
+                    {% endif %}
+
+                    {% if loop.index == 2 %}
+                        </div>
+
+                        {{ article_related_banners }}
+
+                        <div class="b-read_also">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ article_related_banners }}
+        {% endif %}
+    {% endblock %}
+
+
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-article-bottom-banners-1'
+            }
+        )
+    }}
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-premium2-mobile'
+            }
+        )
+    }}
+    {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'banner-article-bottom-banners-2'
+            }
+        )
+    }}
+
+    <div class="banners-wrap bottom-position">
+        <div class="items">
+			{{
+                sonata_block_render(
+                    { 'type': 'page.block.site_variable' },
+                    {
+                        'placement': 'banner-article-above-footer'
+                    }
+                )
+			}}
+        </div>
+    </div><!-- /.banners-wrap -->
+
+    <div class="b-read_also">
+		{% if article is not instanceof("\\ArticleBundle\\Entity\\Article") or not article.isCommentsDisabled %}
+            {% include 'AppBundle:Block:fb-comments.html.twig' %}
+        {% endif %}
+    </div>
+
+    <script>
+        function init_article_page() {
+            document.querySelectorAll('article iframe').forEach(function(el){
+                if(el.getAttribute('width') && parseInt(el.getAttribute('width')) <= 620) {
+                    el.style.width = '620px';
+                }
+            });
+            document.querySelectorAll('span._ga1_on_ img').forEach( function(imgItem){
+                var imgSrc = imgItem.getAttribute('src');
+
+                if(imgItem.parentNode.tagName!='a' && !imgItem.classList.contains('c-shakhtar__header-image')) {
+                    if(imgItem.classList.contains('today_img_orig')) {
+                        parts = imgSrc.split('.');
+                        orig_src = imgSrc.replace('.' + parts[parts.length - 1], '_orig.' + parts[parts.length - 1]);
+                        var aItem =  document.createElement('a');
+                        aItem.setAttribute('href', orig_src);
+                        aItem.setAttribute('target', '_blank');
+                        imgItem.parentNode.appendChild(aItem);
+                        aItem.appendChild(imgItem);
+                    } else if(parseInt(imgItem.getAttribute('naturalWidth')) > 610) {
+                        var aItem =  document.createElement('a');
+                        aItem.setAttribute('href', imgSrc);
+                        aItem.setAttribute('target', '_blank');
+                        imgItem.parentNode.appendChild(aItem);
+                        aItem.appendChild(imgItem);
+                    }
+                }
+
+                if(imgSrc.indexOf('segodnya.ua') !== -1) {
+                    if(imgItem.closest('p')) imgItem.closest('p').style.textAlign = 'center';
+                }
+            });
+        }
+        init_article_page();
+    </script>
+</article>
+
+<div class="sidebar">
+    <div class="sidebar-content">
+        {% if article is instanceof("\\ArticleBundle\\Entity\\Article") and article.getSecondaryCategories() %}
+			{% for sc in article.getSecondaryCategories() %}
+                {% if sc.getSlug() == 'day_story' %}
+                    {{
+                    sonata_block_render(
+                        { 'type': 'article.block.service.day_articles' },
+                        {
+                            'show_just_full_page': true,
+                        }
+                    )
+                    }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if breadcrumbs[0] is defined and breadcrumbs[0].slug is defined and breadcrumbs[0].slug == 'sport' %}
+            {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.list' },
+                    {
+                        'items_count': 5,
+                        'show_block_title': true,
+                        'category': breadcrumbs[0].id,
+                        'article_type': constant('ArticleBundle\\Twig\\ArticleExtension::IS_SECTION_SLIDER'),
+                        'show_paginator': false,
+                        'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_LIST'),
+						'popular_days_ago': 30
+                    }
+                )
+            }}
+        {% elseif breadcrumbs[0] is defined and breadcrumbs[0].slug is defined and breadcrumbs[0].slug == 'opinion' %}
+            {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.list' },
+                    {
+                        'items_count': 4,
+                        'bloggers_only': true,
+                        'show_paginator': false,
+                        'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::OPINION_LIST'),
+						'popular_days_ago': 30
+                    }
+                )
+            }}
+        {% else %}
+            {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.list' },
+                    {
+                        'items_count': 1,
+						'show_block_title': true,
+                        'category': constant('ArticleBundle\\Block\\ArticleBaseBlockService::VIDEO_CATEGORY'),
+                        'show_paginator': false,
+                        'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_LIST'),
+						'popular_days_ago': 30
+                    }
+                )
+            }}
+
+            {{
+                sonata_block_render(
+                    { 'type': 'article.block.service.list' },
+                    {
+                        'items_count': 4,
+						'show_block_title': true,
+                        'article_type': constant('ArticleBundle\\Twig\\ArticleExtension::IS_MAIN_SLIDER'),
+                        'show_paginator': false,
+                        'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_LIST'),
+						'popular_days_ago': 30
+                    }
+                )
+            }}
+        {% endif %}
+
+        {{
+            sonata_block_render(
+                { 'type': 'page.block.site_variable' },
+                {
+                    'placement': 'banner-article-middle-column'
+                }
+            )
+        }}
+
+        <script>var fluidSidebar = new fluidBlock(document.querySelector('.sidebar-content'));</script>
+    </div>
+</div>

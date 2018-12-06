@@ -1,0 +1,105 @@
+{% extends base_template %}
+
+{% block sonata_nav %}
+{% endblock sonata_nav %}
+
+{% block logo %}
+{% endblock logo %}
+
+{% block sonata_left_side %}
+{% endblock sonata_left_side %}
+
+{% block body_attributes %}
+    class="sonata-bc login-page"
+    data-sonata-admin='{{ {
+        config: {
+            CONFIRM_EXIT: sonata_admin.adminPool.getOption('confirm_exit') ? 'true' : 'false',
+            USE_SELECT2: sonata_admin.adminPool.getOption('use_select2') ? 'true' : 'false',
+            USE_ICHECK: sonata_admin.adminPool.getOption('use_icheck') ? 'true' : 'false',
+            USE_STICKYFORMS: sonata_admin.adminPool.getOption('use_stickyforms') ? 'true' : 'false'
+        },
+        translations: {
+            CONFIRM_EXIT: 'confirm_exit'|trans({}, 'SonataAdminBundle'),
+        },
+    }|json_encode()|raw }}'
+{% endblock %}
+
+{% block sonata_wrapper %}
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="{{ path('sonata_admin_dashboard') }}">
+                {% if 'single_image' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
+                    <img src="{{ asset(sonata_admin.adminPool.titlelogo|replace({'[lang]': app.request.locale})) }}" alt="{{ sonata_admin.adminPool.title }}">
+                {% endif %}
+                {% if 'single_text' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
+                    <span>{{ sonata_admin.adminPool.title }}</span>
+                {% endif %}
+            </a>
+        </div>
+        <div class="login-box-body">
+            {% block sonata_user_login_form %}
+                {% if error is not null %}
+                    {% if 'recaptcha' in error.message  and '|' in error.message %}
+                        {% set key = error.message | split ('|') %}
+                        <p class="alert alert-danger alert-error">{{ key.1 | trans }}</p>
+                    {% else %}
+                        <p class="alert alert-danger alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                    {% endif %}
+                {% endif %}
+
+                <p class="login-box-msg">
+                    <span style="font-size: 1.4em;">{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</span>
+                </p>
+                <form action="{{ path("sonata_user_admin_security_check", {'referrer' : app.request.session.get('_security.admin.target_path') }) }}" method="post" role="form">
+                    {{ form_widget(form._csrf_token, {'value': csrf_token}) }}
+
+                    <div class="form-group has-feedback">
+                        {{ form_widget(form._username, {
+                            'attr': {
+                                'class': 'form-control',
+                                'required':'required',
+                                'placeholder': 'security.login.username'|trans({}, 'SonataUserBundle')
+                            }
+                        }) }}
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        {{ form_widget(form._password, {
+                            'attr': {
+                                'class': 'form-control',
+                                'required':'required',
+                                'placeholder': 'security.login.password'|trans({}, 'SonataUserBundle')
+                            }
+                        }) }}
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+
+                    {% if form.recaptcha.vars.ewz_recaptcha_enabled == true %}
+                        <div class="form-group" align="center">
+                            {{ form_widget(form.recaptcha ) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form_widget(form._remember_me, {'value':'on', 'checked': true}) }}
+                                    {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            {{ form_widget(form.submit, {
+                                'attr': {'class': "btn btn-primary btn-block btn-flat"},
+                                'label': 'security.login.submit'|trans({}, 'FOSUserBundle')
+                            } ) }}
+                        </div>
+                    </div>
+                    {#<a href="{{ path('sonata_user_admin_resetting_request') }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a>#}
+                </form>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock sonata_wrapper %}

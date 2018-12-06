@@ -1,0 +1,86 @@
+{% if shortcode_data and shortcode_data.video is defined %}
+    {% if shortcode_data.video.type == constant('MEDIA_VIDEO_TYPE_CODE', shortcode_data.video) %}
+        {% if 'videomanager' in shortcode_data.video.code %}<div class="player-wrapper player-wrapper-vmgr">{% else %}<div class="player-wrapper">{% endif %}
+            {{ shortcode_data.video.code|replace({'width="650"': 'width="100%"'})|raw }}
+        </div>
+    {% elseif shortcode_data.video_url|split('.')|slice(-1)[0] in ['m3u8', 'mp4'] %}
+        {{
+            sonata_block_render(
+                { 'type': 'media.block.player' },
+                {
+                    'url': shortcode_data.video_url,
+                    'poster': shortcode_data.video.path|imagine_filter('video_snapshot_poster'),
+                    'width': '100%',
+                    'height': '100%',
+                    'autoplay': false,
+                    'muted': false,
+                    'online': false,
+                    'contentId': shortcode_data.video.path
+                }
+            )
+        }}
+    {% elseif shortcode_data.video.path != null %}
+        <script type="text/javascript" src="/user/js/jwplayer-5.9.js"></script>
+        <div id="vplayer_{{ shortcode_data.video.id }}"></div>
+        <script type="text/javascript">
+            (function (zid) {
+                var w = window, d = document;
+                iu = 'https://inv-nets.admixer.net/dsp.aspx?rct=3&zone=' + zid + '&zoneInt=14015&sect=3839&site=3281&rnd=' + Math.floor(Math.random()*10000);
+                window.ad_video_xml_1264951186 = iu;
+            })('cc1d13ab-58ba-4c5e-b63d-e00f37c39249');
+
+            jwplayer("vplayer_{{ shortcode_data.video.id }}").setup({
+                'flashplayer': "/user/player/jwplayer.swf",
+                'width': 600,
+                'height': 450,
+                'skin': '/user/player/blueratio.zip',
+                'controlbar.position': 'bottom',
+                'file': '{{ shortcode_data.video.path }}',
+				'ga': {
+                    'idstring': "Просмотр видео",
+                    'trackingobject': "pageTracker"
+                },
+                'stretching': 'uniform',
+                'plugins': {
+                    'ova-jw': {
+                        "ads": {
+                            "skipAd": {
+                                "enabled": true
+                            },
+                            "schedule": [{
+                                "position": "pre-roll",
+                                "tag": ad_video_xml_1264951186,
+                                "notice": {
+                                    "show": true,
+                                    "region": "my-ad-notice",
+                                    "message": "Осталось _countdown_ секунд"
+                                }
+                            }
+                            ],
+                            "clickSign": {
+                                "enabled": "true",
+                                "verticalAlign": "center",
+                                "horizontalAlign": "center",
+                                "width": 170,
+                                "height": 30,
+                                "opacity": 1,
+                                "borderRadius": 20,
+                                "backgroundColor": "transparent",
+                                "style": "font-size:16px;",
+                                "html": "Кликнуть для перехода!",
+                                "scaleRate": 0.75
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endif %}
+	{% if shortcode_data.video.getSource()|trim != '' %}
+        <figure>
+            <figcaption>
+				{{ shortcode_data.video.getSource()|trim }}
+            </figcaption>
+        </figure>
+	{% endif %}
+{% endif %}

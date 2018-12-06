@@ -1,0 +1,28 @@
+<div class="page-content">
+{% if spectopic %}
+    <h1>{{ spectopic.getTitle() }}</h1>
+{% else %}
+    <h1>{{ 'front.seo.news'|trans([], 'ArticleBundle')}}</h1>
+{% endif %}
+    {{
+        sonata_block_render(
+        {'type': 'article.block.service.calendar'},
+        {
+            'spectopic': spectopic|default,
+            'category': category|default,
+            'date': date|default
+        }
+    )
+}}
+{{
+    sonata_block_render(
+        { 'type': 'article.block.service.list' },
+        {
+            'items_count': 30,
+            'spectopic': spectopic|default,
+            'page': app.request.get('page') ? app.request.get('page')[2:] : 1 ,
+            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_LIST')
+        }
+    )
+}}
+</div>

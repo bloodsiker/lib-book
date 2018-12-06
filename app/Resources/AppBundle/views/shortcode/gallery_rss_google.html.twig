@@ -1,0 +1,10 @@
+{% if shortcode_data and shortcode_data.gallery is defined and shortcode_data.gallery.galleryHasImage.count() %}
+	<section class="type:slideshow">
+		{% for galleryMedia in shortcode_data.gallery.galleryHasImage %}
+			<figure>
+				<img src="{{ absolute_url(galleryMedia.image.getPath()|get_actual_image('gallery_big_640', ['main'])) }}" alt="{{ galleryMedia.image.translate.description }}" />
+				<figcaption><![CDATA[{{ galleryMedia.image.translate.description }}]]></figcaption>
+			</figure>
+		{% endfor %}
+	</section>
+{% endif %}

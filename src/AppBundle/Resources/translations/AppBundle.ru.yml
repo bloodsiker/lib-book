@@ -1,828 +1,330 @@
-Article List: Статьи
-Category List: Категории
-Article Has Categories List: Категории статей
-Event List: События
-Collection Designer List: Дизайнеры
-Collection Season List: Сезоны
-Collection Type List: Типы
-Collection Category List: Категории
-Collection Fashion Week List: Недели моды
-Collection List: Показы
-World Vogue List: Vogue в мире
-Gallery List: Галереи
-Image List: Изображения
-Top List: Топ
-Blog List: Блоги
-Blogger List: Блогеры
-Articles List: Статьи
-Tv Category List: Категории
-Tv Video List: Видео
+Lifestyle Project List: Спецпроекты
+Lifestyle Project Create: Создать
+Action: Действия
 
-Magazine List: Журналы
-Magazine Post List: Посты номера
-
-Horoscope List: Гороскоп
-
-Team Group List: Группы
-Team Member List: Команда
-
-R T F Block List: Текстовые блоки
-
-Informer List: Информеры
-
-File List: Файлы
-Image List: Изображения
-
-Action: Действие
-
-Collections Fashion Week: Недели моды
-
-admin:
-  action:
-    on_site: На сайте
-  alert:
-    no_translation: Перевод отсутствует
-    no_translation_AppBundle:Article: <strong>%count% новая статья</strong> без перевода|<strong>%count% новых статьи</strong> без перевода|<strong>%count% новых статей</strong> без перевода
-    no_translation_AppBundle:TvVideo: <strong>%count% новое видео</strong> без перевода|<strong>%count% новых видео</strong> без перевода|<strong>%count% новых видео</strong> без перевода
-    no_translation_AppBundle:Event: <strong>%count% новое событие</strong> без перевода|<strong>%count% новых события</strong> без перевода|<strong>%count% новых событий</strong> без перевода
 group:
-  article: Статьи
-  article.category_editor: Категории
-  article.article_editor: Статьи
-  article.article_has_categories_editor: Категории статей
-  event: События
-  event.event_editor: События
-  collection: Показы
-  collection.designer_editor: Дизайнеры
-  collection.season_editor: Сезоны
-  collection.type_editor: Типы
-  collection.category_editor: Категории
-  collection.fashionweek_editor: Недели моды
-  collection.collection_editor: Показы
-  world_vogue: Vogue в мире
-  gallery: Галереи
-  upload: Загрузка файлов
-  upload.image_editor: Изображения
-  upload.file_editor: Файлы
-  upload.gallery_editor: Галереи
-  upload.gallery_has_image_editor: Изображения галерей
+  app_lifestyle: Lifestyle
+  app_lifestyle_projects: Спецпроекты
 
-  blog: Блоги
-  blog.blog_editor: Блоги
-  blog.blogger_editor: Блогеры
-
-  tv: ТВ
-  tv.tv_video_editor: Видео
-  tv.tv_category_editor: Категории
-
-  magazine: Журналы
-  magazine.magazine_editor: Журналы
-  magazine.magazine_post_editor: В номере
-
-  horoscope: Гороскоп
-  horoscope.horoscope_editor: Гороскоп
-
-  team: Команда
-  team.group_editor: Группы
-  team.member_editor: Команда
-
-  rtf_block: Текстовые блоки
-  rtf_block.rtf_block_editor: Текстовые блоки
-
-  html_page: HTML-страницы
-  html_page.html_page_editor: HTML-страницы
-
-  informer: Информеры
-  informer.informer_editor: Информеры
-
-  site: Сайты
-
-category:
-  fields:
-    title: Название
-    tag_title: Title
-    h1_title: H1 тег
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    parent: Родительская категория
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    is_for_menu: В меню
-    order_num:
-    created_at: Создана
-    title_for_last_article: Еще в разделе
-    order_num: Позиция
-  block:
-    field:
-      category: Категория
-      items_count: Кол-во элементов
-      popular_articles: Популярные статьи
-      popular_articles_days: Кол-во дней для выборки популярных статей
-      bg_style: Стиль фона
-      cols_type: Стиль элементов
-      exclude_last_articles: Исключить последние статьи
-      dark_header: "'Темный' заголовок"
-      show_title: Показать заголовок
-      show_h1_title: Показать H1 тег
-      show_big_image: Показать большую картинку
-      show_more_btn: "Показать кнопку 'Больше матералов'"
-      show_top: Показать ТОП контент
-      banner: Баннер
-      banner_position: Позиция баннера
-      banner_second: Второй баннер
-      banner_second_position: Позиция второго баннера
-      banner_990x200: Баннер 990х200
-      last_articles: Блок последних статей категории
-      italic_title: Курсивный заголовок
-      template: Шаблон
-      template_top_list: Список видео
-      template_new: Новый для главной
-      top_items_count: Кол-во ТОП элементов
-      title: Заголовок
-      title_uk: Заголовок (укр.)
-article:
-  block:
-    fields:
-      template: Шаблон
-      template.old: Старый дизайн
-      template.alternate: Чередующиеся блоки (квадратный / горизонтальный)
-      template.vertical: Вертикальные блоки (квадратные)
-      template.horizontal: Горизонтальные блоки (квадратные)
-      template.sidebar: Вертикальные в сайдбаре
-  fields:
-    title: Заголовок
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст снизу
-      1: Текст на белом фоне
-      2: Текст в прозрачном блоке
-      3: Не выводить заглавие
-    header: Текст подзаголовка
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    content: Текст
-    category: Категория
-    created_by: Создана пользователем
-    slug: Сегмент URL (slug)
-    image: Титульное изображение
-    image_remove: Удалить
-    image_990: Горизонтальное изображение
-    image_990_remove: Удалить
-    image_650: Изображение статьи
-    image_650_remove: Удалить
-    image_small: Маленькое изображение
-    image_small_remove: Удалить
-    image_medium: Среднее изображение
-    image_medium_remove: Удалить
-    image_caption: Подпись изображения
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-    is_active: Активна
-    is_on_main: На главной
-    is_top: Топ
-    is_top_on_main: Топ на главной
-    is_yandex_rss: Yandex RSS
-    is_auto_tweet: Автоматический Tweet
-    tags: Теги
-    source: Источник
-    source_url: URL источника
-    views: Просмотров
-    order_num:
-    publish_at: Дата/время публикации
-    created_at: Создана
-    html: HTML
-    is_facebook_instant_article: Facebook Instant Articles
-    is_full_width: На всю ширину экрана
-    top_content: Верхний текст
-    team_member: Автор
-    articles_related: Статти
-    videos_related: Видео
-  tab:
-    article: Статья
-    images: Картинки
-    related_content: Связанный контент (Читай также)
-  error:
-    not_unique: URL сегмент статьи должен быть уникальным
-    empty_content: Контент статьи не должен быть пустым
-
-article_has_categories:
-  fields:
-    category: Категория
-    is_main: Главная
-
-article_has_related:
-  fields:
-    position: Позиция
-    article_related: Стаття
-    video_related: Видео
-
-placeholders:
-  content:
-    1: 'Контент блок #1'
-    2: 'Контент блок #2'
-    3: 'Контент блок #3'
-    4: 'Контент блок #4'
-    5: 'Контент блок #5'
-
-error:
-    not_unique: Поле должно быть уникальным
-    not_unique.name: Название должно быть уникальным
-    empty: Поле должно быть заданно
-
-event:
-  fields:
-    title: Заголовок
-    header: Текст подзаголовка
-    content: Текст
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    date: Дата события
-    slug: Сегмент URL (slug)
-    is_active: Активно
-    is_on_main: На главной
-    is_top_on_main: Топ на главной
-    is_yandex_rss: Yandex RSS
-    has_new_gallery: Новая галерея
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст снизу
-      1: Текст на белом фоне
-      2: Текст в прозрачном блоке
-      3: Не выводить заглавие
-    tags: Теги
-    views: Просмотры
-    publish_at: Дата/время публикации
-    created_at: Создано
-    created_by: Создано пользователем
-    gallery: Галерея
-    image: Титульное изображение
-    image_remove: Удалить
-    image_990: Горизонтальное изображение
-    image_990_remove: Удалить
-    image_small: Маленькое изображение
-    image_small_remove: Удалить
-    image_medium: Среднее изображение
-    image_medium_remove: Удалить
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-  tab:
-    event: Событие
-    images: Картинки
-
-collection_designer:
-  fields:
-    name: Имя
-    slug: Сегмент URL (slug)
-    is_active: Активен
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-
-collection_season:
-  fields:
-    title: Название
-    slug: Сегмент URL (slug)
-    is_active: Активен
-    image: Изображение
-    image_remove: Удалить
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    tag_title: Title
-  tab:
-    season: Сезон
-    images: Картинки
-
-collection_type:
-  fields:
-    title: Название
-    slug: Сегмент URL (slug)
-    is_active: Активен
-    image: Изображение
-    image_remove: Удалить
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-  tab:
-    type: Тип
-    images: Картинки
-
-collection_fashionweek:
-  fields:
-    title: Название
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    tag_title: Title
-
-collection_category:
-  fields:
-    title: Название
-    slug: Сегмент URL (slug)
-    is_active: Активна
-    season: Сезон
-    type: Тип
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-
-collection:
-  fields:
-    title: Название
-    header: Текст подзаголовка
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    designer: Дизайнер
-    category: Категория
-    season: Сезон
-    type: Тип
-    gallery: Галерея
-    fashionweek: Неделя моды
-    slug: Сегмент URL (slug)
-    is_active: Активен
-    is_top: Топ
-    is_top_on_main: Топ на Главной
-    is_yandex_rss: Yandex RSS
-    image: Изображение
-    image_remove: Удалить
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-    tags: Теги
-    views: Просмотры
-    copyright: Копирайт
-    created_at: Создан
-    created_by: Создан пользователем
-    publish_at: Опубликован
-    items_count: Количество
-    order_designer: Порядок отображения дизайнеров
-    order_designer.name: По алфавиту
-    order_designer.date: По дате
-  tab:
-    collection: Показ
-    image: Картинки
-
-world_vogue:
-  fields:
-    title: Название
-    url: URL
-    is_active: Активно
-
-gallery:
+app_lifestyle:
   fields:
     id: ID
-    is_active: Активна
-    name: Название
-    image: Изображение
-    is_cover: Обложка
-    order_num: Позиция
-    created_at: Создана
-    created_by: Создана пользователем
-
-image:
-  fields:
-    file: Файл
-    path: Путь
-    path_preview: Изображение
-    title: Название
-    copyright: Копирайт
-    created_at: Создано
-    created_by: Создано пользователем
-    extension: Расширение
-
-  upload:
-    upload_files: Загрузка файлов
-    btn_update_all: Сохранить все
-    btn_update_all_set_gallery: Сохранить все и добавить в галерею
-
-  btn:
-    choose_images: Выберите файлы-картинки
-    back_to_list: Вернуться к списку
-    link_action_multi: Мультизагрузка новых
-
-blog:
-  tab:
-    blog: Блог
-    images: Изображения
-    blogger: Блогер
-
-  fields:
-    title: Название
-    header: Подзаголовок
-    short: Краткое описание
-    content: Описание
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    slug: Сегмент URL (slug)
-    is_active: Опубликовать
-    is_on_main: На Главной
-    is_top: ТОП
-    is_top_on_main: ТОП на Главной
-    is_yandex_rss: Yandex RSS
-    title_style: Стиль заголовка
-    title_style_choice:
-      0: Текст снизу
-      1: Текст на белом фоне
-      2: Текст в прозрачном блоке
-      3: Не выводить заглавие
-    blogger: Блогер
-    tags: Теги
-    views: Просмотров
-    created_at: Дата создания
-    created_by: Создан
-    publish_at: Опубликован
-    image: Титульное изображение
-    image_990: Горизонтальное изображение
-    image_650: Изображение cтатьи
-    image_small: Маленькое изображение
-    image_medium: Среднее изображение
-    image_remove: Удалить
-    image_990_remove: Удалить
-    image_650_remove: Удалить
-    image_small_remove: Удалить
-    image_medium_remove: Удалить
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-    is_facebook_instant_article: Facebook Instant Articles
-  error:
-    empty_content: Описание не должно быть пустым
-    empty_short: Краткое описание не должно быть пустым
-
-blogger:
-  tab:
-    blogger: Блогер
-    images: Изображения
-
-  fields:
-    name: ФИО
-    content: Описание
-    position: Должность
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    slug: Сегмент URL (slug)
-    is_active: Отображать на сайте
-    views: Просмотров
-    created_at: Дата создания
-    created_by: Создан
-    published_at: Опубликован
-    image: Большая аватарка
-    image_remove: Удалить
-    image_small: Маленькая аватарка
-    image_small_remove: Удалить
-
-tv:
-  category:
-    fields:
-      title: Название
-      meta_title: Meta title
-      meta_keywords: Meta keywords
-      meta_description: Meta description
-      tag_title: Title
-      slug: Сегмент URL (slug)
-      is_active: Отображать на сайте
-      is_for_menu: В меню
-      created_at: Дата создания
-      created_by: Создан
-
-  video:
-    tab:
-      video: Видео
-      images: Изображения
-      code: Код плеера
-      related_content: Связанный контент (Смотри также)
-
-    fields:
-      code: Код
-      title: Название
-      header: Подзаголовок
-      short: Краткое описание
-      content: Описание
-      meta_title: Meta title
-      meta_keywords: Meta keywords
-      meta_description: Meta description
-      slug: Сегмент URL (slug)
-      slug_old: Старый сегмент URL (slug)
-      is_active: Опубликовать
-      is_on_main: На Главной
-      is_top: Топ
-      is_top_on_main: ТОП на Главной
-      is_yandex_rss: Yandex RSS
-      title_style: Стиль заголовка
-      title_style_choice:
-        0: Текст снизу
-        1: Текст на белом фоне
-        2: Текст в прозрачном блоке
-        3: Не выводить заглавие
-      category: Категория
-      collections: Коллекции
-      tags: Теги
-      views: Просмотров
-      created_at: Дата создания
-      created_by: Создан
-      publish_at: Опубликован
-      image: Титульное изображение
-      image_remove: Удалить
-      image_990: Горизонтальное изображение
-      image_990_remove: Удалить
-      image_320x176: Изображение в списке
-      image_320x176_remove: Удалить
-      image_small: Маленькое изображение
-      image_small_remove: Удалить
-      image_medium: Среднее изображение
-      image_medium_remove: Удалить
-      image_social: Изображение для соц-сeтей
-      image_social_remove: Удалить
-      articles_related: Статти
-      videos_related: Видео
-
-tv_video_has_related:
-  fields:
-    position: Позиция
-    article_related: Стаття
-    video_related: Видео
-
-magazine:
-  tab:
-    magazine: Журнал
-    images: Изображения
-    relations: Связи
-
-  fields:
-    title: Название
-    content: Описание
-    meta_title: Meta title
-    meta_keywords: Meta keywords
-    meta_description: Meta description
-    tag_title: Title
-    slug: Сегмент URL (slug)
-    is_active: Опубликовать
-    created_at: Дата создания
-    created_by: Создан
-    released_at: Дата выпуска
-    publish_at: Дата/время публикации
-    month: Месяц выпуска
-    year: Год выпуска
-    number: № журнала
-    main_editor: Главный редактор
-    main_photograph: Фотограф
-    dress: Одежда на обложке
-    models: Модели
-    articles: Привязанные статьи
-    posts: Посты номера
-    image: Большое изображение
-    image_remove: Удалить
-    image_small: Маленькое изображение
-    image_small_remove: Удалить
-    image_top: Изображение в шапке сайта
-    image_top_remove: Удалить
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-    is_main_cover: Главная обложка
-
-  post:
-    fields:
-      title: Название
-      content: Описание
-      created_at: Дата создания
-      created_by: Создан
-
-  magazine_has_post:
-    fields:
-      post: Посты
-
-  magazine_has_articles:
-     fields:
-        article: Cтатьи
-
-horoscope:
-  fields:
-    title: Название
-    sub_title: Период
-    content: Текст
-    is_active: Активен
-    slug: Сегмен URL (slug)
-    image: Изображение
-    image_remove: Удалить
-    image_social: Изображение для соц-сeтей
-    image_social_remove: Удалить
-    image_title: Подпись изображения
-    tag_title: Title
-    meta_title: Meta-title
-    meta_keywords: Meta-keywords
-    meta_description: Meta-description
-    created_at: Создан
-    created_by: Создан пользователем
-
-html_page:
-  fields:
-    title: Название
-    is_active: Активен
-    created_at: Создан
-    created_by: Создан пользователем
-    html: HTML
-    page: Маршрут страницы
-    article: Статья
-    path: Путь
-    site: Сайт
-  block:
-    fields:
-      html_page_title: Html страница
-  error:
-    empty_site: Сайт должен быть задан
-
-team_group:
-  fields:
-    name: Название
-    show_title: Показывать название
-    created_at: Создана
-    created_by: Создана пользователем
-
-team_member:
-  fields:
-    name: Ф.И.О.
-    position: Должность
-    group: Группа
-    created_at: Создан
-    created_by: Создан пользователем
-
-rtf_block:
-  fields:
     title: Заголовок
-    content: Содержимое блока
-    created_at: Создан
-    created_by: Создан пользователем
+    link: Ссылка
+    is_active: Активен
+    order_num: Позиция
+  form_group:
+    basic: Основное
+    additional: Дополнительное
 
-frontend:
-  article:
-    title: Новости
-    popular_title: Популярное
-    more: Больше новостей
-    read_more: Читайте также
-  counter:
-    left: осталось
-  index:
-    title: Vogue UA
-    description: >-
-      Женский журнал о моде. Красота, культура, события и видео.
-      Коллекции и показы 2018, интервью и обзоры на украинской версии журнала Vogue.
-    keywords: >-
-      портал для женщин, женский интернет журнал, женская мода, мода 2018, осень – зима, весна - лето,
-      новости мира моды, фотографии с подиума, последние тенденции, новые коллекции, показы известных дизайнеров,
-      коллекции сезона зима-весна, репортажи с показов мод, недели высокой моды, в милане, париже, лондоне,
-      нью йорке, копенгагене, москве, от кутюр, haute couture, интервью и статьи, био
-  footer:
-    vogue_worldwide: Vogue в мире
-    copyright: |
-      «Condé Nast» as to materials published on www.vogue.com. All Rights Reserved.
-    copyright2: |
-      Товарный знак VOGUE используется на основании лицензии/сублицензии Les Publications Condé Nast S. A. Copyright
-      /TRK MEDIA FINANCE LIMITED/ЧАО «СЕГОДНЯ МУЛЬТИМЕДИА»
-  events:
-    show_more_btn: Показать больше материалов
+app:
+  pager:
+    previous: Предыдущая страница
+    next: Следующая страница
+    page: Страница
+
   block:
-    horoscope:
-      title: Гороскоп 2018
-      meta_title: Гороскоп на 2018 год. Гороскоп на год собаки 2018 по знакам зодиака для женщин.
-      meta_description: Читайте гороскоп на 2018 год по знакам зодиака. Гороскоп на год собаки для всех знаков зодиака. Гороскоп на 2018 для женщин.
-    popular:
-      title: Популярное
-  tags:
-    articles: Статьи по теме
-    not_found: Тег не найден
-    show_more_btn: Показать больше материалов по тегу
-    meta_title: %1$s. Все статьи и новости с %1$s.
-    meta_description: Статьи %1$s, последние новости по теме %1$s. Главные события и новости по теме %1$s.
-    meta_keywords: %1$s, статьи, новости, новости %1$s, последние новости по тегу %1$s
-  rss:
-    brend: Vogue.ua
-    ukrnet:
-      articles:
-        title: Новости на Vogue.ua
-        description: Женский журнал о моде
-      events:
-        title: События на Vogue.ua
-        description: События на женском журнале о моде
-      videos:
-        title: Видео на Vogue.ua
-        description: Женский журнал о моде
-      blogs:
-        title: Блог Suzy Menkes на Vogue.ua
-        description: Женский журнал о моде
-      collections:
-        title: Показы на Vogue.ua
-        description: Показы на женском журнале о моде
-  video:
-    show_recommend: Рекомендации
-    show_more_btn: Показать больше материалов
-    voguetv: Vogue TV
+    service:
+      header: 'Блок "Header"'
+      footer: 'Блок "Footer"'
+      player: 'Блок "Плеер"'
+      language_switcher: 'Блок "Переключатель языков"'
+      banner: 'Блок "Баннер"'
+      announce: 'Блок "Анонс"'
+    fields:
+      title_announce: Заголовок анонса
+      link: Ссылка
+      image: Изображение
+      type_banner: Тип баннера
+      premium_banner1: Премиум 1
+      premium_banner2: Премиум 2
+
+  frontend:
+    breadcrumb:
+      main: Главная
+      tv: Сегодня TV
+      news:  Новости
+      search: Поиск
+      contacts: Контакты редакции "Сегодня"
+      rules: Условия использования материалов сайта СЕГОДНЯ.ua
+      rules_comments: Правила комментирования на сайте Сегодня.ua
+      privacy: Политика конфиденциальности и защиты персональных данных
+      make_homepage: Сделать Сегодня.ua стартовой страницей
+      feedback: Написать нам
+
+    title: СЕГОДНЯ
+    login: Войти
+    make_as_homepage: Сделать стартовой
+    filter_all_letter: Все
+    partners_news: Наши партнеры
+    partners_informer: Новости партнеров
+    opinions: мнение
     video: Видео
-    read_more: Смотрите также
+    top_materials: Самые читаемые
+    actual_themes: Актуальные темы
+
+    meta:
+      sitename: СЕГОДНЯ
+      keywords: Газета Сегодня, свежие новости, новости политики, новости киева, новости мира, блог, форум, новости культуры, ctujlyz, новости спорта, полезности, здоровье,спецпроекты, репортажи, мультимедиа, интерактив, архив выпусков, гороскоп на сегодня
+      description: Газета "Сегодня". Ежедневное украинское издание. Украина сегодня. Новости Украины, новости Киева, новости в мире.
+      meta_title_index: Новости, последние новости и события от редакции сайта и газеты Сегодня.
+      meta_description_index: Новости, статьи и мнения экспертов. Главные новости и события Украины и мира от редакции газеты и сайта Сегодня.
+      meta_keywords_index: Новости, статьи, последние новости, новости украины, новости сегодня, онлайн новости, сайт Сегодня, онлайн издание Сегодня, газета Сегодня
+
+    socials:
+      we_are_in: Мы в
+
+    lang_switcher:
+      ru: РУС
+      uk: УКР
+
+    feedback:
+      title: Написать нам
+      dear_readers: Дорогі читачі!
+      text: Якщо Вам хочеться надіслати свою новину, щось поліпшити на нашому сайті або дати пару дружніх порад - будь ласка, напишіть нам. Заздалегідь дякуємо!
+      site_editing: Редакція сайту «Сегодня.ua»
+      name: "Ім'я"
+      email: Email
+      message: Повідомлення
+      send: Відправити
+      send_message: Повідомлення відправлено!
+      site: Сегодня.ua
+      new_feedback: Новый запрос с формы обратной связи
+      best_regards: "С наилучшими пожеланиями,<br/>команда сайта."
+      validate:
+        name: Укажите ваше имя
+        email: Введите корректный email
+        message: Сообщение должно содержать более 15 символов
+
+    header:
+      hot_news_slider:
+        title: Горячая новость
+        news: Новости Сегодня
+        live: Прямой эфир
+
+    search:
+      title: Поиск
+      enter_text: введите текст
+
+    footer:
+      site_copyright: ЧАО "Сегодня Мультимедиа"
+      photos_by: Стоковые фото от
+      links:
+        map: Карта
+        rules: Правила цитирования
+        rules_comments: Правила комментирования
+        privacy: "Политика конфиденциальности<br>и защиты персональных данных"
+        contacts: Контакты
+        feedback: Написать нам
+        advertising: Реклама на сайте
+        subscription: Подписка на газету
+      info:
+        cookie:
+          using_site: Продолжая просмотр сайта, вы соглашаетесь с тем, что ознакомились с обновленной
+          politics: политикой конфиденциальности
+          agree: и соглашаетесь на использование файлов cookie.
+        buttons:
+          agree: Соглашаюсь
+
+    lifestyle:
+      to_homepage: Главная Сегодня
+      go_to_homepage: На главную Сегодня
+
+      lang_switcher:
+        ru: Ru
+        uk: Ua
+
+    quiz:
+      list:
+        title: Опросы
+      view:
+        title: Опрос
+        give_vote: Отдать голос
+        total_votes: Всего проголосовало
+        comments: комментарии
+
+    tv:
+      live_news: Новости Сегодня
+      live_stream: Прямой эфир
+      button_more: Більше відео
+      share_twitter: Поделиться ссылкой в Твиттере
+      share_facebook: Поделиться ссылкой на Фейсбуке
+      channel_youtube: Канал «Сегодня» на
+
+    article:
+      read: Читайте также
+      view: Смотрите также
+
+    orphus:
+      error_text: Если вы нашли ошибку в тексте, выделите её мышью и нажмите Ctrl+Enter
+      title: Орфографическая ошибка в тексте
+      subtitle: Послать сообщение об ошибке автору?
+      comment: Комментарий для автора (не обязательно)
+      cancel: Отмена
+      send: Отправить
+      mouse_hint: Выделите некорректный текст мышкой
+      thanks: Спасибо! Сообщение отправлено.
+      subject: Ошибка в тексте на сайте
+      site: Сегодня.ua
+      best_regards: "С наилучшими пожеланиями,<br/>команда сайта."
+      message: Текст
+      url: Адрес
+      validate:
+          comment: Сообщение должно содержать не более 250 символов
+
+    calcs:
+      taxes:
+        title: Какие налоги платят с моей зарплаты
+        income: Сколько вы получаете на руки
+        uah: гривен
+        job: Где вы работаете
+        kiev: Киев
+        other_city: Другой населенный пункт
+        do: Рассчитать
+        result: Результат
+        hint: Расчеты актуальны при условии официального трудоустройства и «белой» зарплаты
+        result1: Каждый месяц в Пенсионный фонд с вашей зарплаты поступает
+        result2: За год за счет вашей зарплаты выплачивают примерно
+        result21: минимальных пенсий
+        result3: Каждый месяц вы отдаете
+        result31: гривен на содержание украинской армии
+        result4: Бюджет вашего города получает от вас
+        result41: гривен, а бюджет страны -
+        result42: гривен ежемесячно
+        result5: «Грязными» ваша зарплата составляет
+        error: Ошибка. Укажите зарплату
+      pension_compare:
+        title: Какая у вас пенсия
+        pension: Какая у вас пенсия
+        type: Выберите вид вашей пенсии
+        region: Выберите регион проживания
+        do: Рассчитать
+        by_age: пенсия по возрасту
+        by_invalid: пенсия по инвалидности
+        by_loss: пенсия по утрате кормильца
+        region1: Винницкая область
+        region2: Волынская область
+        region3: Днепропетровская область
+        region4: Донецкая область
+        region5: Житомирская область
+        region6: Закарпатская область
+        region7: Запорожская область
+        region8: Ивано-Франковская область
+        region9: г.Киев
+        region10: Киевская область
+        region11: Кировоградская область
+        region12: Луганская область
+        region13: Львовская область
+        region14: Николаевская область
+        region15: Одесская область
+        region16: Полтавская область
+        region17: Ровенская область
+        region18: Сумская область
+        region19: Тернопольская область
+        region20: Харьковская область
+        region21: Херсонская область
+        region22: Хмельницкая область
+        region23: Черкасская область
+        region24: Черновицкая область
+        region25: Черниговская область
+        less: меньше
+        more: больше
+        pension_word: пенсия
+        or: или
+        than1: чем средняя по стране
+        than2: чем средняя
+        than3: чем средняя по региону
+        set_value: Укажите значение
+      salary:
+        title: Какая у вас зарплата
+        salary: Укажите вашу зарплату
+        industry: Выберите сферу занятости
+        region: Выберите регион проживания
+        do: Рассчитать
+        region1: Винницкая область
+        region2: Волынская область
+        region3: Днепропетровская область
+        region4: Донецкая область
+        region5: Житомирская область
+        region6: Закарпатская область
+        region7: Запорожская область
+        region8: Ивано-Франковская область
+        region9: г.Киев
+        region10: Киевская область
+        region11: Кировоградская область
+        region12: Луганская область
+        region13: Львовская область
+        region14: Николаевская область
+        region15: Одесская область
+        region16: Полтавская область
+        region17: Ровенская область
+        region18: Сумская область
+        region19: Тернопольская область
+        region20: Харьковская область
+        region21: Херсонская область
+        region22: Хмельницкая область
+        region23: Черкасская область
+        region24: Черновицкая область
+        region25: Черниговская область
+        area1: Сельское, лесное или рыбное хозяйство
+        area2: Промышленность
+        area2_1: Добывающая промышленность, разработка карьеров
+        area2_2: Перерабатывающая промышленность
+        area2_3: Производство пищевых продуктов, напитков, табачных изделий
+        area2_4: Текстильное производство, производство одежды, производство изделий из кожи
+        area2_5: Полиграфия, производство бумаги, изделий из древесины
+        area2_6: Производство кокса и продуктов нефтепереработки
+        area2_7: Производство химической продукции и веществ
+        area2_8: Производство фармацевтических препаратов и продуктов
+        area2_9: Производство резиновых, пластмассовой, другой неметаллической минеральной продукции
+        area2_10: Металлургия (кроме машин и оборудования)
+        area2_11: Машиностроение, в т.ч.
+        area2_11_1: Производство компьютеров электронной и оптической продукции
+        area2_11_2: Производство электрического оборудования
+        area2_11_3: Производство транспортных средств
+        area2_11_4: Производство машин и оборудования, не отнесенных к другим группам
+        area2_12: Производство мебели
+        area2_13: Ремонт и монтаж машин и оборудования
+        area2_14: Поставки электроэнергии, газа, пара и др.
+        area2_15: Водоснабжение, канализация, обращение с отходами
+        area3: Строительство
+        area4: Оптовая и розничная торговля
+        area5: Ремонт автотранспорта
+        area6: Работа на транспорте
+        area7: Складское хозяйство, почтовая и курьерская деятельность
+        area8: Организация питания
+        area9: Информация и телекоммуникации
+        area10: Финансовая и страховая деятельность
+        area11: Операции с недвижимостью
+        area12: Научная и техническая деятельность
+        area13: Административное и вспомогательное обслуживание
+        area14: Оборона
+        area15: Образование
+        area16: Здравоохранение
+        area17: Социальная помощь
+        area18: Искусство, спорт, развлечение и отдых
+        area19: Другие виды услуг
+        less: меньше
+        more: больше
+        your_salary: Ваша зарплата на
+        or: или
+        than1: чем средняя по вашей сфере деятельности
+        than2: чем средняя по региону
+        set_value: Укажите значение
+      taxespensback:
+        title: Налоговый возврат за взносы в негосударственный пенсионный фонд
+        contribution: Взносы в чью пользу
+        whom1: в свою
+        whom2: родственника
+        paid: Размер ежемесячного взноса
+        do: Рассчитать
+        result: Результат
+
+  datetime:
+    today: Сегодня
+    yesterday: Вчера
+
+error:
   404:
-    to_main: На главную
-    page_not_found: Страница не найдена
-    text: |
-      Возможно ссылка устарела. Воспользуйтесь Поиском. Если вы уверены, что такой страницы нет по нашей вине, пожалуйста,
-      сообщите нам об этом и не забудьте указать адрес, с которого вы сюда попали.
-  contacts:
-    title: Контакты
-    address: 01001 Киев, ул. Владимирская, 4
-  team:
-    title: Команда
-  newsletter:
-    title: Подпишись на Vogue UA
-  subscribe:
-    title: Подписка
-  advertisement:
-    title: Реклама
-    download_mediakit_magazine: СКАЧАТЬ<BR> МЕДИА-КИТ (журнал)
-    download_mediakit_site: СКАЧАТЬ<BR> МЕДИА-КИТ (сайт)
-  magazine:
-    main_editor: Главный редактор
-    on_poster: На обложке
-    model: Модель
-    main_photograph: Фотограф
-    dress: Одежда
-    read_in_number: Читайте в этом номере
-    show_more_btn: Показать больше материалов
-    archive: Архив журнала
-    covers: Обложки
-    subscribe: Подписаться
-    magazine: Журнал
-  collections:
-    collections: Показы
-    collections_h1: Показы
-    last_collections: Последние показы
-    other_collections: Другие показы
-    show_more_btn: Показать больше материалов
-    choose_season: Выберите сезон
-    choose_designer: Выберите дизайнера
-    choose_fashionweek: Выберите неделю моды
-    meta_title: Новая коллекция %s. Коллекция женской/мужской одежды %s сезона %s.
-    meta_description: Новая коллекция женской/мужской одежды %s сезона %s. Смотрите все образы коллекции %s.
-    meta_keywords: Коллекции, новая коллекция, новая коллекция %s, коллекция женской/мужской одежды %s, коллекция %s сезона %s, %s, сезон %s
-    fashion_week: Неделя моды
-    by_list: списком
-    by_date: по дате
-  search:
-    title: Поиск
-    enter_word_for_seach: Введите слово для поиска
-    enter_word_for_seach_title: Введите слово для поиска.
-    not_found: По вашему запросу ничего не найдено.
-    placeholder:
-      search: поиск
-    tabs:
-      all: Все материалы
-      article: Статьи
-      event: События
-      collection: Показы
-      voguetv: Vogue TV
-      blog: Suzy Menkes
-  langs:
-    ru: РУС
-    en: ENG
-  app:
-    more: Больше
-
-informer:
-  tab:
-    informer: Информер
-    images: Изображения
-
-  fields:
-    title: Название
-    url: URL
-    article: Cтатья
-    is_active: Опубликовать
-    published_at: Дата/время публикации
-    created_at: Дата создания
-    created_by: Создан
-    articles: Статья
-    image: Изображение
-    image_remove: Удалить
-
-  validation:
-    empty_title_or_article: Заполните название или статью
-    empty_url_or_article: Заполните URL или статью
-
-shortcode:
-  season:
-    spring_summer: весна-лето
-    winter_autumn: зима-осень
-
-top:
-  block:
-    field:
-      type: Тип
-      type.list: Список (3 статьи)
-      type.single: Одна сущность (с заголовком)
-      type.no_title: Одна сущность (без заголовка)
-      article_1: Статья 1
-      article_2: Статья 2
-      article_3: Статья 3
+    page_not_found: Ошибка 404. Страница не найдена
+    on_main_page:  Перейти на главную

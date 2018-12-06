@@ -1,0 +1,14 @@
+<table border="1">
+	<tr>
+		<td><strong>Фотограф</strong></td>
+		<td><strong>Количество материалов</strong></td>
+		<td><strong>Общее число просмотров</strong></td>
+	</tr>
+	{% for data in statistics  %}
+		<tr>
+			<td nowrap>{{ data.photographer }}</td>
+			<td>{{ data.views }}</td>
+			<td>{{ data.number }}</td>
+		</tr>
+	{% endfor %}
+</table>

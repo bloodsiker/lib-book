@@ -1,0 +1,30 @@
+{% extends 'AppBundle:Menu:knp_menu.html.twig' %}
+
+{% block children %}
+	{% set currentItem = item %}
+
+	<amp-sidebar id="sidebar-left" layout="nodisplay" side="left">
+		<nav>
+			<ul>
+				{% for item in currentItem.children %}
+					{% set linkAttributes = item.linkAttributes %}
+
+					{% if matcher.isCurrent(item) %}
+						{% set linkAttributes = linkAttributes|merge({'class': 'active-link'}) %}
+					{% endif %}
+
+					{% if item.setExtra('ga', false) %}{# skip ga events #}{% endif %}
+
+					{{ block('item') }}
+				{% endfor %}
+			</ul>
+		</nav>
+	</amp-sidebar>
+{% endblock %}
+
+{% block linkElement %}
+	{% import 'knp_menu.html.twig' as macros %}
+	<li>
+		<a href="{{ finalUri }}" {{ macros.attributes(linkAttributes) }}>{{ block('label') }}</a>
+	</li>
+{% endblock %}

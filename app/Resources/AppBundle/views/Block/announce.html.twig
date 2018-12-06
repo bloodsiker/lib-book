@@ -1,0 +1,20 @@
+<div class="block">
+    <div class="b-photonewslist">
+        {% set countItem = constant('AppBundle\\Block\\AnnouncementBlockService::COUNT_ITEM') %}
+        {% for i in range(1, countItem) %}
+            {% if settings['title_'~i] is defined and settings['title_'~i]
+                and settings['link_'~i] is defined and settings['link_'~i]
+                and settings['image_'~i] is defined and settings['image_'~i] %}
+                <a href="{{ settings['link_'~i] }}" class="b-photonewslist-item">
+                    <div class="b-photonewslist-item-img-wrap">
+                        <div class="b-photonewslist-item-img">
+                            <img src="{{ settings['image_'~i].getPath()|get_actual_image('image_150x100', ['main']) }}" />
+                        </div>
+                    </div>
+                    <label class="label label-blue">анонс</label>
+                    <h5>{{ settings['title_'~i] }}</h5>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

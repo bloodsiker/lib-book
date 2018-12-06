@@ -1,0 +1,15 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as macro %}
+
+{% if article %}
+    <a href="{{ article_path(article) }}" class="block">
+        {% if settings is defined %}{{ macro.item_block_title(settings) }}{% endif %}
+        <div class="b-news bg-gray">
+            <div class="b-news-img-wrap">
+                <div class="b-news-img">
+                    <img src="{{  article.getImage() ? article.getImage().getPath()|get_actual_image('image_300x200', ['main']) : default_article_image|imagine_filter('image_300x200')}}">
+                </div>
+            </div>
+            <p>{{ article.getHeader()|raw }}</p>
+        </div>
+    </a>
+{% endif %}

@@ -1,0 +1,3 @@
+{% if shortcode_data.link is defined %}
+    href="{{ shortcode_data.link }}" {% if shortcode_data.link|slice(0, 1) != '/' and 'segodnya.ua' not in shortcode_data.link and 'unian.net' not in shortcode_data.link %}rel="nofollow"{% endif %}
+{% endif %}

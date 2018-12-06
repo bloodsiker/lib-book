@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	<channel>
+		<title>{{ 'front.rss.title'|trans([], 'ArticleBundle') }}</title>
+		<description>{{ 'front.rss.description'|trans([], 'ArticleBundle') }}</description>
+		<link>{{ 'front.rss.link'|trans([], 'ArticleBundle') }}</link>
+		<language>{{ app.request.locale }}-{{ app.request.locale }}</language>
+		<lastBuildDate>{{ "now"|date("c") }}</lastBuildDate>
+
+		{% for article in articles %}
+			<item>
+				<title>{{ article.title }}</title>
+				<link>{{ absolute_url(article_path(article)) }}</link>
+				<guid>{{ article.getId() }}</guid>
+				<pubDate>{{ article.publishAt|date('c') }}</pubDate>
+
+				{% if article.authors is not empty %}
+					{% set needCommaAuthor = null %}
+					<author>
+						{% for author in article.authors %}
+							{% if author.name %}
+								{{ needCommaAuthor ? ", " : "" }}
+								{{ author.name }}
+								{% set needCommaAuthor = true %}
+							{% endif %}
+						{% endfor %}
+					</author>
+				{% endif %}
+
+				<description>{{ article.getHeader()|raw }}</description>
+
+				<content:encoded>
+					<![CDATA[
+						{{ article.getDescription()|shortcode(['external_links'])|facebook_text|html_entity_decode|raw }}
+					]]>
+				</content:encoded>
+			</item>
+		{% endfor %}
+
+	</channel>
+</rss>

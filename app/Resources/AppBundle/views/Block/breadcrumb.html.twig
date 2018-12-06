@@ -1,0 +1,27 @@
+{% import _self as macro %}
+{% macro macro(text, href) %}
+{% spaceless %}
+    <a href="{{ href }}">{{ text }}</a>
+{% endspaceless %}
+{% endmacro %}
+{% macro macro_text(text) %}
+{% spaceless %}
+    <span>{{ text }}</span>
+{% endspaceless %}
+{% endmacro %}
+{% if breadcrumbs != [] %}
+<div class="bread-crumbs">
+    {{ macro.macro('app.frontend.breadcrumb.main'|trans([], 'AppBundle'), path('index')) }}
+    {% for link in breadcrumbs %}
+
+        <img src="{{ asset('bundles/app/img/breadcrumbs_arrow.svg') }}">&nbsp;
+        {% if link['href'] is defined %}
+            {{ macro.macro(link[app.request.locale], link.href) }}
+        {% elseif link[app.request.locale]|default %}
+            {{ macro.macro_text(link[app.request.locale]) }}
+        {% else %}
+            {{ macro.macro_text(link) }}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}

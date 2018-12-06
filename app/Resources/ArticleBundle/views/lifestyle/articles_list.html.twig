@@ -1,0 +1,37 @@
+{% set template_type = 'LARGE' %}
+
+{% if category.parent %}
+    {% set template_type = 'SMALL' %}
+    <div class="section-title">
+        <h1>{{ category.getTitleHead() ? category.getTitleHead() : category.title }}</h1>
+    </div>
+{% endif %}
+
+{% if not app.request.get('page') %}
+    {{
+        sonata_block_render(
+            { 'type': 'article.block.service.list' },
+            {
+                'items_count': 6,
+                'article_type': category.parent ? 6 : 5,
+                'skin': 'lifestyle',
+                'category': category|default,
+                'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::'~template_type~'_SLIDER')
+            }
+        )
+    }}
+{% endif %}
+
+{{
+    sonata_block_render(
+        { 'type': 'article.block.service.list' },
+        {
+            'items_count': category.parent ? 30 : 25,
+            'skin': 'lifestyle',
+            'category': category|default,
+            'show_extra': true,
+            'page': app.request.get('page') ? app.request.get('page')[2:] : 1,
+            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::'~template_type~'_LIST')
+        }
+    )
+}}

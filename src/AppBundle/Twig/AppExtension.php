@@ -2,17 +2,53 @@
 
 namespace AppBundle\Twig;
 
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Sonata\BlockBundle\Model\Block;
+
 /**
  * Class AppExtension
  */
 class AppExtension extends \Twig_Extension
 {
     /**
-     * {@inheritdoc}
+     * @var RouterInterface
+     */
+    protected $router;
+
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
+     * AppExtension constructor.
+     *
+     * @param TranslatorInterface $translator
+     * @param RouterInterface     $router
+     */
+    public function __construct(TranslatorInterface $translator, RouterInterface $router)
+    {
+        $this->router       = $router;
+        $this->translator   = $translator;
+    }
+
+    /**
+     * @return string
      */
     public function getName()
     {
         return 'app_extension';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_SimpleFunction('block_ajax_url', array($this, 'blockAjaxUrl')),
+        );
     }
 
     /**
@@ -26,25 +62,34 @@ class AppExtension extends \Twig_Extension
     }
 
     /**
-     * @return array
-     */
-    public function getFunctions()
-    {
-        return array(
-            new \Twig_SimpleFunction('is_boolean', array($this, 'isBool')),
-            new \Twig_SimpleFunction('is_string', array($this, 'isString')),
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getFilters()
     {
         return array(
             new \Twig_SimpleFilter('file_size_humanize', array($this, 'fileSizeHumanize')),
+            new \Twig_SimpleFilter('date_humanize', array($this, 'dateHumanize')),
+            new \Twig_SimpleFilter('date_time_humanize', array($this, 'dateTimeHumanize')),
             new \Twig_SimpleFilter('url_decode', array($this, 'urlDecode')),
         );
+    }
+
+    /**
+     * Generate ajax block route without page
+     *
+     * @param Block $block
+     * @param array $parameters
+     *
+     * @return string
+     */
+    public function blockAjaxUrl(Block $block, $parameters = [])
+    {
+        $parameters = array_merge($parameters, [
+            'blockId'   => $block->getId(),
+            'blockType' => $block->getType(),
+        ]);
+
+        return $this->router->generate('block__ajax', $parameters);
     }
 
     /**
@@ -64,10 +109,11 @@ class AppExtension extends \Twig_Extension
      * Returns a file size in human readable format.
      *
      * @param integer $size
+     * @param string  $delimiter
      *
      * @return string
      */
-    public function fileSizeHumanize($size)
+    public function fileSizeHumanize($size, $delimiter = '')
     {
         $prefix = array('b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb');
 
@@ -78,7 +124,7 @@ class AppExtension extends \Twig_Extension
             $counter += 1;
         }
 
-        return sprintf('%.2f%s', $size, $prefix[$counter]);
+        return sprintf('%.2f%s%s', $size, $delimiter, $prefix[$counter]);
     }
 
     /**
@@ -94,27 +140,63 @@ class AppExtension extends \Twig_Extension
     }
 
     /**
-     * You need to check if you were given a boolean value
+     * Convert DateTime value for news format
      *
-     * @param mixed $value
+     * @param \DateTime $datetime
+     * @param string    $formatDay
+     * @param bool      $hideYearIfCurrent
      *
-     * @return bool
+     * @return string
+     *
+     * @throws \Exception
      */
-    public static function isBoolean($value)
+    public function dateHumanize(\DateTime $datetime, $formatDay = 'd MMMM', $hideYearIfCurrent = true)
     {
-        return is_bool($value);
+        $now = self::getNow();
+        $date = $datetime->format('d.m.Y');
+        if ($date === $now->format('d.m.Y')) {
+            return $this->translator->trans('app.datetime.today', [], 'AppBundle');
+        } elseif ($date === $now->sub(new \DateInterval('PT24H'))->format('d.m.Y')) {
+            return $this->translator->trans('app.datetime.yesterday', [], 'AppBundle');
+        }
+
+        if (true === $hideYearIfCurrent && $now->format('Y') !== $datetime->format('Y')) {
+            $formatDay .= ' y';
+        }
+
+        return datefmt_format_object($datetime, $formatDay);
     }
 
     /**
-     * You need to check if you were given a string value
+     * Convert DateTime value for news format (with time)
      *
-     * @param mixed $value
+     * @param \DateTime $datetime
+     * @param string    $formatDay
+     * @param string    $formatTime
+     * @param bool      $hideYearIfCurrent
      *
-     * @return bool
+     * @return string
+     *
+     * @throws \Exception
      */
-    public static function isString($value)
+    public function dateTimeHumanize(\DateTime $datetime, $formatDay = 'd MMMM', $formatTime = ', HH:mm', $hideYearIfCurrent = true)
     {
-        return is_string($value);
+        return $this->dateHumanize($datetime, $formatDay, $hideYearIfCurrent).datefmt_format_object($datetime, $formatTime);
     }
 
+    /**
+     * Returns current date and time, rounded to nearest minute
+     *
+     * @return \DateTime
+     *
+     * @throws \Exception
+     */
+    private static function getNow()
+    {
+        $now = new \DateTime('now');
+        $second = $now->format('s');
+        $now->add(new \DateInterval('PT'.(60-$second).'S'));
+
+        return $now;
+    }
 }

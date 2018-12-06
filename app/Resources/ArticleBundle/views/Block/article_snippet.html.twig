@@ -1,0 +1,42 @@
+<div itemscope itemtype="https://schema.org/Article" style="display: none;">
+	<span itemprop="name">{{ snippetParams.article.getTitle() }}</span>
+
+	{% if snippetParams.article is instanceof("\\ArticleBundle\\Entity\\Article") and snippetParams.article.authors is not empty %}
+		<span itemprop="author">
+			{% set needCommaAuthor = null %}
+			{% for author in snippetParams.article.authors %}
+				{% if author.name %}
+					{{ needCommaAuthor ? ", " : "" }}
+					{{ author.name }}
+					{% set needCommaAuthor = true %}
+				{% endif %}
+			{% endfor %}
+		</span>
+	{% endif %}
+
+	{% if snippetParams.image_full is defined %}
+		<span itemprop="image">{{ snippetParams.image_full }}</span>
+	{% endif %}
+
+	{% if snippetParams.image_tn is defined %}
+		<span itemprop="thumbnailUrl">{{ snippetParams.image_tn }}</span>
+	{% endif %}
+
+	<span itemprop="datePublished">{{ snippetParams.article.publishAt|date('c') }}</span>
+
+	{% if snippetParams.article is instanceof("\\ArticleBundle\\Entity\\Article") %}
+		{% if snippetParams.article.getBlogger() %}
+			<span itemprop="articleSection">{{ snippetParams.article.getBlogger().getName() }}</span>
+		{% elseif snippetParams.article.getCategory() %}
+			<span itemprop="articleSection">{{ snippetParams.article.getCategory().getTitle() }}</span>
+		{% elseif snippetParams.article.getArticleHasSpectopics() %}
+			{% for specTopic in snippetParams.article.getArticleHasSpectopics() %}
+				{% if loop.first %}
+					<span itemprop="articleSection">{{ specTopic.getSpectopic().getTitle() }}</span>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+
+	{{ snippetParams.article.getHeader() }}
+</div>

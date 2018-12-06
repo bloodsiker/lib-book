@@ -1,0 +1,8 @@
+{% if shortcode_data.article is defined %}
+	<div class="framebox">
+		<div class="framebox-insideframe">
+			<h5 class="framebox-title">{{ ('app.frontend.article.read')|trans({}, 'AppBundle') }}</h5>
+			<a onclick="_gaq.push(['_trackEvent', 'LS_read_inner', 'click']);" href="{{ article_path(shortcode_data.article) }}" target="_blank">{{ shortcode_data.article.getTitle() }}</a>
+		</div>
+	</div>
+{% endif %}

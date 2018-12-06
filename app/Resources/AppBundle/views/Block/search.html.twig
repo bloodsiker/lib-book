@@ -1,0 +1,21 @@
+<div class="page-content">
+    <!-- Title -->
+    <h1>{{ 'app.frontend.search.title'|trans({}, 'AppBundle') }}</h1>
+    <div class="search">
+        <script>
+            (function() {
+                var cx = '011373912425537656523:qxeyl7ifwba';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+        </script>
+        <gcse:search
+                queryParameterName="q"
+                {#hl="{{ app.request.locale }}"#}
+        ></gcse:search>
+    </div>
+</div>

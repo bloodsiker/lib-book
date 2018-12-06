@@ -1,0 +1,27 @@
+{#
+    variables:
+        - settings       : array  : block settings
+        - locales        : array  : list of available locales
+        - current_locale : string : current locale
+#}
+
+<div class="container">
+    <div class="lang lined-top">
+        {% for locale in locales|sort %}
+            {% set switcher_route = app.request.attributes.get('_route') == 'page_slug' ? 'index' : app.request.attributes.get('_route') %}
+            {% set route_params = app.request.attributes.get('_route') == 'page_slug' ? {} : app.request.attributes.get('_route_params') %}
+            {% set locale_attr = locale == 'ru' ? 'ukr' : 'rus' %}
+            {% set locale_class = locale == 'ru' ? 'lang_ua' : 'lang_ru' %}
+
+            <a class="{{ locale_class~' '~(locale == current_locale ? 'lang_active' : '') }}"
+               onclick="_gaq.push(['_trackEvent', 'lifestyle_header', 'click', 'other_lang_{{ locale_attr }}'])"
+               href="{{
+                path(
+                    switcher_route|default('index'),
+                    route_params |default({'_locale': locale})|merge({'_locale': locale})
+                )
+            }}">{{ ('app.frontend.lifestyle.lang_switcher.'~locale)|trans({}, 'AppBundle') }}</a>
+            {% if loop.first %}&nbsp;|&nbsp;{% endif %}
+        {% endfor %}
+    </div>
+</div>

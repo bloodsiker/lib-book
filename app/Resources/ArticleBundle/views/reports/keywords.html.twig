@@ -1,0 +1,10 @@
+<table border=1>
+{% for article in articles  %}
+	<tr>
+		<td>{{ article[0].publishAt|date('d.m.Y H:i') }}</td>
+		<td>{{ article[0].getTitle() }}</td>
+		<td>{{ absolute_url(article_path(article[0])) }}</td>
+		<td>{{ article[0].views }}</td>
+	</tr>
+{% endfor %}
+</table>

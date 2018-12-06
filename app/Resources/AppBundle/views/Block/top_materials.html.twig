@@ -1,0 +1,18 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+{% if articles|length %}
+    <div class="b-morereading">
+        <h3>{{ 'app.frontend.top_materials'|trans([], 'AppBundle') }}</h3>
+        <ul>
+            {% for article in articles %}
+                {% spaceless %}
+                    <li class="b-morereading-item">
+                        <span class="b-morereading-item-time">{{ article.views }}</span>
+                        <a class="b-morereading-item-link" href="{{ article_path(article) }}">
+                            {{ item.item_title(article)|trim|raw }}
+                        </a>
+                    </li>
+                {% endspaceless %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

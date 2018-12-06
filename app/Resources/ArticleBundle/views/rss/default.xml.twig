@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		{% include 'ArticleBundle:rss/blocks:rss_head.xml.twig' %}
+
+		{% for article in articles %}
+			<item>
+				<title>{{ article.title }}</title>
+				<link>{{ absolute_url(article_path(article)) }}</link>
+				<description><![CDATA[ {% if article.image %}<img src="{{ absolute_url(article.image.getPath|get_actual_image('image_610x343', ['main_new', 'main'])) }}" alt="{{ article.image.getDescription() }}" border=0> {% endif %}{{ article.getHeader()|raw }}]]></description>
+				<category>{{ article.getCategory.getTitle }}</category>
+				<pubDate>{{ article.publishAt|date('r') }}</pubDate>
+				{% if article.image %}
+					<enclosure url="{{ absolute_url(article.image.getPath|get_actual_image('image_610x343', ['main_new', 'main'])) }}" type="image/jpeg"/>
+				{% endif %}
+			</item>
+		{% endfor %}
+
+	</channel>
+</rss>

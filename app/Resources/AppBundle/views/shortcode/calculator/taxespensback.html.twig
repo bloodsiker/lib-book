@@ -1,0 +1,38 @@
+<div class="calc_cont taxespensback_cont">
+	<fieldset class="taxespensback_calc">
+		<legend>{{ ('app.frontend.calcs.taxespensback.title')|trans({}, 'AppBundle') }}:</legend>
+		<div>{{ ('app.frontend.calcs.taxespensback.contribution')|trans({}, 'AppBundle') }}:<br>
+			<div><input type="radio" name="taxespensback_whom" value="1"> {{ ('app.frontend.calcs.taxespensback.whom1')|trans({}, 'AppBundle') }}</div>
+			<div><input type="radio" name="taxespensback_whom" value="2"> {{ ('app.frontend.calcs.taxespensback.whom2')|trans({}, 'AppBundle') }}</div>
+		</div>
+
+		<div>{{ ('app.frontend.calcs.taxespensback.paid')|trans({}, 'AppBundle') }}:<br><input type="text" id="taxespensbackcalc_paid" value=""></div>
+
+		<div><input type="button" id="taxespensbackcalc_button" value="{{ ('app.frontend.calcs.taxespensback.do')|trans({}, 'AppBundle') }}"></div>
+		<div>{{ ('app.frontend.calcs.taxespensback.result')|trans({}, 'AppBundle') }}: <span id="taxespensbackcalc_result">-</span></div>
+	</fieldset>
+</div>
+<script>
+    function taxespensbackcalc_init() {
+        document.getElementById('taxespensbackcalc_button').addEventListener('click', function(){
+            paid = document.getElementById('taxespensbackcalc_paid').value+'';
+            whom = document.querySelector('input[name=taxespensback_whom]:checked').value;
+
+            if(!paid || !whom) return;
+
+            paid = paid.replace(",",".");
+            paid = paid.replace(" ","");
+            paid = parseInt(paid);
+
+            if(whom == 1 && paid > 2240) {
+                paid = 2240;
+            }
+            if(whom == 2 && paid > 1120) {
+                paid = 1120;
+            }
+
+            document.getElementById('taxespensbackcalc_result').innerHTML = Math.round(paid * 12 * 0.18) + 'грн';
+        });
+    }
+    taxespensbackcalc_init();
+</script>

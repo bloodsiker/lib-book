@@ -1,0 +1,34 @@
+{% if articles is not empty %}
+    <div class="block">
+        {% set sliderID = 'slider_'~random('abcdefghijklmnopqrstuvwxyz')~random(range(10, 90)) %}
+        {% set blockTitle = app.request.getLocale() == 'uk' and settings.title_ua ? settings.title_ua : settings.title %}
+        {% set blockLink = app.request.getLocale() == 'uk' and settings.link_ua ? settings.link_ua : settings.link %}
+        {% spaceless %}
+            <div class="b-slider" id="{{ sliderID }}">
+                <h3><a href="{{ blockLink }}">{{ blockTitle }}</a></h3>
+                <div class="b-slider-items-wrap">
+                    <div class="b-slider-items">
+                        {% for article in articles %}
+                            <div class="b-slider-item">
+                                <div class="b-slider-item-img-wrap">
+                                    <a href="{{ path('longread', { 'folder': article.longread.folder }) }}" class="b-slider-item-img">
+                                        <img src="{{ article.getImage() ? article.getImage().getPath()|get_actual_image('image_300x200', ['main']) : default_article_image|imagine_filter('image_300x200') }}" alt="{{ article.getTitle()|raw }}" />
+                                    </a>
+                                </div>
+                                <h4><a href="{{ path('longread', { 'folder': article.longread.folder }) }}">{{ article.getTitle()|raw }}</a></h4>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if articles|length > 1 %}
+                    <div class="b-slider-prev"></div>
+                    <div class="b-slider-next"></div>
+                {% endif %}
+            </div>
+            <script>
+                var {{ sliderID }} = new blockSlider;
+                {{ sliderID }}.init(document.getElementById("{{ sliderID }}"));
+            </script>
+        {% endspaceless %}
+    </div>
+{% endif %}

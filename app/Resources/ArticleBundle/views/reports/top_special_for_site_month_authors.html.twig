@@ -1,0 +1,22 @@
+<table border="1">
+	<tr>
+		<td><strong>Автор</strong></td>
+		<td><strong>Материалы для сайта</strong></td>
+		<td><strong>Просмотры для сайта</strong></td>
+		<td><strong>Материалы не для сайта</strong></td>
+		<td><strong>Просмотры не для сайта</strong></td>
+		<td><strong>Материалы ВСЕГО</strong></td>
+		<td><strong>Просмотры ВСЕГО</strong></td>
+	</tr>
+	{% for data in statistics  %}
+		<tr>
+			<td nowrap>{{ data.author }}</td>
+			<td>{{ data.number_for_site }}</td>
+			<td>{{ data.views_for_site }}</td>
+			<td>{{ data.number_other }}</td>
+			<td>{{ data.views_other }}</td>
+			<td>{{ data.number }}</td>
+			<td>{{ data.views }}</td>
+		</tr>
+	{% endfor %}
+</table>

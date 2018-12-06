@@ -1,0 +1,28 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+<div class="newsfeed">
+    <div class="b-lastnews">
+
+    <h3>{{ settings['show_title'] }}</h3>
+    <ul>
+    {% for article in articles %}
+        {{ item.item_text(article, loop) }}
+    {% endfor %}
+    </ul>
+    <a href="/allnews.html" class="b-lastnews-more">Больше новостей</a>
+    {#<div class="b-subscribe">#}
+        {#<h3>Подписка на новости</h3>#}
+        {#<form action="/exec/ajax/subscribe.php" method="get">#}
+            {#<button type="submit" class="btn">Ok</button>#}
+            {#<label>#}
+                {#<span>Ваш email</span>#}
+                {#<input name="email" type="email">#}
+            {#</label>#}
+        {#</form>#}
+        {#</div>#}
+        {#<script>#}
+          {#var subscribeForm = document.querySelector('.b-subscribe input');#}
+          {#subscribeForm.addEventListener('focus', function() { if(!this.parentNode.classList.contains('focus')) this.parentNode.classList.toggle('focus') });#}
+          {#subscribeForm.addEventListener('blur', function() { if(this.value=='') this.parentNode.classList.remove('focus') });#}
+        {#</script>#}
+    </div>
+</div>

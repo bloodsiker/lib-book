@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" {{ sonata_seo_html_attributes() }}>
+    <head {{ sonata_seo_head_attributes() }}>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <base href="{{ app.request.schemeAndHttpHost }}" />
+        {{ sonata_seo_title() }}
+        {{ sonata_seo_metadatas() }}
+
+        {{ sonata_seo_oembed_links() }}
+        {{ sonata_seo_lang_alternates() }}
+        {{ sonata_seo_link_canonical() }}
+
+        {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
+        {{ sonata_block_include_javascripts('screen', app.request.basePath) }}
+
+        {% block favicon %}
+            <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('fav/apple-icon-57x57.png') }}">
+            <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('fav/apple-icon-60x60.png') }}">
+            <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('fav/apple-icon-72x72.png') }}">
+            <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('fav/apple-icon-76x76.png') }}">
+            <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('fav/apple-icon-114x114.png') }}">
+            <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('fav/apple-icon-120x120.png') }}">
+            <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('fav/apple-icon-144x144.png') }}">
+            <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('fav/apple-icon-152x152.png') }}">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('fav/apple-icon-180x180.png') }}">
+            <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('fav/android-icon-192x192.png') }}">
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('fav/favicon-32x32.png') }}">
+            <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('fav/favicon-96x96.png') }}">
+            <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('fav/favicon-16x16.png') }}">
+            <link rel="manifest" href="{{ asset('fav/manifest.json') }}">
+            <link rel="icon" href="{{ asset('fav/favicon.ico') }}" type="image/x-icon" />
+
+            <meta name="msapplication-TileColor" content="#ffffff">
+            <meta name="msapplication-TileImage" content="{{ asset('fav/ms-icon-144x144.png') }}">
+        {% endblock %}
+
+		{#{{#}
+            {#sonata_block_render(#}
+                {#{ 'type': 'app.block.service.get_state_value' },#}
+                {#{ 'key': 'custom_meta_tags' }#}
+            {#)#}
+		{#}}#}
+
+        {% if app.request.attributes.get('_route') in ['articles_subcategory_article_view', 'articles_spectopic_article_view', 'articles_spectopic_article_view_lifestyle'] %}
+            <link rel="amphtml" href="{{ path('articles_amp', {'slug': app.request.attributes.get('slug'), 'id': app.request.attributes.get('id')}) }}">
+        {% endif %}
+
+        {% block stylesheets %}
+            {% if app.debug is defined and app.debug %}
+                <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}" />
+            {% else %}
+                {#{% stylesheets#}
+                    {#'@AppBundle/Resources/public/css/style.css'#}
+                    {#vars=["version"]#}
+                    {#filter='cssrewrite' filter='?uglifycss' output='css/app{version}.min.css' %}#}
+                    {#<link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />#}
+                {#{% endstylesheets %}#}
+            {% endif %}
+
+            {% if page.stylesheet is defined and page.stylesheet is not empty %}
+                <style type="text/css">
+                    {{ page.stylesheet|raw }}
+                </style>
+            {% endif %}
+        {% endblock %}
+
+        {% block head_javascripts %}
+            {% if app.debug %}
+                <script src="{{ asset('bundles/app/js/src/functions.js') }}"></script>
+                <script src="{{ asset('bundles/app/js/src/segallery.js') }}"></script>
+                <script src="{{ asset('bundles/app/js/src/orphus.js') }}"></script>
+            {% else %}
+                {#{% javascripts#}
+                    {#'@AppBundle/Resources/public/js/src/functions.js'#}
+                    {#'@AppBundle/Resources/public/js/src/segallery.js'#}
+                    {#'@AppBundle/Resources/public/js/src/orphus.js' vars=["version"]#}
+                    {#filter='?uglifyjs2' output='js/app{version}.min.js'#}
+                {#%}#}
+                {#<script src="{{ asset_url }}"></script>#}
+                {#{% endjavascripts %}#}
+            {% endif %}
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+
+        {% block head_variables %}
+            {#{{#}
+                {#sonata_block_render(#}
+                    {#{ 'type': 'page.block.site_variable' },#}
+                    {#{#}
+                        {#'placement': 'head'#}
+                    {#}#}
+                {#)#}
+            {#}}#}
+		{% endblock %}
+		{% block head_banners %}
+			{#{{#}
+                {#sonata_block_render(#}
+                    {#{ 'type': 'page.block.site_variable' },#}
+                    {#{#}
+                        {#'placement': 'banner-init'#}
+                    {#}#}
+                {#)#}
+			{#}}#}
+        {% endblock %}
+    </head>
+    <body {% block body_attrs %}{% endblock %}>
+	    {% block body_begin %}
+            {#{{#}
+                {#sonata_block_render(#}
+                    {#{ 'type': 'page.block.site_variable' },#}
+                    {#{#}
+                        {#'placement': 'body-begin'#}
+                    {#}#}
+                {#)#}
+            {#}}#}
+        {% endblock %}
+
+		{% block branding %}
+            {#{{#}
+                {#sonata_block_render(#}
+                    {#{ 'type': 'page.block.site_variable' },#}
+                    {#{#}
+                        {#'placement': 'banner-branding'#}
+                    {#}#}
+                {#)#}
+            {#}}#}
+        {% endblock %}
+
+        {% block body %}
+
+            {% block header %}{% endblock %}
+            {% block content %}
+                {% block content_top %}{% endblock %}
+                {% block breadchumbs %}{% endblock %}
+                {% block content_main %}{% endblock %}
+                {% block content_bottom %}{% endblock %}
+            {% endblock %}
+            {% block footer %}{% endblock %}
+
+            {% block body_javascripts %}
+                {% block body_scripts %}{% endblock %}
+                {% if page.javascript is defined and page.javascript is not empty %}
+                    <script type="text/javascript">
+                        {{ page.javascript|raw }}
+                    </script>
+                {% endif %}
+            {% endblock %}
+        {% endblock %}
+
+        {% block body_end %}
+            {#{{#}
+                {#sonata_block_render(#}
+                    {#{ 'type': 'page.block.site_variable' },#}
+                    {#{#}
+                        {#'placement': 'body-end'#}
+                    {#}#}
+                {#)#}
+            {#}}#}
+
+            {% include 'AppBundle:Block:cookie_politics.html.twig' %}
+        {% endblock %}
+    </body>
+</html>

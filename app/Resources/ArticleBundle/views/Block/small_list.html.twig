@@ -1,0 +1,4 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+{% for article in articles %}
+    {{ item.item_small(article, loop) }}
+{% endfor %}

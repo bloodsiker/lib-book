@@ -1,0 +1,49 @@
+<div class="page-content">
+    {% if category %}
+        <h1>{{ category.getTitleHead()|default(category.getTitle()) }}</h1>
+    {% else %}
+        <h1>{{ 'front.seo.news'|trans([], 'ArticleBundle')}}</h1>
+    {% endif %}
+    {{
+        sonata_block_render(
+            {'type': 'article.block.service.calendar'},
+            {
+                'category': category|default,
+                'date': date|default
+            }
+        )
+    }}
+    <div class="br"></div>
+    {% if not app.request.get('page') %}
+
+        {% if category %}
+                {{
+                    sonata_block_render(
+                        { 'type': 'article.block.service.list' },
+                        {
+                            'items_count': 6,
+                            'category': category|default,
+                            'use_secondary_category': true,
+                            'article_type': 4,
+                            'show_paginator': false,
+                            'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::SMALL_SLIDER')
+                        }
+                    )
+                }}
+        {% endif %}
+    {% endif %}
+
+    {{
+        sonata_block_render(
+            { 'type': 'article.block.service.list' },
+            {
+                'items_count': 30,
+                'category': category|default,
+                'use_secondary_category': true,
+                'tag': tag|default,
+                'page': app.request.get('page') ? app.request.get('page')[2:] : 1 ,
+                'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::LARGE_LIST')
+            }
+        )
+    }}
+</div>

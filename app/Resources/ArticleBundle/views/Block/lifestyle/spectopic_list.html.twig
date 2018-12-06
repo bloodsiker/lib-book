@@ -1,0 +1,56 @@
+{% import "ArticleBundle:Block/macros:item.html.twig" as item %}
+{% set articles_count = articles|length %}
+
+{% if articles_count %}
+    <div class="row news-blocks block-with-ads-banner">
+        <div class="col-lg-8 col-md-12">
+            {{ item.item_top_lifestyle(articles[:1][0], 'image_650x434', 'image_650x434', 'ls') }}
+
+            <div class="row">
+                {% for article in articles[1:2] %}
+                    <div class="col-md-6">
+                        {{ item.item_lifestyle(article, 'news-block-3', 'image_310x207', 'lssm') }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+            {% include 'ArticleBundle:Block/lifestyle:banner_list.html.twig' %}
+        </div>
+    </div>
+
+    {% if articles_count > 2 %}
+        <div class="row news-blocks">
+            {% for article in articles[3:6] %}
+                <div class="col-md-4">
+                    {{ item.item_lifestyle(article, 'news-block-3', 'image_310x207', 'lssm') }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if articles_count > 9 %}
+        <div class="row news-blocks">
+            {% for article in articles[10:2] %}
+                <div class="col-md-6">
+                    {{ item.item_lifestyle(article, 'news-block-2', 'image_650x434', 'ls') }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if articles_count > 11 %}
+        <div class="row news-blocks">
+            {% for article in articles[12:] %}
+                <div class="col-md-4">
+                    {{ item.item_lifestyle(article, 'news-block-3', 'image_310x207', 'lssm') }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+
+{% if settings['show_paginator'] and articles.getNbPages() > 1 %}
+    {{ pagerfanta(articles) }}
+{% endif %}

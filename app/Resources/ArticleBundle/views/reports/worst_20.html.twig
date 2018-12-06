@@ -1,0 +1,20 @@
+<table border="1">
+	<tr>
+		<td><b>Название статьи</b></td>
+		<td><b>Раздел</b></td>
+		<td><b>Хиты</b></td>
+	</tr>
+	{% for article in articles  %}
+		<tr>
+			<td>{{ article[0].getTitle() }}</td>
+			{% if article[0].getBlogger() %}
+				<td>{{ article[0].getBlogger().getName() }}</td>
+			{% elseif article[0].getCategory() %}
+				<td>{{ article[0].getCategory().getTitle() }}</td>
+			{% else %}
+				<td>Спецтема</td>
+			{% endif %}
+			<td>{{ article[0].views }}</td>
+		</tr>
+	{% endfor %}
+</table>

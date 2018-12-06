@@ -19,6 +19,8 @@ class AppExtension extends Extension
         $bundles = $container->getParameter('kernel.bundles');
 
         $loader->load('services.yml');
+        $loader->load('blocks.yml');
+//        $loader->load('twig.yml');
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.yml');
