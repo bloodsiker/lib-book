@@ -69,9 +69,11 @@ class MediaFileAdmin extends Admin
     {
         $file = $object->getFile();
         if ($file) {
+//            $object->setOrigName($file->originalName);
             $object->setSize($file->getSize());
             $object->setMimeType($file->getMimeType());
         }
+//        dump($file->getOriginalName());die;
     }
 
     /**
@@ -83,16 +85,17 @@ class MediaFileAdmin extends Admin
             ->add('id', null, [
                 'label' => 'media_file.fields.id',
             ])
+            ->addIdentifier('title', null, [
+                'label' => 'media_file.fields.title',
+                'field' => 'title',
+                'template' => 'MediaBundle:Admin:list_title.html.twig',
+            ])
             ->addIdentifier('origName', null, [
                 'label' => 'media_file.fields.orig_name',
+                'template'  => 'MediaBundle:Admin:list_media.html.twig',
             ])
             ->addIdentifier('path', null, [
                 'label'     => 'media.fields.path',
-//                'template'  => 'MediaBundle:Admin:list_media.html.twig',
-                'sortable'  => false,
-            ])
-            ->add('size', null, [
-                'label' => 'media_file.fields.size',
             ])
             ->add('isActive', null, [
                 'label' => 'media_file.fields.is_active',

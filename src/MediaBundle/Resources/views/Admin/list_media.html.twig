@@ -6,8 +6,6 @@
 
     {% set isFile       = object is instanceof("\\MediaBundle\\Entity\\MediaFile") %}
     {% set isImage      = object is instanceof("\\MediaBundle\\Entity\\MediaImage") %}
-    {% set isVideo      = object is instanceof("\\MediaBundle\\Entity\\MediaVideo") %}
-    {% set isAudio      = object is instanceof("\\MediaBundle\\Entity\\MediaAudio") %}
     {% set isGallery    = object is instanceof("\\MediaBundle\\Entity\\MediaGallery") %}
 
     {% if isImage or isGallery %}
@@ -24,13 +22,7 @@
         {% endif %}
 
         <div class="text-primary">
-            <i class="{{ object.path|file_mime_icon_class }}"></i> {{ object.name }}
+            <i class="{{ object.path|file_mime_icon_class }}"></i> {{ object.origName }}
         </div>
-    {% elseif isVideo or isAudio %}
-        {% if not object.type and object.path %}
-            {{ isAudio ? _media.audio(object.path) : _media.video(object.path, mediaId, true)}}
-        {% elseif object.type %}
-            {{ _media.iframe(object.code, mediaId, true) }}
-        {% endif %}
     {% endif %}
 {% endblock %}
