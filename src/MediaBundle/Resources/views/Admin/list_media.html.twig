@@ -1,0 +1,36 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% import 'MediaBundle:Admin:_media_macro.html.twig' as _media %}
+    {% set mediaId = 'media'~object.id %}
+
+    {% set isFile       = object is instanceof("\\MediaBundle\\Entity\\MediaFile") %}
+    {% set isImage      = object is instanceof("\\MediaBundle\\Entity\\MediaImage") %}
+    {% set isVideo      = object is instanceof("\\MediaBundle\\Entity\\MediaVideo") %}
+    {% set isAudio      = object is instanceof("\\MediaBundle\\Entity\\MediaAudio") %}
+    {% set isGallery    = object is instanceof("\\MediaBundle\\Entity\\MediaGallery") %}
+
+    {% if isImage or isGallery %}
+        {{ _media.image(value, 'max-height: 100px;') }}
+    {% elseif isFile %}
+        {% set extension = object.path|file_extension %}
+
+        {% if extension in ['mp3', 'ogg'] %}
+            {{ _media.audio(object.path) }}
+        {% elseif extension in ['jpg', 'jpeg', 'gif', 'png', 'bmp'] %}
+            {{ _media.image(object.path, 'max-height: 100px;') }}
+        {% elseif extension in ['mp4', 'avi', 'wma', '3gp', 'mov', 'mpeg'] %}
+            {{ _media.video(object.path, mediaId, true) }}
+        {% endif %}
+
+        <div class="text-primary">
+            <i class="{{ object.path|file_mime_icon_class }}"></i> {{ object.name }}
+        </div>
+    {% elseif isVideo or isAudio %}
+        {% if not object.type and object.path %}
+            {{ isAudio ? _media.audio(object.path) : _media.video(object.path, mediaId, true)}}
+        {% elseif object.type %}
+            {{ _media.iframe(object.code, mediaId, true) }}
+        {% endif %}
+    {% endif %}
+{% endblock %}

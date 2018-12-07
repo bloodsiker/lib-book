@@ -8,18 +8,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Class Media
- *
- * @ORM\Entity()
- * @ORM\Table(name="media")
- * @ORM\HasLifecycleCallbacks
- *
- * @Vich\Uploadable
+ * Class AbstractMedia
  */
-class Media
+abstract class AbstractMedia
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -39,14 +33,21 @@ class Media
      *
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $mediaFile;
+    protected $path;
 
     /**
-     * Unmapped property to handle file uploads
+     * @var string
      *
-     * @Vich\UploadableField(mapping="media_file", fileNameProperty="mediaFile")
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
-    private $file;
+    protected $mimeType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
+     */
+    protected $size;
 
     /**
      * @var bool
@@ -54,6 +55,14 @@ class Media
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isActive;
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $createdBy;
 
     /**
      * @var \DateTime
@@ -70,17 +79,16 @@ class Media
     protected $updatedAt;
 
     /**
-     * Constructor
+     * Gallery constructor.
      */
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isActive  = true;
         $this->createdAt = new \DateTime('now');
     }
 
     /**
      * "String" representation of class
-     *
      * @return string
      */
     public function __toString()
@@ -103,7 +111,7 @@ class Media
      *
      * @param string $origName
      *
-     * @return Media
+     * @return AbstractMedia
      */
     public function setOrigName($origName)
     {
@@ -123,52 +131,51 @@ class Media
     }
 
     /**
-     * Set bookFile
+     * Set path
      *
-     * @param string $mediaFile
+     * @param string $path
      *
-     * @return Media
+     * @return AbstractMedia
      */
-    public function setMediaFile($mediaFile = null)
+    public function setPath($path = null)
     {
-        $this->mediaFile = $mediaFile;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Get mediaFile
+     * Get path
      *
      * @return string
      */
-    public function getMediaFile()
+    public function getPath()
     {
-        return $this->mediaFile;
+        return $this->path;
     }
 
     /**
-     * Sets file
+     * Set size.
      *
-     * @param File|null $file
+     * @param int|null $size
      *
-     * @throws \Exception
+     * @return AbstractMedia
      */
-    public function setFile(File $file = null)
+    public function setSize($size = null)
     {
-        $this->file = $file;
-        if (null !== $file) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
+        $this->size = $size;
+
+        return $this;
     }
 
     /**
-     * Get file.
+     * Get size.
      *
-     * @return UploadedFile
+     * @return int|null
      */
-    public function getFile()
+    public function getSize()
     {
-        return $this->file;
+        return $this->size;
     }
 
     /**
@@ -176,7 +183,7 @@ class Media
      *
      * @param boolean $isActive
      *
-     * @return Media
+     * @return AbstractMedia
      */
     public function setIsActive($isActive)
     {
@@ -196,11 +203,59 @@ class Media
     }
 
     /**
+     * Set createdBy.
+     *
+     * @param \UserBundle\Entity\User|null $createdBy
+     *
+     * @return AbstractMedia
+     */
+    public function setCreatedBy(\UserBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy.
+     *
+     * @return \UserBundle\Entity\User|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set mimeType.
+     *
+     * @param string|null $mimeType
+     *
+     * @return AbstractMedia
+     */
+    public function setMimeType($mimeType = null)
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mimeType.
+     *
+     * @return string|null
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
-     * @return Media
+     * @return AbstractMedia
      */
     public function setCreatedAt($createdAt)
     {
@@ -224,7 +279,7 @@ class Media
      *
      * @param \DateTime $updatedAt
      *
-     * @return Media
+     * @return AbstractMedia
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -242,4 +297,5 @@ class Media
     {
         return $this->updatedAt;
     }
+
 }

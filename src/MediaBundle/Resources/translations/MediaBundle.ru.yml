@@ -8,13 +8,16 @@ form_group:
 
 group:
     media: Медиа
-    media_editor: Медиа
+    media_file_editor: Файлы
 
-comment:
+media_file:
     fields:
-        comment: Комментарий
+        orig_name: Оригинальное название
+        file: Файл
+        mime_type: Mime-type
+        size: Размер
         is_active: Активна
-        rating: Рейтинг комментария
-        book: Книга
         created_at: Дата создания
+        updated_at: Дата редактирования
+        created_by: Создан пользователем
         id: ID

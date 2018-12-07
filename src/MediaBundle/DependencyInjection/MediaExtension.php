@@ -13,7 +13,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class MediaExtension extends Extension
 {
     /**
-     * {@inheritdoc}
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     *
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -21,6 +24,8 @@ class MediaExtension extends Extension
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+//        $loader->load('upload.yml');
+        $loader->load('twig.yml');
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.yml');
