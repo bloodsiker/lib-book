@@ -6,25 +6,17 @@ vich_uploader:
         cache: file
 
     mappings:
-        book_image:
-            upload_destination: image
-            namer: book.upload_namer.book_poster
-
-            inject_on_load: false
-            delete_on_update: true
-            delete_on_remove: true
-
-        book_file:
-            upload_destination: file
-            namer: book.upload_namer.book
-
-            inject_on_load: false
-            delete_on_update: true
-            delete_on_remove: true
-
         media_file:
             upload_destination: file
             namer: media.upload_namer.file
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        media_image:
+            upload_destination: image
+            namer: media.upload_namer.image
 
             inject_on_load: false
             delete_on_update: true

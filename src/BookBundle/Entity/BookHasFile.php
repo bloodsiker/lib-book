@@ -3,9 +3,6 @@
 namespace BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class BookHasFile
@@ -13,8 +10,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity()
  * @ORM\Table(name="books_has_file")
  * @ORM\HasLifecycleCallbacks
- *
- * @Vich\Uploadable
  */
 class BookHasFile
 {
@@ -36,9 +31,9 @@ class BookHasFile
     protected $book;
 
     /**
-     * @var \BookBundle\Entity\BookFile
+     * @var \MediaBundle\Entity\MediaFile
      *
-     * @ORM\ManyToOne(targetEntity="BookBundle\Entity\BookFile", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="MediaBundle\Entity\MediaFile", fetch="EAGER")
      * @ORM\JoinColumn(name="book_file_id", referencedColumnName="id", nullable=false)
      */
     protected $bookFile;
@@ -129,11 +124,11 @@ class BookHasFile
     /**
      * Set bookFile.
      *
-     * @param \BookBundle\Entity\BookFile $bookFile
+     * @param \MediaBundle\Entity\MediaFile $bookFile
      *
      * @return BookHasFile
      */
-    public function setBookFile(\BookBundle\Entity\BookFile $bookFile)
+    public function setBookFile(\MediaBundle\Entity\MediaFile $bookFile = null)
     {
         $this->bookFile = $bookFile;
 
@@ -143,7 +138,7 @@ class BookHasFile
     /**
      * Get bookFile.
      *
-     * @return \BookBundle\Entity\BookFile
+     * @return \MediaBundle\Entity\MediaFile
      */
     public function getBookFile()
     {

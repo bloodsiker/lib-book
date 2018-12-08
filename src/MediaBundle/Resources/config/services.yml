@@ -2,4 +2,9 @@ services:
     media.upload_namer.file:
         class: "MediaBundle\\Naming\\MediaNamer"
         calls:
-        - [ setPathImage, ["/files/media/[ID/100]/[FILE]"]]
+        - [ setPathImage, ["/files/media_file/[YEAR]/[MONTH]/[FILE]"]]
+
+    media.upload_namer.image:
+        class: "MediaBundle\\Naming\\MediaNamer"
+        calls:
+        - [ setPathImage, ["/files/media_image/[YEAR]/[MONTH]/[FILE]"]]

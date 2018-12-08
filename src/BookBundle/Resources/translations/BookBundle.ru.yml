@@ -35,13 +35,3 @@ book_has_file:
         book: Книга
         file: Файл
         type: Тип
-
-book_file:
-    fields:
-        id: ID
-        orig_name: Оригинальное название
-        type: Тип файла
-        file: Файл
-        is_active: Актовно
-        updated_at: Обновлено
-        created_at: Создано

@@ -9,13 +9,16 @@ form_group:
 group:
     media: Медиа
     media_file_editor: Файлы
+    media_image_editor: Изображения
 
-media_file:
+media:
     fields:
-        orig_name: Оригинальное название
+        description: Описание
         file: Файл
         mime_type: Mime-type
         size: Размер
+        width: Ширина
+        height: Высота
         is_active: Активна
         created_at: Дата создания
         updated_at: Дата редактирования

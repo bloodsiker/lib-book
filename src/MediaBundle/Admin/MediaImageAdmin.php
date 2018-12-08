@@ -3,6 +3,7 @@
 namespace MediaBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use AdminBundle\Form\Type\UploadVichImageType;
 use MediaBundle\Twig\Extension\MediaExtension;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -10,12 +11,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 
 /**
- * Class MediaFileAdmin
+ * Class MediaImageAdmin
  */
-class MediaFileAdmin extends Admin
+class MediaImageAdmin extends Admin
 {
     /**
      * @var array
@@ -66,6 +66,9 @@ class MediaFileAdmin extends Admin
     {
         $file = $object->getFile();
         if ($file) {
+            list($width, $height) = getimagesize($file->getRealPath());
+            $object->setWidth($width);
+            $object->setHeight($height);
             $object->setSize($file->getSize());
             $object->setMimeType($file->getMimeType());
         }
@@ -130,10 +133,10 @@ class MediaFileAdmin extends Admin
                     'label' => 'media.fields.description',
                     'required'  => false,
                 ])
-                ->add('file', VichFileType::class, [
+                ->add('file', UploadVichImageType::class, [
                     'label'     => 'media.fields.file',
+                    'preview_width' => 250,
                     'required'  => false,
-                    'help'      => $this->getSubject()->getPath() ?: false,
                 ])
                 ->add('createdBy', ModelListType::class, [
                     'label'    => 'media.fields.created_by',
@@ -150,6 +153,16 @@ class MediaFileAdmin extends Admin
                 ])
                 ->add('size', TextType::class, [
                     'label' => 'media.fields.size',
+                    'required' => false,
+                    'attr'  => ['readonly' => true],
+                ])
+                ->add('width', TextType::class, [
+                    'label' => 'media.fields.width',
+                    'required' => false,
+                    'attr'  => ['readonly' => true],
+                ])
+                ->add('height', TextType::class, [
+                    'label' => 'media.fields.height',
                     'required' => false,
                     'attr'  => ['readonly' => true],
                 ])

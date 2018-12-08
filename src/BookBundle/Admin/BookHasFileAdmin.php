@@ -3,6 +3,7 @@
 namespace BookBundle\Admin;
 
 use BookBundle\Entity\BookFile;
+use MediaBundle\Twig\Extension\MediaExtension;
 use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -63,30 +64,19 @@ class BookHasFileAdmin extends Admin
             ], ['link_parameters' => $linkParameters])
         ;
         if ($this->getSubject() && $this->getSubject()->getId()) {
+            $extensionFile = MediaExtension::getExtensionFile($this->getSubject()->getBookFile()->getPath());
             $formMapper
-                ->add('bookFile.type', TextType::class, [
+                ->add('bookFile.mimeType', TextType::class, [
                     'label' => 'book_has_file.fields.type',
                     'required' => false,
-                    'empty_data' => $this->getSubject()->getBookFile()->getType(),
+                    'empty_data' => $extensionFile,
                     'attr' => [
                         'readonly' => true,
                         'disabled' => true,
-                        'value'    => $this->getType($this->getSubject()->getBookFile()->getType()),
+                        'value' => $extensionFile,
                     ],
                 ])
             ;
         }
-    }
-
-    /**
-     * @param int $type
-     *
-     * @return mixed
-     */
-    protected function getType($type)
-    {
-        $types = BookFile::getTypeList();
-
-        return $types[$type];
     }
 }

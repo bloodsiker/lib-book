@@ -119,9 +119,9 @@ class BookAdmin extends Admin
                     'label' => 'book.fields.is_active',
                     'required' => false,
                 ])
-                ->add('file', UploadVichImageType::class, [
+                ->add('poster', ModelListType::class, [
                     'label' => 'book.fields.poster',
-                    'preview_width' => 250,
+                    'required' => false,
                 ])
                 ->add('author', ModelListType::class, [
                     'label' => 'book.fields.author',

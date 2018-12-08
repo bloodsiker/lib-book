@@ -21,9 +21,9 @@ abstract class AbstractMedia
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $origName;
+    protected $description;
 
     /**
      * @var string
@@ -90,7 +90,7 @@ abstract class AbstractMedia
      */
     public function __toString()
     {
-        return (string) $this->origName;
+        return (string) $this->id;
     }
 
     /**
@@ -104,27 +104,27 @@ abstract class AbstractMedia
     }
 
     /**
-     * Set name
+     * Set description
      *
-     * @param string $origName
+     * @param string $description
      *
      * @return AbstractMedia
      */
-    public function setOrigName($origName)
+    public function setDescription($description)
     {
-        $this->origName = $origName;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get description
      *
      * @return string
      */
-    public function getOrigName()
+    public function getDescription()
     {
-        return $this->origName;
+        return $this->description;
     }
 
     /**

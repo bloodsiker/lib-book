@@ -7,7 +7,7 @@
             <div class="btn-group" role="group" aria-label="...">
                 {% for file in files %}
                     {#<button type="button" class="btn btn-default">{{ file.bookFile.getTypeList[file.bookFile.type] }}</button>#}
-                    <button type="button" class="btn btn-default">{{ file.bookFile.bookFile|file_extension|upper }}</button>
+                    <button type="button" class="btn btn-default">{{ file.bookFile.path|file_extension|upper }}</button>
                 {% endfor %}
             </div>
         {% elseif field_description.name == 'fromPath' %}

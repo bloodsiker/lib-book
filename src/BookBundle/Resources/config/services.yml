@@ -1,10 +1,1 @@
 services:
-    book.upload_namer.book:
-        class: "BookBundle\\Naming\\BookNamer"
-        calls:
-          - [ setPathImage, ["/files/books/[ID/100]/[FILE]"]]
-
-    book.upload_namer.book_poster:
-        class: "BookBundle\\Naming\\BookNamer"
-        calls:
-          - [ setPathImage, ["/images/posters/[ID/100]/[FILE]"]]

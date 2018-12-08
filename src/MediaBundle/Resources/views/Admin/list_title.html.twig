@@ -2,7 +2,6 @@
 
 {% block field %}
     {% set isImage = object is instanceof("\\MediaBundle\\Entity\\MediaImage") %}
-    {% set isVideo = object is instanceof("\\MediaBundle\\Entity\\MediaVideo") %}
 
     {{ value is not empty ? value : 'file #'~object.id }}
 
@@ -22,7 +21,7 @@
                     {{ 'media.fields.mime_type'|trans({}, 'MediaBundle') }}: "{{ object.mimeType }}"<br/>
                 {% endif %}
 
-                {% if (isVideo or isImage) and (object.width and object.height) %}
+                {% if isImage and (object.width and object.height) %}
                     {{ 'media.fields.resolution'|trans({}, 'MediaBundle') }}: {{ object.width }}x{{ object.height }} px
                 {% endif %}
             </span>

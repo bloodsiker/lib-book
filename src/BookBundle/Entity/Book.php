@@ -5,6 +5,9 @@ namespace BookBundle\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use MediaBundle\Admin\MediaImageAdmin;
+use MediaBundle\Entity\MediaFile;
+use MediaBundle\MediaBundle;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -37,18 +40,12 @@ class Book
     protected $name;
 
     /**
-     * @var string
+     * @var \MediaBundle\Entity\MediaImage
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="MediaBundle\Entity\MediaImage")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $poster;
-
-    /**
-     * Unmapped property to handle file uploads
-     *
-     * @Vich\UploadableField(mapping="book_image", fileNameProperty="poster")
-     */
-    private $file;
 
     /**
      * @var string
@@ -221,11 +218,11 @@ class Book
     /**
      * Set poster
      *
-     * @param string $poster
+     * @param \MediaBundle\Entity\MediaImage $poster
      *
      * @return Book
      */
-    public function setPoster($poster = null)
+    public function setPoster(\MediaBundle\Entity\MediaImage $poster = null)
     {
         $this->poster = $poster;
 
@@ -235,36 +232,11 @@ class Book
     /**
      * Get image
      *
-     * @return integer
+     * @return \MediaBundle\Entity\MediaImage
      */
     public function getPoster()
     {
         return $this->poster;
-    }
-
-    /**
-     * Sets file
-     *
-     * @param File|null $file
-     *
-     * @throws \Exception
-     */
-    public function setFile(File $file = null)
-    {
-        $this->file = $file;
-        if (null !== $file) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
     }
 
     /**

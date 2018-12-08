@@ -30,7 +30,7 @@ class MediaNamer implements NamerInterface
         $name = $file->getClientOriginalName();
         $name = uniqid().'_'.Transliterator::transliterate($name);
 
-        return $this->fillPath($object, $name);
+        return $this->fillPath($name);
     }
 
     /**
@@ -38,7 +38,7 @@ class MediaNamer implements NamerInterface
      *
      * @return $this
      */
-    public function setPathImage(string $pathImage)
+    public function setPathImage(string $pathImage): self
     {
         $this->pathImage = $pathImage;
 
@@ -46,22 +46,18 @@ class MediaNamer implements NamerInterface
     }
 
     /**
-     * @param object $object
      * @param string $name
      *
      * @return string
      */
-    protected function fillPath($object, $name): string
+    protected function fillPath($name): string
     {
-//        $name = uniqid().'.'.$object->getFile()->guessExtension();
-
+        $date = new \DateTime();
+        $year = $date->format('Y');
+        $month = $date->format('m');
         if (null !== $this->pathImage) {
-            $pattern = ['[ID/100]', '[ID]', '[FILE]'];
-            $replace = [
-                intval($object->getId() / 100),
-                $object->getId(),
-                $name,
-            ];
+            $pattern = ['[YEAR]', '[MONTH]', '[FILE]'];
+            $replace = [$year, $month, $name];
             $path = str_replace($pattern, $replace, $this->pathImage);
         } else {
             $path = '/img_tmp/'.$name;
