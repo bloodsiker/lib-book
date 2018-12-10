@@ -67,12 +67,13 @@ class BookAdmin extends Admin
                 'label' => 'book.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
-                    'edit' => [],
-                ],
-            ]);
+//            ->add('_action', 'actions', [
+//                'actions' => [
+//                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
+//                    'edit' => [],
+//                ],
+//            ])
+        ;
     }
 
     /**

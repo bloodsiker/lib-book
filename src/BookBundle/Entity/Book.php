@@ -5,11 +5,6 @@ namespace BookBundle\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use MediaBundle\Admin\MediaImageAdmin;
-use MediaBundle\Entity\MediaFile;
-use MediaBundle\MediaBundle;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -136,16 +131,16 @@ class Book
      */
     protected $bookHasRelated;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
-     * @ORM\JoinTable(name="book_tag",
-     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    protected $tags;
+//    /**
+//     * @var ArrayCollection
+//     *
+//     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
+//     * @ORM\JoinTable(name="book_tag",
+//     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
+//     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}
+//     * )
+//     */
+//    protected $tags;
 
     /**
      * @var \DateTime
@@ -170,7 +165,7 @@ class Book
         $this->download = 0;
         $this->createdAt = $this->updatedAt = new \DateTime('now');
         $this->genres = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+//        $this->tags = new ArrayCollection();
         $this->bookHasFiles = new ArrayCollection();
         $this->bookHasRelated = new ArrayCollection();
     }
@@ -562,39 +557,39 @@ class Book
         return $this->bookHasRelated;
     }
 
-    /**
-     * Add tags
-     *
-     * @param \ShareBundle\Entity\Tag $tags
-     *
-     * @return Book
-     */
-    public function addTag(\ShareBundle\Entity\Tag $tags)
-    {
-        $this->tags[] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param \ShareBundle\Entity\Tag $tags
-     */
-    public function removeTag(\ShareBundle\Entity\Tag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
+//    /**
+//     * Add tags
+//     *
+//     * @param \ShareBundle\Entity\Tag $tags
+//     *
+//     * @return Book
+//     */
+//    public function addTag(\ShareBundle\Entity\Tag $tags)
+//    {
+//        $this->tags[] = $tags;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove tags
+//     *
+//     * @param \ShareBundle\Entity\Tag $tags
+//     */
+//    public function removeTag(\ShareBundle\Entity\Tag $tags)
+//    {
+//        $this->tags->removeElement($tags);
+//    }
+//
+//    /**
+//     * Get tags
+//     *
+//     * @return \Doctrine\Common\Collections\Collection
+//     */
+//    public function getTags()
+//    {
+//        return $this->tags;
+//    }
 
     /**
      * Set createdAt

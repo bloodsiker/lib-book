@@ -13,8 +13,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class ShareExtension extends Extension
 {
     /**
-     * @param array            $config
+     * @param array $config
      * @param ContainerBuilder $container
+     *
+     * @throws \Exception
      */
     public function load(array $config, ContainerBuilder $container)
     {
