@@ -1,6 +1,6 @@
 <?php
 
-namespace ArticleBundle\Entity;
+namespace BookBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
