@@ -46,17 +46,6 @@ final class Version20181014125608 extends AbstractMigration
         $book->addForeignKeyConstraint($schema->getTable('authors'), ['author_id'], ['id'], ['onDelete' => 'set null']);
         $book->addForeignKeyConstraint($schema->getTable('series'), ['series_id'], ['id'], ['onDelete' => 'set null']);
 
-        // bookFile
-        $bookFile = $schema->createTable('books_file');
-        $bookFile->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
-        $bookFile->addColumn('orig_name', 'string', array('length' => 255, 'notnull' => true));
-        $bookFile->addColumn('book_file', 'string', array('length' => 255, 'notnull' => false));
-        $bookFile->addColumn('type', 'smallint', array('length' => 1, 'notnull' => true));
-        $bookFile->addColumn('is_active', 'boolean', array('notnull' => true));
-        $bookFile->addColumn('created_at', 'datetime', array('notnull' => true));
-        $bookFile->addColumn('updated_at', 'datetime', array('notnull' => true));
-        $bookFile->setPrimaryKey(['id']);
-
         // bookHasFile
         $bookHasFile = $schema->createTable('books_has_file');
         $bookHasFile->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
@@ -67,6 +56,17 @@ final class Version20181014125608 extends AbstractMigration
         $bookHasFile->addIndex(['book_id', 'book_file_id']);
         $bookHasFile->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'restrict']);
         $bookHasFile->addForeignKeyConstraint($schema->getTable('books_file'), ['book_file_id'], ['id'], ['onDelete' => 'restrict']);
+
+        // bookHasRelated
+        $bookHasRelated = $schema->createTable('books_has_related');
+        $bookHasRelated->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $bookHasRelated->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookHasRelated->addColumn('related_book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookHasRelated->addColumn('order_num', 'integer', array('length' => 11, 'notnull' => true, 'default' => 1));
+        $bookHasRelated->setPrimaryKey(['id']);
+        $bookHasRelated->addIndex(['book_id', 'related_book_id']);
+        $bookHasRelated->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'restrict']);
+        $bookHasRelated->addForeignKeyConstraint($book, ['related_book_id'], ['id'], ['onDelete' => 'restrict']);
 
         // bookGenres
         $bookGenres = $schema->createTable('books_genres');
@@ -94,11 +94,11 @@ final class Version20181014125608 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
+        $schema->dropTable('books_has_related');
         $schema->dropTable('books_has_file');
         $schema->dropTable('books_file');
         $schema->dropTable('books_genres');
         $schema->dropTable('books_comments');
         $schema->dropTable('books');
-
     }
 }

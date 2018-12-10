@@ -27,6 +27,7 @@ book:
         year: Год издания
         genres: Жанр(ы)
         download: Скачиваний
+        book_related: Похожие книги
         updated_at: Изменена
         created_at: Создана
 
@@ -35,3 +36,9 @@ book_has_file:
         book: Книга
         file: Файл
         type: Тип
+
+book_has_related:
+    fields:
+        book: Книга
+        book_related: Похожая книги
+        order_num: Позиция

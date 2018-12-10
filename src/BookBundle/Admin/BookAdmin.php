@@ -29,6 +29,17 @@ class BookAdmin extends Admin
     ];
 
     /**
+     * @return array
+     */
+    public function getFormTheme()
+    {
+        return array_merge(
+            parent::getFormTheme(),
+            ['BookBundle:Form:admin_fields.html.twig']
+        );
+    }
+
+    /**
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
@@ -55,6 +66,12 @@ class BookAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'book.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
+                    'edit' => [],
+                ],
             ]);
     }
 
@@ -112,6 +129,18 @@ class BookAdmin extends Admin
                     'sortable' => 'orderNum',
                     'link_parameters' => ['context' => $context],
                     'admin_code' => 'sonata.admin.book_has_files',
+                ])
+                ->add('bookHasRelated', CollectionType::class, [
+                    'label' => 'book.fields.book_related',
+                    'required' => false,
+                    'constraints' => new Valid(),
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'orderNum',
+                    'link_parameters' => ['context' => $context],
+                    'admin_code' => 'sonata.admin.book_has_related',
                 ])
             ->end()
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])

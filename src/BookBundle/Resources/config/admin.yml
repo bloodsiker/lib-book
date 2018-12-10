@@ -20,3 +20,14 @@ services:
           - ~
         calls:
           - [ setTranslationDomain, [BookBundle] ]
+
+    sonata.admin.book_has_related:
+        class: "BookBundle\\Admin\\BookHasRelatedAdmin"
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_has_related", show_in_dashboard: false }
+        arguments:
+          - ~
+          - "BookBundle\\Entity\\BookHasRelated"
+          - ~
+        calls:
+          - [ setTranslationDomain, [BookBundle] ]

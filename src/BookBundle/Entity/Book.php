@@ -15,7 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Class Book
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BookBundle\Entity\BookRepository")
  * @ORM\Table(name="books")
  * @ORM\HasLifecycleCallbacks
  *
@@ -69,9 +69,9 @@ class Book
     protected $year;
 
     /**
-     * @var \AuthorBundle\Entity\Author
+     * @var \ShareBundle\Entity\Author
      *
-     * @ORM\ManyToOne(targetEntity="AuthorBundle\Entity\Author")
+     * @ORM\ManyToOne(targetEntity="ShareBundle\Entity\Author")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $author;
@@ -127,6 +127,27 @@ class Book
     protected $bookHasFiles;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BookBundle\Entity\BookHasRelated",
+     *     mappedBy="book", cascade={"all"}, orphanRemoval=true
+     * )
+     * @ORM\OrderBy({"orderNum" = "ASC"})
+     */
+    protected $bookHasRelated;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
+     * @ORM\JoinTable(name="book_tag",
+     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    protected $tags;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -149,7 +170,9 @@ class Book
         $this->download = 0;
         $this->createdAt = $this->updatedAt = new \DateTime('now');
         $this->genres = new ArrayCollection();
+        $this->tags = new ArrayCollection();
         $this->bookHasFiles = new ArrayCollection();
+        $this->bookHasRelated = new ArrayCollection();
     }
 
     /**
@@ -338,11 +361,11 @@ class Book
     /**
      * Set author
      *
-     * @param \AuthorBundle\Entity\Author $author
+     * @param \ShareBundle\Entity\Author $author
      *
      * @return Book
      */
-    public function setAuthor(\AuthorBundle\Entity\Author $author = null)
+    public function setAuthor(\ShareBundle\Entity\Author $author = null)
     {
         $this->author = $author;
 
@@ -352,7 +375,7 @@ class Book
     /**
      * Get author
      *
-     * @return \AuthorBundle\Entity\Author
+     * @return \ShareBundle\Entity\Author
      */
     public function getAuthor()
     {
@@ -493,13 +516,84 @@ class Book
     }
 
     /**
-     * Get articleHasAuthors.
+     * Get BookHasAuthors.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getBookHasFiles()
     {
         return $this->bookHasFiles;
+    }
+
+    /**
+     * Add BookHasRelated.
+     *
+     * @param \BookBundle\Entity\BookHasRelated $bookHasRelated
+     *
+     * @return Book
+     */
+    public function addBookHasRelated(\BookBundle\Entity\BookHasRelated $bookHasRelated)
+    {
+        $bookHasRelated->setBook($this);
+        $this->bookHasRelated[] = $bookHasRelated;
+
+        return $this;
+    }
+
+    /**
+     * Remove bookHasRelated.
+     *
+     * @param \BookBundle\Entity\BookHasRelated $bookHasRelated
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeBookHasRelated(\BookBundle\Entity\BookHasRelated $bookHasRelated)
+    {
+        return $this->bookHasRelated->removeElement($bookHasRelated);
+    }
+
+    /**
+     * Get BookHasRelated.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBookHasRelated()
+    {
+        return $this->bookHasRelated;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \ShareBundle\Entity\Tag $tags
+     *
+     * @return Book
+     */
+    public function addTag(\ShareBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \ShareBundle\Entity\Tag $tags
+     */
+    public function removeTag(\ShareBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**

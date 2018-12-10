@@ -92,9 +92,6 @@ class MediaImageAdmin extends Admin
                 'label' => 'media.fields.description',
                 'template'  => 'MediaBundle:Admin:list_media.html.twig',
             ])
-            ->add('size', null, [
-                'label' => 'media.fields.size',
-            ])
             ->add('isActive', null, [
                 'label' => 'media.fields.is_active',
                 'editable'  => true,

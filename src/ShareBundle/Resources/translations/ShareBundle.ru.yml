@@ -1,0 +1,39 @@
+Action: Действия
+Tag List: Теги
+Social List: Социальные сети
+R T F Block List: Текстовые блоки
+Author List: Список авторов
+Author Create: Добавить автора
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    share: Справочники
+    tag: Теги
+    social: Социальные сети
+    rtf_block: Текстовые блоки
+    author: Авторы
+    author_editor: Авторы
+
+tag:
+    fields:
+        id: ID
+        name: Название
+        slug: Сегмент URL (slug)
+        is_active: Активен
+    block:
+        breadcrumb_item: Теги
+        title:
+            last: Последние новости по запросу «%tag%»
+            all: Все новости по запросу «%tag%»
+
+author:
+    fields:
+        name: ФИО
+        is_active: Активен
+        created_at: Дата создания
+        slug: Сегмент URL (slug)
+        parent: Родительский жанр
+        id: ID

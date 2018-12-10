@@ -64,10 +64,11 @@ class AppKernel extends Kernel
             new PageBundle\PageBundle(),
             new MediaBundle\MediaBundle(),
             new GenreBundle\GenreBundle(),
-            new AuthorBundle\AuthorBundle(),
+//            new AuthorBundle\AuthorBundle(),
             new SeriesBundle\SeriesBundle(),
             new BookBundle\BookBundle(),
             new CommentBundle\CommentBundle(),
+            new ShareBundle\ShareBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
