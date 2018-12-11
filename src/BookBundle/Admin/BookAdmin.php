@@ -223,6 +223,11 @@ class BookAdmin extends Admin
                     'btn_add' => 'book.buttons.link_add_tag',
                     'attr' => ['class' => 'form-control'],
                 ])
+                ->add('views', IntegerType::class, [
+                    'label' => 'book.fields.views',
+                    'required' => false,
+                    'attr' => ['readonly' => true],
+                ])
                 ->add('download', IntegerType::class, [
                     'label' => 'book.fields.download',
                     'required' => false,

@@ -39,6 +39,7 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('is_active', 'boolean', array('notnull' => true));
         $book->addColumn('is_allow_download', 'boolean', array('notnull' => true));
         $book->addColumn('download', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));
+        $book->addColumn('views', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));
         $book->addColumn('created_at', 'datetime', array('notnull' => true));
         $book->addColumn('updated_at', 'datetime', array('notnull' => true));
         $book->setPrimaryKey(['id']);

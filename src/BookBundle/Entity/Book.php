@@ -108,6 +108,13 @@ class Book
     protected $download;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $views;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre")
@@ -171,10 +178,12 @@ class Book
         $this->isActive = true;
         $this->isAllowDownload = true;
         $this->download = 0;
+        $this->views = 0;
         $this->createdAt = $this->updatedAt = new \DateTime('now');
-        $this->genres = new ArrayCollection();
-        $this->tags = new ArrayCollection();
-        $this->bookHasFiles = new ArrayCollection();
+
+        $this->genres         = new ArrayCollection();
+        $this->tags           = new ArrayCollection();
+        $this->bookHasFiles   = new ArrayCollection();
         $this->bookHasRelated = new ArrayCollection();
     }
 
@@ -455,6 +464,30 @@ class Book
     public function getDownload()
     {
         return $this->download;
+    }
+
+    /**
+     * Set views
+     *
+     * @param boolean $views
+     *
+     * @return Book
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * Get views
+     *
+     * @return integer
+     */
+    public function getViews()
+    {
+        return $this->views;
     }
 
     /**
