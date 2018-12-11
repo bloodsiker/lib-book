@@ -54,6 +54,9 @@ class BookAdmin extends Admin
             ->with('author')
                 ->addConstraint(new NotNull())
             ->end()
+            ->with('genres')
+                ->addConstraint(new NotNull())
+            ->end()
         ;
     }
 
@@ -210,7 +213,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('genres', ModelAutocompleteType::class, [
                     'label' => 'book.fields.genres',
-                    'required' => false,
+                    'required' => true,
                     'property' => 'name',
                     'multiple' => true,
                     'attr' => ['class' => 'form-control'],
@@ -222,6 +225,11 @@ class BookAdmin extends Admin
                     'multiple' => true,
                     'btn_add' => 'book.buttons.link_add_tag',
                     'attr' => ['class' => 'form-control'],
+                ])
+                ->add('rating', TextType::class, [
+                    'label' => 'book.fields.rating',
+                    'required' => false,
+                    'attr' => ['readonly' => true],
                 ])
                 ->add('views', IntegerType::class, [
                     'label' => 'book.fields.views',

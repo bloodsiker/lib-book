@@ -81,9 +81,12 @@
                             relatedTable.append(
                                 '<tr class="success">' +
                                     '<td>' + related[book].id + '</td>' +
-                                    '<td>' + related[book].date + '</td>' +
+                                    '<td width="130px">' + related[book].date + '</td>' +
                                     '<td>' + related[book].name + '</td>' +
                                     '<td>' + related[book].author + '</td>' +
+                                    '<td class="text-center"><i class="fa fa-eye"></i> ' + related[book].views + '</td>' +
+                                    '<td class="text-center"><i class="fa fa-download"></i> ' + related[book].download + '</td>' +
+                                    '<td class="text-center"><i class="fa fa-signal"></i> ' + related[book].rate + '</td>' +
                                     '<td>' +
                                         '<button ' +
                                             'class="btn btn-sm btn-success" ' +

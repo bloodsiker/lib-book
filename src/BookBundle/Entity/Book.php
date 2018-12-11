@@ -115,6 +115,20 @@ class Book
     protected $views;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", length=7, nullable=true)
+     */
+    protected $ratePlus;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", length=7, nullable=true)
+     */
+    protected $rateMinus;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre")
@@ -179,6 +193,8 @@ class Book
         $this->isAllowDownload = true;
         $this->download = 0;
         $this->views = 0;
+        $this->ratePlus = 0;
+        $this->rateMinus = 0;
         $this->createdAt = $this->updatedAt = new \DateTime('now');
 
         $this->genres         = new ArrayCollection();
@@ -700,6 +716,65 @@ class Book
     public function setIsAllowDownload(bool $isAllowDownload)
     {
         $this->isAllowDownload = $isAllowDownload;
+
+        return $this;
+    }
+
+    /**
+     * Get rating book
+     * @return string
+     */
+    public function rating()
+    {
+        $rate = $this->ratePlus - $this->rateMinus;
+
+        return '[+'.$this->ratePlus.'] - [-'.$this->rateMinus.'] => ['.$rate.']';
+    }
+
+    /**
+     * Get ratePlus
+     *
+     * @return int
+     */
+    public function getRatePlus()
+    {
+        return $this->ratePlus;
+    }
+
+    /**
+     * Set ratePlus
+     *
+     * @param int $ratePlus
+     *
+     * @return $this
+     */
+    public function setRatePlus(int $ratePlus)
+    {
+        $this->ratePlus = $ratePlus;
+
+        return $this;
+    }
+
+    /**
+     * Get rateMinus
+     *
+     * @return int
+     */
+    public function getRateMinus()
+    {
+        return $this->rateMinus;
+    }
+
+    /**
+     * Set rateMinus
+     *
+     * @param int $rateMinus
+     *
+     * @return $this
+     */
+    public function setRateMinus(int $rateMinus)
+    {
+        $this->rateMinus = $rateMinus;
 
         return $this;
     }

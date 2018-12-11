@@ -15,7 +15,7 @@ final class Version20181014125608 extends AbstractMigration
      */
     public function getDescription() : string
     {
-        return "Books, BookFile, BooksGenres, BookComments (BookBundle)";
+        return "Books, BookHasFile, BookHasTags, BookHasRelated, BooksGenres, BookComments (BookBundle)";
     }
 
     /**
@@ -34,8 +34,10 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('name', 'string', array('length' => 255, 'notnull' => true));
         $book->addColumn('slug', 'string', array('length' => 100, 'notnull' => true));
         $book->addColumn('description', 'text', array('length' => 65535, 'notnull' => true));
-        $book->addColumn('year', 'integer', array('unsigned' => true, 'notnull' => false));
-        $book->addColumn('pages', 'integer', array('unsigned' => true, 'notnull' => false));
+        $book->addColumn('year', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
+        $book->addColumn('pages', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
+        $book->addColumn('ratePlus', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 7));
+        $book->addColumn('rateMinus', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 7));
         $book->addColumn('is_active', 'boolean', array('notnull' => true));
         $book->addColumn('is_allow_download', 'boolean', array('notnull' => true));
         $book->addColumn('download', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));

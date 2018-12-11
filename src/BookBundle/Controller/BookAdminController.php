@@ -37,6 +37,9 @@ class BookAdminController extends Controller
                     'id'        => $item->getId(),
                     'name'      => $item->getName(),
                     'author'    => $item->getAuthor()->getName(),
+                    'views'     => $item->getViews(),
+                    'download'  => $item->getDownload(),
+                    'rate'      => $item->getRatePlus() - $item->getRateMinus(),
                     'date'      => $item->getCreatedAt()->format('d.m.Y H:i:s'),
                 ];
             },
