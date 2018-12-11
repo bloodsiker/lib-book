@@ -1,5 +1,5 @@
 services:
-    share.author_admin:
+    share.admin.author:
         class: ShareBundle\Admin\AuthorAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "group.share", label: "group.author_editor" }
@@ -10,13 +10,13 @@ services:
         calls:
             - [ setTranslationDomain, [ShareBundle] ]
 
-#    share.admin.tag:
-#        class: ShareBundle\Admin\TagAdmin
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, group: "group.share", label: "group.tag" }
-#        arguments:
-#            - ~
-#            - ShareBundle\Entity\Tag
-#            - ~
-#        calls:
-#            - [ setTranslationDomain, [ShareBundle] ]
+    share.admin.tag:
+        class: ShareBundle\Admin\TagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "group.share", label: "group.tag" }
+        arguments:
+            - ~
+            - ShareBundle\Entity\Tag
+            - ~
+        calls:
+            - [ setTranslationDomain, [ShareBundle] ]

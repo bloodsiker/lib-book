@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
@@ -16,15 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class BookHasRelatedAdmin extends Admin
 {
     protected $parentAssociationMapping = 'book';
-
-    /**
-     * @param RouteCollection $collection
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-//        $collection->add('preview', 'preview');
-        $collection->add('related_by_tags', 'related-by-tags');
-    }
 
     /**
      * @param ListMapper $listMapper

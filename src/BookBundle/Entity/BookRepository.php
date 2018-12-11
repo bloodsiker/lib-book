@@ -24,7 +24,7 @@ class BookRepository extends EntityRepository
         $qb
             ->where('b.isActive = 1')
             ->innerJoin('b.tags', 'tag', 'WITH', 'tag.id IN (:tags)')
-            ->orderBy('b.publishAt', 'DESC')
+            ->orderBy('b.createdAt', 'DESC')
             ->setParameter('tags', $tags)
             ->setFirstResult(0)
             ->setMaxResults($limit)

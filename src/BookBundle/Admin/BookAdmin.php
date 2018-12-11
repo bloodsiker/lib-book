@@ -3,17 +3,19 @@
 namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
-use AdminBundle\Form\Type\UploadVichImageType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Valid;
 
 /**
@@ -37,6 +39,31 @@ class BookAdmin extends Admin
             parent::getFormTheme(),
             ['BookBundle:Form:admin_fields.html.twig']
         );
+    }
+
+    /**
+     * @param ErrorElement $errorElement
+     * @param mixed        $object
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->with('description')
+                ->addConstraint(new NotNull())
+            ->end()
+            ->with('author')
+                ->addConstraint(new NotNull())
+            ->end()
+        ;
+    }
+
+    /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+//        $collection->add('preview', 'preview');
+        $collection->add('related_by_tags', 'related-by-tags');
     }
 
     /**
@@ -110,6 +137,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('description', CKEditorType::class, [
                     'label' => 'book.fields.description',
+                    'required' => true,
                     'attr' => [
                         'rows' => 5,
                     ],
@@ -174,6 +202,14 @@ class BookAdmin extends Admin
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
+                    'attr' => ['class' => 'form-control'],
+                ])
+                ->add('tags', ModelAutocompleteType::class, [
+                    'label' => 'book.fields.tags',
+                    'required' => false,
+                    'property' => 'name',
+                    'multiple' => true,
+                    'btn_add' => 'book.buttons.link_add_tag',
                     'attr' => ['class' => 'form-control'],
                 ])
                 ->add('download', IntegerType::class, [

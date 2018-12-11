@@ -136,7 +136,7 @@
     {#{% endif %}#}
 {#{%- endblock radio_widget %}#}
 
-{% block sonata_admin_bookHasRelated_sonata_type_collection_widget %}
+{% block sonata_admin_book_bookHasRelated_sonata_type_collection_widget %}
     {#{% include '@SonataAdmin/CRUD//Association/edit_one_to_many.html.twig' %}#}
 
     {% if not sonata_admin.field_description.hasassociationadmin %}
@@ -193,10 +193,10 @@
                                 href="#"
                                 onclick="return start_field_related_{{ id }}(this);"
                                 class="btn btn-primary btn-sm sonata-ba-action pull-right"
-                                title="{{ 'btn_search_related'|trans({}, 'ArticleBundle') }}"
+                                title="{{ 'btn_search_related'|trans({}, 'BookBundle') }}"
                             >
                                 <i class="fa fa-refresh"></i>
-                                {{ 'btn_search_related'|trans({}, 'ArticleBundle') }}
+                                {{ 'btn_search_related'|trans({}, 'BookBundle') }}
                             </a>
 
                             {% include 'BookBundle:CRUD/Association:edit_related_script.html.twig' %}

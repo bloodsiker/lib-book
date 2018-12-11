@@ -21,6 +21,9 @@ tag:
     fields:
         id: ID
         name: Название
+        meta_title: Meta-Title
+        meta_description: Meta-Description
+        meta_keywords: Meta-Keywords
         slug: Сегмент URL (slug)
         is_active: Активен
     block:

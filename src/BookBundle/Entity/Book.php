@@ -131,16 +131,16 @@ class Book
      */
     protected $bookHasRelated;
 
-//    /**
-//     * @var ArrayCollection
-//     *
-//     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
-//     * @ORM\JoinTable(name="book_tag",
-//     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
-//     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}
-//     * )
-//     */
-//    protected $tags;
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
+     * @ORM\JoinTable(name="book_tags",
+     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    protected $tags;
 
     /**
      * @var \DateTime
@@ -557,39 +557,39 @@ class Book
         return $this->bookHasRelated;
     }
 
-//    /**
-//     * Add tags
-//     *
-//     * @param \ShareBundle\Entity\Tag $tags
-//     *
-//     * @return Book
-//     */
-//    public function addTag(\ShareBundle\Entity\Tag $tags)
-//    {
-//        $this->tags[] = $tags;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Remove tags
-//     *
-//     * @param \ShareBundle\Entity\Tag $tags
-//     */
-//    public function removeTag(\ShareBundle\Entity\Tag $tags)
-//    {
-//        $this->tags->removeElement($tags);
-//    }
-//
-//    /**
-//     * Get tags
-//     *
-//     * @return \Doctrine\Common\Collections\Collection
-//     */
-//    public function getTags()
-//    {
-//        return $this->tags;
-//    }
+    /**
+     * Add tags
+     *
+     * @param \ShareBundle\Entity\Tag $tags
+     *
+     * @return Book
+     */
+    public function addTag(\ShareBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \ShareBundle\Entity\Tag $tags
+     */
+    public function removeTag(\ShareBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
 
     /**
      * Set createdAt

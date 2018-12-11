@@ -48,6 +48,9 @@ sonata_admin:
                 label: group.share
                 label_catalogue: ShareBundle
                 icon: <i class="fa fa-text-width"></i>
+#                items:
+#                    - share.admin.author
+#                    - share.admin.tag
             group.comment:
                 label: group.comment
                 label_catalogue: CommentBundle

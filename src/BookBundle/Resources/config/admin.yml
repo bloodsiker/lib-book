@@ -6,7 +6,7 @@ services:
         arguments:
           - ~
           - BookBundle\Entity\Book
-          - ~
+          - BookBundle:BookAdmin
         calls:
           - [ setTranslationDomain, [BookBundle] ]
 
