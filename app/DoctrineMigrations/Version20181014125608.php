@@ -30,21 +30,22 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $book->addColumn('author_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('series_id', 'integer', array('unsigned' => true, 'notnull' => false));
+        $book->addColumn('image_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('name', 'string', array('length' => 255, 'notnull' => true));
-        $book->addColumn('poster', 'string', array('length' => 255, 'notnull' => false));
         $book->addColumn('slug', 'string', array('length' => 100, 'notnull' => true));
         $book->addColumn('description', 'text', array('length' => 65535, 'notnull' => true));
         $book->addColumn('year', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('pages', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('is_active', 'boolean', array('notnull' => true));
+        $book->addColumn('is_allow_download', 'boolean', array('notnull' => true));
         $book->addColumn('download', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));
         $book->addColumn('created_at', 'datetime', array('notnull' => true));
         $book->addColumn('updated_at', 'datetime', array('notnull' => true));
         $book->setPrimaryKey(['id']);
-        $book->addIndex(['author_id', 'series_id']);
-        $book->addUniqueIndex(['slug']);
-        $book->addForeignKeyConstraint($schema->getTable('authors'), ['author_id'], ['id'], ['onDelete' => 'set null']);
+        $book->addIndex(['author_id', 'series_id', 'image_id']);
+        $book->addForeignKeyConstraint($schema->getTable('share_authors'), ['author_id'], ['id'], ['onDelete' => 'set null']);
         $book->addForeignKeyConstraint($schema->getTable('series'), ['series_id'], ['id'], ['onDelete' => 'set null']);
+        $book->addForeignKeyConstraint($schema->getTable('media_image'), ['image_id'], ['id'], ['onDelete' => 'set null']);
 
         // bookHasFile
         $bookHasFile = $schema->createTable('books_has_file');
@@ -54,8 +55,8 @@ final class Version20181014125608 extends AbstractMigration
         $bookHasFile->addColumn('order_num', 'integer', array('length' => 11, 'notnull' => true, 'default' => 1));
         $bookHasFile->setPrimaryKey(['id']);
         $bookHasFile->addIndex(['book_id', 'book_file_id']);
-        $bookHasFile->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'restrict']);
-        $bookHasFile->addForeignKeyConstraint($schema->getTable('books_file'), ['book_file_id'], ['id'], ['onDelete' => 'restrict']);
+        $bookHasFile->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'restrict']);
+        $bookHasFile->addForeignKeyConstraint($schema->getTable('media_file'), ['book_file_id'], ['id'], ['onDelete' => 'restrict']);
 
         // bookHasRelated
         $bookHasRelated = $schema->createTable('books_has_related');
@@ -73,8 +74,16 @@ final class Version20181014125608 extends AbstractMigration
         $bookGenres->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
         $bookGenres->addColumn('genre_id', 'integer', array('unsigned' => true, 'notnull' => true));
         $bookGenres->addIndex(['book_id', 'genre_id']);
-        $bookGenres->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookGenres->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
         $bookGenres->addForeignKeyConstraint($schema->getTable('genres'), ['genre_id'], ['id'], ['onDelete' => 'cascade']);
+
+        // bookTags
+        $bookTags = $schema->createTable('books_tags');
+        $bookTags->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookTags->addColumn('tag_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookTags->addIndex(['book_id', 'tag_id']);
+        $bookTags->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookTags->addForeignKeyConstraint($schema->getTable('share_tags'), ['tag_id'], ['id'], ['onDelete' => 'cascade']);
 
         // bookComments
         $bookComment = $schema->createTable('books_comments');
@@ -86,7 +95,7 @@ final class Version20181014125608 extends AbstractMigration
         $bookComment->addColumn('created_at', 'datetime', array('notnull' => true));
         $bookComment->setPrimaryKey(['id']);
         $bookComment->addIndex(['book_id']);
-        $bookComment->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookComment->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
     }
 
     /**
@@ -96,7 +105,7 @@ final class Version20181014125608 extends AbstractMigration
     {
         $schema->dropTable('books_has_related');
         $schema->dropTable('books_has_file');
-        $schema->dropTable('books_file');
+        $schema->dropTable('books_tags');
         $schema->dropTable('books_genres');
         $schema->dropTable('books_comments');
         $schema->dropTable('books');

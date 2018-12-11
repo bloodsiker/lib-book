@@ -45,6 +45,13 @@ class Author
     protected $isActive;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $isAllowDownload;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -57,6 +64,7 @@ class Author
     public function __construct()
     {
         $this->isActive = true;
+        $this->isAllowDownload = true;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -169,6 +177,30 @@ class Author
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Get isAllowDownload
+     *
+     * @return bool
+     */
+    public function isAllowDownload()
+    {
+        return $this->isAllowDownload;
+    }
+
+    /**
+     * Set isAllowDownload
+     *
+     * @param bool $isAllowDownload
+     *
+     * @return Author
+     */
+    public function setIsAllowDownload(bool $isAllowDownload)
+    {
+        $this->isAllowDownload = $isAllowDownload;
+
+        return $this;
     }
 
 

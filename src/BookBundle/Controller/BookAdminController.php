@@ -19,14 +19,13 @@ class BookAdminController extends Controller
      */
     public function relatedByTagsAction(Request $request)
     {
-        $excludeIds = array_map(
-            function($value) { return (int) $value; },
-            $request->request->get('exclude', [])
-        );
-        $tags = array_map(
-            function($value) { return (int) $value; },
-            $request->request->get('tags', [])
-        );
+        $excludeIds = array_map(function ($value) {
+            return (int) $value;
+            }, $request->request->get('exclude', []));
+
+        $tags = array_map(function ($value) {
+            return (int) $value;
+            }, $request->request->get('tags', []));
 
         $em = $this->container->get('doctrine')->getManager();
         $repository = $em->getRepository($this->admin->getClass());
@@ -37,6 +36,7 @@ class BookAdminController extends Controller
                 return [
                     'id'        => $item->getId(),
                     'name'      => $item->getName(),
+                    'author'    => $item->getAuthor()->getName(),
                     'date'      => $item->getCreatedAt()->format('d.m.Y H:i:s'),
                 ];
             },

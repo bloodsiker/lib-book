@@ -33,6 +33,10 @@ class AuthorAdmin extends Admin
             ->addIdentifier('name', null, [
                 'label' => 'author.fields.name',
             ])
+            ->add('isAllowDownload', null, [
+                'label' => 'author.fields.is_allow_download',
+                'editable'  => true,
+            ])
             ->add('isActive', null, [
                 'label' => 'author.fields.is_active',
                 'editable'  => true,
@@ -55,6 +59,9 @@ class AuthorAdmin extends Admin
             ->add('isActive', null, [
                 'label' => 'author.fields.is_active',
             ])
+            ->add('isAllowDownload', null, [
+                'label' => 'author.fields.is_allow_download',
+            ])
             ->add('createdAt', null, [
                 'label' => 'author.fields.created_at',
             ]);
@@ -67,26 +74,30 @@ class AuthorAdmin extends Admin
     {
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => false])
-            ->add('name', TextType::class, [
-                'label' => 'author.fields.name',
-            ])
-            ->add('slug', TextType::class, [
-                'label' => 'author.fields.slug',
-                'required' => false,
-                'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
-            ])
+                ->add('name', TextType::class, [
+                    'label' => 'author.fields.name',
+                ])
+                ->add('slug', TextType::class, [
+                    'label' => 'author.fields.slug',
+                    'required' => false,
+                    'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
+                ])
             ->end()
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])
-            ->add('isActive', null, [
-                'label' => 'author.fields.is_active',
-                'required' => false,
-            ])
-            ->add('createdAt', DateTimePickerType::class, [
-                'label'     => 'author.fields.created_at',
-                'required' => true,
-                'format' => 'YYYY-MM-dd HH:mm',
-                'attr' => ['readonly' => true],
-            ])
+                ->add('isActive', null, [
+                    'label' => 'author.fields.is_active',
+                    'required' => false,
+                ])
+                ->add('isAllowDownload', null, [
+                    'label' => 'author.fields.is_allow_download',
+                    'required' => false,
+                ])
+                ->add('createdAt', DateTimePickerType::class, [
+                    'label'     => 'author.fields.created_at',
+                    'required' => true,
+                    'format' => 'YYYY-MM-dd HH:mm',
+                    'attr' => ['readonly' => true],
+                ])
             ->end();
     }
 }

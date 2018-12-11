@@ -86,6 +86,10 @@ class BookAdmin extends Admin
                 'label' => 'book.fields.files',
                 'template'  => 'BookBundle:Admin:list_image.html.twig',
             ])
+            ->add('isAllowDownload', null, [
+                'label' => 'book.fields.is_allow_download',
+                'editable'  => true,
+            ])
             ->add('isActive', null, [
                 'label' => 'book.fields.is_active',
                 'editable'  => true,
@@ -114,6 +118,9 @@ class BookAdmin extends Admin
             ])
             ->add('author', null, [
                 'label' => 'book.fields.author',
+            ])
+            ->add('isAllowDownload', null, [
+                'label' => 'book.fields.is_allow_download',
             ])
             ->add('isActive', null, [
                 'label' => 'book.fields.is_active',
@@ -175,6 +182,10 @@ class BookAdmin extends Admin
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
                 ->add('isActive', null, [
                     'label' => 'book.fields.is_active',
+                    'required' => false,
+                ])
+                ->add('isAllowDownload', null, [
+                    'label' => 'book.fields.is_allow_download',
                     'required' => false,
                 ])
                 ->add('poster', ModelListType::class, [

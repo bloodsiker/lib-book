@@ -24,6 +24,7 @@ book:
         slug: Сегмент URL (slug)
         files: Файлы книги
         is_active: Активно
+        is_allow_download: Разрешено для скачивания
         poster: Изображение книги
         author: Автор
         series: Серия

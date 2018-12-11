@@ -79,10 +79,11 @@
                         var relatedTable = relatedArea.find('table');
                         for (var book in related) {
                             relatedTable.append(
-                                '<tr class="">' +
+                                '<tr class="success">' +
                                     '<td>' + related[book].id + '</td>' +
                                     '<td>' + related[book].date + '</td>' +
                                     '<td>' + related[book].name + '</td>' +
+                                    '<td>' + related[book].author + '</td>' +
                                     '<td>' +
                                         '<button ' +
                                             'class="btn btn-sm btn-success" ' +

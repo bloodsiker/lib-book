@@ -94,6 +94,13 @@ class Book
     protected $isActive;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $isAllowDownload;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer", nullable=false)
@@ -162,10 +169,11 @@ class Book
     public function __construct()
     {
         $this->isActive = true;
+        $this->isAllowDownload = true;
         $this->download = 0;
         $this->createdAt = $this->updatedAt = new \DateTime('now');
         $this->genres = new ArrayCollection();
-//        $this->tags = new ArrayCollection();
+        $this->tags = new ArrayCollection();
         $this->bookHasFiles = new ArrayCollection();
         $this->bookHasRelated = new ArrayCollection();
     }
@@ -637,5 +645,29 @@ class Book
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Get isAllowDownload
+     *
+     * @return bool
+     */
+    public function isAllowDownload()
+    {
+        return $this->isAllowDownload;
+    }
+
+    /**
+     * Set isAllowDownload
+     *
+     * @param bool $isAllowDownload
+     *
+     * @return Book
+     */
+    public function setIsAllowDownload(bool $isAllowDownload)
+    {
+        $this->isAllowDownload = $isAllowDownload;
+
+        return $this;
     }
 }

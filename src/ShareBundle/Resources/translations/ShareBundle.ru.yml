@@ -36,6 +36,7 @@ author:
     fields:
         name: ФИО
         is_active: Активен
+        is_allow_download: Разрешено для скачивания
         created_at: Дата создания
         slug: Сегмент URL (slug)
         parent: Родительский жанр

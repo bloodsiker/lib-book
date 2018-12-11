@@ -26,14 +26,27 @@ final class Version20181011151334 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // author
-        $author = $schema->createTable('authors');
+        $author = $schema->createTable('share_authors');
         $author->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $author->addColumn('name', 'string', array('length' => 100, 'notnull' => true));
         $author->addColumn('slug', 'string', array('length' => 100, 'notnull' => true));
         $author->addColumn('created_at', 'datetime', array('notnull' => true));
         $author->addColumn('is_active', 'boolean', array('notnull' => true));
+        $author->addColumn('is_allow_download', 'boolean', array('notnull' => true));
         $author->setPrimaryKey(array('id'));
         $author->addUniqueIndex(array('slug'));
+
+        $tag = $schema->createTable('share_tags');
+        $tag->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $tag->addColumn('name', 'string', array('length' => 100, 'notnull' => true));
+        $tag->addColumn('slug', 'string', array('length' => 100, 'notnull' => true));
+        $tag->addColumn('meta_title', 'string', array('length' => 255, 'notnull' => true));
+        $tag->addColumn('metaKeywords', 'text', array('length' => 65535, 'notnull' => false));
+        $tag->addColumn('metaDescription', 'text', array('length' => 65535, 'notnull' => false));
+        $tag->addColumn('created_at', 'datetime', array('notnull' => true));
+        $tag->addColumn('is_active', 'boolean', array('notnull' => true));
+        $tag->setPrimaryKey(array('id'));
+        $tag->addUniqueIndex(array('slug'));
 
         // genre
         $genre = $schema->createTable('genres');
@@ -78,7 +91,8 @@ final class Version20181011151334 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
-        $schema->dropTable('authors');
+        $schema->dropTable('share_authors');
+        $schema->dropTable('share_tags');
         $schema->dropTable('series');
         $schema->dropTable('genres');
     }
