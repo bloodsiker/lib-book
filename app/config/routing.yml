@@ -37,6 +37,11 @@ sonata_page_cache:
     prefix: /
 # =============================================================================
 
+# Liip Imagine ================================================================
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+# =============================================================================
+
 # FOS User Bundle =============================================================
 fos_user_resetting_request:
     path: /resetting/request

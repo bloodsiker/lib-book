@@ -44,8 +44,11 @@ class AppKernel extends Kernel
             // Sonata EasyExtendsBundle
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
-            // Doctrine2 Behaviors
-            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+//            // Doctrine2 Behaviors
+//            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+
+            // Image manipulations
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
             // CKEditor integration
             new FOS\CKEditorBundle\FOSCKEditorBundle(),

@@ -19,3 +19,5 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     server_version: 9.4
     media_base_path: '%kernel.root_dir%/../web'
+    imagine_web_root: '%kernel.root_dir%/../web'
+    imagine_cache_prefix: i

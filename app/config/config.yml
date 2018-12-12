@@ -10,6 +10,7 @@ imports:
     - { resource: sonata/page.yml }
     - { resource: fos/user.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+    - { resource: liip/imagine.yml }
     - { resource: knplabs/gaufrette.yml }
     - { resource: oneup/oneup-upload.yml }
     - { resource: vich/vich_uploader.yml }
