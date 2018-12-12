@@ -33,6 +33,7 @@ book:
         genres: Жанр(ы)
         tags: Тег(и)
         download: Скачиваний
+        rating: Рейтинг
         views: Просмотры
         book_related: Похожие книги
         updated_at: Изменена

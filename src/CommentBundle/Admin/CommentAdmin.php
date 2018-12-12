@@ -76,6 +76,14 @@ class CommentAdmin extends Admin
     {
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => false])
+                ->add('userName', TextType::class, [
+                    'label' => 'comment.fields.name',
+                    'required' => false,
+                ])
+                ->add('userEmail', TextType::class, [
+                    'label' => 'comment.fields.email',
+                    'required' => false,
+                ])
                 ->add('comment', TextareaType::class, [
                     'label' => 'comment.fields.comment',
                     'attr' => [
@@ -92,12 +100,16 @@ class CommentAdmin extends Admin
                     'label' => 'comment.fields.rating',
                     'required' => true,
                 ])
+                ->add('user', ModelListType::class, [
+                    'label' => 'comment.fields.created_by',
+                    'required' => false,
+                ])
                 ->add('book', ModelListType::class, [
                     'label' => 'comment.fields.book',
                     'required' => false,
                 ])
                 ->add('createdAt', DateTimePickerType::class, [
-                    'label'     => 'comment.fields.created_by',
+                    'label'     => 'comment.fields.created_at',
                     'required' => true,
                     'format' => 'YYYY-MM-dd HH:mm',
                     'attr' => ['readonly' => true],

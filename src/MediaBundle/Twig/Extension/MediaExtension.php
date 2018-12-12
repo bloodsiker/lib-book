@@ -59,6 +59,11 @@ class MediaExtension extends \Twig_Extension
         return strtolower(pathinfo($path, PATHINFO_EXTENSION));
     }
 
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
     public static function getExtensionFile($path)
     {
         return strtolower(pathinfo($path, PATHINFO_EXTENSION));

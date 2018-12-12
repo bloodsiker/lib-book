@@ -7,7 +7,8 @@
     {% endif %}
 
     {% if object is mediainstanceof('\\MediaBundle\\Entity\\MediaImage') and object.path %}
-        {% set imagePreviewPath = object.path|imagine_filter('admin_preview_220x124') %}
+        {#{% set imagePreviewPath = object.path|imagine_filter('admin_preview_220x124') %}#}
+        {% set imagePreviewPath = object.path %}
         <script>
             var {{ preview_container_id }} = jQuery('#{{ preview_container_id }}').parent().parent().find('img:first');
             if ({{ preview_container_id }}.length) {
@@ -15,7 +16,7 @@
             } else {
                 jQuery('#{{ preview_container_id }}').parent().before(
                     '<div class="image-field-short-description">' +
-                        '<img src="{{ imagePreviewPath~'?r='~random() }}">' +
+                        '<img src="{{ imagePreviewPath~'?r='~random() }}" width="100%">' +
                     '</div>'
                 );
             }

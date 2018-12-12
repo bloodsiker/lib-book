@@ -12,6 +12,8 @@ sonata_admin:
         admin_permissions: [CREATE, LIST, EDIT, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
         object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
 
+    templates:
+        short_object_description: 'MediaBundle:Helper:short-object-description.html.twig'
     options:
         title_mode: single_image
 

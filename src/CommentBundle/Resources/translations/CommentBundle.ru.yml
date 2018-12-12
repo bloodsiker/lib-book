@@ -14,7 +14,10 @@ comment:
     fields:
         comment: Комментарий
         is_active: Активна
+        name: Имя
+        email: Email
         rating: Рейтинг комментария
         book: Книга
+        created_by: Создал пользователь
         created_at: Дата создания
         id: ID
