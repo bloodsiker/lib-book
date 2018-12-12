@@ -92,13 +92,17 @@ final class Version20181014125608 extends AbstractMigration
         $bookComment = $schema->createTable('books_comments');
         $bookComment->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $bookComment->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookComment->addColumn('user_id', 'integer', array('unsigned' => true, 'notnull' => false));
+        $bookComment->addColumn('user_name', 'string', array('length' => 255, 'notnull' => false));
+        $bookComment->addColumn('user_email', 'string', array('length' => 255, 'notnull' => false));
         $bookComment->addColumn('comment', 'text', array('length' => 65535, 'notnull' => true));
         $bookComment->addColumn('rating', 'smallint', array('length' => 6, 'notnull' => true));
         $bookComment->addColumn('is_active', 'boolean', array('notnull' => true));
         $bookComment->addColumn('created_at', 'datetime', array('notnull' => true));
         $bookComment->setPrimaryKey(['id']);
-        $bookComment->addIndex(['book_id']);
+        $bookComment->addIndex(['book_id', 'user_id']);
         $bookComment->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookTags->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
     }
 
     /**

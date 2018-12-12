@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -37,23 +37,37 @@ class Comment
      */
     protected $book;
 
-//    /**
-//     * @var \GenreBundle\Entity\Genre
-//     *
-//     * @ORM\ManyToOne(targetEntity="User")
-//     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-//     */
-//    protected $user;
+    /**
+     * @var \UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $user;
 
     /**
-     * @var integer
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $userName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $userEmail;
+
+    /**
+     * @var int
      *
      * @ORM\Column(type="smallint", length=2, nullable=false)
      */
     protected $rating;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -144,29 +158,77 @@ class Comment
         return $this->book;
     }
 
-//    /**
-//     * Set user
-//     *
-//     * @param \GenreBundle\Entity\Genre $user
-//     *
-//     * @return Comment
-//     */
-//    public function setUser(\GenreBundle\Entity\Genre $user = null)
-//    {
-//        $this->user = $user;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * Get user
-//     *
-//     * @return \GenreBundle\Entity\Genre
-//     */
-//    public function getUser()
-//    {
-//        return $this->user;
-//    }
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Comment
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Get userName
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * Set userName
+     *
+     * @param string $userName
+     *
+     * @return $this
+     */
+    public function setUserName(string $userName)
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
+
+    /**
+     * Get userEmail
+     *
+     * @return string
+     */
+    public function getUserEmail()
+    {
+        return $this->userEmail;
+    }
+
+    /**
+     * Set userEmail
+     *
+     * @param string $userEmail
+     *
+     * @return $this
+     */
+    public function setUserEmail(string $userEmail)
+    {
+        $this->userEmail = $userEmail;
+
+        return $this;
+    }
 
     /**
      * Set rating
