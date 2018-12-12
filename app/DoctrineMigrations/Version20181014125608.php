@@ -15,7 +15,7 @@ final class Version20181014125608 extends AbstractMigration
      */
     public function getDescription() : string
     {
-        return "Books, BookHasFile, BookHasTags, BookHasRelated, BooksGenres, BookComments (BookBundle)";
+        return "Books, BookHasFile, BookHasTags, BookHasRelated, BooksGenres, BookComments, BookVotesResult (BookBundle)";
     }
 
     /**
@@ -102,7 +102,18 @@ final class Version20181014125608 extends AbstractMigration
         $bookComment->setPrimaryKey(['id']);
         $bookComment->addIndex(['book_id', 'user_id']);
         $bookComment->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
-        $bookTags->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
+        $bookComment->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
+
+        // bookVotesResult
+        $bookVotes = $schema->createTable('books_votes_result');
+        $bookVotes->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $bookVotes->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookVotes->addColumn('ip', 'integer', array('unsigned' => true, 'notnull' => false));
+        $bookVotes->addColumn('result_vote', 'boolean', array('notnull' => true));
+        $bookVotes->addColumn('voted_at', 'datetime', array('notnull' => true));
+        $bookVotes->setPrimaryKey(['id']);
+        $bookVotes->addIndex(['book_id']);
+        $bookVotes->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
     }
 
     /**
@@ -110,6 +121,7 @@ final class Version20181014125608 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
+        $schema->dropTable('books_votes_result');
         $schema->dropTable('books_has_related');
         $schema->dropTable('books_has_file');
         $schema->dropTable('books_tags');
