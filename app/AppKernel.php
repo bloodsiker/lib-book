@@ -71,6 +71,7 @@ class AppKernel extends Kernel
             new BookBundle\BookBundle(),
             new CommentBundle\CommentBundle(),
             new ShareBundle\ShareBundle(),
+            new OrderBundle\OrderBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

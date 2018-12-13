@@ -53,6 +53,10 @@ sonata_admin:
                 label: group.comment
                 label_catalogue: CommentBundle
                 icon: <i class="fa fa-comment"></i>
+            group.order:
+                label: group.order
+                label_catalogue: OrderBundle
+                icon: <i class="fa fa-bell-o"></i>
             sonata_page:
                 label: ~
                 label_catalogue: SonataPageBundle
