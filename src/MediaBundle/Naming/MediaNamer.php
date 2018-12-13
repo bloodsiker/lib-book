@@ -53,8 +53,9 @@ class MediaNamer implements NamerInterface
     protected function fillPath($name): string
     {
         $date = new \DateTime();
-        $year = $date->format('Y');
-        $month = $date->format('m');
+        list($year, $month) = explode('/', $date->format('Y/m'));
+//        $year = $date->format('Y');
+//        $month = $date->format('m');
         if (null !== $this->pathImage) {
             $pattern = ['[YEAR]', '[MONTH]', '[FILE]'];
             $replace = [$year, $month, $name];
