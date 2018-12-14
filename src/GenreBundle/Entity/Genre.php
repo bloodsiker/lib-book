@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Genre
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
@@ -41,13 +41,20 @@ class Genre
     /**
      * @var \GenreBundle\Entity\Genre
      *
-     * @ORM\ManyToOne(targetEntity="Genre")
+     * @ORM\ManyToOne(targetEntity="Genre", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $parent;
 
     /**
-     * @var boolean
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="Genre", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
      */

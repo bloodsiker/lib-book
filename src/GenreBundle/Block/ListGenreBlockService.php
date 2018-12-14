@@ -1,9 +1,9 @@
 <?php
 
-namespace PageBundle\Block;
+namespace GenreBundle\Block;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use PageBundle\Entity\SiteVariable;
+use GenreBundle\Entity\Genre;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SiteVariableBlockService
+ * Class ListGenreBlockService
  */
-class SiteVariableBlockService extends AbstractAdminBlockService
+class ListGenreBlockService extends AbstractAdminBlockService
 {
     /**
      * @var Registry $doctrine
@@ -22,7 +22,7 @@ class SiteVariableBlockService extends AbstractAdminBlockService
     protected $doctrine;
 
     /**
-     * SiteVariableBlockService constructor.
+     * ListGenreBlockService constructor.
      *
      * @param string          $name
      * @param EngineInterface $templating
@@ -46,7 +46,7 @@ class SiteVariableBlockService extends AbstractAdminBlockService
             $this->getName(),
             (!is_null($code) ? $code : $this->getName()),
             false,
-            'SonataPageBundle',
+            'GenreBundle',
             ['class' => 'fa fa-code']
         );
     }
@@ -57,8 +57,7 @@ class SiteVariableBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'placement' => null,
-            'template'  => 'PageBundle:Block:site_variable.html.twig',
+            'template'  => 'GenreBundle:Block:list_genre.html.twig',
         ]);
     }
 
@@ -76,14 +75,12 @@ class SiteVariableBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
-        $variableList = array_flip(SiteVariable::getVariablePosition());
-
-        $variables = $this->doctrine
-            ->getRepository(SiteVariable::class)
-            ->findBy(['placement' => $variableList[$blockContext->getSetting('placement')]]);
+        $genres = $this->doctrine
+            ->getRepository(Genre::class)
+            ->findBy(['isActive' => true, 'parent' => null]);
 
         return $this->renderResponse($blockContext->getTemplate(), [
-            'variables' => $variables,
+            'genres'    => $genres,
             'block'     => $block,
             'settings'  => array_merge($blockContext->getSettings(), $block->getSettings()),
         ], $response);

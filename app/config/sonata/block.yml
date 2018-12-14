@@ -25,9 +25,9 @@ sonata_block:
 #        app.block.service.get_state_value:
 #            contexts: [cms]
 
-#        # MediaBundle Block's
-#        media.block.player:
-#            contexts: [cms]
+        # GenreBundle Block's
+        genre.block.list_genge:
+            contexts: [cms]
 #
 #        # UserBundle's Blocks
 #        sonata.user.block.account: # used to display menu option (login option)
