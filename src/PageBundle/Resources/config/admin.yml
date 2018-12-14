@@ -1,0 +1,11 @@
+services:
+    sonata.page.admin.site_variables:
+        class: "PageBundle\\Admin\\SiteVariableAdmin"
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'sonata_page', label: 'sonata_page.site_variables_editor' }
+        arguments:
+            - ~
+            - "PageBundle\\Entity\\SiteVariable"
+            - ~
+        calls:
+            - [ setTranslationDomain, ['SonataPageBundle'] ]

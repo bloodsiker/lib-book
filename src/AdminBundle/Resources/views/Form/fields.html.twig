@@ -258,48 +258,48 @@
     {#{% endspaceless %}#}
 {#{% endblock %}#}
 
-{#{% block text_counter_widget %}#}
-    {#{{ block('form_widget') }}#}
-    {#{{ block('counter_widget') }}#}
-{#{% endblock %}#}
+{% block text_counter_widget %}
+    {{ block('form_widget') }}
+    {{ block('counter_widget') }}
+{% endblock %}
 
-{#{% block textarea_counter_widget %}#}
-    {#{{ block('textarea_widget') }}#}
-    {#{{ block('counter_widget') }}#}
-{#{% endblock %}#}
+{% block textarea_counter_widget %}
+    {{ block('textarea_widget') }}
+    {{ block('counter_widget') }}
+{% endblock %}
 
-{#{% block counter_widget %}#}
-    {#<script>#}
-        {#$('#{{ id }}').textcounter({#}
-            {#countContainerClass: 'text-count-wrapper pull-right',#}
-            {#stopInputAtMaximum: {{ stop_at_maximum ? 'true' : 'false' }},#}
-            {#counterText: '{{ ('admin.fields.counter.total.'~widget_type)|trans({}, 'SonataAdminBundle') }}: %d',#}
-            {#countDownText: '{{ ('admin.fields.counter.remaining.'~widget_type)|trans({}, 'SonataAdminBundle') }}: %d',#}
-            {#countSpaces: {{ count_spaces ? 'true' : 'false' }},#}
-            {#countDown: {{ count_down ? 'true' : 'false' }},#}
-            {#type: "{{ widget_type }}",#}
-            {#min: {{ min }},#}
-            {#max: {{ max }},#}
-        {#});#}
-    {#</script>#}
-{#{% endblock %}#}
+{% block counter_widget %}
+    <script>
+        $('#{{ id }}').textcounter({
+            countContainerClass: 'text-count-wrapper pull-right',
+            stopInputAtMaximum: {{ stop_at_maximum ? 'true' : 'false' }},
+            counterText: '{{ ('admin.fields.counter.total.'~widget_type)|trans({}, 'SonataAdminBundle') }}: %d',
+            countDownText: '{{ ('admin.fields.counter.remaining.'~widget_type)|trans({}, 'SonataAdminBundle') }}: %d',
+            countSpaces: {{ count_spaces ? 'true' : 'false' }},
+            countDown: {{ count_down ? 'true' : 'false' }},
+            type: "{{ widget_type }}",
+            min: {{ min }},
+            max: {{ max }},
+        });
+    </script>
+{% endblock %}
 
-{#{% block codemirror_widget %}#}
-    {#{% spaceless %}#}
-        {#{{ block('textarea_widget') }}#}
+{% block codemirror_widget %}
+    {% spaceless %}
+        {{ block('textarea_widget') }}
 
-        {#<script type="text/javascript">#}
-            {#if (typeof CodeMirror !== 'undefined') {#}
-                {#CodeMirror.fromTextArea(document.getElementById('{{ id }}'), {#}
-                    {#autoRefresh: true,#}
-                    {#lineNumbers: true,#}
-                    {#mode: 'htmlmixed',#}
-                    {#indentUnit: 4,#}
-                    {#autofocus: true,#}
-                    {#fixedGutter: true,#}
-                    {#lineWrapping: true#}
-                {#});#}
-            {#}#}
-        {#</script>#}
-    {#{% endspaceless %}#}
-{#{% endblock %}#}
+        <script type="text/javascript">
+            if (typeof CodeMirror !== 'undefined') {
+                CodeMirror.fromTextArea(document.getElementById('{{ id }}'), {
+                    autoRefresh: true,
+                    lineNumbers: true,
+                    mode: 'htmlmixed',
+                    indentUnit: 4,
+                    autofocus: true,
+                    fixedGutter: true,
+                    lineWrapping: true
+                });
+            }
+        </script>
+    {% endspaceless %}
+{% endblock %}

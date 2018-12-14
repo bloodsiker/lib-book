@@ -14,10 +14,10 @@ sonata_block:
 #            contexts: [sonata_page_bundle]
 #        sonata.page.block.context_manager:
 #            contexts: [sonata_page_bundle]
-#        page.block.site_variable:
-#            contexts: [sonata_page_bundle]
+        page.block.site_variable:
+            contexts: [cms]
 
-#        # AppBundle's Blocks
+        # AppBundle's Blocks
         app.block.service.header:
             contexts: [cms]
         app.block.service.footer:

@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Snapshot extends BaseSnapshot
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})

@@ -1,0 +1,9 @@
+services:
+    page.block.site_variable:
+        class: "PageBundle\\Block\\SiteVariableBlockService"
+        arguments:
+            - page.block.site_variable
+            - '@templating'
+            - '@?doctrine'
+        tags:
+            - { name: sonata.block }

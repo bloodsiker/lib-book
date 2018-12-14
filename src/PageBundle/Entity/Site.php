@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Site
- * @package PageBundle\Entity
  *
  * @ORM\Entity
  * @ORM\Table(name="page_site")
@@ -15,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Site extends BaseSite
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})

@@ -85,14 +85,14 @@
         {% block javascripts %}{% endblock %}
 
         {% block head_variables %}
-            {#{{#}
-                {#sonata_block_render(#}
-                    {#{ 'type': 'page.block.site_variable' },#}
-                    {#{#}
-                        {#'placement': 'head'#}
-                    {#}#}
-                {#)#}
-            {#}}#}
+            {{
+                sonata_block_render(
+                    { 'type': 'page.block.site_variable' },
+                    {
+                        'placement': 'head'
+                    }
+                )
+            }}
 		{% endblock %}
 		{% block head_banners %}
 			{#{{#}
@@ -107,14 +107,14 @@
     </head>
     <body {% block body_attrs %}{% endblock %}>
 	    {% block body_begin %}
-            {#{{#}
-                {#sonata_block_render(#}
-                    {#{ 'type': 'page.block.site_variable' },#}
-                    {#{#}
-                        {#'placement': 'body-begin'#}
-                    {#}#}
-                {#)#}
-            {#}}#}
+            {{
+                sonata_block_render(
+                    { 'type': 'page.block.site_variable' },
+                    {
+                        'placement': 'body-begin'
+                    }
+                )
+            }}
         {% endblock %}
 
 		{% block branding %}
@@ -150,14 +150,14 @@
         {% endblock %}
 
         {% block body_end %}
-            {#{{#}
-                {#sonata_block_render(#}
-                    {#{ 'type': 'page.block.site_variable' },#}
-                    {#{#}
-                        {#'placement': 'body-end'#}
-                    {#}#}
-                {#)#}
-            {#}}#}
+            {{
+                sonata_block_render(
+                    { 'type': 'page.block.site_variable' },
+                    {
+                        'placement': 'body-end'
+                    }
+                )
+            }}
 
         {% endblock %}
     </body>

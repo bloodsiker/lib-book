@@ -86,7 +86,6 @@ class Comment
     public function __construct()
     {
         $this->isActive = true;
-        $this->comment = 10;
         $this->createdAt = new \DateTime('now');
     }
 

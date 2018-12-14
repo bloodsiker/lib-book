@@ -20,8 +20,17 @@ sonata_admin:
     assets:
         extra_javascripts:
             - bundles/sonatapage/sonata-page.back.min.js
+            - bundles/admin/js/textcounter.min.js
+            - bundles/admin/js/codemirror/codemirror.js
+            - bundles/admin/js/codemirror/autorefresh.js
+            - bundles/admin/js/codemirror/css.js
+            - bundles/admin/js/codemirror/xml.js
+            - bundles/admin/js/codemirror/javascript.js
+            - bundles/admin/js/codemirror/htmlmixed.js
         extra_stylesheets:
             - bundles/sonatapage/sonata-page.back.min.css
+            - bundles/admin/css/codemirror/codemirror.css
+
 
     dashboard:
         groups:
@@ -29,7 +38,6 @@ sonata_admin:
                 label: group.media
                 label_catalogue: MediaBundle
                 icon: <i class="fa fa-files-o"></i>
-#                items:
             group.book:
                 label: group.book
                 label_catalogue: BookBundle
@@ -46,9 +54,6 @@ sonata_admin:
                 label: group.share
                 label_catalogue: ShareBundle
                 icon: <i class="fa fa-text-width"></i>
-#                items:
-#                    - share.admin.author
-#                    - share.admin.tag
             group.comment:
                 label: group.comment
                 label_catalogue: CommentBundle
@@ -61,6 +66,10 @@ sonata_admin:
                 label: ~
                 label_catalogue: SonataPageBundle
                 icon: <i class="fa fa-sitemap"></i>
+                items:
+                    - sonata.page.admin.page
+                    - sonata.page.admin.site
+                    - sonata.page.admin.site_variables
 
         blocks:
              - { position: center, type: sonata.admin.block.admin_list }

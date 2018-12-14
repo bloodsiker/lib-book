@@ -64,4 +64,15 @@
         {#{% endfor %}#}
     {#</ul>#}
 
+    <div class="footer-counters">
+        {{
+        sonata_block_render(
+            { 'type': 'page.block.site_variable' },
+            {
+                'placement': 'footer-counters'
+            }
+        )
+        }}
+    </div>
+
 </div>

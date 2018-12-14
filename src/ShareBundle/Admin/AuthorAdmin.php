@@ -28,7 +28,7 @@ class AuthorAdmin extends Admin
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'author.fields.ID',
+                'label' => 'author.fields.id',
             ])
             ->addIdentifier('name', null, [
                 'label' => 'author.fields.name',

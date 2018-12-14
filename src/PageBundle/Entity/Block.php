@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Block
- * @package PageBundle\Entity
  *
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
  * @ORM\Table(name="page_block")
@@ -15,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Block extends BaseBlock
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})

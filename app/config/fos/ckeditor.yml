@@ -3,10 +3,10 @@ fos_ck_editor:
    default_config: default
    base_path: "/bundles/admin/js/ckeditor"
    js_path:   "/bundles/admin/js/ckeditor/ckeditor.js"
-   filebrowsers:
-       - ExpertBrowse
-       - GalleryBrowse
-       - NewsBrowse
+#   filebrowsers:
+#       - ExpertBrowse
+#       - GalleryBrowse
+#       - NewsBrowse
    configs:
         simple:
             title: false
@@ -48,27 +48,27 @@ fos_ck_editor:
             fullPage: false
             language: "%locale%"
 
-            filebrowserImageBrowseRoute: admin_newmedia_media_media_list
-            filebrowserImageBrowseRouteParameters:
-                provider: media.provider.image
-                CKEditor: true
-
-            filebrowserFlashBrowseRoute: admin_newmedia_media_media_list
-            filebrowserFlashBrowseRouteParameters:
-                provider: media.provider.video
-                CKEditor: true
-
-            filebrowserGalleryBrowseRoute: admin_newmedia_media_gallery_list
-            filebrowserGalleryBrowseRouteParameters:
-                CKEditor: true
-
-            filebrowserExpertBrowseRoute: admin_newmedia_share_expert_list
-            filebrowserExpertBrowseRouteParameters:
-                CKEditor: true
-
-            filebrowserNewsBrowseRoute: admin_newmedia_news_news_list
-            filebrowserNewsBrowseRouteParameters:
-                CKEditor: true
+#            filebrowserImageBrowseRoute: admin_newmedia_media_media_list
+#            filebrowserImageBrowseRouteParameters:
+#                provider: media.provider.image
+#                CKEditor: true
+#
+#            filebrowserFlashBrowseRoute: admin_newmedia_media_media_list
+#            filebrowserFlashBrowseRouteParameters:
+#                provider: media.provider.video
+#                CKEditor: true
+#
+#            filebrowserGalleryBrowseRoute: admin_newmedia_media_gallery_list
+#            filebrowserGalleryBrowseRouteParameters:
+#                CKEditor: true
+#
+#            filebrowserExpertBrowseRoute: admin_newmedia_share_expert_list
+#            filebrowserExpertBrowseRouteParameters:
+#                CKEditor: true
+#
+#            filebrowserNewsBrowseRoute: admin_newmedia_news_news_list
+#            filebrowserNewsBrowseRouteParameters:
+#                CKEditor: true
 
    plugins:
         font:
@@ -143,6 +143,6 @@ fos_ck_editor:
                 - [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ]
                 - [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ]
 
-#twig:
-#   form_themes:
-#       - AdminBundle:Form:ckeditor_widget.html.twig
+twig:
+   form_themes:
+       - AdminBundle:Form:ckeditor_widget.html.twig

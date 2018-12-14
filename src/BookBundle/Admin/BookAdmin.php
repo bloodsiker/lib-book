@@ -3,6 +3,7 @@
 namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use AdminBundle\Form\Type\TextCounterType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -142,11 +143,12 @@ class BookAdmin extends Admin
 
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
-                ->add('name', TextType::class, [
+                ->add('name', TextCounterType::class, [
                     'label' => 'book.fields.name',
                 ])
                 ->add('description', CKEditorType::class, [
                     'label' => 'book.fields.description',
+//                    'config_name' => 'advanced',
                     'required' => true,
                     'attr' => [
                         'rows' => 5,
