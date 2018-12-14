@@ -1,0 +1,13 @@
+<ul>
+    {% for genre in genres %}
+        <li>{{ genre.name }}
+                {% if genre.children.getValues()|length %}
+                        <ul>
+                                {% for child in genre.children.getValues() %}
+                                        <li>{{ child.name }}</li>
+                                {% endfor %}
+                        </ul>
+                {% endif %}
+        </li>
+    {% endfor %}
+</ul>

@@ -1,8 +1,8 @@
 services:
-    genre.block.list_genge:
+    genre.block.list_genre:
         class: "GenreBundle\\Block\\ListGenreBlockService"
         arguments:
-          - genre.block.list_genge
+          - genre.block.list_genre
           - '@templating'
           - '@?doctrine'
         tags:

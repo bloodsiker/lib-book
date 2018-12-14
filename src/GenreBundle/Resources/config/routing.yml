@@ -1,0 +1,5 @@
+# genre ========================================================
+genre_list:
+    path: /genres
+    defaults:
+        _controller: GenreBundle:Genre:list

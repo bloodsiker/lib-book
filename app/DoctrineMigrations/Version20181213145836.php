@@ -25,18 +25,18 @@ final class Version20181213145836 extends AbstractMigration
      */
     public function up(Schema $schema) : void
     {
-        // bookComments
-        $bookComment = $schema->createTable('order_board');
-        $bookComment->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
-        $bookComment->addColumn('book_title', 'string', array('length' => 255, 'notnull' => true));
-        $bookComment->addColumn('user_id', 'integer', array('unsigned' => true, 'notnull' => false));
-        $bookComment->addColumn('user_name', 'string', array('length' => 255, 'notnull' => false));
-        $bookComment->addColumn('status', 'smallint', array('length' => 1, 'notnull' => true));
-        $bookComment->addColumn('vote', 'smallint', array('length' => 6, 'notnull' => true, 'default' => 0));
-        $bookComment->addColumn('created_at', 'datetime', array('notnull' => true));
-        $bookComment->setPrimaryKey(['id']);
-        $bookComment->addIndex(['user_id']);
-        $bookComment->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
+        // orderBoards
+        $orderBoard = $schema->createTable('order_board');
+        $orderBoard->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $orderBoard->addColumn('book_title', 'string', array('length' => 255, 'notnull' => true));
+        $orderBoard->addColumn('user_id', 'integer', array('unsigned' => true, 'notnull' => false));
+        $orderBoard->addColumn('user_name', 'string', array('length' => 255, 'notnull' => false));
+        $orderBoard->addColumn('status', 'smallint', array('length' => 1, 'notnull' => true));
+        $orderBoard->addColumn('vote', 'smallint', array('length' => 6, 'notnull' => true, 'default' => 0));
+        $orderBoard->addColumn('created_at', 'datetime', array('notnull' => true));
+        $orderBoard->setPrimaryKey(['id']);
+        $orderBoard->addIndex(['user_id']);
+        $orderBoard->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
     }
 
     /**

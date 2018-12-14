@@ -3,6 +3,7 @@
 namespace GenreBundle\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -74,6 +75,7 @@ class Genre
     {
         $this->isActive = true;
         $this->createdAt = new \DateTime('now');
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -185,6 +187,42 @@ class Genre
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add children.
+     *
+     * @param \GenreBundle\Entity\Genre $child
+     *
+     * @return $this
+     */
+    public function addChild(\GenreBundle\Entity\Genre $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove children.
+     *
+     * @param \GenreBundle\Entity\Genre $child
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeChild(\GenreBundle\Entity\Genre $child)
+    {
+        return $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**
