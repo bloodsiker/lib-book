@@ -1,0 +1,5 @@
+# order_board ========================================================
+order_board:
+    path: /order-board
+    defaults:
+        _controller: OrderBundle:OrderBoard:list
