@@ -1,78 +1,10 @@
-{#{{ knp_menu_render('footer', {'template': 'AppBundle:Menu:footer_menu.html.twig'}) }}#}
 
-<div class="footer-container">
-    <div class="footer-block">
-        <a class="footer-logo" href="{{ path('index') }}">
-            {% if app.request.locale == 'ru' %}
-                <img src="{{ asset('bundles/app/img/logo_segodnya_footer_ru.svg') }}" />
-            {% else %}
-                <img src="{{ asset('bundles/app/img/logo_segodnya_footer_ua.svg') }}" />
-            {% endif %}
-            </a>
-        <p>© {{ 'now'|date('Y') }} {{ 'app.frontend.footer.site_copyright'|trans({}, 'AppBundle') }}</p>
-        <p>
-            <a href="https://ua.depositphotos.com/" class="footer-link-depositphotos" target="_blank" rel="nofollow">
-                {{ 'app.frontend.footer.photos_by'|trans({}, 'AppBundle') }} <img src="{{ asset('bundles/app/img/depositphotos.svg') }}">
-            </a>
-        </p>
-    </div>
-
-    {#<div class="footer-social">#}
-        {##}
-        {#{{#}
-        {#sonata_block_render(#}
-            {#{ 'type': 'share.block.service.social_buttons' },#}
-            {#{ 'placement': 'footer', 'hasRss': true }#}
-        {#)#}
-        {#}}#}
-        {##}
-    {#</div>#}
-
-    {#<ul class="footer-links">#}
-        {#{%#}
-            {#set first_footer_links = [#}
-            {#{ name: 'map',              link: path('articles_sitemap') },#}
-            {#{ name: 'rules',            link: path('rules') },#}
-            {#{ name: 'rules_comments',   link: path('rules_comments') },#}
-            {#{ name: 'privacy',          link: path('privacy') },#}
-        {#]#}
-        {#%}#}
-        {#{% for footer_link in first_footer_links %}#}
-            {#<li>#}
-                {#<a onclick="_gaq.push(['_trackEvent', 'footer', 'click', '{{ footer_link.link }}'])" href="{{ footer_link.link }}">#}
-                    {#{{ ('app.frontend.footer.links.'~footer_link.name)|trans({}, 'AppBundle')|raw }}#}
-                {#</a>#}
-            {#</li>#}
-        {#{% endfor %}#}
-    {#</ul>#}
-
-    {#<ul class="footer-links">#}
-        {#{%#}
-            {#set second_footer_links = [#}
-            {#{ name: 'contacts',      link: path('contacts') },#}
-            {#{ name: 'feedback',      link: path('feedback') },#}
-            {#{ name: 'advertising',   link: (path('index', [], true)~'pub/segodnya_adv.pdf') },#}
-            {#{ name: 'subscription',  link: (path('index', [], true)~'podpiska/step1a.html') },#}
-        {#]#}
-        {#%}#}
-        {#{% for footer_link in second_footer_links %}#}
-            {#<li>#}
-                {#<a onclick="_gaq.push(['_trackEvent', 'footer', 'click', '{{ footer_link.link }}'])" href="{{ footer_link.link }}">#}
-                    {#{{ ('app.frontend.footer.links.'~footer_link.name)|trans({}, 'AppBundle')|raw }}#}
-                {#</a>#}
-            {#</li>#}
-        {#{% endfor %}#}
-    {#</ul>#}
-
-    <div class="footer-counters">
-        {{
-        sonata_block_render(
-            { 'type': 'page.block.site_variable' },
-            {
-                'placement': 'footer-counters'
-            }
-        )
-        }}
-    </div>
-
-</div>
+<p>© {{ 'now'|date('Y') }} {{ 'app.frontend.footer.site_copyright'|trans({}, 'AppBundle') }}</p>
+{{
+sonata_block_render(
+    { 'type': 'page.block.site_variable' },
+    {
+        'placement': 'footer-counters'
+    }
+)
+}}

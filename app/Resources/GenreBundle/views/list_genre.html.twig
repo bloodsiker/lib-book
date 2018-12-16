@@ -1,5 +1,11 @@
-{{
+<h1>Жанры</h1>
+<hr class="line">
+
+<div class="genres-list">
+    {{
     sonata_block_render(
-        { 'type': 'genre.block.list_genre' }
+        { 'type': 'genre.block.list_genre' },
+        { 'list_type' : constant('GenreBundle\\Block\\ListGenreBlockService::LIST_GENRES') }
     )
-}}
+    }}
+</div>

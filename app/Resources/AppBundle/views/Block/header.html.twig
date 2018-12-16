@@ -1,34 +1,22 @@
-{#{{#}
-    {#sonata_block_render(#}
-        {#{ 'type': 'page.block.site_variable' },#}
-        {#{#}
-            {#'placement': 'banner-top'#}
-        {#}#}
-    {#)#}
-{#}}#}
 
-<div class="container">
+<div class="head center">
+    <a href="/" class="logo" title="На главную">Книголюб.нет</a>
 
-    <a class="h-logo" onclick="_gaq.push(['_trackEvent', 'header', 'click', 'logo'])" href="{{ path('index') }}">
-        {% if app.request.locale == 'ru' %}
-            <img src="{{ asset('bundles/app/img/logo_segodnya_ru.svg') }}" />
-        {% else %}
-            <img src="{{ asset('bundles/app/img/logo_segodnya_ua.svg') }}" />
-        {% endif %}
-    </a>
+    <div class="search-wrap">
+        <form id="quicksearch" method="post">
 
-    <div class="h-social">
-        {#{{#}
-            {#sonata_block_render(#}
-                {#{ 'type': 'share.block.service.social_buttons' },#}
-                {#{ 'placement': 'header' }#}
-            {#)#}
-        {#}}#}
+            <input type="hidden" name="do" value="search"/>
+            <input type="hidden" name="subaction" value="search"/>
+            <div class="search-box">
+                <input id="story" name="story" placeholder="Поиск..." type="text"/>
+                <button type="submit" title="Найти"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
     </div>
-
-
-    <a href="{{ path('index', [], true) }}/passport/register.html" class="h-login"><img src="{{ asset('bundles/app/img/signin.png') }}" /></a>
-
+    <div class="login-buts">
+        <div class="show-login icon-left icon-dark button" id="show-login"><i class="fa fa-sign-in"></i>Авторизация</div>
+    </div>
 </div>
+
 
 {#{{ knp_menu_render('main', {'template': 'AppBundle:Menu:main_menu.html.twig'}) }}#}

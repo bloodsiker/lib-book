@@ -1,13 +1,11 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    <div class="{% block site_wr__class %}{% endblock %}">
-        {{ parent() }}
-    </div>
+    {{ parent() }}
 {% endblock %}
 
 {% block header %}
-    <header>
+    <header class="head-container">
         {{
             sonata_block_render(
                 {
@@ -16,7 +14,6 @@
             )
         }}
     </header>
-    <section class="header-wrapper"></section>
 
     {% if page is defined %}
         {% if page.name != 'global' %}
@@ -24,75 +21,114 @@
         {% endif %}
         {{ sonata_page_render_container('header', page) }}
     {% endif %}
-
-    {#{{#}
-        {#sonata_block_render(#}
-            {#{ 'type': 'page.block.site_variable' },#}
-            {#{#}
-                {#'placement': 'banner-top'#}
-            {#}#}
-        {#)#}
-    {#}}#}
 {% endblock %}
 
 {% block content %}
-    <section class="container {% block main_class %}{% endblock %}">
+    <section class="wrap center">
         {{ parent() }}
     </section>
 
-    {% block banner_richmedia %}
-        {#{{#}
-            {#sonata_block_render(#}
-                {#{ 'type': 'page.block.site_variable' },#}
-                {#{#}
-                    {#'placement': 'banner-richmedia'#}
-                {#}#}
-            {#)#}
-        {#}}#}
-    {% endblock %}
 {% endblock %}
 
-{% block content_top %}
-    <div class="{% block content_top_class %}{% endblock %}">
-        {% if page is defined %}
-            {% if page.name != 'global' %}
-                {{ sonata_page_render_container('content_top', 'global') }}
-            {% endif %}
-            {{ sonata_page_render_container('content_top', page) }}
-        {% endif %}
+{% block top_nav %}
+    <div class="top-nav">
+        <div class="top-nav-title">
+            <a class="to-top-link" href="/top-100.html"><span>&nbsp;ТОП-100 книг&nbsp;</span></a>
+            <a class="to-top-link" href="{{ path('genre_list') }}"><span>Жанры</span></a>
+            <a class="to-top-link" href="/tickets/new.html"><span>Авторы</span></a>
+            <a class="to-top-link" href="/tickets/new.html"><span>Серии</span></a>
+            <a class="to-top-link" href="/index.php?do=lastcomments"><span>Обмен книгами</span></a>
+            <a class="to-top-link" href="/index.php?do=lastcomments"><span>Последние комментарии</span></a>
+            <a class="to-top-link" href="/orderdesc"><span>Стол заказов</span></a>
+        </div>
     </div>
 {% endblock %}
+
+ {% block breadchumbs %}
+     <section class="breadcrumb">
+         <ul>
+             <li><a href="">Главная</a></li>
+             <li><a href="">Серии</a></li>
+             <li>Книга о доблестном воине Сидрике</li>
+         </ul>
+     </section>
+ {% endblock %}
 
 {% block content_main %}
-    <div class="content-wrapper">
-        <div class="content">
-            {% if content is defined and content|length > 0 %}
-                {{ content|raw }}
-            {% endif %}
-
-            {% if page is defined %}
-                {% if page.name != 'global' %}
-                    {{ sonata_page_render_container('content_main', 'global') }}
-                {% endif %}
-                {{ sonata_page_render_container('content_main', page) }}
-            {% endif %}
-        </div>
+    <section class="cols">
         {{ block('content_side') }}
-    </div>
+
+        {% if content is defined and content|length > 0 %}
+            {{ content|raw }}
+        {% endif %}
+
+        {% if page is defined %}
+            {% if page.name != 'global' %}
+                {{ sonata_page_render_container('content_main', 'global') }}
+            {% endif %}
+            {{ sonata_page_render_container('content_main', page) }}
+        {% endif %}
+    </section>
 {% endblock %}
 
 {% block content_side %}
-    <aside>
-        <div class="aside-content">
+    <aside class="col-side">
 
-            {# top_materials #}
-            {% if page is defined %}
-                {% if page.name != 'global' %}
-                    {{ sonata_page_render_container('content_side', 'global') }}
-                {% endif %}
-                {{ sonata_page_render_container('content_side', page) }}
-            {% endif %}
+        {{
+        sonata_block_render(
+            { 'type': 'genre.block.list_genre' },
+            { 'list_type' : constant('GenreBundle\\Block\\ListGenreBlockService::LIST_ASIDE') }
+        )
+        }}
 
+        <div class="side-item">
+            <div class="side-title icon-left"><i class="fa fa-bookmark-o"></i>Самые популярные книги</div>
+            <div class="side-cont">
+                <a class="side-book" href="https://knigolub.net/fantasy/5966-ravnodenstvie.html">
+                    <div class="side-book-img img-box">
+                        <img src="1539687835_lakedemonskaya_hishchniki.jpg"
+                             alt="Равноденствие"/>
+                    </div>
+                    <div class="side-book-title">Равноденствие</div>
+                </a><a class="side-book"
+                       href="https://knigolub.net/fantasy/5965-bastard-korolevskoy-krovi-kniga-2.html">
+                    <div class="side-book-img img-box">
+                        <img src="1539940783_marina-efiminiuk_pervaia-nevesta-chiernoknizhnika.jpg"
+                             alt="Бастард королевской крови. Книга 2"/>
+                    </div>
+                    <div class="side-book-title">Бастард королевской крови. Книга 2</div>
+                </a><a class="side-book" href="https://knigolub.net/fantasy/5964-vozlyublennaya-lunnogo-vetra.html">
+                    <div class="side-book-img img-box">
+                        <img src="1540378357_svobodina_naslednitsa_proklyatogo_mira.jpg"
+                             alt="Возлюбленная Лунного Ветра"/>
+                    </div>
+                    <div class="side-book-title">Возлюбленная Лунного Ветра</div>
+                </a><a class="side-book" href="https://knigolub.net/fantasy/5963-bastard-korolevskoy-krovi.html">
+                    <div class="side-book-img img-box">
+                        <img src="1540565492_barista_tri-korolevskih-slova_2.jpg"
+                             alt="Бастард королевской крови"/>
+                    </div>
+                    <div class="side-book-title">Бастард королевской крови</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="side-item">
+            <div class="side-title icon-left"><i class="fa fa-tags"></i>Теги</div>
+            <div class="side-cont clearfix">
+                <ul class="tags">
+                    <li><a href="">Привет</a></li>
+                    <li><a href="">Кондра</a></li>
+                    <li><a href="">Словель</a></li>
+                    <li><a href="">Анаконрде</a></li>
+                    <li><a href="">Slice proter</a></li>
+                    <li><a href="">Twitter</a></li>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Dwar</a></li>
+                    <li><a href="">LinkedIn</a></li>
+                    <li><a href="">Google</a></li>
+                </ul>
+            </div>
         </div>
 
     </aside>
@@ -108,7 +144,7 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="{% block footer_class %}{% endblock %}">
+    <footer class="foot-line">
         {% if page is defined %}
             {% if page.name != 'global' %}
                 {{ sonata_page_render_container('footer', 'global') }}

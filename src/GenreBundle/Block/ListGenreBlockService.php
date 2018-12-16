@@ -16,6 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ListGenreBlockService extends AbstractAdminBlockService
 {
+    const LIST_ASIDE = 'aside';
+    const LIST_GENRES = 'genres';
+
     /**
      * @var Registry $doctrine
      */
@@ -57,6 +60,7 @@ class ListGenreBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'list_type' => self::LIST_ASIDE,
             'template'  => 'GenreBundle:Block:list_genre.html.twig',
         ]);
     }

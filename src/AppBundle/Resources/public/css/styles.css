@@ -294,7 +294,7 @@ height:40px; padding:0 15px; line-height:40px; background-color:#f5f5f5;}
 .side-cont {padding:15px 0; display: flex; flex-flow: row wrap}
 .side-bg .side-title {background-color:#f5f5f5; color:#2a2a2a;}
 
-.menu-2col {margin:0 -10px;}
+.menu-2col {margin-left: -10px; width: 100%;}
 /*.menu-2col li {width:50%; float:left;}*/
 .menu-2col li a {height:30px; padding:0 10px; line-height:30px; display:block; position:relative; border-radius:3px; color:#444;}
 .menu-2col li a:hover {background-color:#e5e6e8; color:#444;}
