@@ -21,3 +21,4 @@ parameters:
     media_base_path: '%kernel.root_dir%/../web'
     imagine_web_root: '%kernel.root_dir%/../web'
     imagine_cache_prefix: i
+    static_version: 1

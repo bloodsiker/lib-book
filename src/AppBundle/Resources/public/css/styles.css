@@ -73,7 +73,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 box-shadow:0 0 20px 0 rgba(0,0,0,0.15);}
 .head-container {background-color: #272c34}
 .head {height:60px; padding:10px 15px 0 360px; z-index:110;}
-.wrap {background:#f7f8fa url(../images/bg1.png);}
+.wrap {background:#f7f8fa url(../assets/images/bg1.png);}
 .cols {padding:0 0 30px 0px; display: flex; flex-flow:row wrap; align-items: flex-start;min-height:800px;}
 .col-side {width:25%; padding-left:15px;}
 .col-cont {width:75%; padding:0 30px;}
