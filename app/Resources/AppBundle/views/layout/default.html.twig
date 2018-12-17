@@ -35,7 +35,7 @@
         <div class="top-nav-title">
             <a class="to-top-link" href="/top-100.html"><span>&nbsp;ТОП-100 книг&nbsp;</span></a>
             <a class="to-top-link" href="{{ path('genre_list') }}"><span>Жанры</span></a>
-            <a class="to-top-link" href="/tickets/new.html"><span>Авторы</span></a>
+            <a class="to-top-link" href="{{ path('author_list') }}"><span>Авторы</span></a>
             <a class="to-top-link" href="/tickets/new.html"><span>Серии</span></a>
             <a class="to-top-link" href="/index.php?do=lastcomments"><span>Обмен книгами</span></a>
             <a class="to-top-link" href="/index.php?do=lastcomments"><span>Последние комментарии</span></a>
@@ -76,7 +76,7 @@
 
         {{
         sonata_block_render(
-            { 'type': 'genre.block.list_genre' },
+            { 'type': 'genre.block.genre_list' },
             { 'list_type' : constant('GenreBundle\\Block\\ListGenreBlockService::LIST_ASIDE') }
         )
         }}
@@ -113,23 +113,11 @@
             </div>
         </div>
 
-        <div class="side-item">
-            <div class="side-title icon-left"><i class="fa fa-tags"></i>Теги</div>
-            <div class="side-cont clearfix">
-                <ul class="tags">
-                    <li><a href="">Привет</a></li>
-                    <li><a href="">Кондра</a></li>
-                    <li><a href="">Словель</a></li>
-                    <li><a href="">Анаконрде</a></li>
-                    <li><a href="">Slice proter</a></li>
-                    <li><a href="">Twitter</a></li>
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">Dwar</a></li>
-                    <li><a href="">LinkedIn</a></li>
-                    <li><a href="">Google</a></li>
-                </ul>
-            </div>
-        </div>
+        {{
+        sonata_block_render(
+            { 'type': 'share.block.tag_list' }
+        )
+        }}
 
     </aside>
 {% endblock %}

@@ -1,0 +1,15 @@
+# genre ========================================================
+tag_list:
+    path: /tag/{slug}
+    defaults:
+        _controller: ShareBundle:Tag:list
+
+author_list:
+    path: /authors
+    defaults:
+        _controller: ShareBundle:Author:list
+
+author_books:
+    path: /author/{slug}
+    defaults:
+        _controller: ShareBundle:Author:authorBook

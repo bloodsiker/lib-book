@@ -12,66 +12,7 @@
  {% block breadchumbs %}{% endblock %}
 
 {% block content_side %}
-    <aside class="col-side">
-
-        {{
-        sonata_block_render(
-            { 'type': 'genre.block.list_genre' },
-            { 'list_type' : constant('GenreBundle\\Block\\ListGenreBlockService::LIST_ASIDE') }
-        )
-        }}
-
-        <div class="side-item">
-            <div class="side-title icon-left"><i class="fa fa-bookmark-o"></i>Самые популярные книги</div>
-            <div class="side-cont">
-                <a class="side-book" href="https://knigolub.net/fantasy/5966-ravnodenstvie.html">
-                    <div class="side-book-img img-box">
-                        <img src="1539687835_lakedemonskaya_hishchniki.jpg"
-                             alt="Равноденствие"/>
-                    </div>
-                    <div class="side-book-title">Равноденствие</div>
-                </a><a class="side-book"
-                       href="https://knigolub.net/fantasy/5965-bastard-korolevskoy-krovi-kniga-2.html">
-                    <div class="side-book-img img-box">
-                        <img src="1539940783_marina-efiminiuk_pervaia-nevesta-chiernoknizhnika.jpg"
-                             alt="Бастард королевской крови. Книга 2"/>
-                    </div>
-                    <div class="side-book-title">Бастард королевской крови. Книга 2</div>
-                </a><a class="side-book" href="https://knigolub.net/fantasy/5964-vozlyublennaya-lunnogo-vetra.html">
-                    <div class="side-book-img img-box">
-                        <img src="1540378357_svobodina_naslednitsa_proklyatogo_mira.jpg"
-                             alt="Возлюбленная Лунного Ветра"/>
-                    </div>
-                    <div class="side-book-title">Возлюбленная Лунного Ветра</div>
-                </a><a class="side-book" href="https://knigolub.net/fantasy/5963-bastard-korolevskoy-krovi.html">
-                    <div class="side-book-img img-box">
-                        <img src="1540565492_barista_tri-korolevskih-slova_2.jpg"
-                             alt="Бастард королевской крови"/>
-                    </div>
-                    <div class="side-book-title">Бастард королевской крови</div>
-                </a>
-            </div>
-        </div>
-
-        <div class="side-item">
-            <div class="side-title icon-left"><i class="fa fa-tags"></i>Теги</div>
-            <div class="side-cont clearfix">
-                <ul class="tags">
-                    <li><a href="">Привет</a></li>
-                    <li><a href="">Кондра</a></li>
-                    <li><a href="">Словель</a></li>
-                    <li><a href="">Анаконрде</a></li>
-                    <li><a href="">Slice proter</a></li>
-                    <li><a href="">Twitter</a></li>
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">Dwar</a></li>
-                    <li><a href="">LinkedIn</a></li>
-                    <li><a href="">Google</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </aside>
+    {{ parent() }}
 {% endblock %}
 
 {% block content_right %}

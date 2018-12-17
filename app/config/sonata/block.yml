@@ -26,7 +26,11 @@ sonata_block:
 #            contexts: [cms]
 
         # GenreBundle Block's
-        genre.block.list_genre:
+        genre.block.genre_list:
+            contexts: [cms]
+
+        # ShareBundle Block's
+        share.block.tag_list:
             contexts: [cms]
 #
 #        # UserBundle's Blocks

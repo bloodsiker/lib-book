@@ -16,6 +16,12 @@ genres:
     options: { i18n: true }
 #==============================================================================
 
+# Share ========================================================================
+share:
+    resource: '@ShareBundle/Resources/config/routing.yml'
+    options: { i18n: true }
+#==============================================================================
+
 # Sonata Admin ================================================================
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'

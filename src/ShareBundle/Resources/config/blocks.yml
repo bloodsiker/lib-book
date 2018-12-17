@@ -1,8 +1,8 @@
 services:
-    genre.block.genre_list:
-        class: "GenreBundle\\Block\\ListGenreBlockService"
+    share.block.tag_list:
+        class: "ShareBundle\\Block\\ListTagsBlockService"
         arguments:
-          - genre.block.genre_list
+          - share.block.tag_list
           - '@templating'
           - '@?doctrine'
         tags:
