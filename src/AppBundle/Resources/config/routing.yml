@@ -4,6 +4,13 @@ index:
   defaults:
     _controller: AppBundle:Default:index
 
+index_page:
+  path: /page/{page}
+  defaults:
+    _controller: AppBundle:Default:index
+  requirements:
+    page: "\\d+"
+
 top_100:
   path: /top-100
   defaults:
