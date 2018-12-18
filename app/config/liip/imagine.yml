@@ -1,9 +1,10 @@
 #parameters:
 #    liip_imagine.jpegoptim.binary: '%jpegoptim_binary%'
+# http://qaru.site/questions/1152042/liipimaginebundle-thumbnails-doesnt-work
 
 liip_imagine:
-    data_loader: proxy_loader #default
-    driver: imagick #gd
+    data_loader: filesystem #default
+    driver: gd #imagick
 
     loaders:
         default:
