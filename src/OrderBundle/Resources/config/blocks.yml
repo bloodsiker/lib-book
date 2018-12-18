@@ -1,0 +1,9 @@
+services:
+    order.block.order_board_list:
+        class: "OrderBundle\\Block\\ListOrderBoardBlockService"
+        arguments:
+          - order.block.order_board_list
+          - '@templating'
+          - '@?doctrine'
+        tags:
+          - { name: sonata.block }

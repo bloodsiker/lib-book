@@ -54,7 +54,7 @@ class GenreAdmin extends Admin
     {
         $datagridMapper
             ->add('name', null, [
-                'label' => 'genre.fields.title',
+                'label' => 'genre.fields.name',
             ])
             ->add('parent', null, [
                 'label' => 'genre.fields.parent',

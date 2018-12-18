@@ -1,0 +1,38 @@
+<div class="col-cont">
+    <div class="container">
+        <button class="order-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить заказ</button>
+        <h2>Стол заказов</h2>
+        <div class="order-description">
+            Если на сайте нет книги, которую Вы хотите прочитать - нажмите кнопку "Добавить заказ" и
+            мы постараемся ее добавить.
+            </br>
+            Если у Вас есть книга(и) из списка ниже и Вы хотите поделиться - <a
+                    href="https://knigolub.net/tickets/new.html"><u>добавьте книгу на сайт</u></a>.
+            <p style="padding: 2px 0;"><b style="color:#BC8F8F">Внимание!</b> Если книга, которую Вы
+                хотите уже добавлена в список ниже, Вы можете поддержать эту книгу своим голосом.
+            </p>
+
+        </div>
+
+        {{
+        sonata_block_render(
+            { 'type': 'order.block.order_board_list' }
+        )
+        }}
+
+        <div class="pagi-nav">
+            <span class="navigation"><span>1</span> <a href="https://knigolub.net/page/2/">2</a> <a
+                        href="https://knigolub.net/page/3/">3</a> <a
+                        href="https://knigolub.net/page/4/">4</a> <a
+                        href="https://knigolub.net/page/5/">5</a> <a
+                        href="https://knigolub.net/page/6/">6</a> <a
+                        href="https://knigolub.net/page/7/">7</a> <a
+                        href="https://knigolub.net/page/8/">8</a> <a
+                        href="https://knigolub.net/page/9/">9</a> <a
+                        href="https://knigolub.net/page/10/">10</a> <span class="nav_ext">...</span> <a
+                        href="https://knigolub.net/page/258/">258</a></span>
+            <span class="pnext"><a href="https://knigolub.net/page/2/">Вперед</a></span>
+        </div>
+    </div>
+
+</div>

@@ -33,13 +33,13 @@
 {% block top_nav %}
     <div class="top-nav">
         <div class="top-nav-title">
-            <a class="to-top-link" href="/top-100.html"><span>&nbsp;ТОП-100 книг&nbsp;</span></a>
+            <a class="to-top-link" href="{{ path('top_100') }}"><span>&nbsp;ТОП-100 книг&nbsp;</span></a>
             <a class="to-top-link" href="{{ path('genre_list') }}"><span>Жанры</span></a>
             <a class="to-top-link" href="{{ path('author_list') }}"><span>Авторы</span></a>
-            <a class="to-top-link" href="/tickets/new.html"><span>Серии</span></a>
+            <a class="to-top-link" href="{{ path('series_list') }}"><span>Серии</span></a>
             <a class="to-top-link" href="/index.php?do=lastcomments"><span>Обмен книгами</span></a>
-            <a class="to-top-link" href="/index.php?do=lastcomments"><span>Последние комментарии</span></a>
-            <a class="to-top-link" href="/orderdesc"><span>Стол заказов</span></a>
+            <a class="to-top-link" href="{{ path('last_comments') }}"><span>Последние комментарии</span></a>
+            <a class="to-top-link" href="{{ path('order_board') }}"><span>Стол заказов</span></a>
         </div>
     </div>
 {% endblock %}

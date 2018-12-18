@@ -218,7 +218,10 @@ class BookAdmin extends Admin
                     'required' => true,
                     'property' => 'name',
                     'multiple' => true,
+                    'btn_add' => 'book.buttons.link_add_genre',
                     'attr' => ['class' => 'form-control'],
+                    'btn_catalogue' => $this->translationDomain,
+                    'minimum_input_length' => 2,
                 ])
                 ->add('tags', ModelAutocompleteType::class, [
                     'label' => 'book.fields.tags',
@@ -227,6 +230,8 @@ class BookAdmin extends Admin
                     'multiple' => true,
                     'btn_add' => 'book.buttons.link_add_tag',
                     'attr' => ['class' => 'form-control'],
+                    'btn_catalogue' => $this->translationDomain,
+                    'minimum_input_length' => 2,
                 ])
                 ->add('rating', TextType::class, [
                     'label' => 'book.fields.rating',

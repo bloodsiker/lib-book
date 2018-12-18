@@ -1,0 +1,34 @@
+<div class="col-cont">
+    <div class="container">
+        <h1>Серии</h1>
+
+        <hr class="line">
+
+        <form action="" class="form">
+            <div class="inputs">
+                <input type="text" name="author" placeholder="Искать..">
+                <button>Искать</button>
+            </div>
+        </form>
+
+        {{
+        sonata_block_render(
+            { 'type': 'series.block.series_list' }
+        )
+        }}
+
+        <div class="pagi-nav">
+            <span class="navigation"><span>1</span> <a href="https://knigolub.net/page/2/">2</a> <a
+                        href="https://knigolub.net/page/3/">3</a> <a
+                        href="https://knigolub.net/page/4/">4</a> <a
+                        href="https://knigolub.net/page/5/">5</a> <a
+                        href="https://knigolub.net/page/6/">6</a> <a
+                        href="https://knigolub.net/page/7/">7</a> <a
+                        href="https://knigolub.net/page/8/">8</a> <a
+                        href="https://knigolub.net/page/9/">9</a> <a
+                        href="https://knigolub.net/page/10/">10</a> <span class="nav_ext">...</span> <a
+                        href="https://knigolub.net/page/258/">258</a></span>
+            <span class="pnext"><a href="https://knigolub.net/page/2/">Вперед</a></span>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace OrderBundle\Controller;
+namespace CommentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 /**
- * Class OrderBoardController
+ * Class CommentController
  */
-class OrderBoardController extends Controller
+class CommentController extends Controller
 {
     /**
      * @param Request $request
@@ -21,6 +21,6 @@ class OrderBoardController extends Controller
      */
     public function listAction(Request $request)
     {
-        return $this->render('OrderBundle::orders_board_list.html.twig');
+        return $this->render('CommentBundle::last_comments_list.html.twig');
     }
 }

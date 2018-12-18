@@ -22,12 +22,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
-    public function contactsAction(Request $request)
+    public function topBooksAction()
     {
-        return new Response("<h1>Contacts</h1>");
+        return $this->render('BookBundle::top-100.html.twig');
     }
 }

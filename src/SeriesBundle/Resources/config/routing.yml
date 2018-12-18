@@ -1,0 +1,5 @@
+# series ========================================================
+series_list:
+    path: /series
+    defaults:
+        _controller: SeriesBundle:Series:list

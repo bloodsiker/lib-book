@@ -29,8 +29,20 @@ sonata_block:
         genre.block.genre_list:
             contexts: [cms]
 
+        # SeriesBundle Block's
+        series.block.series_list:
+            contexts: [cms]
+
         # ShareBundle Block's
         share.block.tag_list:
+            contexts: [cms]
+
+        # OrderBundle Block's
+        order.block.order_board_list:
+            contexts: [cms]
+
+        # CommentBundle Block's
+        comment.block.last_comments:
             contexts: [cms]
 #
 #        # UserBundle's Blocks

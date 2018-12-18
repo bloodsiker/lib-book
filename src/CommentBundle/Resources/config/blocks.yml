@@ -1,0 +1,9 @@
+services:
+    comment.block.last_comments:
+        class: "CommentBundle\\Block\\ListLastCommentBlockService"
+        arguments:
+          - comment.block.last_comments
+          - '@templating'
+          - '@?doctrine'
+        tags:
+          - { name: sonata.block }

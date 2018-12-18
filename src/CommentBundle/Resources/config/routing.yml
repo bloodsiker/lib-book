@@ -1,0 +1,5 @@
+# comments ========================================================
+last_comments:
+    path: /last-comments
+    defaults:
+        _controller: CommentBundle:Comment:list

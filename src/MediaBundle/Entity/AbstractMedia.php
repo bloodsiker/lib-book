@@ -90,7 +90,7 @@ abstract class AbstractMedia
      */
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) '#'.$this->id.'-'.$this->description;
     }
 
     /**

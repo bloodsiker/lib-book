@@ -4,21 +4,16 @@ index:
   defaults:
     _controller: AppBundle:Default:index
 
-#tv:
-#  path: /tv.html
-#  defaults:
-#    _controller: AppBundle:Default:tv
-#
+top_100:
+  path: /top-100
+  defaults:
+    _controller: AppBundle:Default:topBooks
+
 #search:
 #  path: /search.html
 #  defaults:
 #    _controller: AppBundle:Default:search
 #
-contacts:
-  path: /contacts
-  defaults:
-    _controller: AppBundle:Default:contacts
-
 #rules:
 #  path: /rules.html
 #  defaults:

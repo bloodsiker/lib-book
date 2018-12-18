@@ -1,6 +1,6 @@
 <?php
 
-namespace OrderBundle\Controller;
+namespace SeriesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 /**
- * Class OrderBoardController
+ * Class SeriesController
  */
-class OrderBoardController extends Controller
+class SeriesController extends Controller
 {
     /**
      * @param Request $request
@@ -21,6 +21,6 @@ class OrderBoardController extends Controller
      */
     public function listAction(Request $request)
     {
-        return $this->render('OrderBundle::orders_board_list.html.twig');
+        return $this->render('SeriesBundle::series_list.html.twig');
     }
 }
