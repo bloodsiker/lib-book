@@ -199,7 +199,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('authors', ModelAutocompleteType::class, [
                     'label' => 'book.fields.authors',
-                    'required' => true,
+                    'required' => false,
                     'property' => 'name',
                     'multiple' => true,
                     'btn_add' => 'book.buttons.link_add',
