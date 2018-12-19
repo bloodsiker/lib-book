@@ -74,6 +74,7 @@
 {% block content_side %}
     <aside class="col-side">
 
+        {# List genres #}
         {{
         sonata_block_render(
             { 'type': 'genre.block.genre_list' },
@@ -81,38 +82,17 @@
         )
         }}
 
-        <div class="side-item">
-            <div class="side-title icon-left"><i class="fa fa-bookmark-o"></i>Самые популярные книги</div>
-            <div class="side-cont">
-                <a class="side-book" href="https://knigolub.net/fantasy/5966-ravnodenstvie.html">
-                    <div class="side-book-img img-box">
-                        <img src="1539687835_lakedemonskaya_hishchniki.jpg"
-                             alt="Равноденствие"/>
-                    </div>
-                    <div class="side-book-title">Равноденствие</div>
-                </a><a class="side-book"
-                       href="https://knigolub.net/fantasy/5965-bastard-korolevskoy-krovi-kniga-2.html">
-                    <div class="side-book-img img-box">
-                        <img src="1539940783_marina-efiminiuk_pervaia-nevesta-chiernoknizhnika.jpg"
-                             alt="Бастард королевской крови. Книга 2"/>
-                    </div>
-                    <div class="side-book-title">Бастард королевской крови. Книга 2</div>
-                </a><a class="side-book" href="https://knigolub.net/fantasy/5964-vozlyublennaya-lunnogo-vetra.html">
-                    <div class="side-book-img img-box">
-                        <img src="1540378357_svobodina_naslednitsa_proklyatogo_mira.jpg"
-                             alt="Возлюбленная Лунного Ветра"/>
-                    </div>
-                    <div class="side-book-title">Возлюбленная Лунного Ветра</div>
-                </a><a class="side-book" href="https://knigolub.net/fantasy/5963-bastard-korolevskoy-krovi.html">
-                    <div class="side-book-img img-box">
-                        <img src="1540565492_barista_tri-korolevskih-slova_2.jpg"
-                             alt="Бастард королевской крови"/>
-                    </div>
-                    <div class="side-book-title">Бастард королевской крови</div>
-                </a>
-            </div>
-        </div>
+        {# Popular book #}
+        {{
+        sonata_block_render(
+            { 'type': 'book.block.list' },
+            {
+                'list_type' : constant('BookBundle\\Block\\ListBooksBlockService::POPULAR_LIST')
+            }
+        )
+        }}
 
+        {# List tags #}
         {{
         sonata_block_render(
             { 'type': 'share.block.tag_list' }

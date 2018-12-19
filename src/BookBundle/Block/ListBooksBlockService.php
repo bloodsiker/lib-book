@@ -46,7 +46,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
     /**
      * @param BookRepository $bookRepository
      */
-    public function setArticleRepository(BookRepository $bookRepository)
+    public function setBookRepository(BookRepository $bookRepository)
     {
         $this->bookRepository = $bookRepository;
     }
@@ -96,7 +96,8 @@ class ListBooksBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
-        $repository = $this->bookRepository;
+//        $repository = $this->bookRepository;
+        $repository = $this->doctrine->getRepository(Book::class);
 
         $qb = $repository->baseBookQueryBuilder();
 

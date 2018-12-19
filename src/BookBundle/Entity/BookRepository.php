@@ -10,7 +10,6 @@ use Doctrine\ORM\QueryBuilder;
  */
 class BookRepository extends EntityRepository
 {
-
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */

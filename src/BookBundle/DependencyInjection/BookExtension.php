@@ -21,6 +21,7 @@ class BookExtension extends Extension
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('blocks.yml');
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.yml');

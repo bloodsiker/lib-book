@@ -1,0 +1,11 @@
+services:
+    book.block.list:
+        class: "BookBundle\\Block\\ListBooksBlockService"
+        arguments:
+          - book.block.list
+          - '@templating'
+          - '@?doctrine'
+        calss:
+          - [ setBookRepository, ['@book.repository.book']]
+        tags:
+          - { name: sonata.block }
