@@ -11,14 +11,18 @@ use Doctrine\ORM\QueryBuilder;
 class BookRepository extends EntityRepository
 {
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param int $limit
+     *
+     * @return QueryBuilder
      */
-    public function baseBookQueryBuilder()
+    public function baseBookQueryBuilder(int $limit): QueryBuilder
     {
         $qb = $this->createQueryBuilder('b');
         $qb
             ->where('b.isActive = 1')
             ->orderBy('b.createdAt', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults($limit)
         ;
 
         return $qb;
@@ -32,7 +36,7 @@ class BookRepository extends EntityRepository
      *
      * @throws \Exception
      */
-    public function filterPopularByDaysAgo(QueryBuilder $qb, int $period)
+    public function filterPopularByDaysAgo(QueryBuilder $qb, int $period): QueryBuilder
     {
         $timeAgo = $this->getNow()->modify(" -{$period} day");
 

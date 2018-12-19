@@ -74,6 +74,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
     {
         $resolver->setDefaults([
             'list_type'        => null,
+            'items_count'      => 20,
             'popular'          => false,
             'popular_days_ago' => 30,
             'template'         => 'BookBundle:Block:large_list.html.twig',
@@ -96,14 +97,16 @@ class ListBooksBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
+        $limit = (int) $blockContext->getSetting('items_count');
+
 //        $repository = $this->bookRepository;
         $repository = $this->doctrine->getRepository(Book::class);
 
-        $qb = $repository->baseBookQueryBuilder();
+        $qb = $repository->baseBookQueryBuilder($limit);
 
-        $popularDaysAgo = (int) $blockContext->getSetting('popular_days_ago');
+        $popularDaysAgo = $blockContext->getSetting('popular_days_ago');
         if ($blockContext->getSetting('popular') && $popularDaysAgo) {
-            $repository->filterPopularByDaysAgo($qb, $popularDaysAgo);
+            $repository->filterPopularByDaysAgo($qb, (int) $popularDaysAgo);
         }
 
         $result = $qb->getQuery()->getResult();
