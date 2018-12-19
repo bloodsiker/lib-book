@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -75,6 +76,15 @@ class MediaImageAdmin extends Admin
     }
 
     /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+//        $collection->add('preview', 'preview');
+        $collection->remove('acl');
+    }
+
+    /**
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
@@ -99,6 +109,12 @@ class MediaImageAdmin extends Admin
             ->add('createdAt', null, [
                 'label' => 'media.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'delete' => [],
+                    'edit' => [],
+                ],
             ]);
     }
 

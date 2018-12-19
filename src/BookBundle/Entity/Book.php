@@ -64,12 +64,15 @@ class Book
     protected $year;
 
     /**
-     * @var \ShareBundle\Entity\Author
+     * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="ShareBundle\Entity\Author")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Author")
+     * @ORM\JoinTable(name="books_authors",
+     *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")}
+     *     )
      */
-    protected $author;
+    protected $authors;
 
     /**
      * @var \SeriesBundle\Entity\Series
@@ -78,6 +81,13 @@ class Book
      * @ORM\JoinColumn(name="series_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $series;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", length=4, nullable=true)
+     */
+    protected $seriesNumber;
 
     /**
      * @var int
@@ -199,6 +209,7 @@ class Book
 
         $this->genres         = new ArrayCollection();
         $this->tags           = new ArrayCollection();
+        $this->authors        = new ArrayCollection();
         $this->bookHasFiles   = new ArrayCollection();
         $this->bookHasRelated = new ArrayCollection();
     }
@@ -387,27 +398,37 @@ class Book
     }
 
     /**
-     * Set author
+     * Add author
      *
      * @param \ShareBundle\Entity\Author $author
      *
      * @return Book
      */
-    public function setAuthor(\ShareBundle\Entity\Author $author = null)
+    public function addAuthor(\ShareBundle\Entity\Author $author)
     {
-        $this->author = $author;
+        $this->authors[] = $author;
 
         return $this;
     }
 
     /**
-     * Get author
+     * Remove author
      *
-     * @return \ShareBundle\Entity\Author
+     * @param \ShareBundle\Entity\Author $author
      */
-    public function getAuthor()
+    public function removeAuthor(\ShareBundle\Entity\Author $author)
     {
-        return $this->author;
+        $this->authors->removeElement($author);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
     }
 
     /**
@@ -432,6 +453,30 @@ class Book
     public function getSeries()
     {
         return $this->series;
+    }
+
+    /**
+     * Get seriesNumber
+     *
+     * @return int
+     */
+    public function getSeriesNumber()
+    {
+        return $this->seriesNumber;
+    }
+
+    /**
+     * Set seriesNumber
+     *
+     * @param int|null $seriesNumber
+     *
+     * @return $this
+     */
+    public function setSeriesNumber(int $seriesNumber = null)
+    {
+        $this->seriesNumber = $seriesNumber;
+
+        return $this;
     }
 
     /**

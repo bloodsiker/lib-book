@@ -3,3 +3,13 @@ search_placeholder: поиск
 short_object_description_placeholder: не выбрано
 
 Dashboard: '<i class="fa fa-home"></i>'
+
+admin:
+    fields:
+        counter:
+            total:
+                character: Символов
+                word: Слов
+            remaining:
+                character: Осталось символов
+            word: Осталось слов

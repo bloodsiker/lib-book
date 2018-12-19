@@ -1,9 +1,0 @@
-Trans Unit List: Переклади
-Translation File List: Файли
-
-group:
-  translation: Переклади
-  file: Файли
-
-action:
-  clear_cache: Очистити кеш

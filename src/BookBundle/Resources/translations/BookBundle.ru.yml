@@ -26,8 +26,9 @@ book:
         is_active: Активно
         is_allow_download: Разрешено для скачивания
         poster: Изображение книги
-        author: Автор
+        authors: Автор(ы)
         series: Серия
+        series_number: 'номер # в серии'
         pages: Страниц
         year: Год издания
         genres: Жанр(ы)
@@ -39,8 +40,7 @@ book:
         updated_at: Изменена
         created_at: Создана
     buttons:
-        link_add_tag: Добавить новый
-        link_add_genre: Добавить новый
+        link_add: Добавить новый
 
 book_has_file:
     fields:

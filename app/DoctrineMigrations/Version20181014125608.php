@@ -28,12 +28,12 @@ final class Version20181014125608 extends AbstractMigration
         // book
         $book = $schema->createTable('books');
         $book->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
-        $book->addColumn('author_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('series_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('image_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('name', 'string', array('length' => 255, 'notnull' => true));
         $book->addColumn('slug', 'string', array('length' => 100, 'notnull' => true));
         $book->addColumn('description', 'text', array('length' => 65535, 'notnull' => true));
+        $book->addColumn('series_number', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
         $book->addColumn('year', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
         $book->addColumn('pages', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
         $book->addColumn('ratePlus', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 7));
@@ -45,8 +45,7 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('created_at', 'datetime', array('notnull' => true));
         $book->addColumn('updated_at', 'datetime', array('notnull' => true));
         $book->setPrimaryKey(['id']);
-        $book->addIndex(['author_id', 'series_id', 'image_id']);
-        $book->addForeignKeyConstraint($schema->getTable('share_authors'), ['author_id'], ['id'], ['onDelete' => 'set null']);
+        $book->addIndex(['series_id', 'image_id']);
         $book->addForeignKeyConstraint($schema->getTable('series'), ['series_id'], ['id'], ['onDelete' => 'set null']);
         $book->addForeignKeyConstraint($schema->getTable('media_image'), ['image_id'], ['id'], ['onDelete' => 'set null']);
 
@@ -87,6 +86,14 @@ final class Version20181014125608 extends AbstractMigration
         $bookTags->addIndex(['book_id', 'tag_id']);
         $bookTags->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
         $bookTags->addForeignKeyConstraint($schema->getTable('share_tags'), ['tag_id'], ['id'], ['onDelete' => 'cascade']);
+
+        // bookAuthors
+        $bookGenres = $schema->createTable('books_authors');
+        $bookGenres->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookGenres->addColumn('author_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookGenres->addIndex(['book_id', 'author_id']);
+        $bookGenres->addForeignKeyConstraint($book, ['book_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookGenres->addForeignKeyConstraint($schema->getTable('share_authors'), ['author_id'], ['id'], ['onDelete' => 'cascade']);
 
         // bookComments
         $bookComment = $schema->createTable('books_comments');

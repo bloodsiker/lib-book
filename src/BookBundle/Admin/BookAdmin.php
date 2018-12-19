@@ -52,7 +52,7 @@ class BookAdmin extends Admin
             ->with('description')
                 ->addConstraint(new NotNull())
             ->end()
-            ->with('author')
+            ->with('authors')
                 ->addConstraint(new NotNull())
             ->end()
             ->with('genres')
@@ -102,12 +102,12 @@ class BookAdmin extends Admin
                 'label' => 'book.fields.created_at',
                 'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ])
-//            ->add('_action', 'actions', [
-//                'actions' => [
+            ->add('_action', 'actions', [
+                'actions' => [
 //                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
-//                    'edit' => [],
-//                ],
-//            ])
+                    'edit' => [],
+                ],
+            ])
         ;
     }
 
@@ -120,8 +120,8 @@ class BookAdmin extends Admin
             ->add('name', null, [
                 'label' => 'book.fields.name',
             ])
-            ->add('author', null, [
-                'label' => 'book.fields.author',
+            ->add('authors', null, [
+                'label' => 'book.fields.authors',
             ])
             ->add('isAllowDownload', null, [
                 'label' => 'book.fields.is_allow_download',
@@ -197,12 +197,22 @@ class BookAdmin extends Admin
                     'label' => 'book.fields.poster',
                     'required' => false,
                 ])
-                ->add('author', ModelListType::class, [
-                    'label' => 'book.fields.author',
+                ->add('authors', ModelAutocompleteType::class, [
+                    'label' => 'book.fields.authors',
                     'required' => true,
+                    'property' => 'name',
+                    'multiple' => true,
+                    'btn_add' => 'book.buttons.link_add',
+                    'attr' => ['class' => 'form-control'],
+                    'btn_catalogue' => $this->translationDomain,
+                    'minimum_input_length' => 2,
                 ])
                 ->add('series', ModelListType::class, [
                     'label' => 'book.fields.series',
+                    'required' => false,
+                ])
+                ->add('seriesNumber', IntegerType::class, [
+                    'label' => 'book.fields.series_number',
                     'required' => false,
                 ])
                 ->add('pages', IntegerType::class, [
@@ -218,7 +228,7 @@ class BookAdmin extends Admin
                     'required' => true,
                     'property' => 'name',
                     'multiple' => true,
-                    'btn_add' => 'book.buttons.link_add_genre',
+                    'btn_add' => 'book.buttons.link_add',
                     'attr' => ['class' => 'form-control'],
                     'btn_catalogue' => $this->translationDomain,
                     'minimum_input_length' => 2,
@@ -228,7 +238,7 @@ class BookAdmin extends Admin
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
-                    'btn_add' => 'book.buttons.link_add_tag',
+                    'btn_add' => 'book.buttons.link_add',
                     'attr' => ['class' => 'form-control'],
                     'btn_catalogue' => $this->translationDomain,
                     'minimum_input_length' => 2,
