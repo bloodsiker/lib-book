@@ -32,11 +32,18 @@ class BookAdminController extends Controller
         $relatedNews = $repository->getRelatedByTagsBooks($tags, $excludeIds, 40);
 
         $result = array_map(
-            function($item) {
+            function ($item) {
+                $authors = [];
+                array_map(function ($value) use (&$authors) {
+                    $authors[] = $value->getName();
+
+                    return $value;
+                }, $item->getAuthors()->getValues());
+
                 return [
                     'id'        => $item->getId(),
                     'name'      => $item->getName(),
-                    'author'    => $item->getAuthor()->getName(),
+                    'author'    => implode(', ', $authors),
                     'views'     => $item->getViews(),
                     'download'  => $item->getDownload(),
                     'rate'      => $item->getRatePlus() - $item->getRateMinus(),
