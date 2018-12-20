@@ -1,0 +1,40 @@
+<div class="col-cont">
+    <div class="container">
+
+        <div class="section-title clearfix">
+            <h2>Книги по жанру {{ subGenre ? subGenre.name : genre.name }}</h2>
+        </div>
+
+        {% if genre.children.getValues()|length %}
+            <div class="genres">
+                <ul class="tags">
+                    {% for child in genre.children.getValues() %}
+                        {% if child.isActive %}
+                            <li><a href="{{ genre_path(child) }}">{{ child.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="movies clearfix grid grid-list" data-view="grid-list" id="grid">
+
+            {{
+            sonata_block_render(
+                { 'type': 'book.block.list' },
+                {
+                    'items_count' : 10,
+                    'page': app.request.get('page') ? app.request.get('page') : 1,
+                    'genre': subGenre ? subGenre : genre,
+                }
+            )
+            }}
+
+            {% if books.maxPerPage is defined and books.count > books.maxPerPage %}
+                {{ pagerfanta(books, { 'omitFirstPage': true}) }}
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>

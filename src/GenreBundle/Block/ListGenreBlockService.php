@@ -61,7 +61,7 @@ class ListGenreBlockService extends AbstractAdminBlockService
     {
         $resolver->setDefaults([
             'list_type' => self::LIST_ASIDE,
-            'template'  => 'GenreBundle:Block:list_genre.html.twig',
+            'template'  => 'GenreBundle:Block:genre_list.html.twig',
         ]);
     }
 

@@ -3,8 +3,9 @@
 namespace BookBundle\Block;
 
 use BookBundle\Entity\Book;
-use BookBundle\Entity\BookRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -25,11 +26,6 @@ class ListBooksBlockService extends AbstractAdminBlockService
     protected $doctrine;
 
     /**
-     * @var BookRepository
-     */
-    private $bookRepository;
-
-    /**
      * ListGenreBlockService constructor.
      *
      * @param string          $name
@@ -41,14 +37,6 @@ class ListBooksBlockService extends AbstractAdminBlockService
         parent::__construct($name, $templating);
 
         $this->doctrine = $doctrine;
-    }
-
-    /**
-     * @param BookRepository $bookRepository
-     */
-    public function setBookRepository(BookRepository $bookRepository)
-    {
-        $this->bookRepository = $bookRepository;
     }
 
     /**
@@ -77,6 +65,8 @@ class ListBooksBlockService extends AbstractAdminBlockService
             'items_count'      => 20,
             'popular'          => false,
             'popular_days_ago' => 30,
+            'page'             => 1,
+            'genre'            => null,
             'template'         => 'BookBundle:Block:large_list.html.twig',
         ]);
     }
@@ -98,8 +88,8 @@ class ListBooksBlockService extends AbstractAdminBlockService
         }
 
         $limit = (int) $blockContext->getSetting('items_count');
+        $page = $blockContext->getSetting('page');
 
-//        $repository = $this->bookRepository;
         $repository = $this->doctrine->getRepository(Book::class);
 
         $qb = $repository->baseBookQueryBuilder($limit);
@@ -109,13 +99,19 @@ class ListBooksBlockService extends AbstractAdminBlockService
             $repository->filterPopularByDaysAgo($qb, (int) $popularDaysAgo);
         }
 
-        $result = $qb->getQuery()->getResult();
+        if ($blockContext->getSetting('genre')) {
+            $repository->filterByGenre($qb, $blockContext->getSetting('genre'));
+        }
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
+        $paginator->setMaxPerPage((int) $limit);
+        $paginator->setCurrentPage((int) $page);
 
         $template = !is_null($blockContext->getSetting('list_type'))
             ? $blockContext->getSetting('list_type') : $blockContext->getTemplate();
 
         return $this->renderResponse($template, [
-            'books'     => $result,
+            'books'     => $paginator,
             'block'     => $block,
             'settings'  => array_merge($blockContext->getSettings(), $block->getSettings()),
         ], $response);

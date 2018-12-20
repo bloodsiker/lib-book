@@ -4,7 +4,7 @@
         <div class="side-cont">
             <ul class="menu-2col navi">
                 {% for genre in genres %}
-                    <li><a href="">{{ genre.name }}</a></li>
+                    <li><a href="{{ genre_path(genre) }}">{{ genre.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -17,7 +17,7 @@
                 <ul>
                     {% for child in genre.children.getValues() %}
                         {% if child.isActive %}
-                            <li><a href="">{{ child.name }}</a></li>
+                            <li><a href="{{ genre_path(genre) }}">{{ child.name }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

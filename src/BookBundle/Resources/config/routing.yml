@@ -1,0 +1,8 @@
+# books ========================================================
+book_view:
+    path: /book/{slug}-{id}
+    defaults:
+        _controller: BookBundle:Book:view
+    requirements:
+        slug: ".+"
+        id: "\\d+"

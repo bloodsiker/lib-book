@@ -1,0 +1,75 @@
+{% for book in books %}
+    <div class="book-item ignore-select">
+        <div class="book-img img-box pseudo-link"
+             data-link="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">
+            <div class="book-rates">
+                {% set rate = book.ratePlus - book.rateMinus %}
+                <span class="count {{ rate >= 0 ? 'green' : 'red' }}">{{ rate > 0 ? '+'~rate : rate < 0 ? rate : 0 }}</span>
+                <div class="counter">
+                    <span class="rating">
+                        <span id="ratig-layer-127958">
+                            <span class="hand-up icon-like" onclick="doRate(1, '127958', 'main'); return false;">
+                                <i class="fa fa-thumbs-up"></i>
+                                <span class="ratePos">{{ book.ratePlus }}</span>
+                            </span>
+                            <span class="hand-down icon-dislike" onclick="doRate(-1, '127958', 'main'); return false;">
+                                <i class="fa fa-thumbs-down"></i>
+                                <span class="rateNeg">{{ book.rateMinus }}</span>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}"/>
+        </div>
+        <div class="book-text">
+
+            <a class="book-title" href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">{{ book.name }}</a>
+
+            <div class="book-text-inner">
+                {% if book.getAuthors is iterable %}
+                    <div class="mi-item">
+                        <span>Автор:</span>
+                        {% for author in book.getAuthors %}
+                            <a href="">{{ author.name }}</a>{{ loop.last ? '' : ' / ' }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if book.getGenres is iterable %}
+                    <div class="mi-item">
+                        <span>Жанр:</span>
+                        {% for genre in book.getGenres %}
+                            <a href="{{ genre_path(genre) }}">{{ genre.name }}</a>{{ loop.last ? '' : ' / ' }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if book.year is not empty %}
+                    <div class="mi-item">
+                        <span>Год:</span>
+                        <a href="">{{ book.year }}</a>
+                    </div>
+                {% endif %}
+
+                {% if book.pages is not empty %}
+                    <div class="mi-item">
+                        <span>Страниц:</span> {{ book.pages }}
+                    </div>
+                {% endif %}
+
+                <div class="book-desc">{{ book.description|truncate(280, true)|raw }}</div>
+
+                <div class="book-stats">
+                    <span class="stats-item"><i class="fa fa-eye" aria-hidden="true"></i> {{ book.views|number_format(0, '.', ' ') }}</span>
+                    {#<span class="stats-item"><i class="fa fa-comments" aria-hidden="true"></i> {{ book.getComments|length|number_format(0, '.', ' ') }}</span>#}
+                    <span class="stats-item"><i class="fa fa-cloud-download" aria-hidden="true"></i> {{ book.download|number_format(0, '.', ' ') }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% if books.maxPerPage is defined and books.count > books.maxPerPage %}
+    {{ pagerfanta(books, { 'omitFirstPage': true}) }}
+{% endif %}

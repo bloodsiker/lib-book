@@ -19,8 +19,8 @@ app_lifestyle:
 
 app:
   pager:
-    previous: Предыдущая страница
-    next: Следующая страница
+    previous: Назад
+    next: Вперед
     page: Страница
 
   block:

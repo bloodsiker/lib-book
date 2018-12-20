@@ -16,21 +16,18 @@ services:
 #            - 'mysql:host=%database_host%;port=%database_port%;dbname=%database_name%'
 #            - { db_username: "%database_user%", db_password: "%database_password%" }
 #
-#    app.pagerfanta.view.default:
-#        class: "AppBundle\\Template\\DefaultView"
-#        arguments:
-#            - '@app.pagerfanta.template.default'
-#            - { proximity: 9 }
-#        tags: [{ name: pagerfanta.view, alias: default }]
-#
-#    app.pagerfanta.template.default:
-#        class: "AppBundle\\Template\\PagerfantaTemplate"
-#        calls:
-#            - [ 'setAssets', ['@twig.extension.assets']]
-#            - [ 'setTranslator', ['@translator']]
-#            - [ 'setSaveStateService', ['@app.save.state.value']]
-#            - [ 'setRequestStack', ['@request_stack']]
-#            - [ 'init', ['AppBundle'] ]
+    app.pagerfanta.view.default:
+        class: "AppBundle\\Template\\DefaultView"
+        arguments:
+            - '@app.pagerfanta.template.default'
+            - { proximity: 9 }
+        tags: [{ name: pagerfanta.view, alias: default }]
+
+    app.pagerfanta.template.default:
+        class: "AppBundle\\Template\\PagerfantaTemplate"
+        calls:
+            - [ 'setTranslator', ['@translator']]
+            - [ 'init', ['AppBundle'] ]
 
     app.entity_manager:
         class: "Doctrine\\ORM\\EntityManager"

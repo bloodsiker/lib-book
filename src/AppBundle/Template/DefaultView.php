@@ -13,8 +13,6 @@ use Sonata\AdminBundle\Route\RouteGeneratorInterface;
  */
 class DefaultView implements ViewInterface
 {
-    const MAX_PAGES = 10;
-
     private $template;
 
     private $pagerfanta;
@@ -143,8 +141,8 @@ class DefaultView implements ViewInterface
     private function generateContainer($pages)
     {
         return str_replace(
-            '%prev_next%',
-            $this->previous().$this->next(),
+            ['%prev%', '%next%'],
+            [$this->previous(), $this->next()],
             str_replace('%pages%', $pages.$this->generateExtraPages(), $this->template->container())
         );
     }
@@ -246,7 +244,6 @@ class DefaultView implements ViewInterface
             return $this->template->previousEnabled($this->pagerfanta->getPreviousPage());
         }
 
-//        return $this->template->previousEnabled($this->currentPage);
         return null;
     }
 
@@ -267,7 +264,7 @@ class DefaultView implements ViewInterface
     {
         $pages = '';
 
-        foreach (range(1, $this->nbPages < self::MAX_PAGES ? $this->nbPages : self::MAX_PAGES) as $page) {
+        foreach (range($this->startPage, $this->endPage) as $page) {
             $pages .= $this->page($page);
         }
 
@@ -313,11 +310,10 @@ class DefaultView implements ViewInterface
      */
     private function next()
     {
-        if ($this->pagerfanta->hasNextPage() && $this->currentPage < self::MAX_PAGES) {
+        if ($this->pagerfanta->hasNextPage()) {
             return $this->template->nextEnabled($this->pagerfanta->getNextPage());
         }
 
-//        return $this->template->nextEnabled($this->currentPage);
         return null;
     }
 }

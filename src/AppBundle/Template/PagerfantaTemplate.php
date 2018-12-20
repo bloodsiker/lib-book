@@ -15,38 +15,23 @@ use Symfony\Component\Translation\TranslatorInterface;
 class PagerfantaTemplate extends DefaultTemplate
 {
     static protected $defaultOptions = [
-        'prev_message'       => '<a class="pagination-prev" href="%href%"><span></span><b>%prev_text%</b></a>',
-        'next_message'       => '<a class="pagination-next" href="%href%"><b>%next_text%</b><span></span></a>',
+        'prev_message'       => '<span class="pagination-prev"><a href="%href%">%prev_text%</a></span>',
+        'next_message'       => '<span class="pagination-next"><a href="%href%">%next_text%</a></span>',
         'css_disabled_class' => '',
         'css_dots_class'     => '',
         'css_current_class'  => 'pagination-current',
         'dots_text'          => '...',
-        'container_template' => '<div class="br"></div><div class="pagination">%prev_next%<ul>%pages%</ul></div>',
-        'page_template'      => '<li><a href="%href%"%rel%>%text%</a></li>',
-        'span_template'      => '<li class="%class%" ><a href="%href%">%text%</a></li>',
+        'container_template' => '<div class="pagination">%prev%<span class="navigation">%pages%</span>%next%</div>',
+        'page_template'      => '<a href="%href%"%rel%>%text%</a>',
+        'span_template'      => '<a href="%href%" class="%class%">%text%</a>',
         'rel_previous'        => 'prev',
         'rel_next'            => 'next',
     ];
 
     /**
-     * @var AssetExtension
-     */
-    private $asset;
-
-    /**
      * @var TranslatorInterface
      */
     private $translator;
-
-    /**
-     * @var SaveStateValue
-     */
-    private $saveStateService;
-
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
 
     /**
      * @param int         $page
@@ -59,8 +44,8 @@ class PagerfantaTemplate extends DefaultTemplate
     {
         $search = array('%href%', '%text%', '%rel%');
 
-        $href = $this->generateRoute($page > 1 ? '/p'.$page : null);
-        $replace = $rel ? array($href, $text, ' rel="'.$rel.'"') : array($href, $text, '');
+        $href = $this->generateRoute($page);
+        $replace = $rel ? [$href, $text, ' rel="'.$rel.'"'] : [$href, $text, ''];
 
         return str_replace($search, $replace, $this->option('page_template'));
     }
@@ -76,7 +61,7 @@ class PagerfantaTemplate extends DefaultTemplate
     {
         $search = array('%href%', '%text%', '%rel%');
 
-        $replace = $rel ? array($href, $text, ' rel="'.$rel.'"') : array($href, $text, '');
+        $replace = $rel ? [$href, $text, ' rel="'.$rel.'"'] : [$href, $text, ''];
 
         return str_replace($search, $replace, $this->option('page_template'));
     }
@@ -92,16 +77,6 @@ class PagerfantaTemplate extends DefaultTemplate
     }
 
     /**
-     * @param AssetExtension $asset
-     *
-     * @return void
-     */
-    public function setAssets(AssetExtension $asset)
-    {
-        $this->asset = $asset;
-    }
-
-    /**
      * @param TranslatorInterface $translator
      *
      * @return void
@@ -109,26 +84,6 @@ class PagerfantaTemplate extends DefaultTemplate
     public function setTranslator(TranslatorInterface $translator)
     {
         $this->translator = $translator;
-    }
-
-    /**
-     * @param SaveStateValue $saveStateService
-     *
-     * @return void
-     */
-    public function setSaveStateService(SaveStateValue $saveStateService)
-    {
-        $this->saveStateService = $saveStateService;
-    }
-
-    /**
-     * @param RequestStack $requestStack
-     *
-     * @return void
-     */
-    public function setRequestStack(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
     }
 
     /**
@@ -146,14 +101,7 @@ class PagerfantaTemplate extends DefaultTemplate
      */
     public function previousEnabled($page)
     {
-        $route = $this->generateRoute($page > 1 ? '/p'.$page : null);
-        if ($route) {
-            $customMetaTags = $this->saveStateService->getValue('custom_meta_tags') ?: [];
-            $customMetaTags[] = '<link rel="prev" href="'.$this->requestStack->getCurrentRequest()->getScheme().'://'.$this->requestStack->getCurrentRequest()->getHttpHost().$route.'">';
-            $this->saveStateService->setValue('custom_meta_tags', $customMetaTags);
-        }
-
-        return str_replace(['%href%'], $route, $this->previousDisabled());
+        return str_replace(['%href%'], $this->generateRoute($page), $this->previousDisabled());
     }
 
     /**
@@ -171,14 +119,7 @@ class PagerfantaTemplate extends DefaultTemplate
      */
     public function nextEnabled($page)
     {
-        $route = $this->generateRoute($page > 1 ? '/p'.$page : null);
-        if ($route) {
-            $customMetaTags = $this->saveStateService->getValue('custom_meta_tags') ?: [];
-            $customMetaTags[] = '<link rel="next" href="'.$this->requestStack->getCurrentRequest()->getScheme().'://'.$this->requestStack->getCurrentRequest()->getHttpHost().$route.'">';
-            $this->saveStateService->setValue('custom_meta_tags', $customMetaTags);
-        }
-
-        return str_replace(['%href%'], $route, $this->nextDisabled());
+        return str_replace(['%href%'], $this->generateRoute($page), $this->nextDisabled());
     }
 
     /**
@@ -213,7 +154,7 @@ class PagerfantaTemplate extends DefaultTemplate
     private function generateSpan($class, $page)
     {
         $search = array('%class%', '%text%', '%href%');
-        $replace = array($class, $page, $this->generateRoute($page > 1 ? '/p'.$page : null));
+        $replace = array($class, $page, $this->generateRoute($page));
 
         return str_replace($search, $replace, $this->option('span_template'));
     }

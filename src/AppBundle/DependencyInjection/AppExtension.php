@@ -20,7 +20,7 @@ class AppExtension extends Extension
 
         $loader->load('services.yml');
         $loader->load('blocks.yml');
-//        $loader->load('twig.yml');
+        $loader->load('twig.yml');
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.yml');
