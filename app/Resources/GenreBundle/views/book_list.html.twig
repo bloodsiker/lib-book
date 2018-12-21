@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            <h2>Книги по жанру <span>{{ subGenre ? subGenre.name : genre.name }}</span></h2>
+            <h2>Жанр: <span>{{ subGenre ? subGenre.name : genre.name }}</span></h2>
         </div>
 
         {% if genre.children.getValues()|length %}

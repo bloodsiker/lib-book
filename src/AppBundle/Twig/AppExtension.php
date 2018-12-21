@@ -49,6 +49,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('block_ajax_url', array($this, 'blockAjaxUrl')),
             new \Twig_SimpleFunction('replace_highlight', array($this, 'replaceHighlight')),
+            new \Twig_SimpleFunction('book_change_end', array($this, 'countBookChangeEnd')),
         );
     }
 
@@ -84,6 +85,21 @@ class AppExtension extends \Twig_Extension
     public function replaceHighlight($value, $replace) : string
     {
         return preg_replace("/$replace/iu", '<span class="highlight">'.$replace.'</span>', $value);
+    }
+
+    /**
+     * @param int $count
+     *
+     * @return string
+     */
+    public function countBookChangeEnd($count) : string
+    {
+        $titles = ['книга', 'книги', 'книг'];
+
+        $cases = [2, 0, 1, 1, 1, 2];
+        $key = ($count % 100 > 4 && $count % 100 < 20) ? 2 : $cases[min($count % 10, 5)];
+
+        return $titles[$key];
     }
 
     /**

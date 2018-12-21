@@ -2,7 +2,8 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            <h2>Книги из серии <span>{{ series.title }} ({{ series.getBooks().count() }})</span></h2>
+            {% set countBook = series.getBooks().count() %}
+            <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
         </div>
 
         <div class="movies clearfix grid grid-list">
