@@ -1,0 +1,16 @@
+<table class="table">
+    {% for author in authors %}
+        <tr>
+            <td>
+                <i aria-hidden="true" class="fa fa-book"></i> {{ author.getBooks().count() }}
+            </td>
+            <td class="title author-name">
+                <a href="{{ path('author_books', { 'slug': author.slug }) }}">{{ replace_highlight(author.name, app.request.get('search'))|raw }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% if authors.maxPerPage is defined and authors.count > authors.maxPerPage %}
+    {{ pagerfanta(authors, { 'omitFirstPage': true}) }}
+{% endif %}

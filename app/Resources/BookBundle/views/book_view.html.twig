@@ -1,0 +1,366 @@
+<div class="col-cont">
+    <div itemscope itemtype="http://schema.org/Book">
+        <article class="full-page">
+
+            <div class="page-cols">
+
+                <div class="page-col-left">
+
+                    <div class="m-img">
+                        <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image"/>
+                    </div>
+                </div>
+
+                <div class="page-col-right">
+
+                    <h1 itemprop="name">{{ book.name }}</h1>
+
+                    <div class="m-info">
+
+                        {% if book.getAuthors is iterable %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-users"></i>Автор:</span>
+                                {% for author in book.getAuthors %}
+                                    <a href="{{ path('author_books', { 'slug': author.slug }) }}">{{ author.name }}</a>{{ loop.last ? '' : ' / ' }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if book.getGenres is iterable %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-info-circle"></i>Жанр:</span>
+                                {% for genre in book.getGenres %}
+                                    <a href="{{ genre_path(genre) }}">{{ genre.name }}</a>{{ loop.last ? '' : ' / ' }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if book.year is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-calendar-o"></i>Год:</span>
+                                <a href="{{ path('year_books', { 'year': book.year }) }}">{{ book.year }}</a>
+                            </div>
+                        {% endif %}
+
+                        {% if book.series is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-pencil-square"></i>Серия:</span>
+                                <a href="">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
+                            </div>
+                        {% endif %}
+
+                        {% if book.pages is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa fa-book"></i>Страниц:</span> {{ book.pages }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <br>
+                    <div class="rates">
+                        <div class="rate3" data-name="Оценка читателей">
+                            <div class="ps" id="ps-204" onclick="doRateLD('plus', '204');">
+                                <span class="fa fa-thumbs-up"></span>
+                            </div>
+                            <div class="ms" id="ms-204" onclick="doRateLD('minus', '204');">
+                                <span class="fa fa-thumbs-down"></span>
+                            </div>
+                            <span id="ratig-layer-204">
+                                <span class="ratingtypeplusminus ignore-select ratingplus">{{ book.ratePlus - book.rateMinus }}</span>
+                            </span>
+                            <span id="vote-num-id-204">{{ book.ratePlus + book.rateMinus }}</span>
+                        </div>
+
+                    </div>
+
+                    <div class="m-desc full-text slice-this" itemprop="description">
+                        {{ book.description|raw }}
+                    </div>
+                    <div class="m-buttons">
+                        <div class="but to-view"><i class="fa fa-arrow-down"></i> Скачать</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="section related">
+                <div class="section-title"><h2>Похожие книги:</h2></div>
+                <div class="rel-box" id="owl-rel">
+                    <a class="rel-book img-box"
+                       href="https://knigolub.net/romance-fiction/605-esli-odin-uydet.html">
+                        <img data-src="1539940783_marina-efiminiuk_pervaia-nevesta-chiernoknizhnika.jpg"
+                             alt="Если один уйдет" class="lazyOwl"/>
+                        <div class="rel-book-title">Если один уйдет</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/science-fiction/290-devchonka-s-iznanki-aprel.html">
+                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
+                             alt="Девчонка с изнанки. Апрель" class="lazyOwl"/>
+                        <div class="rel-book-title">Девчонка с изнанки. Апрель</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/romance-fiction/273-opasaysya-dvernyh-ruchek.html">
+                        <img data-src="1540378357_svobodina_naslednitsa_proklyatogo_mira.jpg"
+                             alt="Опасайся дверных ручек" class="lazyOwl"/>
+                        <div class="rel-book-title">Опасайся дверных ручек</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/fantasy/266-hozyayka-logova.html">
+                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
+                             alt="Хозяйка «Логова»" class="lazyOwl"/>
+                        <div class="rel-book-title">Хозяйка «Логова»</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/space-fantasy/206-poteryatsya-sredi-zvezd-chtob-nayti-tebya.html">
+                        <img data-src="1543582139_zinina_karilskiy_tsikl_9_bastard_korolevskoy_krovi_kniga_2.jpg"
+                             alt="Потеряться среди звезд, чтоб найти тебя!" class="lazyOwl"/>
+                        <div class="rel-book-title">Потеряться среди звезд, чтоб</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/cyberpunk/161-stremlenie-k-zvezdam.html">
+                        <img data-src="1541869831_kvin_1-plohaya-primeta-ili-za-muzhem-ne-propast.jpg"
+                             alt="Стремление к звездам" class="lazyOwl"/>
+                        <div class="rel-book-title">Стремление к звездам</div>
+                    </a><a class="rel-book img-box"
+                           href="https://knigolub.net/detective-fiction/67-lgunya.html">
+                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
+                             alt="Лгунья" class="lazyOwl"/>
+                        <div class="rel-book-title">Лгунья</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="download-section">
+
+                <ul class="tabs nowrap">
+                    <li class="current">Скачать книгу</li>
+                </ul>
+
+                <div class="book-file">
+                    <div class="block">
+                        <span itemprop="bookFormat" content="fb2"><a
+                                    href="https://knigolub.net/uploads/book/Miechty_sbyvaiutsia_._-_Ariella_Odiesskaia.fb2"
+                                    download
+                                    onclick="yaCounter42495019.reachGoal('fb2-download'); return true;"><img
+                                        src="templates/knigolub/images/fb2.png"
+                                        alt="Скачать книгу в Fb2 формате"></a></span>
+                    </div>
+                    <div class="block">
+                                    <span itemprop="bookFormat" content="epub"><a
+                                                href="https://knigolub.net/uploads/book/Miechty_sbyvaiutsia_._-_Ariella_Odiesskaia.epub"
+                                                download
+                                                onclick="yaCounter42495019.reachGoal('epub-download'); return true;"><img
+                                                    src="templates/knigolub/images/epub.png"
+                                                    alt="Скачать книгу в ePub формате"></a></span>
+                    </div>
+                    <div class="block">
+                                    <span itemprop="bookFormat" content="pdf"><a
+                                                href="https://knigolub.net/uploads/book/Miechty_sbyvaiutsia_._-_Ariella_Odiesskaia.pdf"
+                                                download
+                                                onclick="yaCounter42495019.reachGoal('pdf-download'); return true;"><img
+                                                    src="templates/knigolub/images/pdf.png"
+                                                    alt="Скачать книгу в PDF формате"></a></span>
+                    </div>
+                    <div class="block">
+                                    <span itemprop="bookFormat" content="txt"><a
+                                                href="https://knigolub.net/uploads/book/Miechty_sbyvaiutsia_._-_Ariella_Odiesskaia.txt"
+                                                download
+                                                onclick="yaCounter42495019.reachGoal('txt-download'); return true;"><img
+                                                    src="templates/knigolub/images/txt.png"
+                                                    alt="Скачать книгу в txt формате"></a></span>
+                    </div>
+                </div>
+
+                <div class="share-section">
+                    <div class="addthis_inline_share_toolbox_k7z0"></div>
+                </div>
+
+            </div>
+
+        </article>
+
+        <div class="full-comms">
+            <form method="post" name="dle-comments-form" id="dle-comments-form">
+                <div id="addcform">
+                    <div class="add-com-form clearfix">
+                        <div class="add-com-textarea clearfix">
+                            <div class="add-comm">
+                                <div class="side-title">Прокомментировать <i class="fa fa-angle-down"></i></div>
+                                <div class="ac-inputs clearfix">
+                                    <input type="text" maxlength="35" name="name" id="name"
+                                           placeholder="Ваше имя"/>
+                                    <input type="text" maxlength="35" name="mail" id="mail"
+                                           placeholder="Ваш e-mail (необязательно)"/>
+                                </div>
+
+                                <div class="ac-textarea">
+                                    <div class="wseditor">
+                                        <textarea id="comments" name="comments" rows="10" cols="50"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="ac-protect">
+
+
+                                </div>
+
+                                <div class="ac-submit">
+                                    <button name="submit" class="fbutton" type="submit">Отправить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <input type="hidden" name="subaction" value="addcomment">
+                <input type="hidden" name="post_id" id="post_id" value="204">
+                <input type="hidden" name="user_hash" value="33a9035db1ad78a4048676248192f4e2dbcd94a9">
+            </form>
+            <div class="comments-items">
+                <ol class="comments-tree-list">
+                    <li class="comments-tree-item">
+                        <div class="comm-item">
+                            <div class="comm-left">
+                                <img src="uploads/fotos/foto_3648.jpg" alt="Macurta">
+                            </div>
+                            <div class="comm-right">
+                                <div class="comm-top-info">
+                                    <div class="comm-info-line clearfix">
+                                        <div class="comm-author"><a
+                                                    onclick="ShowProfile('Macurta', 'https://knigolub.net/user/Macurta/', '0'); return false;"
+                                                    href="https://knigolub.net/user/Macurta/">Macurta</a>
+                                        </div>
+                                        <div class="comm-date">2 ноября 2018 09:55</div>
+
+                                        <div class="comm-rate pos-comm">
+                                            <a href="#"
+                                               onclick="doCommentsRate('plus', '23264'); return false;">+</a>
+                                            <span id="comments-ratig-layer-23264"
+                                                  class="ignore-select"><span
+                                                        class="ratingtypeplusminus ignore-select ratingplus">+2</span></span>
+                                            <a href="#"
+                                               onclick="doCommentsRate('minus', '23264'); return false;">-</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="comm-text">
+                                    Два раза перечитывала,
+                                    такое спокойное и интересное повествование
+                                    редко встретишь.
+                                </div>
+                                <div class="comm-bottom-info">
+                                    <ul>
+                                        <li><i class="fa fa-reply"></i><a
+                                                    onclick="dle_reply('23264', '0', '0'); return false;"
+                                                    href="#">Ответить</a></li>
+                                        <li class="mob-vis"><i
+                                                    class="fa fa-quote-right"></i><a
+                                                    onmouseover="dle_copy_quote('Macurta');"
+                                                    href="#"
+                                                    onclick="dle_ins('23264'); return false;">Цитата</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="comments-tree-item">
+                        <div class="comm-item">
+                            <div class="comm-left">
+                                <img src="templates/knigolub/dleimages/noavatar.png" alt="Тетя жу">
+                            </div>
+                            <div class="comm-right">
+                                <div class="comm-top-info">
+                                    <div class="comm-info-line clearfix">
+                                        <div class="comm-author"><a
+                                                    onclick="ShowProfile('Macurta', 'https://knigolub.net/user/Macurta/', '0'); return false;"
+                                                    href="https://knigolub.net/user/Macurta/">Macurta</a>
+                                        </div>
+                                        <div class="comm-date">2 ноября 2018 09:55</div>
+
+                                        <div class="comm-rate pos-comm">
+                                            <a href="#"
+                                               onclick="doCommentsRate('plus', '23264'); return false;">+</a>
+                                            <span id="comments-ratig-layer-233264"
+                                                  class="ignore-select"><span
+                                                        class="ratingtypeplusminus ignore-select ratingplus">+2</span></span>
+                                            <a href="#"
+                                               onclick="doCommentsRate('minus', '23264'); return false;">-</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="comm-text">
+                                    Устала на середине.Нудно
+                                </div>
+                                <div class="comm-bottom-info">
+                                    <ul>
+                                        <li><i class="fa fa-reply"></i><a
+                                                    onclick="dle_reply('23264', '0', '0'); return false;"
+                                                    href="#">Ответить</a></li>
+                                        <li class="mob-vis"><i
+                                                    class="fa fa-quote-right"></i><a
+                                                    onmouseover="dle_copy_quote('Macurta');"
+                                                    href="#"
+                                                    onclick="dle_ins('23264'); return false;">Цитата</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="comments-tree-item">
+                        <div class="comm-item">
+                            <div class="comm-left">
+                                <img src="templates/knigolub/dleimages/noavatar.png" alt="Айя">
+                            </div>
+                            <div class="comm-right">
+                                <div class="comm-top-info">
+                                    <div class="comm-info-line clearfix">
+                                        <div class="comm-author"><a
+                                                    onclick="ShowProfile('Macurta', 'https://knigolub.net/user/Macurta/', '0'); return false;"
+                                                    href="https://knigolub.net/user/Macurta/">Macurta</a>
+                                        </div>
+                                        <div class="comm-date">2 ноября 2018 09:55</div>
+
+                                        <div class="comm-rate pos-comm">
+                                            <a href="#"
+                                               onclick="doCommentsRate('plus', '23264'); return false;">+</a>
+                                            <span
+                                                    class="ignore-select"><span
+                                                        class="ratingtypeplusminus ignore-select ratingplus">+2</span></span>
+                                            <a href="#"
+                                               onclick="doCommentsRate('minus', '23264'); return false;">-</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="comm-text">
+                                    Не смогла,не осилила!
+                                    Откуда такой рейтинг непонятно?
+                                    Примитивно,вульгарно, не интересно!
+                                </div>
+                                <div class="comm-bottom-info">
+                                    <ul>
+                                        <li><i class="fa fa-reply"></i><a
+                                                    onclick="dle_reply('23264', '0', '0'); return false;"
+                                                    href="#">Ответить</a></li>
+                                        <li class="mob-vis"><i
+                                                    class="fa fa-quote-right"></i><a
+                                                    onmouseover="dle_copy_quote('Macurta');"
+                                                    href="#"
+                                                    onclick="dle_ins('23264'); return false;">Цитата</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -4,5 +4,10 @@ book_view:
     defaults:
         _controller: BookBundle:Book:view
     requirements:
-        slug: ".+"
+        slug: "([a-zA-Z\\-0-9\\_]+)?"
         id: "\\d+"
+
+year_books:
+    path: /year/{year}
+    defaults:
+        _controller: BookBundle:Book:yearList

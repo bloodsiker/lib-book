@@ -48,6 +48,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('block_ajax_url', array($this, 'blockAjaxUrl')),
+            new \Twig_SimpleFunction('replace_highlight', array($this, 'replaceHighlight')),
         );
     }
 
@@ -72,6 +73,17 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('date_time_humanize', array($this, 'dateTimeHumanize')),
             new \Twig_SimpleFilter('url_decode', array($this, 'urlDecode')),
         );
+    }
+
+    /**
+     * @param string $value
+     * @param string $replace
+     *
+     * @return string
+     */
+    public function replaceHighlight($value, $replace) : string
+    {
+        return preg_replace("/$replace/iu", '<span class="highlight">'.$replace.'</span>', $value);
     }
 
     /**

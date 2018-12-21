@@ -11,14 +11,6 @@ genre_books:
     requirements:
         genre: "([a-zA-Z\\-0-9\\_]+)?"
 
-genre_books_page:
-    path: /genre/{genre}/page/{page}
-    defaults:
-        _controller: GenreBundle:Genre:listBook
-    requirements:
-        genre: "([a-zA-Z\\-0-9\\_]+)?"
-        page: "\\d+"
-
 sub_genre_books:
     path: /genre/{genre}/{sub_genre}
     defaults:
@@ -26,12 +18,3 @@ sub_genre_books:
     requirements:
         genre: "([a-zA-Z\\-0-9\\_]+)?"
         sub_genre: "([a-zA-Z\\-0-9\\_]+)?"
-
-sub_genre_books_page:
-    path: /genre/{genre}/{sub_genre}/page/{page}
-    defaults:
-        _controller: GenreBundle:Genre:listBook
-    requirements:
-        genre: "([a-zA-Z\\-0-9\\_]+)?"
-        sub_genre: "([a-zA-Z\\-0-9\\_]+)?"
-        page: "\\d+"

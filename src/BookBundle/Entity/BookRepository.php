@@ -5,6 +5,8 @@ namespace BookBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use GenreBundle\Entity\Genre;
+use SeriesBundle\Entity\Series;
+use ShareBundle\Entity\Author;
 use ShareBundle\Entity\Tag;
 
 /**
@@ -49,13 +51,56 @@ class BookRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param Author       $author
+     *
+     * @return QueryBuilder
+     */
+    public function filterByAuthor(QueryBuilder $qb, Author $author) : QueryBuilder
+    {
+        return $qb->innerJoin('b.authors', 'author', 'WITH', 'author.id = :author')
+            ->setParameter('author', $author);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param Series       $series
+     *
+     * @return QueryBuilder
+     */
+    public function filterBySeries(QueryBuilder $qb, Series $series) : QueryBuilder
+    {
+        return $qb->andWhere('b.series = :series')->setParameter('series', $series);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param int          $year
+     *
+     * @return QueryBuilder
+     */
+    public function filterByYear(QueryBuilder $qb, int $year) : QueryBuilder
+    {
+        return $qb->andWhere('b.year = :year')->setParameter('year', $year);
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     *
+     * @return QueryBuilder
+     */
+    public function filterByTop(QueryBuilder $qb) : QueryBuilder
+    {
+        return $qb->resetDQLPart('orderBy')->orderBy('b.views');
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param Tag          $tag
      *
      * @return QueryBuilder
      */
     public function filterByTag(QueryBuilder $qb, Tag $tag) : QueryBuilder
     {
-
         return $qb->innerJoin('b.tags', 'tag', 'WITH', 'tag.id = :tag')->setParameter(
             'tag',
             $tag

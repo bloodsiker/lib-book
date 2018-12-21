@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            <h2>Книги автора <span>{{ author.name }} ({{ author.getBooks().count() }})</span></h2>
+            <h2>Книги за <span>{{ app.request.get('year') }} год</span></h2>
         </div>
 
         <div class="movies clearfix grid grid-list">
@@ -13,7 +13,7 @@
                 {
                     'items_count' : 15,
                     'page': app.request.get('page') ? app.request.get('page') : 1,
-                    'author': author,
+                    'year': app.request.get('year'),
                 }
             )
             }}

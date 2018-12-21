@@ -3,12 +3,13 @@
 namespace ShareBundle\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Author
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ShareBundle\Entity\AuthorRepository")
  * @ORM\Table(name="share_authors")
  * @ORM\HasLifecycleCallbacks
  */
@@ -59,6 +60,13 @@ class Author
     protected $createdAt;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="BookBundle\Entity\Book", mappedBy="authors")
+     */
+    protected $books;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -66,6 +74,8 @@ class Author
         $this->isActive = true;
         $this->isAllowDownload = true;
         $this->createdAt = new \DateTime('now');
+
+        $this->books = new ArrayCollection();
     }
 
     /**
@@ -226,5 +236,39 @@ class Author
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Add book
+     *
+     * @param \BookBundle\Entity\Book $book
+     *
+     * @return $this
+     */
+    public function addBook(\BookBundle\Entity\Book $book)
+    {
+        $this->books[] = $book;
+
+        return $this;
+    }
+
+    /**
+     * Remove book
+     *
+     * @param \BookBundle\Entity\Book $book
+     */
+    public function removeAuthor(\BookBundle\Entity\Book $book)
+    {
+        $this->books->removeElement($book);
+    }
+
+    /**
+     * Get book
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

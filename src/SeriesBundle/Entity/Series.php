@@ -3,12 +3,13 @@
 namespace SeriesBundle\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Series
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="SeriesBundle\Entity\SeriesRepository")
  * @ORM\Table(name="series")
  * @ORM\HasLifecycleCallbacks
  */
@@ -45,6 +46,13 @@ class Series
     protected $isActive;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BookBundle\Entity\Book", mappedBy="series")
+     */
+    protected $books;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -58,6 +66,7 @@ class Series
     {
         $this->isActive = true;
         $this->createdAt = new \DateTime('now');
+        $this->books = new ArrayCollection();
     }
 
     /**
@@ -194,5 +203,39 @@ class Series
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Add book
+     *
+     * @param \BookBundle\Entity\Book $books
+     *
+     * @return $this
+     */
+    public function addBook(\BookBundle\Entity\Book $books)
+    {
+        $this->books[] = $books;
+
+        return $this;
+    }
+
+    /**
+     * Remove book
+     *
+     * @param \BookBundle\Entity\Book $books
+     */
+    public function removeBook(\BookBundle\Entity\Book $books)
+    {
+        $this->books->removeElement($books);
+    }
+
+    /**
+     * Get books
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }

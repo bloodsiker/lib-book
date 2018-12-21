@@ -3,3 +3,10 @@ series_list:
     path: /series
     defaults:
         _controller: SeriesBundle:Series:list
+
+series_books:
+    path: /series/{slug}
+    defaults:
+        _controller: SeriesBundle:Series:listBook
+    requirements:
+        slug: "([a-zA-Z\\-0-9\\_]+)?"

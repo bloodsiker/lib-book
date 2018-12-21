@@ -1,11 +1,11 @@
 <?php
 
-namespace SeriesBundle\Block;
+namespace ShareBundle\Block;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use SeriesBundle\Entity\Series;
+use ShareBundle\Entity\Author;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ListSeriesBlockService
+ * Class ListAuthorsBlockService
  */
-class ListSeriesBlockService extends AbstractAdminBlockService
+class ListAuthorsBlockService extends AbstractAdminBlockService
 {
     /**
      * @var Registry $doctrine
@@ -48,7 +48,7 @@ class ListSeriesBlockService extends AbstractAdminBlockService
             $this->getName(),
             (!is_null($code) ? $code : $this->getName()),
             false,
-            'SeriesBundle',
+            'ShareBundle',
             ['class' => 'fa fa-code']
         );
     }
@@ -62,7 +62,7 @@ class ListSeriesBlockService extends AbstractAdminBlockService
             'items_count' => 20,
             'page'        => 1,
             'search'      => null,
-            'template'    => 'SeriesBundle:Block:series_list.html.twig',
+            'template'    => 'ShareBundle:Block:author_list.html.twig',
         ]);
     }
 
@@ -83,12 +83,12 @@ class ListSeriesBlockService extends AbstractAdminBlockService
         $limit = $blockContext->getSetting('items_count');
         $page = $blockContext->getSetting('page');
 
-        $repository = $this->doctrine->getRepository(Series::class);
+        $repository = $this->doctrine->getRepository(Author::class);
 
-        $qb = $repository->baseSeriesQueryBuilder();
+        $qb = $repository->baseAuthorQueryBuilder();
 
         if ($blockContext->getSetting('search')) {
-            $repository->searchBySeries($qb, $blockContext->getSetting('search'));
+            $repository->searchByAuthor($qb, $blockContext->getSetting('search'));
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
@@ -96,9 +96,9 @@ class ListSeriesBlockService extends AbstractAdminBlockService
         $paginator->setCurrentPage((int) $page);
 
         return $this->renderResponse($blockContext->getTemplate(), [
-            'series'    => $paginator,
-            'block'     => $block,
-            'settings'  => array_merge($blockContext->getSettings(), $block->getSettings()),
+            'authors'  => $paginator,
+            'block'    => $block,
+            'settings' => array_merge($blockContext->getSettings(), $block->getSettings()),
         ], $response);
     }
 }

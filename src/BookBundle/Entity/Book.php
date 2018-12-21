@@ -66,7 +66,7 @@ class Book
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Author")
+     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Author", inversedBy="books")
      * @ORM\JoinTable(name="books_authors",
      *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -77,7 +77,7 @@ class Book
     /**
      * @var \SeriesBundle\Entity\Series
      *
-     * @ORM\ManyToOne(targetEntity="SeriesBundle\Entity\Series")
+     * @ORM\ManyToOne(targetEntity="SeriesBundle\Entity\Series", inversedBy="books")
      * @ORM\JoinColumn(name="series_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $series;
@@ -422,7 +422,7 @@ class Book
     }
 
     /**
-     * Get tags
+     * Get author
      *
      * @return \Doctrine\Common\Collections\Collection
      */

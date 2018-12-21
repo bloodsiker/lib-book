@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ListBooksBlockService extends AbstractAdminBlockService
 {
     const POPULAR_LIST = 'BookBundle:Block:popular_list.html.twig';
+    const TOP_100_LIST = 'BookBundle:Block:top_100_list.html.twig';
 
     /**
      * @var Registry $doctrine
@@ -67,6 +68,10 @@ class ListBooksBlockService extends AbstractAdminBlockService
             'popular_days_ago' => 30,
             'page'             => 1,
             'genre'            => null,
+            'author'           => null,
+            'series'           => null,
+            'year'             => null,
+            'top_book'         => false,
             'template'         => 'BookBundle:Block:large_list.html.twig',
         ]);
     }
@@ -101,6 +106,22 @@ class ListBooksBlockService extends AbstractAdminBlockService
 
         if ($blockContext->getSetting('genre')) {
             $repository->filterByGenre($qb, $blockContext->getSetting('genre'));
+        }
+
+        if ($blockContext->getSetting('author')) {
+            $repository->filterByAuthor($qb, $blockContext->getSetting('author'));
+        }
+
+        if ($blockContext->getSetting('series')) {
+            $repository->filterBySeries($qb, $blockContext->getSetting('series'));
+        }
+
+        if ($blockContext->getSetting('top_book')) {
+            $repository->filterByTop($qb);
+        }
+
+        if ($blockContext->getSetting('year')) {
+            $repository->filterByYear($qb, $blockContext->getSetting('year'));
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));

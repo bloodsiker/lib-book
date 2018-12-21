@@ -1,50 +1,16 @@
 <table class="table">
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">ПОЗЫВНОЙ &quot;ЗАЙЧИК&quot; - Кароль Елена</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Невеста темного колдуна. Маски сброшены Наталья Самсонова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Горничная для некроманта Кристи Кострова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Франциска Вудворт - Особое условие</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">ПОЗЫВНОЙ &quot;ЗАЙЧИК&quot; - Кароль Елена</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Невеста темного колдуна. Маски сброшены Наталья Самсонова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Горничная для некроманта Кристи Кострова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Франциска Вудворт - Особое условие</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">ПОЗЫВНОЙ &quot;ЗАЙЧИК&quot; - Кароль Елена</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Невеста темного колдуна. Маски сброшены Наталья Самсонова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Горничная для некроманта Кристи Кострова</a></td>
-    </tr>
-    <tr>
-        <td><i aria-hidden="true" class="fa fa-book"></i> 25</td>
-        <td class="title"><a href="">Франциска Вудворт - Особое условие</a></td>
-    </tr>
+    {% for serie in series %}
+        <tr>
+            <td>
+                <i aria-hidden="true" class="fa fa-book"></i> {{ serie.getBooks().count() }}
+            </td>
+            <td class="title">
+                <a href="{{ path('series_books', { 'slug': serie.slug }) }}">{{ replace_highlight(serie.title, app.request.get('search'))|raw }}</a>
+            </td>
+        </tr>
+    {% endfor %}
 </table>
+
+{% if series.maxPerPage is defined and series.count > series.maxPerPage %}
+    {{ pagerfanta(series, { 'omitFirstPage': true}) }}
+{% endif %}

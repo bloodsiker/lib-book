@@ -231,7 +231,7 @@ $(document).ready(function(){
 
 function doRateLD( rate, id ) {
 	ShowLoading('');
-	$.get(dle_root + "engine/ajax/controller.php?mod=rating", { go_rate: rate, news_id: id, skin: dle_skin, user_hash: dle_login_hash }, function(data){
+	$.get(dle_root + "engine/ajax/controller.php?mod=rating", { go_rate: rate, news_id: id }, function(data){
 		HideLoading('');
 		if ( data.success ) {
 			var rating = data.rating;
