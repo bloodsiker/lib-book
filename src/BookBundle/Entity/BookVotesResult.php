@@ -122,7 +122,7 @@ class BookVotesResult
      *
      * @return bool
      */
-    public function isResultVote()
+    public function getResultVote()
     {
         return $this->resultVote;
     }

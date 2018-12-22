@@ -81,14 +81,20 @@ class BookAdmin extends Admin
             ])
             ->add('poster', null, array(
                 'label'     => 'book.fields.poster',
-                'template'  => 'BookBundle:Admin:list_image.html.twig',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ))
             ->addIdentifier('name', null, [
                 'label' => 'book.fields.name',
             ])
+            ->add('authors', null, [
+                'label' => 'book.fields.authors',
+            ])
+            ->add('genres', null, [
+                'label' => 'book.fields.genres',
+            ])
             ->add('files', null, [
                 'label' => 'book.fields.files',
-                'template'  => 'BookBundle:Admin:list_image.html.twig',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ])
             ->add('isAllowDownload', null, [
                 'label' => 'book.fields.is_allow_download',
@@ -122,6 +128,9 @@ class BookAdmin extends Admin
             ])
             ->add('authors', null, [
                 'label' => 'book.fields.authors',
+            ])
+            ->add('genres', null, [
+                'label' => 'book.fields.genres',
             ])
             ->add('isAllowDownload', null, [
                 'label' => 'book.fields.is_allow_download',
@@ -199,7 +208,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('authors', ModelAutocompleteType::class, [
                     'label' => 'book.fields.authors',
-                    'required' => false,
+                    'required' => true,
                     'property' => 'name',
                     'multiple' => true,
                     'btn_add' => 'book.buttons.link_add',

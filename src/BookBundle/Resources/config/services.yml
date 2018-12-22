@@ -1,8 +1,8 @@
 services:
-#    book.entity_manager:
-#        class: "Doctrine\\ORM\\EntityManager"
-#        factory: ['@doctrine', getManager]
-#        public: false
+    book.entity_manager:
+        class: "Doctrine\\ORM\\EntityManager"
+        factory: ['@doctrine', getManager]
+        public: false
 #
 #    book.repository.abstract:
 #        factory: [ '@book.entity_manager', 'getRepository' ]

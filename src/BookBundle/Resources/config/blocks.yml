@@ -5,7 +5,15 @@ services:
           - book.block.list
           - '@templating'
           - '@?doctrine'
-        calss:
-          - [ setBookRepository, ['@book.repository.book']]
+        tags:
+          - { name: sonata.block }
+
+    book.block.book_voting:
+        class: "BookBundle\\Block\\BookVotingBlockService"
+        arguments:
+          - book.block.book_voting
+          - '@templating'
+          - '@request_stack'
+          - '@book.entity_manager'
         tags:
           - { name: sonata.block }

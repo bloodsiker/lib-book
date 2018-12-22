@@ -13,6 +13,8 @@ group:
 
 media:
     fields:
+        extension: Разширение
+        resolution: Размеры
         description: Описание
         file: Файл
         mime_type: Mime-type

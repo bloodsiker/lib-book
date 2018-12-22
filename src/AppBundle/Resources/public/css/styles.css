@@ -181,7 +181,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     padding:15px; line-height:18px; margin:15px 0;}
 .book-text .mi-item {padding:0; margin-top:5px;}
 .mi-item span {font-weight:700; display:inline-block; width:130px;}
-.mi-item a {text-decoration:underline; color:#5c5c5c;}
+.mi-item a {display: inline-block; text-decoration:underline; color:#5c5c5c;}
 .mi-item a:hover {text-decoration:none;}
 .book-stats {display: flex; flex-flow: wrap row; margin: 12px 0 14px;}
 .book-stats .stats-item {background-color: #f7f7f7; padding: 4px 12px; margin: 0 2px;
@@ -373,9 +373,9 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .m-buttons a {display:inline-block;}
 
 .m-desc {}
-.m-info .mi-item {display: flex; flex-flow:row wrap; padding:7px 5px;}
+.m-info .mi-item {padding:7px 5px;}
 .m-info .mi-item:nth-child(2n+1) {background-color:#f6f6f6;}
-.m-info .mi-item span {width:90px; display: block; text-transform:none;}
+.m-info .mi-item span {width:90px; display: inline-block; text-transform:none;}
 .mi-item i {font-weight:400; margin-right:7px; color:#fed718;}
 .long span {width:100% !important; margin-bottom:5px;}
 .book-file {display: flex; flex-flow: row wrap; justify-content: center; padding: 20px 0}

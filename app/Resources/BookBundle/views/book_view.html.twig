@@ -58,20 +58,13 @@
                     </div>
 
                     <br>
-                    <div class="rates">
-                        <div class="rate3" data-name="Оценка читателей">
-                            <div class="ps" id="ps-204" onclick="doRateLD('plus', '204');">
-                                <span class="fa fa-thumbs-up"></span>
-                            </div>
-                            <div class="ms" id="ms-204" onclick="doRateLD('minus', '204');">
-                                <span class="fa fa-thumbs-down"></span>
-                            </div>
-                            <span id="ratig-layer-204">
-                                <span class="ratingtypeplusminus ignore-select ratingplus">{{ book.ratePlus - book.rateMinus }}</span>
-                            </span>
-                            <span id="vote-num-id-204">{{ book.ratePlus + book.rateMinus }}</span>
-                        </div>
-
+                    <div id="result-rates" class="rates">
+                        {{
+                        sonata_block_render(
+                            { 'type': 'book.block.book_voting' },
+                            { 'book' : book }
+                        )
+                        }}
                     </div>
 
                     <div class="m-desc full-text slice-this" itemprop="description">

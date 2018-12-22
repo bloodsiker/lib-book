@@ -97,7 +97,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
 
         $repository = $this->doctrine->getRepository(Book::class);
 
-        $qb = $repository->baseBookQueryBuilder($limit);
+        $qb = $repository->baseBookQueryBuilder();
 
         $popularDaysAgo = $blockContext->getSetting('popular_days_ago');
         if ($blockContext->getSetting('popular') && $popularDaysAgo) {

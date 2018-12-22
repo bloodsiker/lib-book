@@ -28,6 +28,8 @@ sonata_block:
         # BookBundle Block's
         book.block.list:
             contexts: [cms]
+        book.block.book_voting:
+            contexts: [cms]
 
         # GenreBundle Block's
         genre.block.genre_list:
