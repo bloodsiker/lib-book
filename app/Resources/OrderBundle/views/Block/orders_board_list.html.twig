@@ -6,10 +6,6 @@
     <li><a href="{{ path('order_board_status', { 'status': 'top' }) }}"><i class="fa fa-bomb" aria-hidden="true"></i> В топе</a></li>
 </ul>
 
-{% set statuses = [
-    ''
-] %}
-
 <table class="table">
     {% for order in orders %}
         <tr>
