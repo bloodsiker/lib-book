@@ -4,6 +4,8 @@ namespace OrderBundle\Block;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use OrderBundle\Entity\OrderBoard;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -57,7 +59,10 @@ class ListOrderBoardBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'template'  => 'OrderBundle:Block:orders_board_list.html.twig',
+            'items_count' => 20,
+            'page'        => 1,
+            'status'      => null,
+            'template'    => 'OrderBundle:Block:orders_board_list.html.twig',
         ]);
     }
 
@@ -75,12 +80,23 @@ class ListOrderBoardBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
-        $genres = $this->doctrine
-            ->getRepository(OrderBoard::class)
-            ->findAll();
+        $limit = $blockContext->getSetting('items_count');
+        $page = $blockContext->getSetting('page');
+
+        $repository = $this->doctrine->getRepository(OrderBoard::class);
+
+        $qb = $repository->baseOrderBoardQueryBuilder();
+
+        if ($blockContext->getSetting('status')) {
+            $repository->filterByStatus($qb, $blockContext->getSetting('status'));
+        }
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
+        $paginator->setMaxPerPage((int) $limit);
+        $paginator->setCurrentPage((int) $page);
 
         return $this->renderResponse($blockContext->getTemplate(), [
-            'genres'    => $genres,
+            'orders'    => $paginator,
             'block'     => $block,
             'settings'  => array_merge($blockContext->getSettings(), $block->getSettings()),
         ], $response);

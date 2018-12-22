@@ -2,6 +2,7 @@
 
 namespace AppBundle\Twig;
 
+use OrderBundle\Entity\OrderBoard;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sonata\BlockBundle\Model\Block;
@@ -50,6 +51,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFunction('block_ajax_url', array($this, 'blockAjaxUrl')),
             new \Twig_SimpleFunction('replace_highlight', array($this, 'replaceHighlight')),
             new \Twig_SimpleFunction('book_change_end', array($this, 'countBookChangeEnd')),
+            new \Twig_SimpleFunction('icon_order_status', array($this, 'iconOrderStatus')),
         );
     }
 
@@ -101,6 +103,23 @@ class AppExtension extends \Twig_Extension
 
         return $titles[$key];
     }
+
+    /**
+     * @param int $status
+     *
+     * @return string
+     */
+    public function iconOrderStatus(int $status) : string
+    {
+        $statuses = [
+            OrderBoard::STATUS_NEW => 'fa fa-exclamation',
+            OrderBoard::STATUS_COMPLETED => 'fa fa-check',
+            OrderBoard::STATUS_CANCEL => 'fa fa-times',
+        ];
+
+        return $statuses[$status];
+    }
+
 
     /**
      * Generate ajax block route without page

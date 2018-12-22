@@ -3,3 +3,10 @@ order_board:
     path: /order-board
     defaults:
         _controller: OrderBundle:OrderBoard:list
+
+order_board_status:
+    path: /order-board/{status}
+    defaults:
+        _controller: OrderBundle:OrderBoard:list
+    requirements:
+        type: "new|completed|cancel|top"

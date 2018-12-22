@@ -16,23 +16,15 @@
 
         {{
         sonata_block_render(
-            { 'type': 'order.block.order_board_list' }
+            { 'type': 'order.block.order_board_list' },
+            {
+                'items_count' : 30,
+                'page': app.request.get('page') ? app.request.get('page') : 1,
+                'status' : app.request.get('status', null),
+            }
         )
         }}
 
-        <div class="pagi-nav">
-            <span class="navigation"><span>1</span> <a href="https://knigolub.net/page/2/">2</a> <a
-                        href="https://knigolub.net/page/3/">3</a> <a
-                        href="https://knigolub.net/page/4/">4</a> <a
-                        href="https://knigolub.net/page/5/">5</a> <a
-                        href="https://knigolub.net/page/6/">6</a> <a
-                        href="https://knigolub.net/page/7/">7</a> <a
-                        href="https://knigolub.net/page/8/">8</a> <a
-                        href="https://knigolub.net/page/9/">9</a> <a
-                        href="https://knigolub.net/page/10/">10</a> <span class="nav_ext">...</span> <a
-                        href="https://knigolub.net/page/258/">258</a></span>
-            <span class="pnext"><a href="https://knigolub.net/page/2/">Вперед</a></span>
-        </div>
     </div>
 
 </div>

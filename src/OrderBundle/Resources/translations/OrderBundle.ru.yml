@@ -19,3 +19,7 @@ order_board:
         status: Статус
         created_at: Дата создания
         id: ID
+        statuses:
+            new: Новый заказ
+            completed: Заказ выполнен
+            cancel: Отказ

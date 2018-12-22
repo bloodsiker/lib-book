@@ -92,10 +92,7 @@ class BookVotingBlockService extends AbstractAdminBlockService
         $book = $blockContext->getSetting('book');
         if (!$book) {
             $bookId = $request->request->get('bookId');
-            $book = $this->em
-                ->getRepository(Book::class)
-                ->find((int) $bookId)
-            ;
+            $book = $this->em->getRepository(Book::class)->find((int) $bookId);
         }
 
         if (!$book->getId()) {

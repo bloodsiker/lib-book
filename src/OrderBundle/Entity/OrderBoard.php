@@ -7,12 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class OrderBoard
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="OrderBundle\Entity\OrderBoardRepository")
  * @ORM\Table(name="order_board")
  * @ORM\HasLifecycleCallbacks
  */
 class OrderBoard
 {
+    const STATUS_NEW       = 1;
+    const STATUS_COMPLETED = 2;
+    const STATUS_CANCEL    = 3;
+
     /**
      * @var int
      *
@@ -71,6 +75,7 @@ class OrderBoard
     public function __construct()
     {
         $this->vote = 0;
+        $this->status = self::STATUS_NEW;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -237,5 +242,17 @@ class OrderBoard
         $this->vote = $vote;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_NEW       => 'new',
+            self::STATUS_COMPLETED => 'completed',
+            self::STATUS_CANCEL    => 'cancel',
+        ];
     }
 }

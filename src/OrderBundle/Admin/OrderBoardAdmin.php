@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeFilter;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -27,7 +29,18 @@ class OrderBoardAdmin extends Admin
     ];
 
     /**
+     * {@inheritdoc}
+     */
+    public function setTranslationDomain($translationDomain)
+    {
+        $this->translationDomain = $translationDomain;
+        $this->formOptions['translation_domain'] = $translationDomain;
+    }
+
+    /**
      * @param ListMapper $listMapper
+     *
+     * @throws \Exception
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -38,30 +51,30 @@ class OrderBoardAdmin extends Admin
             ->addIdentifier('bookTitle', null, [
                 'label' => 'order_board.fields.book_title',
             ])
-            ->add('status', null, [
+            ->add('status', 'choice', [
                 'label' => 'order_board.fields.status',
+                'choices' => array_flip($this->getStatuses()),
+                'catalogue' => $this->getTranslationDomain(),
                 'editable'  => true,
             ])
             ->add('vote', null, [
                 'label' => 'order_board.fields.vote',
-                'editable'  => true,
             ])
             ->add('user', null, [
                 'label' => 'order_board.fields.user',
-                'editable'  => true,
             ])
             ->add('userName', null, [
                 'label' => 'order_board.fields.user_name',
-                'editable'  => true,
             ])
             ->add('createdAt', null, [
                 'label' => 'order_board.fields.created_at',
-                'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ]);
     }
 
     /**
      * @param DatagridMapper $datagridMapper
+     *
+     * @throws \Exception
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -71,14 +84,21 @@ class OrderBoardAdmin extends Admin
             ])
             ->add('status', null, [
                 'label' => 'order_board.fields.status',
+            ], ChoiceType::class, [
+                'choices' => $this->getStatuses(),
+                'choice_translation_domain' => $this->getTranslationDomain(),
+                'expanded' => false,
+                'multiple' => false,
             ])
-            ->add('createdAt', null, [
+            ->add('createdAt', DateTimeFilter::class, [
                 'label' => 'order_board.fields.created_at',
             ]);
     }
 
     /**
      * @param FormMapper $formMapper
+     *
+     * @throws \Exception
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -97,9 +117,10 @@ class OrderBoardAdmin extends Admin
                     'label' => 'order_board.fields.user',
                     'required' => false,
                 ])
-                ->add('status', null, [
+                ->add('status', ChoiceType::class, [
                     'label' => 'order_board.fields.status',
-                    'required' => false,
+                    'choices' => $this->getStatuses(),
+                    'required' => true,
                 ])
                 ->add('vote', IntegerType::class, [
                     'label' => 'order_board.fields.vote',
@@ -112,5 +133,22 @@ class OrderBoardAdmin extends Admin
                     'attr' => ['readonly' => true],
                 ])
             ->end();
+    }
+
+    /**
+     * @return array
+     *
+     * @throws \Exception
+     */
+    private function getStatuses()
+    {
+        $matchEntity = $this->getClass();
+        $statusesEntity = $matchEntity::getStatuses();
+
+        foreach ($statusesEntity as $key => $value) {
+            $statusChoice["order_board.fields.statuses.".$value] = $key;
+        }
+
+        return $statusChoice;
     }
 }
