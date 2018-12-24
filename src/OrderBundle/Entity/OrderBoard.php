@@ -245,6 +245,14 @@ class OrderBoard
     }
 
     /**
+     * @return int
+     */
+    public function increaseVote()
+    {
+        return $this->vote++;
+    }
+
+    /**
      * @return array
      */
     public static function getStatuses()

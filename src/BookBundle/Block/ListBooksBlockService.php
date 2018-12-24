@@ -93,7 +93,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
         }
 
         $limit = (int) $blockContext->getSetting('items_count');
-        $page = $blockContext->getSetting('page');
+        $page = (int) $blockContext->getSetting('page');
 
         $repository = $this->doctrine->getRepository(Book::class);
 
@@ -125,8 +125,8 @@ class ListBooksBlockService extends AbstractAdminBlockService
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
-        $paginator->setMaxPerPage((int) $limit);
-        $paginator->setCurrentPage((int) $page);
+        $paginator->setMaxPerPage($limit);
+        $paginator->setCurrentPage($page);
 
         $template = !is_null($blockContext->getSetting('list_type'))
             ? $blockContext->getSetting('list_type') : $blockContext->getTemplate();

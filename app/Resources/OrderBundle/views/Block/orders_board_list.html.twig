@@ -13,7 +13,12 @@
             <td class="title">{{ order.bookTitle|raw }}</td>
             <td style="width:150px;">{{ order.user ? order.user.username : order.userName ?: 'анонимно' }}</td>
             <td style="width:130px;">{{ order.createdAt|date_time_humanize }}</td>
-            <td style="width:36px"><span class="td-rating {{ order.vote > 0 ? 'green' : null }}" title="Поддержать">{{ order.vote }}</span></td>
+            <td style="width:36px">
+                <span class="td-rating {{ order.vote > 0 ? 'green' : null }}"
+                      data-order-id="{{ order.id }}"
+                      onclick="voteOrderBoard({{ order.vote }}, {{ order.id }}, '{{ path('order_board_vote') }}');"
+                      title="Поддержать">{{ order.vote }}</span>
+            </td>
         </tr>
     {% endfor %}
 </table>
