@@ -26,6 +26,7 @@ function voteBook(vote, bookId, url) {
         data: { vote: vote, bookId: bookId },
         success: function(response) {
             $('#result-rates').html(response);
+            showAlert('Ваш голос засчитан', 'success');
         }
     });
 };
@@ -41,6 +42,7 @@ function voteOrderBoard(count, orderId, url) {
                 count.addClass('green');
             };
             count.text(response.count);
+            showAlert(response.message, response.type);
         }
     });
 };
@@ -343,16 +345,12 @@ $(document).ready(function() {
 
 /*! end */
 
-function showAlert(text){
-    var err = $('<div>'+text+'</div>');
-    err.prependTo(".show-alerts");
+function showAlert(text, type){
+    var err = $('<div class="message '+ type +'">'+text+'</div>');
+    err.prependTo(".alert-container");
     err.slideDown(300);
-    setTimeout(function(){err.fadeOut(500,function(){$(this).remove()})},3000);
-}
-function showLoad(show){
-    $(".showLoad").remove();
-    if(show) $(".show-alerts").append('<div class="showLoad"></div>');
+    setTimeout(function(){err.fadeOut(500,function(){$(this).remove()})},4000);
 }
 $(function(){
-    $('body').append('<div class="show-alerts"></div>');
-})
+    $('body').append('<div class="alert-container"></div>');
+});

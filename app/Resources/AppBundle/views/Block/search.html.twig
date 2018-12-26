@@ -1,21 +1,8 @@
-<div class="page-content">
-    <!-- Title -->
-    <h1>{{ 'app.frontend.search.title'|trans({}, 'AppBundle') }}</h1>
-    <div class="search">
-        <script>
-            (function() {
-                var cx = '011373912425537656523:qxeyl7ifwba';
-                var gcse = document.createElement('script');
-                gcse.type = 'text/javascript';
-                gcse.async = true;
-                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(gcse, s);
-            })();
-        </script>
-        <gcse:search
-                queryParameterName="q"
-                {#hl="{{ app.request.locale }}"#}
-        ></gcse:search>
+<form id="quicksearch" action="{{ path('search') }}" method="post">
+    <div class="search-box">
+        {% set block_ajax_path = block.page is defined ? sonata_page_ajax_url(block) : block_ajax_url(block) %}
+        <input id="quick-search" name="search" placeholder="Поиск...(название книги, автор)" data-ajax-url="{{ block_ajax_path }}" autocomplete="off" type="text"/>
+        <button type="submit" title="Найти"><i class="fa fa-search"></i></button>
+        <div class="result-search"></div>
     </div>
-</div>
+</form>

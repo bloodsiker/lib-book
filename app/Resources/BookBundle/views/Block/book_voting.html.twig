@@ -9,11 +9,11 @@
     </div>
 </div>
 <div class="rate3" data-name="Оценка читателей">
-    <div class="ps" {% if (result and result.resultVote == false) or result is null %} onclick="voteBook(1, {{ book.id }}, '{{ block_ajax_path }}');" {% endif %}>
+    <div class="ps" {% if (result and result.resultVote == false) or result is null %} onclick="voteBook(1, {{ book.id }}, '{{ block_ajax_path }}');" {% else %} onclick="showAlert('Ваш голос уже засчитан', 'error')" {% endif %}>
         <span class="fa fa-thumbs-up"></span>
         <span class="psc">{{ book.ratePlus }}</span>
     </div>
-    <div class="ms" {% if (result and result.resultVote == true) or result is null %} onclick="voteBook(0, {{ book.id }}, '{{ block_ajax_path }}');" {% endif %}>
+    <div class="ms" {% if (result and result.resultVote == true) or result is null %} onclick="voteBook(0, {{ book.id }}, '{{ block_ajax_path }}');" {% else %} onclick="showAlert('Ваш голос уже засчитан', 'error')" {% endif %}>
         <span class="fa fa-thumbs-down"></span>
         <span class="msc">{{ book.rateMinus }}</span>
     </div>

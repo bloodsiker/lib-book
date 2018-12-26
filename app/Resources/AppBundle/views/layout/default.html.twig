@@ -87,7 +87,8 @@
         sonata_block_render(
             { 'type': 'book.block.list' },
             {
-                'list_type' : constant('BookBundle\\Block\\ListBooksBlockService::POPULAR_LIST')
+                'list_type' : constant('BookBundle\\Block\\ListBooksBlockService::POPULAR_LIST'),
+                'items_count': 4,
             }
         )
         }}

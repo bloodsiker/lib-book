@@ -28,4 +28,12 @@ class DefaultController extends Controller
     {
         return $this->render('BookBundle::top-100.html.twig');
     }
+
+    /**
+     * @return Response
+     */
+    public function searchAction()
+    {
+        return $this->render('BookBundle::top-100.html.twig');
+    }
 }

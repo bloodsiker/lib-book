@@ -31,8 +31,6 @@ class OrderBoardController extends Controller
      * @param Request $request
      *
      * @return JsonResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function voteOrderAction(Request $request)
     {
@@ -56,9 +54,17 @@ class OrderBoardController extends Controller
                         $em->persist($resultVoted);
                         $em->flush();
 
-                        return new JsonResponse(['count' => $order->getVote()]);
+                        return new JsonResponse([
+                            'count' => $order->getVote(),
+                            'message' => 'Вы поддержали книгу',
+                            'type' => 'success',
+                        ]);
                     } else {
-                        // уже голосовали
+                        return new JsonResponse([
+                            'count' => $order->getVote(),
+                            'message' => 'Ранее, Вы уже отдавали голос за эту книгу',
+                            'type' => 'error',
+                        ]);
                     }
                 }
             }

@@ -37,6 +37,15 @@ final class Version20181213145836 extends AbstractMigration
         $orderBoard->setPrimaryKey(['id']);
         $orderBoard->addIndex(['user_id']);
         $orderBoard->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
+
+        $orderVote = $schema->createTable('order_board_votes_result');
+        $orderVote->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $orderVote->addColumn('order_board_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $orderVote->addColumn('ip', 'integer', array('unsigned' => true, 'notnull' => false));
+        $orderVote->addColumn('voted_at', 'datetime', array('notnull' => true));
+        $orderVote->setPrimaryKey(['id']);
+        $orderVote->addIndex(['order_board_id']);
+        $orderVote->addForeignKeyConstraint($orderBoard, ['order_board_id'], ['id'], ['onDelete' => 'cascade']);
     }
 
     /**
@@ -44,6 +53,7 @@ final class Version20181213145836 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
+        $schema->dropTable('order_board_votes_result');
         $schema->dropTable('order_board');
     }
 }

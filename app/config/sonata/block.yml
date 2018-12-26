@@ -10,8 +10,8 @@ sonata_block:
 #        # PageBundle's Blocks
 #        sonata.page.block.container:
 #            contexts: [sonata_page_bundle]
-#        sonata.page.block.ajax:
-#            contexts: [sonata_page_bundle]
+        sonata.page.block.ajax:
+            contexts: [cms]
 #        sonata.page.block.context_manager:
 #            contexts: [sonata_page_bundle]
         page.block.site_variable:
@@ -21,6 +21,8 @@ sonata_block:
         app.block.service.header:
             contexts: [cms]
         app.block.service.footer:
+            contexts: [cms]
+        app.block.service.search:
             contexts: [cms]
 #        app.block.service.get_state_value:
 #            contexts: [cms]
