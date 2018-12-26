@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use BookBundle\Entity\Book;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,10 +31,12 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
      * @return Response
      */
-    public function searchAction()
+    public function searchAction(Request $request)
     {
-        return $this->render('BookBundle::top-100.html.twig');
+        return $this->render('AppBundle:search:search.html.twig');
     }
 }

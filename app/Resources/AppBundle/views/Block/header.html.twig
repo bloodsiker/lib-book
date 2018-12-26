@@ -5,7 +5,10 @@
     <div class="search-wrap">
         {{
         sonata_block_render(
-            { 'type': 'app.block.service.search' }
+            { 'type': 'app.block.service.search' },
+            {
+                'list_type' : constant('AppBundle\\Block\\SearchBlockService::HEADER_FORM_TEMPLATE'),
+            }
         )
         }}
     </div>

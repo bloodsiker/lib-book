@@ -18,6 +18,22 @@ function setCookie(name, value, expires, path, domain, secure) {
     return secure && r.push("secure"), document.cookie = r.join(";"), true;
 }
 
+var topNav = $('.top-nav').offset().top;
+
+$(window).scroll(function(){
+    var sticky = $('.top-nav'),
+        logo = $('.logo-hide'),
+        scroll = $(window).scrollTop();
+
+    if (scroll >= topNav){
+        sticky.addClass('fixed');
+        logo.show();
+    } else {
+        sticky.removeClass('fixed');
+        logo.hide();
+    }
+});
+
 // Ajax voted book
 function voteBook(vote, bookId, url) {
     $.ajax({
@@ -46,6 +62,38 @@ function voteOrderBoard(count, orderId, url) {
         }
     });
 };
+
+$('#quick-search').on('input', function () {
+    var search = $(this).val();
+
+    if (search.length > 2) {
+        $('.result-search').show();
+        $('.wrap').addClass('bluer');
+
+        var url = $(this).data('ajax-url');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: { search: search },
+            success: function(response) {
+                $('.result-search').html(response);
+            }
+        });
+    } else {
+        $('.result-search').hide();
+        $('.wrap').removeClass('bluer');
+    }
+});
+
+$(document).mouseup(function (e) {
+    var container = $('.search-wrap');
+    if (container.has(e.target).length === 0){
+        $('.wrap').removeClass('bluer');
+        $('.result-search').html('');
+        $('.result-search').hide();
+    }
+});
 
 $(document).ready(function(){
 

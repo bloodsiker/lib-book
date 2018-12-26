@@ -20,6 +20,7 @@ h1, h2, h3, h4, h5 {font-weight:400; font-size:18px;}
 .pm-page, .search-page, .static-page, .tags-page {}
 .line {margin:10px 0; border-bottom: 1px solid #e3e3e3; box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1);}
 .highlight {color: #ff7a00}
+.fixed {position: sticky; top:0; z-index: 1020; width: 100%}
 
 
 /*--- SET ---*/
@@ -71,12 +72,12 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 /* KARKAS
 ----------------------------------------------- */
-.wrapper {height:auto; width:100%; min-width:320px; position:relative}
+.wrapper {height:auto; width:100%; min-width:320px; position:relative;}
 .center {width:100%; min-width:320px; max-width:1264px; margin:0 auto; position:relative; z-index:100;
     box-shadow:0 0 20px 0 rgba(0,0,0,0.15);}
 .head-container {background-color: #272c34}
 .head {height:60px; padding:10px 15px 0 360px; z-index:110;}
-.wrap {background:#f7f8fa url(../assets/images/bg1.png);}
+.wrap {background:#f7f8fa url(../assets/images/bg1.png);transition: .6s;}
 .cols {padding:0 0 30px 0px; display: flex; flex-flow:row wrap; align-items: flex-start;min-height:800px;}
 .col-side {width:25%; padding-left:15px;}
 .col-cont {width:75%; padding:0 30px;}
@@ -97,11 +98,13 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 /* HEADER
 ----------------------------------------------- */
-.logo {height:60px; width:210px; display:block; position:absolute; left:0; top:0;
-    overflow:hidden;}
+.logo {height:60px; width:210px; display:block; position:absolute; left:0; top:0; background: url("../assets/images/logo_white.png") center center no-repeat;
+    overflow:hidden; background-size: contain; text-indent: -1000px;}
 .logo:hover {opacity:0.7;}
 .login-buts {display:inline-block; float:right; line-height:40px; color:#2a2a2a;}
 .show-login {display:inline-block; padding:0 15px;cursor:pointer;}
+.logo-hide {height:43px; width:170px; background: url("../assets/images/logo_black.png") center center no-repeat;
+    overflow:hidden; background-size: contain;transition: .6s;}
 
 
 /* SEARCH
@@ -112,6 +115,18 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     background-color:#f7f7f7; color:#5c5c5c; border:0; box-shadow:inset 0 0 0 1px #e3e3e3;}
 .search-box button {position:absolute; left:0; top:0; border-radius:0;
     padding:0; text-align:center; width:40px; height:40px; line-height:40px; color:#fed718; background-color:transparent;}
+.bluer {-webkit-filter: blur(3px); filter: blur(3px);}
+.result-search {position: absolute; top: 41px; width: 100%; background: #f7f7f7; color: #5c5c5c; border-radius: 3px;
+    box-shadow: 0 0 1.6em rgba(0,0,0, 0.2); display: none}
+.result-search > .search-item {display: flex; flex-flow: row wrap; padding: 10px; border-bottom: 1px solid #e3e3e3; margin-bottom: 10px;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1); background: linear-gradient(to top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0) 70px);}
+.result-search > .search-item:hover {color: #2a2a2a}
+.result-search > .search-item > img {width: 18%; height: 140px;}
+.result-search > .search-item > div {width: 82%; padding-left: 15px}
+.result-search > .search-item > div > h3 {margin-bottom: 8px}
+.result-search > .search-item > div > span {font-size: 13px; display: block; margin-bottom: 5px}
+.no-result {text-align: center; border-bottom: 1px solid #e3e3e3; box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1); padding: 15px 0; margin-bottom: 10px}
+.all-result {display:block; width: 100%; text-align: center; padding: 10px 0; margin-top: -10px}
 
 /* BREADCRUMB
 ----------------------------------------------- */
@@ -134,7 +149,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 .to-top-link {display:inline-block; padding:0 20px; float:left; color:#000 !important;border-bottom: 3px solid transparent}
 .to-top-link span {margin:0 10px; font-weight: 500}
-.to-top-link:hover {background-color:#fed718; border-bottom: 3px solid #000}
+.to-top-link:not(.logo-hide):hover {background-color:#fed718; border-bottom: 3px solid #000}
 
 
 /* CONTENT SECTIONS
@@ -160,8 +175,9 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 /* SHORT STORY bookS
 ----------------------------------------------- */
+.grid {display: flex; flex-flow: wrap row}
 .books {margin:0 -15px;}
-.book-item {float:left; width:16.4%; margin:0 1.8% 30px 1.8%; position:relative;}
+.book-item {width:16.4%; margin:0 1.8% 30px 1.8%; position:relative;}
 .book-img {height:200px; border-radius:3px; display:block;}
 .book-img:hover img {opacity:0.7;}
 .book-title {margin:7px 0 7px 0; height:36px; line-height:18px; overflow:hidden}
@@ -235,7 +251,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .table td:first-child {width: 50px}
 .table td{height: 32px; margin: 0; padding: 0; text-align: center; font: bold 13px/32px Arial; color: #666; border-bottom: 1px solid #ccc;}
 .table td.title{text-align: left; padding: 2px 0 2px 10px;}
-.table td.author-name{text-transform: capitalize;}
+.author-name{text-transform: capitalize;}
 .table td a:hover{text-decoration: underline; color: #2a2a2a}
 .table .td-icon {background: #f0f0f0; height: 36px; line-height: 36px; width: 32px;}
 .table .td-rating {display: block; width: 100%; height: 36px; line-height: 36px;cursor: pointer;text-shadow: 0 1px 3px rgba(0,0,0,.3);
@@ -383,13 +399,15 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .mi-item i {font-weight:400; margin-right:7px; color:#fed718;}
 .long span {width:100% !important; margin-bottom:5px;}
 .book-file {display: flex; flex-flow: row wrap; justify-content: center; padding: 20px 0}
+.book-file > .block > span > a {background: #414141; color: #fff; padding: 15px 30px; margin: 0 5px; line-height: 1.4; text-align: center;
+    white-space: nowrap; vertical-align: middle;}
 
 .screens-section {text-align:center; margin:-5px -8px 15px -8px;}
 .screens-section > .highslide, .screens-section > img {display:inline-block; width:22.8%; height:90px; overflow:hidden; margin:5px 1%;}
 .screens-section br {display:none;}
 .screens-section > .highslide img {display:block; width:100%; min-height:100%;}
 
-.download-section {padding:20px 60px 20px 20px; background:#fec900; color:#fff;}
+.download-section {padding:20px; background:#fec900; color:#fff;}
 .download-drop {color:#fff !important; display:none;}
 .download-drop.visible {display:block;}
 .tabs {margin-top:-20px;}

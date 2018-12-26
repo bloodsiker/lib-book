@@ -1,5 +1,5 @@
-{% if results %}
-    {% for book in results %}
+{% if books %}
+    {% for book in books %}
         <a href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}" class="search-item">
             <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}">
             <div>

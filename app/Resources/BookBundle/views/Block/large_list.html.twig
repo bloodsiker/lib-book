@@ -1,5 +1,5 @@
 {% for book in books %}
-    <div class="book-item ignore-select">
+    <div class="book-item">
         <div class="book-img img-box pseudo-link"
              data-link="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">
             <div class="book-rates">
