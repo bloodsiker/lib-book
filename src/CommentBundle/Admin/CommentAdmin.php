@@ -3,6 +3,7 @@
 namespace CommentBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -38,6 +39,12 @@ class CommentAdmin extends Admin
             ])
             ->addIdentifier('book', null, [
                 'label' => 'comment.fields.book',
+            ])
+            ->add('user', null, [
+                'label' => 'comment.fields.created_by',
+            ])
+            ->add('userName', null, [
+                'label' => 'comment.fields.name',
             ])
             ->add('rating', null, [
                 'label' => 'comment.fields.rating',
@@ -84,8 +91,9 @@ class CommentAdmin extends Admin
                     'label' => 'comment.fields.email',
                     'required' => false,
                 ])
-                ->add('comment', TextareaType::class, [
+                ->add('comment', CKEditorType::class, [
                     'label' => 'comment.fields.comment',
+                    'required' => true,
                     'attr' => [
                         'rows' => 5,
                     ],

@@ -112,6 +112,17 @@ final class Version20181014125608 extends AbstractMigration
         $bookComment->addForeignKeyConstraint($schema->getTable('user_users'), ['user_id'], ['id'], ['onDelete' => 'set null']);
 
         // bookVotesResult
+        $bookCommentVotes = $schema->createTable('books_comments_votes_result');
+        $bookCommentVotes->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $bookCommentVotes->addColumn('comment_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookCommentVotes->addColumn('ip', 'integer', array('unsigned' => true, 'notnull' => false));
+        $bookCommentVotes->addColumn('result_vote', 'boolean', array('notnull' => true));
+        $bookCommentVotes->addColumn('voted_at', 'datetime', array('notnull' => true));
+        $bookCommentVotes->setPrimaryKey(['id']);
+        $bookCommentVotes->addIndex(['comment_id']);
+        $bookCommentVotes->addForeignKeyConstraint($bookComment, ['comment_id'], ['id'], ['onDelete' => 'cascade']);
+
+        // bookVotesResult
         $bookVotes = $schema->createTable('books_votes_result');
         $bookVotes->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $bookVotes->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));

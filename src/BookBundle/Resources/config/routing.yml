@@ -1,6 +1,6 @@
 # books ========================================================
 book_view:
-    path: /book/{slug}-{id}
+    path: /book/{id}-{slug}
     defaults:
         _controller: BookBundle:Book:view
     requirements:

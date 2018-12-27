@@ -137,7 +137,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 /* SLIDER
 ----------------------------------------------- */
-.top-nav {background:#fec900;color:#FFF; max-height:280px; overflow:hidden; margin-bottom: 20px;}
+.top-nav {background:#fec900;color:#FFF; max-height:280px; overflow:hidden; margin-bottom: 20px; box-shadow: 2px 4px 5px 0 rgba(0,0,0,0.15);}
 .top-nav-title {height:40px; line-height:40px;}
 .top-nav-title h2 {font-size:16px; text-transform:uppercase; font-weight:700; display:inline-block;
     padding:0 15px; background-color:#fed718; float:left;}
@@ -560,6 +560,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     border:1px solid #d6cfcf; box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.34);}
 
 .comm-item {display:flex;padding:0 20px 15px 0; margin-bottom:15px; border-bottom:1px solid #e3e3e3;}
+.comm-link {margin-bottom: 10px;padding-left: 10px; font-size: 16px;}
+.comm-link a {box-shadow: inset 0 -2px #fed718;}
 .comm-left {width:11%; padding: 0 15px; overflow:hidden; position:relative;}
 .comm-right {width:89%;}
 .comm-left img {width:100%;}

@@ -1,0 +1,45 @@
+<div id="dle-comments-list">
+    {% for comment in comments %}
+        <div class="comm-container">
+            {% if settings.show_title %}
+                <div class="comm-link">
+                    <span>Комментарий к книге: </span>
+                    <a href="{{ path('book_view', { 'slug': comment.book.slug, 'id': comment.book.id }) }}">{{ comment.book.name }}</a>
+                </div>
+            {% endif %}
+            <div class="comm-item">
+                <div class="comm-left">
+                    <img src="uploads/fotos/foto_2705.jpg" alt="{{ comment.user ? comment.user.username : 'Гость '~comment.userName }}"/>
+                </div>
+                <div class="comm-right">
+                    <div class="comm-top-info clearfix">
+                        <div class="comm-info-line">
+                            <div class="comm-author">{{ comment.user ? comment.user.username : 'Гость '~comment.userName }}</div>
+                            <div class="comm-date">{{ comment.createdAt|date_time_humanize }}</div>
+
+                            <div class="comm-rate {{ comment.rating == 0 ? null : comment.rating > 0 ? 'pos-comm' : 'neg-comm' }}">
+                                <a href="#"
+                                   onclick="voteComment(1, {{ comment.id }}, '{{ path('comment_vote') }}'); return false;">+</a>
+                                <span class="ignore-select">
+                                    <span class="ratingtypeplusminus ratingzero" data-comment-id="{{ comment.id }}">{{ comment.rating }}</span>
+                                </span>
+                                <a href="#"
+                                   onclick="voteComment(0, {{ comment.id }}, '{{ path('comment_vote') }}'); return false;">-</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="comm-text">
+                        {{ comment.comment|raw }}
+                    </div>
+                    <div class="comm-bottom-info">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% if settings.show_paginator and comments.getNbPages() > 1 %}
+    {{ pagerfanta(comments, { 'omitFirstPage': true}) }}
+{% endif %}

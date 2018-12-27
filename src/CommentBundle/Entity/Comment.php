@@ -86,6 +86,7 @@ class Comment
     public function __construct()
     {
         $this->isActive = true;
+        $this->rating = 0;
         $this->createdAt = new \DateTime('now');
     }
 
@@ -300,5 +301,21 @@ class Comment
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function increaseVote()
+    {
+        return $this->rating++;
+    }
+
+    /**
+     * @return int
+     */
+    public function decreaseVote()
+    {
+        return $this->rating--;
     }
 }

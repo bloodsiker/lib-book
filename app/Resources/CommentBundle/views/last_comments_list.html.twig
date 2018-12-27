@@ -1,158 +1,16 @@
 <div class="col-cont">
     <div class="comments-items">
 
-        <div id="dle-comments-list">
+        {{
+        sonata_block_render(
+            { 'type': 'comment.block.last_comments' },
+            {
+                'items_count' : 30,
+                'page': app.request.get('page') ? app.request.get('page') : 1,
+            }
+        )
+        }}
 
-            <div class="comm-item">
-                <div class="comm-left">
-                    <img src="uploads/fotos/foto_2705.jpg" alt="Ariadna"/>
-                </div>
-                <div class="comm-right">
-                    <div class="comm-top-info clearfix">
-                        <div class="comm-info-line">
-                            <div class="comm-author"><a
-                                        onclick="ShowProfile('Ariadna', 'https://knigolub.net/user/Ariadna/', '0'); return false;"
-                                        href="https://knigolub.net/user/Ariadna/">Ariadna</a></div>
-                            <div class="comm-date">28 ноября 2018 14:35</div>
-
-                            <div class="comm-rate">
-                                <a href="#"
-                                   onclick="doCommentsRate('plus', '24078'); return false;">+</a>
-                                <span id="comments-ratig-layer-24078"
-                                      class="ignore-select"><span
-                                            class="ratingtypeplusminus ignore-select ratingzero">0</span></span>
-                                <a href="#"
-                                   onclick="doCommentsRate('minus', '24078'); return false;">-</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="comm-text">
-                        Всем доброго времени суток :)<br>Поделитесь,
-                        пожалуйста, если есть возможность:<br><br><b>Ирина
-                            Гутовская.</b>   Контакт<br><b>Рита Навьер. </b>   Это не
-                        любовь<br><b>Агата Лель.</b>    Несломленная<br><b>Агата
-                            Лель.</b>    Давай никому не скажем<br><b>Кира Фарди</b>. 
-                         Моя любовь с последней парты<br><b>Тати Блэк и Полина Рей</b>.   В
-                        постели с миллиардером<br><b>Amira Alexeevna.</b>   Когда
-                        наступит новый день…<br><b>Оксана Гринберга.</b>   Цена соблазна<br><b>Дарья
-                            Сорокина.</b>   Осмелься или беги<br><br>Заранее спасибо за
-                        помощь!<br>skudrova97@mail.ru
-                    </div>
-                    <div class="comm-bottom-info">
-                    </div>
-                </div>
-            </div>
-
-            <div class="comm-item">
-                <div class="comm-left">
-                    <img src="uploads/fotos/foto_1586.jpg" alt="Olga son"/>
-                </div>
-                <div class="comm-right">
-                    <div class="comm-top-info">
-                        <div class="comm-info-line clearfix">
-                            <div class="comm-author"><a
-                                        onclick="ShowProfile('Olga+son', 'https://knigolub.net/user/Olga+son/', '0'); return false;"
-                                        href="https://knigolub.net/user/Olga+son/">Olga son</a>
-                            </div>
-                            <div class="comm-date">28 ноября 2018 13:32</div>
-
-                            <div class="comm-rate pos-comm">
-                                <a href="#"
-                                   onclick="doCommentsRate('plus', '24077'); return false;">+</a>
-                                <span class="ignore-select"><span
-                                            class="ratingtypeplusminus ignore-select ratingplus">+1</span></span>
-                                <a href="#"
-                                   onclick="doCommentsRate('minus', '24077'); return false;">-</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="comm-text">
-                        <b><u><i>Может быть у кого нибудь есть эти
-                                    книги,<br>поделитесь пожалуйста.<br>СДЕЛКА Часть III - Юлия
-                                    Кузьминых.<br>Джокер.Ксения Иллюзия<br>Рина Кухимо -
-                                    "Беркут-3.История Леши<br>Сердце как стекло-3 Александра
-                                    Топазова<br>РОМАШКИ. Ameli Karm<br>Призрак прошлого.Королева
-                                    Людмила .<br>ОТМЕННАЯ ДЕВЧОНКА «ОБРЕТАЯ КРЫЛЬЯ». ДАНА СТАР<br>Беглянка.
-                                    Джорджиана Золомон.<br>Будни Золушки.Джорджиана Золомон<br>Невинность
-                                    на продажу.Тати Блэк и Полина Рей.<br>В постели с
-                                    миллиардером.Тати Блэк и Полина Рей<br><br>Клуб больших размеров
-                                    . Северная Виктория<br>Карамелька для Барса или танго на
-                                    Байках.Ольга Овчиникова<br>Конкуренты.Янита Безликая<br>INTOXICATED.
-                                    ОТРАВЛЕН ТОБОЙ. ВИКТОРИЯ ВАЙТ</i></u></b>
-                        <div class="signature">vip.son.1983@mail.ru</div>
-                    </div>
-                    <div class="comm-bottom-info">
-                    </div>
-                </div>
-            </div>
-
-            <div class="comm-item">
-                <div class="comm-left">
-                    <img src="uploads/fotos/foto_3761.jpg" alt="Зимний Тюльпан"/>
-                </div>
-                <div class="comm-right">
-                    <div class="comm-top-info">
-                        <div class="comm-info-line clearfix">
-                            <div class="comm-author"><a
-                                        onclick="ShowProfile('%D0%97%D0%B8%D0%BC%D0%BD%D0%B8%D0%B9+%D0%A2%D1%8E%D0%BB%D1%8C%D0%BF%D0%B0%D0%BD', 'https://knigolub.net/user/%D0%97%D0%B8%D0%BC%D0%BD%D0%B8%D0%B9+%D0%A2%D1%8E%D0%BB%D1%8C%D0%BF%D0%B0%D0%BD/', '0'); return false;"
-                                        href="https://knigolub.net/user/%D0%97%D0%B8%D0%BC%D0%BD%D0%B8%D0%B9+%D0%A2%D1%8E%D0%BB%D1%8C%D0%BF%D0%B0%D0%BD/">Зимний
-                                    Тюльпан</a></div>
-                            <div class="comm-date">28 ноября 2018 11:03</div>
-
-                            <div class="comm-rate">
-                                <a href="#"
-                                   onclick="doCommentsRate('plus', '24076'); return false;">+</a>
-                                <span class="ignore-select"><span
-                                            class="ratingtypeplusminus ignore-select ratingzero">0</span></span>
-                                <a href="#"
-                                   onclick="doCommentsRate('minus', '24076'); return false;">-</a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="comm-text">
-                        Кофе с ликёром - Васёва Ксения <br>Богатый,
-                        сильный и одинокий - Ксения Черногорская <br>Мачеха для
-                        наследника, или К черту дракона! - Матильда Старр <br>Злобный
-                        босс, пиджак и Танечка - Оксана Алексеева <br>Сводный босс -
-                        Алайна Салах <br>Феникс - Оле Адлер <br>Все не так, как кажется
-                        - Наталия Юнина <br><br>Ты
-                        бесишь меня, малыш - Энканта<br>А теперь ты нарвалась-
-                        Энканта<br>Делай все, что захочешь - Энканта<br>Ты была плохой
-                        девочкой - Энканта
-                        <div class="signature">svetlanka.m.85@list.ru</div>
-                    </div>
-                    <div class="comm-bottom-info">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="dle-comments-navigation">
-            <div class="pagi-nav">
-                <span class="pprev">
-                    <a href="https://knigolub.net/index.php?cstart=2&amp;do=lastcomments#comment">Назад</a>
-                </span>
-    <span class="navigation"><a
-                href="https://knigolub.net/index.php?cstart=1&amp;do=lastcomments#comment">1</a> <a
-                href="https://knigolub.net/index.php?cstart=2&amp;do=lastcomments#comment">2</a> <span>3</span> <a
-                href="https://knigolub.net/index.php?cstart=4&amp;do=lastcomments#comment">4</a> <a
-                href="https://knigolub.net/index.php?cstart=5&amp;do=lastcomments#comment">5</a> <a
-                href="https://knigolub.net/index.php?cstart=6&amp;do=lastcomments#comment">6</a> <a
-                href="https://knigolub.net/index.php?cstart=7&amp;do=lastcomments#comment">7</a> <a
-                href="https://knigolub.net/index.php?cstart=8&amp;do=lastcomments#comment">8</a> <a
-                href="https://knigolub.net/index.php?cstart=9&amp;do=lastcomments#comment">9</a> <a
-                href="https://knigolub.net/index.php?cstart=10&amp;do=lastcomments#comment">10</a> <span
-                class="nav_ext">...</span> <a
-                href="https://knigolub.net/index.php?cstart=698&amp;do=lastcomments#comment">698</a></span>
-    <span class="pnext"><a
-                href="https://knigolub.net/index.php?cstart=4&amp;do=lastcomments#comment">Вперед</a></span>
-            </div>
-        </div>
     </div>
 
 </div>
