@@ -41,6 +41,14 @@ comment:
 #==============================================================================
 
 # Sonata Admin ================================================================
+sonata_user_admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+
 admin_area:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin
@@ -49,14 +57,6 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
-
-sonata_user_admin_security:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
-
-sonata_user_admin_resetting:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
-    prefix: /admin/resetting
 # =============================================================================
 
 # Sonata Page =================================================================
@@ -73,12 +73,12 @@ sonata_page_cache:
     prefix: /
 # =============================================================================
 
-# Liip Imagine ================================================================
-_liip_imagine:
-    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
-# =============================================================================
-
 # FOS User Bundle =============================================================
 fos_user_resetting_request:
     path: /resetting/request
+# =============================================================================
+
+# Liip Imagine ================================================================
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
 # =============================================================================

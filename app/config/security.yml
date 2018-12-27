@@ -23,12 +23,14 @@ security:
             context:            user
             form_login:
                 provider:       fos_userbundle_email
-                login_path:     /admin/login
+                login_path:     sonata_user_admin_security_login
                 use_forward:    false
-                check_path:     /admin/login_check
+                check_path:     sonata_user_admin_security_check
                 failure_path:   null
+                default_target_path: sonata_admin_dashboard
+                always_use_default_target_path: true
             logout:
-                path:           /admin/logout
+                path:           sonata_user_admin_security_logout
                 target:         /admin/login
             switch_user:        true
             anonymous:          true
