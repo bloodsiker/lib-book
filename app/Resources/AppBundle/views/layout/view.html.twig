@@ -1,30 +1,14 @@
 {% extends 'AppBundle:layout:default.html.twig' %}
 
-{% block head_javascripts %}
+{% block stylesheets %}
     {{ parent() }}
 
-    {% javascripts '@player' %}
-        <script src="{{ asset_url }}" type="text/javascript"></script>
-    {% endjavascripts %}
-    {% javascripts '@player_libs' filter='?uglifyjs2' %}
-        <script src="{{ asset_url }}" type="text/javascript" defer></script>
-    {% endjavascripts %}
 {% endblock %}
 
-{#{% block main_class %}article-page{% endblock %}#}
-{% block content_side_last_news %}
-    {{
-        sonata_block_render(
-            { 'type': 'article.block.service.list' },
-            {
-                'show_title': 'article.title.last_news'|trans({}, 'ArticleBundle'),
-                'items_count': 10,
-                'list_type': constant('ArticleBundle\\Block\\ArticleBaseBlockService::TEXT_LIST'),
-                'show_paginator': false,
-            }
-        )
-    }}
+{% block footer_javascripts %}
+    {{ parent() }}
 {% endblock %}
+
 {% block content_top %}{% endblock %}
 
 {% block content_bottom %}{% endblock %}
