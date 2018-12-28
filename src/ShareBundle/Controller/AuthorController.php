@@ -24,10 +24,7 @@ class AuthorController extends Controller
      */
     public function listAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository(Author::class);
-        $count = $repo->getAuthorsCount();
-
-        return $this->render('ShareBundle::author_list.html.twig', ['countAuthors' => $count]);
+        return $this->render('ShareBundle::author_list.html.twig');
     }
 
     /**

@@ -1,3 +1,18 @@
+{% if app.request.get('search') %}
+    <h1>Серии. Результаты поиска по запросу <span class="highlight">{{ app.request.get('search')|raw }}</span> ({{ series.count }})</h1>
+{% else %}
+    <h1>Серии ({{ series.count }})</h1>
+{% endif %}
+
+<hr class="line">
+
+<form action="{{ path('series_list') }}" class="form">
+    <div class="inputs">
+        <input type="text" name="search" placeholder="Искать..">
+        <button>Искать</button>
+    </div>
+</form>
+
 <table class="table">
     {% for serie in series %}
         <tr>

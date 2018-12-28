@@ -1,34 +1,5 @@
 <div class="col-cont">
     <div class="container">
-        {% if app.request.get('search') %}
-            <h1>Авторы. Результаты поиска по запросу <span class="highlight">{{ app.request.get('search')|raw }}</span></h1>
-        {% else %}
-            <h1>Авторы ({{ countAuthors|number_format(0, '.', ' ')  }})</h1>
-        {% endif %}
-        <hr class="line">
-
-        {#<ul class="author-filter">#}
-            {#<li><a href="">Все авторы</a></li>#}
-            {#<li><a href="">Популярные авторы</a></li>#}
-        {#</ul>#}
-
-        <form action="{{ path('author_list') }}" class="form">
-            <div class="inputs">
-                <input type="text" name="search" placeholder="Искать..">
-                <button>Искать</button>
-            </div>
-        </form>
-        <ul class="author-list-letter">
-            <li>Авторы на букву</li>
-            <li><a href="">А</a></li>
-            <li><a href="">Б</a></li>
-            <li><a href="">В</a></li>
-            <li><a href="">Г</a></li>
-            <li><a href="">Д</a></li>
-            <li><a href="">Е</a></li>
-            <li><a href="">Ж</a></li>
-            <li><a href="">З</a></li>
-        </ul>
 
         {{
         sonata_block_render(
@@ -36,9 +7,11 @@
             {
                 'items_count' : 20,
                 'page': app.request.get('page') ? app.request.get('page') : 1,
-                'search' : app.request.get('search', null),
+                'search' : app.request.get('search'),
+                'letter' : app.request.get('letter')
             }
         )
         }}
+
     </div>
 </div>

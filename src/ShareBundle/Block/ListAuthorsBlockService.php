@@ -61,6 +61,7 @@ class ListAuthorsBlockService extends AbstractAdminBlockService
         $resolver->setDefaults([
             'items_count' => 20,
             'page'        => 1,
+            'letter'      => null,
             'search'      => null,
             'template'    => 'ShareBundle:Block:author_list.html.twig',
         ]);
@@ -91,11 +92,16 @@ class ListAuthorsBlockService extends AbstractAdminBlockService
             $repository->searchByAuthor($qb, $blockContext->getSetting('search'));
         }
 
+        if ($blockContext->getSetting('letter')) {
+            $repository->filterByLetter($qb, $blockContext->getSetting('letter'));
+        }
+
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
         $paginator->setMaxPerPage((int) $limit);
         $paginator->setCurrentPage((int) $page);
 
         return $this->renderResponse($blockContext->getTemplate(), [
+            'letters'  => $repository->uniqLetterByAuthor(),
             'authors'  => $paginator,
             'block'    => $block,
             'settings' => array_merge($blockContext->getSettings(), $block->getSettings()),

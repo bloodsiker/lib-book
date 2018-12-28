@@ -150,6 +150,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .to-top-link {display:inline-block; padding:0 20px; float:left; color:#000 !important;border-bottom: 3px solid transparent}
 .to-top-link span {margin:0 10px; font-weight: 500}
 .to-top-link:not(.logo-hide):hover {background-color:#fed718; border-bottom: 3px solid #000}
+.to-top-link.active {background-color:#fed718; border-bottom: 3px solid #000}
 
 
 /* CONTENT SECTIONS
@@ -235,6 +236,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .container {padding: 0 0 40px}
 .author-list-letter {margin: 15px 0}
 .author-list-letter li {display: inline-block; margin: 0 5px}
+.author-list-letter li > .active {color: #ffb900; text-decoration: underline; font-weight: 500}
 .form {margin: 15px 0;}
 .form > .inputs {display: flex}
 .form > .inputs input{border: 1px solid #d6cfcf; background-color: #fafafa; width: 90%; border-radius: 3px 0 0 3px}
@@ -365,7 +367,6 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 /* FOOTER
 ----------------------------------------------- */
 .foot-line {padding:30px 15px; min-height:70px; background-color:#252c35; color:#FFF; border-top:5px solid #ffb900}
-.counts {display:flex; flex-direction:column; justify-content:center; float:right;}
 .foot-line a {text-decoration:underline; color:#fff;}
 
 
@@ -545,12 +546,13 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .add-com-form {}
 .add-com-textarea {width:100%;}
 
-.ac-inputs input {width:49%; float:left; box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.1); background-color:#fafafa;}
-.ac-inputs input:last-child {float:right;}
+.add-comm > .inputs input {margin-bottom:15px; box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.1); background-color:#fafafa; border:1px solid #d6cfcf;}
+.ac-inputs {display: flex; flex-flow: wrap row; justify-content: space-between}
+.ac-inputs input {width:49%; box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.1); background-color:#fafafa;}
 .ac-inputs, .ac-textarea, .ac-protect {margin-bottom:15px;}
 .ac-textarea textarea {display:block; width:100%; padding:10px; background-image:none; background-color:#fafafa;
     border:1px solid #d6cfcf; border-radius:0 0 6px 6px; box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.1);}
-.ac-submit button {float:right;}
+.ac-submit {display: flex; flex-flow: row wrap; justify-content: flex-end}
 .sec-answer + .sec-label {margin-top:15px;}
 .add-com-but + form #addcform {display:none; margin:20px 0;}
 .ac-protect {width:70%; float:left; margin-top:-10px;}

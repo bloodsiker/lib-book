@@ -36,16 +36,39 @@ class AuthorRepository extends EntityRepository
     }
 
     /**
+     * @param QueryBuilder $qb
+     * @param string       $letter
+     *
+     * @return QueryBuilder
+     */
+    public function filterByLetter(QueryBuilder $qb, string $letter): QueryBuilder
+    {
+        return $qb->andWhere("a.name LIKE :letter")->setParameter('letter', $letter.'%');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function uniqLetterByAuthor()
+    {
+        $qb = $this->baseAuthorQueryBuilder();
+
+        $qb->select($qb->expr()->substring('a.name', 1, 1))->distinct();
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getAuthorsCount()
-    {
-        $qb = $this->baseAuthorQueryBuilder();
-
-        $qb->select('count(a.id)');
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
+//    public function getAuthorsCount()
+//    {
+//        $qb = $this->baseAuthorQueryBuilder();
+//
+//        $qb->select('count(a.id)');
+//
+//        return $qb->getQuery()->getSingleScalarResult();
+//    }
 }

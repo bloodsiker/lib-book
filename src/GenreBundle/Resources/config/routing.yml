@@ -5,14 +5,14 @@ genre_list:
         _controller: GenreBundle:Genre:list
 
 genre_books:
-    path: /genre/{genre}
+    path: /genres/{genre}
     defaults:
         _controller: GenreBundle:Genre:listBook
     requirements:
         genre: "([a-zA-Z\\-0-9\\_]+)?"
 
 sub_genre_books:
-    path: /genre/{genre}/{sub_genre}
+    path: /genres/{genre}/{sub_genre}
     defaults:
         _controller: GenreBundle:Genre:listBook
     requirements:

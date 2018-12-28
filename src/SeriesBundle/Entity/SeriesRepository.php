@@ -40,12 +40,12 @@ class SeriesRepository extends EntityRepository
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getSeriesCount()
-    {
-        $qb = $this->baseSeriesQueryBuilder();
-
-        $qb->select('count(s.id)');
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
+//    public function getSeriesCount()
+//    {
+//        $qb = $this->baseSeriesQueryBuilder();
+//
+//        $qb->select('count(s.id)');
+//
+//        return $qb->getQuery()->getSingleScalarResult();
+//    }
 }

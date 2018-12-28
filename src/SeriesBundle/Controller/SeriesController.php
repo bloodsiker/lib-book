@@ -24,10 +24,7 @@ class SeriesController extends Controller
      */
     public function listAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository(Series::class);
-        $count = $repo->getSeriesCount();
-
-        return $this->render('SeriesBundle::series_list.html.twig', ['countSeries' => $count]);
+        return $this->render('SeriesBundle::series_list.html.twig');
     }
 
     /**

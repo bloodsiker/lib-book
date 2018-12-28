@@ -110,6 +110,7 @@ $(function(){
 
 $(document).ready(function(){
 
+    // Add comments for book
     $('#add-comment').submit(function (e) {
         e.preventDefault();
         var name_input = $('input[name="name"]'),
@@ -151,8 +152,53 @@ $(document).ready(function(){
                 }
             });
         }
-    })
+    });
 
+    // Order board request
+    $('.order-add').on('click', function () {
+        $('#add-order-board').toggle('fast');
+    });
+
+    $('#add-order-board').submit(function (e) {
+        e.preventDefault();
+        var name_input = $('input[name="name"]'),
+            name = name_input.val(),
+            book_input = $('input[name="book"]'),
+            book = book_input.val(),
+            url = $(this).data('ajax-url'),
+            error = false;
+
+        if (!name) {
+            name_input.css('border-color', 'red');
+            showAlert('Имя обьязательное для заполнения', 'error');
+            error = true;
+        } else {
+            name_input.removeAttr('style');
+        }
+
+        if (!book) {
+            book_input.css('border-color', 'red');
+            showAlert('Название книги обьязательно для заполнения', 'error');
+            error = true;
+        } else {
+            book_input.removeAttr('style');
+        }
+
+        if (error) {
+            return false;
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { name: name, book: book},
+                success: function(response) {
+                    $('table.table').find('tr').first().before(response);
+                    $('#add-order-board').trigger("reset");
+                    showAlert('Заказ добавлен', 'success');
+                }
+            });
+        }
+    })
 });
 
 /***************************************************************************************/

@@ -11,8 +11,15 @@ author_list:
     defaults:
         _controller: ShareBundle:Author:list
 
+author_list_letter:
+    path: /authors/letter/{letter}
+    defaults:
+        _controller: ShareBundle:Author:list
+    requirements:
+        letter: "([a-zA-Zа-яА-Я]+\\/?)+"
+
 author_books:
-    path: /author/{slug}
+    path: /authors/{slug}
     defaults:
         _controller: ShareBundle:Author:authorBook
     requirements:
