@@ -2,12 +2,17 @@
     <div class="container">
         <button class="order-add"><i class="fa fa-plus" aria-hidden="true"></i> Добавить заказ</button>
         <h2>Стол заказов</h2>
+
+        {{
+        sonata_block_render(
+            { 'type': 'order.block.add_order_board' }
+        )
+        }}
+
         <div class="order-description">
             Если на сайте нет книги, которую Вы хотите прочитать - нажмите кнопку "Добавить заказ" и
             мы постараемся ее добавить.
             </br>
-            Если у Вас есть книга(и) из списка ниже и Вы хотите поделиться - <a
-                    href="https://knigolub.net/tickets/new.html"><u>добавьте книгу на сайт</u></a>.
             <p style="padding: 2px 0;"><b style="color:#BC8F8F">Внимание!</b> Если книга, которую Вы
                 хотите уже добавлена в список ниже, Вы можете поддержать эту книгу своим голосом.
             </p>

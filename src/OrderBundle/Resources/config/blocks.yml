@@ -7,3 +7,13 @@ services:
           - '@?doctrine'
         tags:
           - { name: sonata.block }
+
+    order.block.add_order_board:
+        class: "OrderBundle\\Block\\AddOrderBoardBlockService"
+        arguments:
+          - order.block.add_order_board
+          - '@templating'
+          - '@app.entity_manager'
+          - '@request_stack'
+        tags:
+          - { name: sonata.block }

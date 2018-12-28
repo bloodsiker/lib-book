@@ -1,11 +1,11 @@
 {% set block_ajax_path = block.page is defined ? sonata_page_ajax_url(block) : block_ajax_url(block) %}
 <form method="post" data-ajax-url="{{ block_ajax_path }}" id="add-comment">
     <div id="addcform">
-        <div class="add-com-form clearfix">
-            <div class="add-com-textarea clearfix">
+        <div class="add-com-form">
+            <div class="add-com-textarea">
                 <div class="add-comm">
                     <div class="side-title">Прокомментировать <i class="fa fa-angle-down"></i></div>
-                    <div class="ac-inputs clearfix">
+                    <div class="ac-inputs">
                         <input type="text" maxlength="35" name="name" placeholder="Ваше имя"/>
                         <input type="text" maxlength="35" name="mail" placeholder="Ваш e-mail (необязательно)"/>
                     </div>
