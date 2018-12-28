@@ -223,7 +223,7 @@ class Comment
      *
      * @return $this
      */
-    public function setUserEmail(string $userEmail)
+    public function setUserEmail(string $userEmail = null)
     {
         $this->userEmail = $userEmail;
 

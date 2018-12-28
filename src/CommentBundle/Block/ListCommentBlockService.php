@@ -3,7 +3,6 @@
 namespace CommentBundle\Block;
 
 use CommentBundle\Entity\Comment;
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -15,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ListLastCommentBlockService
+ * Class ListCommentBlockService
  */
-class ListLastCommentBlockService extends AbstractAdminBlockService
+class ListCommentBlockService extends AbstractAdminBlockService
 {
     /**
      * @var EntityManager
@@ -91,7 +90,8 @@ class ListLastCommentBlockService extends AbstractAdminBlockService
 
         $qb = $repository->createQueryBuilder('c');
         $qb
-            ->where('c.isActive = 1');
+            ->where('c.isActive = 1')
+            ->orderBy('c.createdAt', 'DESC');
 
         if ($book) {
             $qb->andWhere('c.book = :book')->setParameter('book', $book);

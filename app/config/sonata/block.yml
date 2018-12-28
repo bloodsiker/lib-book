@@ -52,7 +52,9 @@ sonata_block:
             contexts: [cms]
 
         # CommentBundle Block's
-        comment.block.last_comments:
+        comment.block.list_comments:
+            contexts: [cms]
+        comment.block.add_comment:
             contexts: [cms]
 #
 #        # UserBundle's Blocks

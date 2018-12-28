@@ -108,6 +108,53 @@ $(function(){
     $('body').append('<div class="alert-container"></div>');
 });
 
+$(document).ready(function(){
+
+    $('#add-comment').submit(function (e) {
+        e.preventDefault();
+        var name_input = $('input[name="name"]'),
+            name = name_input.val(),
+            email = $('input[name="email"]').val(),
+            comment_input = $('textarea[name="comment"]'),
+            comment = comment_input.val(),
+            bookId = $('input[name="book"]').val(),
+            url = $(this).data('ajax-url'),
+            error = false;
+
+        if (!name) {
+            name_input.css('border-color', 'red');
+            showAlert('Имя обьязательное для заполнения', 'error');
+            error = true;
+        } else {
+            name_input.removeAttr('style');
+        }
+
+        if (!comment) {
+            comment_input.css('border-color', 'red');
+            showAlert('Текст комментария обьязательно для заполнения', 'error');
+            error = true;
+        } else {
+            comment_input.removeAttr('style');
+        }
+
+        if (error) {
+            return false;
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { name: name, email: email, comment: comment, bookId: bookId },
+                success: function(response) {
+                    $('.comments-items').find('.comm-container').first().before(response);
+                    $('#add-comment').trigger("reset");
+                    showAlert('Комментарий добавлен', 'success');
+                }
+            });
+        }
+    })
+
+});
+
 /***************************************************************************************/
 
 $(document).ready(function(){

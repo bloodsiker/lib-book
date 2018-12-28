@@ -1,9 +1,19 @@
 services:
-    comment.block.last_comments:
-        class: "CommentBundle\\Block\\ListLastCommentBlockService"
+    comment.block.list_comments:
+        class: "CommentBundle\\Block\\ListCommentBlockService"
         arguments:
-          - comment.block.last_comments
+          - comment.block.list_comments
           - '@templating'
           - '@app.entity_manager'
+        tags:
+          - { name: sonata.block }
+
+    comment.block.add_comment:
+        class: "CommentBundle\\Block\\AddCommentBlockService"
+        arguments:
+          - comment.block.add_comment
+          - '@templating'
+          - '@app.entity_manager'
+          - '@request_stack'
         tags:
           - { name: sonata.block }
