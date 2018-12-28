@@ -3,7 +3,7 @@
 namespace AppBundle\Block;
 
 use AppBundle\Services\SaveStateValue;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 

@@ -60,16 +60,6 @@ services:
 #            - [ setNamespace, ['%secret%:app:redis:cache']]
 #            - [ connect, ['%redis_host%', '%redis_port%']]
 #
-#    app.exchange:
-#        class: "AppBundle\\Services\\Exchange"
-#        arguments:
-#            - '@app.redis.cache.key.decorator'
-#
-#    app.bitwise.helper:
-#        class: "AppBundle\\Helper\\BitwiseHelper"
-#        arguments:
-#            - '@service_container'
-#            - '@article.repository.article_type'
 #
 #    app.imagine.helper:
 #        class: "AppBundle\\Helper\\ImagineHelper"
@@ -79,3 +69,8 @@ services:
 
     app.save.state.value:
         class: "AppBundle\\Services\\SaveStateValue"
+
+    app.breadcrumb:
+        class: "AppBundle\\Services\\BreadcrumbService"
+        arguments:
+            - '@router'

@@ -1,0 +1,25 @@
+{% import _self as macro %}
+{% macro macro(text, href) %}
+    {% spaceless %}
+        <li><a href="{{ href }}">{{ text }}</a></li>
+    {% endspaceless %}
+{% endmacro %}
+{% macro macro_text(text) %}
+    {% spaceless %}
+        <li>{{ text }}</li>
+    {% endspaceless %}
+{% endmacro %}
+
+{% if breadcrumbs|length %}
+    <section class="breadcrumb">
+        <ul>
+            {% for link in breadcrumbs %}
+                {% if link['href'] is defined %}
+                    {{ macro.macro(link.title, link.href) }}
+                {% else %}
+                    {{ macro.macro_text(link.title) }}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}

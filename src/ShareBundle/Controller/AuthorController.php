@@ -24,6 +24,9 @@ class AuthorController extends Controller
      */
     public function listAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Авторы']);
+
         return $this->render('ShareBundle::author_list.html.twig');
     }
 
@@ -42,6 +45,11 @@ class AuthorController extends Controller
         if (!$author) {
             throw $this->createNotFoundException(self::AUTHOR_404);
         }
+
+        $router = $this->get('router');
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Авторы', 'href' => $router->generate('author_list')]);
+        $breadcrumb->addBreadcrumb(['title' => $author->getName()]);
 
         return $this->render('ShareBundle::author_books.html.twig', ['author' => $author]);
     }

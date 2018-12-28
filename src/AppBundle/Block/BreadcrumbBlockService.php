@@ -2,7 +2,7 @@
 
 namespace AppBundle\Block;
 
-use Doctrine\ORM\EntityManager;
+use AppBundle\Services\BreadcrumbService;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -12,27 +12,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
- * Class HeaderBlockService
+ * Class BreadcrumbBlockService
  */
-class HeaderBlockService extends AbstractAdminBlockService
+class BreadcrumbBlockService extends AbstractAdminBlockService
 {
     /**
-     * @var EntityManager
+     * @var BreadcrumbService
      */
-    protected $em;
+    private $breadcrumb;
 
     /**
-     * HeaderBlockService constructor.
+     * GetStateValueBlockService constructor.
      *
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param EntityManager   $em
+     * @param string            $name
+     * @param EngineInterface   $templating
+     * @param BreadcrumbService $breadcrumb
      */
-    public function __construct($name, EngineInterface $templating, EntityManager $em)
+    public function __construct($name, EngineInterface $templating, BreadcrumbService $breadcrumb)
     {
         parent::__construct($name, $templating);
 
-        $this->em = $em;
+        $this->breadcrumb = $breadcrumb;
     }
 
     /**
@@ -57,7 +57,7 @@ class HeaderBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'template'      => 'AppBundle:Block:header.html.twig',
+            'template'  => 'AppBundle:Block:breadcrumb.html.twig',
         ]);
     }
 
@@ -66,6 +66,8 @@ class HeaderBlockService extends AbstractAdminBlockService
      * @param Response|null         $response
      *
      * @return Response
+     *
+     * @throws \Exception
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
@@ -73,9 +75,10 @@ class HeaderBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), [
-            'settings'      => $blockContext->getSettings(),
-            'block'         => $blockContext->getBlock(),
-        ]);
+        return $this->renderResponse($blockContext->getTemplate(), array(
+            'breadcrumbs' => $this->breadcrumb->getBreadcrumb(),
+            'settings'    => $blockContext->getSettings(),
+            'block'       => $blockContext->getBlock(),
+        ));
     }
 }

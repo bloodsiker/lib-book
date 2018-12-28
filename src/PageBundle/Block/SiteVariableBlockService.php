@@ -4,7 +4,7 @@ namespace PageBundle\Block;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use PageBundle\Entity\SiteVariable;
-use Sonata\CoreBundle\Model\Metadata;
+use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;

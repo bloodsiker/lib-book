@@ -45,13 +45,13 @@
 {% endblock %}
 
  {% block breadchumbs %}
-     <section class="breadcrumb">
-         <ul>
-             <li><a href="">Главная</a></li>
-             <li><a href="">Серии</a></li>
-             <li>Книга о доблестном воине Сидрике</li>
-         </ul>
-     </section>
+
+     {{
+     sonata_block_render(
+         { 'type': 'app.block.service.breadcrumb' }
+     )
+     }}
+
  {% endblock %}
 
 {% block content_main %}
