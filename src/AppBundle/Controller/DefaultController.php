@@ -27,6 +27,9 @@ class DefaultController extends Controller
      */
     public function topBooksAction()
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Топ-100 книг']);
+
         return $this->render('BookBundle::top-100.html.twig');
     }
 
@@ -37,6 +40,9 @@ class DefaultController extends Controller
      */
     public function searchAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Поиск']);
+
         return $this->render('AppBundle:search:search.html.twig');
     }
 }

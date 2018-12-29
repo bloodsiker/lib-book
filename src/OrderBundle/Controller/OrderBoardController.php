@@ -24,6 +24,15 @@ class OrderBoardController extends Controller
      */
     public function listAction(Request $request)
     {
+        $router = $this->get('router');
+        $breadcrumb = $this->get('app.breadcrumb');
+        if (!$request->get('status')) {
+            $breadcrumb->addBreadcrumb(['title' => 'Стол заказов']);
+        } else {
+            $breadcrumb->addBreadcrumb(['title' => 'Стол заказов', 'href' => $router->generate('order_board')]);
+            $breadcrumb->addBreadcrumb(['title' => $this->get('translator')->trans(OrderBoard::getNameStatus($request->get('status')), [], 'OrderBundle')]);
+        }
+
         return $this->render('OrderBundle::orders_board_list.html.twig');
     }
 
@@ -31,6 +40,9 @@ class OrderBoardController extends Controller
      * @param Request $request
      *
      * @return JsonResponse
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function voteOrderAction(Request $request)
     {

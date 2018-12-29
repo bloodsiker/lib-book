@@ -24,6 +24,9 @@ class CommentController extends Controller
      */
     public function listAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Последние комментарии']);
+
         return $this->render('CommentBundle::last_comments_list.html.twig');
     }
 

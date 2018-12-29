@@ -13,6 +13,7 @@
 {% if breadcrumbs|length %}
     <section class="breadcrumb">
         <ul>
+            {{ macro.macro('Главная', path('index')) }}
             {% for link in breadcrumbs %}
                 {% if link['href'] is defined %}
                     {{ macro.macro(link.title, link.href) }}

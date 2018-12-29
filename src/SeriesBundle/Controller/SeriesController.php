@@ -24,6 +24,9 @@ class SeriesController extends Controller
      */
     public function listAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Серии']);
+
         return $this->render('SeriesBundle::series_list.html.twig');
     }
 
@@ -42,6 +45,11 @@ class SeriesController extends Controller
         if (!$series) {
             throw $this->createNotFoundException(self::SERIES_404);
         }
+
+        $router = $this->get('router');
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Серии', 'href' => $router->generate('series_list')]);
+        $breadcrumb->addBreadcrumb(['title' => 'Серия "'.$series->getTitle().'"']);
 
         return $this->render('SeriesBundle::series_books.html.twig', ['series' => $series]);
     }

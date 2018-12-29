@@ -45,7 +45,7 @@
                         {% if book.series is not empty %}
                             <div class="mi-item">
                                 <span><i class="fa fa-pencil-square"></i>Серия:</span>
-                                <a href="">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
+                                <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
                             </div>
                         {% endif %}
 

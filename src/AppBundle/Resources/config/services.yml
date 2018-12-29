@@ -72,5 +72,3 @@ services:
 
     app.breadcrumb:
         class: "AppBundle\\Services\\BreadcrumbService"
-        arguments:
-            - '@router'

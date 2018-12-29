@@ -263,4 +263,21 @@ class OrderBoard
             self::STATUS_CANCEL    => 'cancel',
         ];
     }
+
+    /**
+     * @param string $status
+     *
+     * @return mixed
+     */
+    public static function getNameStatus($status)
+    {
+        $statuses = [
+            'new'       => 'order_board.fields.statuses.new',
+            'completed' => 'order_board.fields.statuses.completed',
+            'cancel'    => 'order_board.fields.statuses.cancel',
+            'top'       => 'order_board.fields.statuses.top',
+        ];
+
+        return $statuses[$status];
+    }
 }

@@ -30,6 +30,25 @@ class BookController extends Controller
             throw $this->createNotFoundException(self::BOOK_404);
         }
 
+        $router = $this->get('router');
+        $breadcrumb = $this->get('app.breadcrumb');
+        if ($book->getGenres()) {
+            if ($book->getGenres()[0]->getParent()) {
+                $genre = $book->getGenres()[0];
+                $breadcrumb->addBreadcrumb([
+                    'title' => $genre->getParent()->getName(),
+                    'href' => $router->generate('sub_genre_books', ['genre' => $genre->getSlug(), 'sub_genre' => $genre->getParent()->getSlug()]),
+                ]);
+                $breadcrumb->addBreadcrumb([
+                    'title' => $genre->getName(),
+                    'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
+                ]);
+            } else {
+                $breadcrumb->addBreadcrumb(['title' => $book->getGenres()[0]->getName(), 'href' => $router->generate('genre_books')]);
+            }
+        }
+        $breadcrumb->addBreadcrumb(['title' => $book->getName()]);
+
         return $this->render('BookBundle::book_view.html.twig', ['book' => $book]);
     }
 
@@ -42,6 +61,9 @@ class BookController extends Controller
      */
     public function yearListAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => $request->get('year').' год']);
+
         return $this->render('BookBundle::year_list.html.twig');
     }
 }

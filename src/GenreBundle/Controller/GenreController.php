@@ -24,6 +24,9 @@ class GenreController extends Controller
      */
     public function listAction(Request $request)
     {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Жанры']);
+
         return $this->render('GenreBundle::genre_list.html.twig');
     }
 
@@ -49,6 +52,19 @@ class GenreController extends Controller
             if (!$subGenre) {
                 throw $this->createNotFoundException(self::GENRE_404);
             }
+        }
+
+        $router = $this->get('router');
+        $breadcrumb = $this->get('app.breadcrumb');
+
+        if ($slugSubGenre && $subGenre) {
+            $breadcrumb->addBreadcrumb([
+                'title' => $genre->getName(),
+                'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
+            ]);
+            $breadcrumb->addBreadcrumb(['title' => $subGenre->getName()]);
+        } else {
+            $breadcrumb->addBreadcrumb(['title' => $genre->getName()]);
         }
 
         return $this->render('GenreBundle::book_list.html.twig', [

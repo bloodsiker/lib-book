@@ -23,3 +23,4 @@ order_board:
             new: Новый заказ
             completed: Заказ выполнен
             cancel: Отказ
+            top: В топе
