@@ -97,6 +97,7 @@ class ListAuthorsBlockService extends AbstractAdminBlockService
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
+        $paginator->setAllowOutOfRangePages(true);
         $paginator->setMaxPerPage((int) $limit);
         $paginator->setCurrentPage((int) $page);
 

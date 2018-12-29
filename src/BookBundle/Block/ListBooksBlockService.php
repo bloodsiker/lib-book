@@ -125,6 +125,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
+        $paginator->setAllowOutOfRangePages(true);
         $paginator->setMaxPerPage($limit);
         $paginator->setCurrentPage($page);
 

@@ -155,6 +155,40 @@ class BookRepository extends EntityRepository
     }
 
     /**
+     * @param int $item
+     */
+    public function incViewCounter(int $item): void
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        $qb
+            ->update()
+            ->set('b.views', 'b.views + 1')
+            ->where('b.id = :item')
+            ->setParameter(':item', $item)
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    /**
+     * @param int $item
+     */
+    public function incDownloadCounter(int $item): void
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        $qb
+            ->update()
+            ->set('b.download', 'b.download + 1')
+            ->where('b.id = :item')
+            ->setParameter(':item', $item)
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    /**
      * Returns current date and time, rounded to nearest minute
      *
      * @return \DateTime

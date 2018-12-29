@@ -30,6 +30,9 @@ sonata_page:
         - sonata_cache_apc
 
         - block__ajax
+        - order_board_vote
+        - comment_vote
+        - inc_book_download
 
     ignore_uri_patterns:
         - "^/admin\\/"   # ignore admin route, ie route containing 'admin'

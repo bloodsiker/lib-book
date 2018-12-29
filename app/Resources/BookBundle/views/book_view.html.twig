@@ -127,10 +127,11 @@
                 </ul>
 
                 <div class="book-file">
+                    {% set url = path('inc_book_download') %}
                     {% for file in book.bookHasFiles %}
                         <div class="block">
                             <span itemprop="bookFormat" content="{{ file.bookFile.path|file_extension }}">
-                                <a href="{{ asset(file.bookFile.path) }}" download >{{ file.bookFile.path|file_extension }}</a></span>
+                                <a href="{{ asset(file.bookFile.path) }}" download onclick="incBookDownload({{ book.id }}, '{{ url }}'); return true;">{{ file.bookFile.path|file_extension }}</a></span>
                         </div>
                     {% endfor %}
                 </div>

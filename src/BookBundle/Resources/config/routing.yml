@@ -7,6 +7,11 @@ book_view:
         slug: "([a-zA-Z\\-0-9\\_]+)?"
         id: "\\d+"
 
+inc_book_download:
+    path: /inc_download/book
+    defaults:
+        _controller: BookBundle:Book:incDownload
+
 year_books:
     path: /year/{year}
     defaults:

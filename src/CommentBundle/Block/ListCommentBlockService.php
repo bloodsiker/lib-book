@@ -95,9 +95,10 @@ class ListCommentBlockService extends AbstractAdminBlockService
 
         if ($book) {
             $qb->andWhere('c.book = :book')->setParameter('book', $book);
-            $results = $qb->getQuery()->getResult();
+            $results = $qb->getQuery()->useResultCache(true, 60)->getResult();
         } else {
             $results = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));
+            $results->setAllowOutOfRangePages(true);
             $results->setMaxPerPage($limit);
             $results->setCurrentPage($page);
         }

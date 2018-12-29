@@ -49,7 +49,23 @@ class BookController extends Controller
         }
         $breadcrumb->addBreadcrumb(['title' => $book->getName()]);
 
+        $repo->incViewCounter($book->getId());
+
         return $this->render('BookBundle::book_view.html.twig', ['book' => $book]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function incDownloadAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository(Book::class);
+        $bookId = $request->get('bookId');
+        $repo->incDownloadCounter($bookId);
+
+        return new Response();
     }
 
     /**
