@@ -40,12 +40,12 @@
 
         {% block stylesheets %}
             {% if app.debug is defined and app.debug %}
-                <link rel="stylesheet" type="text/css" href="{{ asset('public/css/styles.css') }}" />
-                <link rel="stylesheet" type="text/css" href="{{ asset('public/css/engine.css') }}" />
-                <link rel="stylesheet" type="text/css" href="{{ asset('public/css/font-awesome.css') }}" />
-                <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-                <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic&subset=latin,cyrillic'
-                      rel='stylesheet' type='text/css'>
+                {#<link rel="stylesheet" type="text/css" href="{{ asset('public/css/styles.css') }}" />#}
+                {#<link rel="stylesheet" type="text/css" href="{{ asset('public/css/engine.css') }}" />#}
+                {#<link rel="stylesheet" type="text/css" href="{{ asset('public/css/font-awesome.css') }}" />#}
+                {#<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->#}
+                {#<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic&subset=latin,cyrillic'#}
+                      {#rel='stylesheet' type='text/css'>#}
             {% else %}
                 {#{% stylesheets#}
                     {#'@AppBundle/Resources/public/css/styles.css'#}
@@ -55,6 +55,13 @@
                     {#<link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />#}
                 {#{% endstylesheets %}#}
             {% endif %}
+
+            <link rel="stylesheet" type="text/css" href="{{ asset('public/css/styles.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('public/css/engine.css') }}" />
+            <link rel="stylesheet" type="text/css" href="{{ asset('public/css/font-awesome.css') }}" />
+            <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+            <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic&subset=latin,cyrillic'
+                  rel='stylesheet' type='text/css'>
 
             {% if page.stylesheet is defined and page.stylesheet is not empty %}
                 <style type="text/css">
