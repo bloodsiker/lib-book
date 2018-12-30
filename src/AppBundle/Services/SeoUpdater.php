@@ -2,13 +2,11 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Helper\ImagineHelper;
 use ArticleBundle\Entity\Article;
 use ArticleBundle\Entity\ArticleCategory;
 use ArticleBundle\Entity\ArticleSpectopic;
 use ArticleBundle\Helper\ArticleRouterHelper;
 use DossierBundle\Entity\Dossier;
-use ShortcodeBundle\Templating\ShortcodeHelper;
 use Sonata\PageBundle\CmsManager\CmsManagerSelectorInterface;
 use Sonata\PageBundle\Model\PageInterface;
 use Sonata\PageBundle\Model\SiteInterface;
@@ -50,16 +48,6 @@ class SeoUpdater
     private $translator;
 
     /**
-     * @var ShortcodeHelper
-     */
-    private $shortcode;
-
-    /**
-     * @var array
-     */
-    private $shortcodeVariable;
-
-    /**
      * @var string
      */
     private $siteTitle;
@@ -75,19 +63,9 @@ class SeoUpdater
     private $routeLocales;
 
     /**
-     * @var ImagineHelper
-     */
-    private $imagineHelper;
-
-    /**
      * @var SaveStateValue
      */
     private $saveStateService;
-
-    /**
-     * @var ArticleRouterHelper
-     */
-    private $articleRouterHelper;
 
     /**
      * @var string
@@ -95,34 +73,24 @@ class SeoUpdater
     private $defaultOgImageSrc = '/bundles/app/img/logo_sc.gif';
 
     /**
-     * @var string
-     */
-    private $defaultOgImageSrcLifestyle = '/bundles/app/img/logo_ls_200.png';
-
-    /**
      * SeoUpdater constructor.
      * @param CmsManagerSelectorInterface $pageSelector
      * @param SeoPageInterface            $seoPage
      * @param RequestStack                $requestStack
      * @param TranslatorInterface         $translator
-     * @param ShortcodeHelper             $shortcode
      * @param Router                      $router
-     * @param ImagineHelper               $imagineHelper
      * @param SaveStateValue              $saveStateService
      * @param string                      $routeLocales
      */
-    public function __construct(CmsManagerSelectorInterface $pageSelector, SeoPageInterface $seoPage, RequestStack $requestStack, TranslatorInterface $translator, ShortcodeHelper $shortcode, Router $router, ImagineHelper $imagineHelper, SaveStateValue $saveStateService, ArticleRouterHelper $articleRouterHelper, $routeLocales)
+    public function __construct(CmsManagerSelectorInterface $pageSelector, SeoPageInterface $seoPage, RequestStack $requestStack, TranslatorInterface $translator, Router $router, SaveStateValue $saveStateService, $routeLocales)
     {
         $this->pageSelector = $pageSelector;
         $this->seoPage = $seoPage;
         $this->requestStack = $requestStack;
         $this->translator = $translator;
-        $this->shortcode = $shortcode;
         $this->router = $router;
         $this->routeLocales = $routeLocales;
-        $this->imagineHelper = $imagineHelper;
         $this->saveStateService = $saveStateService;
-        $this->articleRouterHelper = $articleRouterHelper;
     }
 
     /**
@@ -166,11 +134,8 @@ class SeoUpdater
         }
 
         $request = $this->requestStack->getCurrentRequest();
-        if ($this->getRequest()->get('skin') === 'lifestyle') {
-            $defaultOgImage = $request->getSchemeAndHttpHost().$this->defaultOgImageSrcLifestyle;
-        } else {
-            $defaultOgImage = $request->getSchemeAndHttpHost().$this->defaultOgImageSrc;
-        }
+        $defaultOgImage = $request->getSchemeAndHttpHost().$this->defaultOgImageSrc;
+
 
         $this->setLangAlternate($customRouteParams);
         $this->setOpenGraph($params, $defaultOgImage);
