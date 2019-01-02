@@ -53,7 +53,7 @@ class AuthorRepository extends EntityRepository
     {
         $qb = $this->baseAuthorQueryBuilder();
 
-        $qb->select($qb->expr()->substring('a.name', 1, 1))->distinct();
+        $qb->select($qb->expr()->substring('a.name', 1, 1))->distinct()->orderBy('a.name');
 
         return $qb->getQuery()->getResult();
     }
