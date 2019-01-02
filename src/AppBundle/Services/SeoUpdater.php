@@ -2,11 +2,6 @@
 
 namespace AppBundle\Services;
 
-use ArticleBundle\Entity\Article;
-use ArticleBundle\Entity\ArticleCategory;
-use ArticleBundle\Entity\ArticleSpectopic;
-use ArticleBundle\Helper\ArticleRouterHelper;
-use DossierBundle\Entity\Dossier;
 use Sonata\PageBundle\CmsManager\CmsManagerSelectorInterface;
 use Sonata\PageBundle\Model\PageInterface;
 use Sonata\PageBundle\Model\SiteInterface;
@@ -221,7 +216,6 @@ class SeoUpdater
         // если Title задан из админки: выводим то что задано
         if ($title = $article->getMetaTitle()) {
             $title = $this->prepareShortcdeStr($title);
-            $title = $this->shortcode->renderShortcodes($title);
             $title .= ' | '.$this->translator->trans('app.frontend.meta.sitename', [], 'AppBundle');
 
             $this->seoPage->setTitle($title);
@@ -247,7 +241,6 @@ class SeoUpdater
 
         if ($description = $article->getMetaDescription()) {
             $description = $this->prepareShortcdeStr($description);
-            $description = $this->shortcode->renderShortcodes($description);
             $description .= ' | '.$this->translator->trans('app.frontend.meta.sitename', [], 'AppBundle');
             $this->seoPage->addMeta('name', 'description', $description);
         } elseif (isset($params['description'])) {
@@ -264,7 +257,6 @@ class SeoUpdater
 
         if ($keywordsMeta = $article->getMetaKeywords()) {
             $keywordsMeta = $this->prepareShortcdeStr($keywordsMeta);
-            $keywordsMeta = $this->shortcode->renderShortcodes($keywordsMeta);
             $keywords .= $keywordsMeta;
             $this->seoPage->addMeta('name', 'keywords', $keywords);
         } elseif (isset($params['keywords'])) {
@@ -314,11 +306,7 @@ class SeoUpdater
             }
         }
         if (!$ogImage) {
-            if ($this->getRequest()->get('skin') === 'lifestyle') {
-                $ogImage = $this->defaultOgImageSrcLifestyle;
-            } else {
-                $ogImage = $this->defaultOgImageSrc;
-            }
+            $ogImage = $this->defaultOgImageSrc;
             $params['og']['og:image:width'] = 200;
             $params['og']['og:image:height'] = 200;
         }
@@ -451,14 +439,6 @@ class SeoUpdater
         $routeParams['_locale'] = $locale ?: $this->getRequest()->getLocale();
 
         return $this->router->generate($route, $routeParams, UrlGenerator::ABSOLUTE_URL);
-    }
-
-    /**
-     * @return array
-     */
-    private function getLocales()
-    {
-        return explode('|', $this->routeLocales) ?: [];
     }
 
     /**

@@ -55,6 +55,12 @@
                             </div>
                         {% endif %}
 
+                        {% if book.restrictAge is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa fa-child"></i>Возрастное ограничение:</span> {{ book.restrictAge }}
+                            </div>
+                        {% endif %}
+
                     </div>
 
                     <br>

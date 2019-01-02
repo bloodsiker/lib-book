@@ -64,6 +64,13 @@ class Book
     protected $year;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", length=3, nullable=true)
+     */
+    protected $restrictAge;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Author", inversedBy="books")
@@ -205,7 +212,6 @@ class Book
         $this->views = 0;
         $this->ratePlus = 0;
         $this->rateMinus = 0;
-        $this->createdAt = $this->updatedAt = new \DateTime('now');
 
         $this->genres         = new ArrayCollection();
         $this->tags           = new ArrayCollection();
@@ -229,6 +235,10 @@ class Book
      */
     public function prePersist()
     {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime('now');
+        }
+
         if (is_null($this->slug)) {
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->getName());
@@ -240,6 +250,8 @@ class Book
      */
     public function preUpdate()
     {
+        $this->updatedAt = new \DateTime('now');
+
         $this->prePersist();
     }
 
@@ -371,6 +383,30 @@ class Book
     public function getYear()
     {
         return $this->year;
+    }
+
+    /**
+     * Get restrictAge
+     *
+     * @return int
+     */
+    public function getRestrictAge()
+    {
+        return $this->restrictAge;
+    }
+
+    /**
+     * Set restrictAge
+     *
+     * @param int $restrictAge
+     *
+     * @return $this
+     */
+    public function setRestrictAge($restrictAge)
+    {
+        $this->restrictAge = $restrictAge;
+
+        return $this;
     }
 
     /**
@@ -697,6 +733,8 @@ class Book
      * Set createdAt
      *
      * @param \DateTime $createdAt
+     *
+     * @ORM\PrePersist
      *
      * @return Book
      */

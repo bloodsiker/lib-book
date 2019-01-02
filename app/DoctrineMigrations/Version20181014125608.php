@@ -35,6 +35,7 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('description', 'text', array('length' => 65535, 'notnull' => true));
         $book->addColumn('series_number', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
         $book->addColumn('year', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
+        $book->addColumn('restrict_age', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 3));
         $book->addColumn('pages', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 4));
         $book->addColumn('ratePlus', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 7));
         $book->addColumn('rateMinus', 'integer', array('unsigned' => true, 'notnull' => false, 'length' => 7));

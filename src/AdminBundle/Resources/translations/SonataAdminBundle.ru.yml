@@ -4,6 +4,11 @@ short_object_description_placeholder: не выбрано
 
 Dashboard: '<i class="fa fa-home"></i>'
 
+actions:
+    btn:
+        preview: Посмотреть
+        on_site: На сайте
+
 admin:
     fields:
         counter:

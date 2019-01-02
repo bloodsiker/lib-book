@@ -110,7 +110,7 @@ class BookAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-//                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
+                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
                     'edit' => [],
                 ],
             ])
@@ -226,6 +226,10 @@ class BookAdmin extends Admin
                 ])
                 ->add('pages', IntegerType::class, [
                     'label' => 'book.fields.pages',
+                    'required' => false,
+                ])
+                ->add('restrictAge', IntegerType::class, [
+                    'label' => 'book.fields.restrict_age',
                     'required' => false,
                 ])
                 ->add('year', IntegerType::class, [

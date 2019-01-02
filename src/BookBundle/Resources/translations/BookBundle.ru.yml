@@ -31,6 +31,7 @@ book:
         series_number: 'номер # в серии'
         pages: Страниц
         year: Год издания
+        restrict_age: Ограничение в возрасте
         genres: Жанр(ы)
         tags: Тег(и)
         download: Скачиваний
