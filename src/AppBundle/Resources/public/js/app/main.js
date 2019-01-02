@@ -68,6 +68,16 @@ function voteComment(vote, commentId, url) {
     });
 };
 
+function incBookDownload(bookId, url) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { bookId: bookId },
+        success: function() {
+        }
+    });
+};
+
 $('#quick-search').on('input', function () {
     var search = $(this).val();
 
