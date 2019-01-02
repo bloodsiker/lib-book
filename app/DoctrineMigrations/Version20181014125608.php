@@ -44,7 +44,7 @@ final class Version20181014125608 extends AbstractMigration
         $book->addColumn('download', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));
         $book->addColumn('views', 'integer', array('unsigned' => true, 'notnull' => false, 'default' => 0));
         $book->addColumn('created_at', 'datetime', array('notnull' => true));
-        $book->addColumn('updated_at', 'datetime', array('notnull' => true));
+        $book->addColumn('updated_at', 'datetime', array('notnull' => false));
         $book->setPrimaryKey(['id']);
         $book->addIndex(['series_id', 'image_id']);
         $book->addForeignKeyConstraint($schema->getTable('series'), ['series_id'], ['id'], ['onDelete' => 'set null']);

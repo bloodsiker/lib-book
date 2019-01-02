@@ -106,7 +106,7 @@ class BookAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'book.fields.created_at',
-                'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
+                'pattern' => 'dd MMMM yyyy, HH:mm',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -273,7 +273,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('updatedAt', DateTimePickerType::class, [
                     'label'     => 'book.fields.updated_at',
-                    'required' => true,
+                    'required' => false,
                     'format' => 'dd-MM-YYYY HH:mm',
                     'attr' => ['readonly' => true],
                 ])

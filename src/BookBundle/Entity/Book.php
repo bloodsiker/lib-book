@@ -197,7 +197,7 @@ class Book
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -212,7 +212,8 @@ class Book
         $this->views = 0;
         $this->ratePlus = 0;
         $this->rateMinus = 0;
-        $this->createdAt = new \DateTime('now');
+        $dateTime = new \DateTime('now');
+        $this->createdAt = $dateTime;
 
         $this->genres         = new ArrayCollection();
         $this->tags           = new ArrayCollection();
@@ -236,10 +237,6 @@ class Book
      */
     public function prePersist()
     {
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime('now');
-        }
-
         if (is_null($this->slug)) {
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->getName());
@@ -734,8 +731,6 @@ class Book
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     *
-     * @ORM\PrePersist
      *
      * @return Book
      */
