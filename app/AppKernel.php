@@ -33,10 +33,12 @@ class AppKernel extends Kernel
 
             // Sonata PageBundle ant it dependencies
             new Sonata\PageBundle\SonataPageBundle(),
-            new Sonata\SeoBundle\SonataSeoBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
             new Sonata\NotificationBundle\SonataNotificationBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+
+            // Sonata Seo bundle
+            new Sonata\SeoBundle\SonataSeoBundle(),
 
             // Sonata UserBundle and it dependencies
             new FOS\UserBundle\FOSUserBundle(),

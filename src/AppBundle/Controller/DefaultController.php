@@ -19,6 +19,18 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+//        $metaTitle = $this->get('translator')->trans('app.frontend.meta.meta_title_index', ['%YEAR%' => date("Y")], 'AppBundle');
+//        $metaDescription = $this->get('translator')->trans('app.frontend.meta.meta_description_index', ['%YEAR%' => date("Y")], 'AppBundle');
+//        $metaKeywords = $this->get('translator')->trans('app.frontend.meta.meta_keywords_index', ['%YEAR%' => date("Y")], 'AppBundle');
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Topbook',
+            'description' => 'Description',
+            'keywords' => 'Keywords',
+            'og' => [
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
         return new Response();
     }
 

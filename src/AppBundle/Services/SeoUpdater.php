@@ -104,30 +104,17 @@ class SeoUpdater
      */
     public function doMagic($object = null, array $params = [])
     {
-        $locale = $this->getRequest()->getLocale();
         $this->currentPage = $this->pageSelector->retrieve()->getCurrentPage();
 
         if (!$this->currentPage) {
             return;
         }
 
-        $this->currentPage->setcurrentLocale($locale);
-
         $customRouteParams = $params['custom_route_params'] ?? [];
         switch (true) {
             /** @var Article $object */
             case ($object instanceof Article):
                 $this->updateArticleMetadata($object, $params);
-                break;
-            /** @var Dossier $object */
-            case ($object instanceof Dossier):
-                $this->updateDossierMetadata($object, $params);
-                break;
-            case ($object instanceof ArticleCategory):
-                $this->updateArticleCategoryMetadata($object, $params);
-                break;
-            case ($object instanceof ArticleSpectopic):
-                $this->updateArticleSpectopicMetadata($object, $params);
                 break;
             default:
                 $this->updateGeneralMetadata($params);
@@ -136,8 +123,6 @@ class SeoUpdater
         $request = $this->requestStack->getCurrentRequest();
         $defaultOgImage = $request->getSchemeAndHttpHost().$this->defaultOgImageSrc;
 
-
-        $this->setLangAlternate($customRouteParams);
         $this->setOpenGraph($params, $defaultOgImage);
         $this->setCanonicalUrl($params, $customRouteParams);
         $this->setOtherMeta($params);
@@ -180,14 +165,6 @@ class SeoUpdater
     public function getAllMeta()
     {
         return $this->seoPage->getMetas();
-    }
-
-    /**
-     * @param array $variables
-     */
-    public function setShortcodeVariables(array $variables)
-    {
-        $this->shortcodeVariable = $variables;
     }
 
     /**
@@ -364,209 +341,6 @@ class SeoUpdater
     }
 
     /**
-     * @param Dossier $dossier
-     * @param array   $params
-     *
-     * @throws \Throwable
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    private function updateDossierMetadata(Dossier $dossier, array &$params = [])
-    {
-        // если Meta Title задан из админки: выводим то что задано
-        if ($title = $dossier->getMetaTitle()) {
-            $title = $this->prepareShortcdeStr($title);
-            $title = $this->shortcode->renderShortcodes($title);
-            $this->seoPage->setTitle($title);
-        } elseif (isset($params['title'])) {
-            $this->seoPage->setTitle($params['title']);
-        } else {
-            $header = strip_tags($dossier->getHeader());
-            $header = explode(".", $header);
-            $title = $this->translator->trans('frontend.meta_title_text', ['%TITLE%' => $dossier->getTitle()], 'DossierBundle').' '.$header[0];
-            $this->seoPage->setTitle($title);
-        }
-
-        if ($description = $dossier->getMetaDescription()) {
-            $description = $this->prepareShortcdeStr($description);
-            $description = $this->shortcode->renderShortcodes($description);
-            $this->seoPage->addMeta('name', 'description', $description);
-        } elseif (isset($params['description'])) {
-            $this->seoPage->addMeta('name', 'description', $params['description']);
-        } else {
-            $description = $dossier->getTitle().': '.$this->translator->trans('frontend.meta_description_text', [], 'DossierBundle').' '.$dossier->getTitle();
-            $this->seoPage->addMeta('name', 'description', $description);
-        }
-
-        if ($keywords = $dossier->getMetaKeywords()) {
-            $keywords = $this->prepareShortcdeStr($keywords);
-            $keywords = $this->shortcode->renderShortcodes($keywords);
-            $this->seoPage->addMeta('name', 'keywords', $keywords);
-        } elseif (isset($params['keywords'])) {
-            $this->seoPage->addMeta('name', 'keywords', $params['keywords']);
-        } else {
-            $keywords = explode(" ", $dossier->getTitle());
-            $this->seoPage->addMeta('name', 'keywords', $keywords[0].', '.$dossier->getTitle().', '.$this->translator->trans('frontend.meta_keywords', [], 'DossierBundle').' '.$keywords[0]);
-        }
-
-        $ogImage = null;
-        if ($dossier->getImage()) {
-            $ogImage = $this->imagineHelper->getActualImage($dossier->getImage(), 'image_610x343', ['main_new', 'main']);
-            if ($ogImage) {
-                try {
-                    $ogImageSize = getimagesize($ogImage);
-                    $params['og']['og:image:width'] = $ogImageSize[0];
-                    $params['og']['og:image:height'] = $ogImageSize[1];
-                } catch (\Exception $exception) {
-
-                }
-
-                $customMetaTags = $this->saveStateService->getValue('custom_meta_tags') ?: [];
-                $customMetaTags[] = '<link rel="image_src" href="'.$ogImage.'" />';
-                $this->saveStateService->setValue('custom_meta_tags', $customMetaTags);
-            }
-        }
-        if (!$ogImage) {
-            $ogImage = $this->defaultOgImageSrc;
-            $params['og']['og:image:width'] = 200;
-            $params['og']['og:image:height'] = 200;
-        }
-
-        $params['og']['og:image'] = $ogImage;
-        $this->seoPage->addMeta('name', 'twitter:image', $ogImage);
-    }
-
-    /**
-     * @param ArticleCategory $category
-     * @param array           $params
-     *
-     * @throws \Throwable
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    private function updateArticleCategoryMetadata(ArticleCategory $category, array &$params = [])
-    {
-        if (($title = $category->getTitleOf()) && isset($params['archive_date']) && $params['archive_date']) {
-            $title .= ' '.$this->translator->trans('front.seo.by', [], 'ArticleBundle').' '.$params['archive_date']->format('d').' '.$this->translator->trans('article.calendar.months_ch.'.($params['archive_date']->format('n') - 1), [], 'ArticleBundle').' '.$params['archive_date']->format('Y').' '.$this->translator->trans('front.seo.by_year', [], 'ArticleBundle');
-
-            $this->seoPage->setTitle($title);
-        } elseif ($title = $category->getMetaTitle()) {
-            $title = $this->prepareShortcdeStr($title);
-            $title = $this->shortcode->renderShortcodes($title);
-            if (isset($params['archive_date']) && $params['archive_date']) {
-                $title .= ' | '.$this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y');
-            }
-            if (isset($params['page_number']) && $params['page_number']) {
-                $title .= ' - '.$this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'];
-            }
-            $this->seoPage->setTitle($title);
-        } elseif ($title = $category->getTitle()) {
-            $title .= ' | '.$this->translator->trans('app.frontend.meta.sitename', [], 'AppBundle');
-            if (isset($params['archive_date']) && $params['archive_date']) {
-                $title .= ' | '.$this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y');
-            }
-            if (isset($params['page_number']) && $params['page_number']) {
-                $title .= ' - '.$this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'];
-            }
-
-            $this->seoPage->setTitle($title);
-        }
-
-        if (($description = $category->getTitleOf()) && isset($params['archive_date']) && $params['archive_date']) {
-            $description = $this->translator->trans('front.seo.read_all', [], 'ArticleBundle').' '.lcfirst($description).' '.$this->translator->trans('front.seo.by', [], 'ArticleBundle').' '.$params['archive_date']->format('d').' '.$this->translator->trans('article.calendar.months_ch.'.($params['archive_date']->format('n') - 1), [], 'ArticleBundle').' '.$params['archive_date']->format('Y').' '.$this->translator->trans('front.seo.by_year_full', [], 'ArticleBundle');
-
-            $this->seoPage->addMeta('name', 'description', $description);
-        } elseif ($metaDescription = $category->getMetaDescription()) {
-            $description = '';
-            if (isset($params['page_number']) && $params['page_number']) {
-                $description .= $this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'].' | ';
-            }
-            if (isset($params['archive_date']) && $params['archive_date']) {
-                $description .= $this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y').'. ';
-            }
-            $description .= $metaDescription;
-            $description = $this->prepareShortcdeStr($description);
-            $description = $this->shortcode->renderShortcodes($description);
-            $this->seoPage->addMeta('name', 'description', $description);
-        } else {
-            $description = '';
-            if (isset($params['page_number']) && $params['page_number']) {
-                $description .= $this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'].' | ';
-            }
-            if (isset($params['archive_date']) && $params['archive_date']) {
-                $description .= $this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y').'. ';
-            }
-            $description .= $this->translator->trans('app.frontend.meta.description', [], 'AppBundle');
-
-            $this->seoPage->addMeta('name', 'description', $description);
-        }
-
-        if (($title = $category->getTitleOf()) && isset($params['archive_date']) && $params['archive_date']) {
-            $keywords = $this->translator->trans('front.seo.news', [], 'ArticleBundle').', '.$category->getTitle().', '.lcfirst($title).', '.lcfirst($title).' '.$this->translator->trans('article.calendar.month.'.($params['archive_date']->format('n') - 1), [], 'ArticleBundle').', '.lcfirst($title).' '.$params['archive_date']->format('Y').', '.lcfirst($title).' '.$this->translator->trans('front.seo.by', [], 'ArticleBundle').' '.$params['archive_date']->format('d').' '.$this->translator->trans('article.calendar.months_ch.'.($params['archive_date']->format('n') - 1), [], 'ArticleBundle').' '.$params['archive_date']->format('Y');
-
-            $this->seoPage->addMeta('name', 'keywords', $keywords);
-        } elseif ($keywords = $category->getMetaKeywords()) {
-            $keywords = $this->prepareShortcdeStr($keywords);
-            $keywords = $this->shortcode->renderShortcodes($keywords);
-            $this->seoPage->addMeta('name', 'keywords', $keywords);
-        } else {
-            $this->seoPage->addMeta('name', 'keywords', $keywords.$this->translator->trans('app.frontend.meta.keywords', [], 'AppBundle'));
-        }
-
-        if ($this->getRequest()->get('skin') === 'lifestyle') {
-            $ogImage = $this->defaultOgImageSrcLifestyle;
-        } else {
-            $ogImage = $this->defaultOgImageSrc;
-        }
-        $params['og']['og:image:width'] = 200;
-        $params['og']['og:image:height'] = 200;
-        $params['og']['og:image'] = $ogImage;
-
-        $this->seoPage->addMeta('name', 'twitter:image', $ogImage);
-    }
-
-    /**
-     * @param ArticleSpectopic $spectopic
-     * @param array            $params
-     */
-    private function updateArticleSpectopicMetadata(ArticleSpectopic $spectopic, array &$params = [])
-    {
-        $metaTitle = $spectopic->getMetaTitle() ?: $spectopic->getTitle().' | '.$this->translator->trans('app.frontend.meta.sitename', [], 'AppBundle');
-        if (isset($params['page_number']) && $params['page_number']) {
-            $metaTitle .= ' - '.$this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'];
-        }
-        if (isset($params['archive_date']) && $params['archive_date']) {
-            $metaTitle .= ' | '.$this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y');
-        }
-        $this->seoPage->setTitle($metaTitle);
-
-        $metaDescription = $spectopic->getMetaDescription() ?: $this->translator->trans('front.spectopic.meta_description_text_alternate', [], 'ArticleBundle').': '.$spectopic->getTitle();
-        if (isset($params['page_number']) && $params['page_number']) {
-            $metaDescription .= $this->translator->trans('app.pager.page', [], 'AppBundle').' '.$params['page_number'].' | ';
-        }
-        if (isset($params['archive_date']) && $params['archive_date']) {
-            $metaDescription .= '. '.$this->translator->trans('front.seo.news_by_date', [], 'ArticleBundle').' '.$params['archive_date']->format('d.m.Y');
-        }
-        $this->seoPage->addMeta('name', 'description', $metaDescription);
-
-        $metaKeywords = $spectopic->getMetaKeywords() ?: $this->translator->trans('front.spectopic.meta_keywords_text', [], 'ArticleBundle');
-        $this->seoPage->addMeta('name', 'keywords', $metaKeywords);
-
-        if ($this->getRequest()->get('skin') === 'lifestyle') {
-            $ogImage = $this->defaultOgImageSrcLifestyle;
-        } else {
-            $ogImage = $this->defaultOgImageSrc;
-        }
-        $params['og']['og:image:width'] = 200;
-        $params['og']['og:image:height'] = 200;
-        $params['og']['og:image'] = $ogImage;
-
-        $this->seoPage->addMeta('name', 'twitter:image', $ogImage);
-    }
-
-    /**
      * @param array  $params
      * @param string $defaultOgImage
      */
@@ -645,22 +419,6 @@ class SeoUpdater
         }
 
         return $subject;
-    }
-
-    /**
-     * add language alternate in SeoPage for all Locales
-     *
-     * @param array $customRouteParams
-     */
-    private function setLangAlternate($customRouteParams = [])
-    {
-        $request = $this->getRequest();
-        $routeParams = $this->prepareRouteParams($request->attributes->all());
-        $routeParams = array_merge($routeParams, $customRouteParams);
-        foreach ($this->getLocales() as $locale) {
-            $url = $this->generateUrlByRoute($request->attributes->get('_route'), $routeParams, $locale);
-            $this->seoPage->addLangAlternate($url, str_replace('ua', 'uk', $locale));
-        }
     }
 
     /**
