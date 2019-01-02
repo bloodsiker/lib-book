@@ -162,7 +162,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .actors-items {padding:0px 15px;}
 
 /* Navigation */
-.pagination {line-height:40px; margin:20px 0 40px 0; text-align:center; font-size:12px;}
+.pagination {line-height:40px; margin:20px 0 40px 0; text-align:center; font-size:12px; width: 100%}
 .pagination > span {display:inline-block;}
 .pagination-prev, .pagination-next {text-align:center; color:#444; width:80px; border-radius:3px; background-color:#fff; box-shadow:0px 1px 3px rgba(0, 0, 0, 0.13);}
 .pagination-next a, .pagination-prev a {color:#444; display:block;}
@@ -396,7 +396,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .m-desc {}
 .m-info .mi-item {padding:7px 5px;}
 .m-info .mi-item:nth-child(2n+1) {background-color:#f6f6f6;}
-.m-info .mi-item span {width:90px; display: inline-block; text-transform:none;}
+.m-info .mi-item span {width:105px; display: inline-block; text-transform:none;}
 .mi-item i {font-weight:400; margin-right:7px; color:#fed718;}
 .long span {width:100% !important; margin-bottom:5px;}
 .book-file {display: flex; flex-flow: row wrap; justify-content: center; padding: 20px 0}
