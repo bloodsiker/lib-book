@@ -70,6 +70,7 @@ sonata_admin:
                     - sonata.page.admin.page
                     - sonata.page.admin.site
                     - sonata.page.admin.site_variables
+                    - sonata.page.admin.site_variables_placement
 
         blocks:
              - { position: center, type: sonata.admin.block.admin_list }

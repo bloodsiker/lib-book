@@ -9,3 +9,14 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, ['SonataPageBundle'] ]
+
+    sonata.page.admin.site_variables_placement:
+        class: "PageBundle\\Admin\\SiteVariablePlacementAdmin"
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'sonata_page', label: 'sonata_page.site_variables_placement_editor' }
+        arguments:
+            - ~
+            - "PageBundle\\Entity\\SiteVariablePlacement"
+            - ~
+        calls:
+            - [ setTranslationDomain, ['SonataPageBundle'] ]

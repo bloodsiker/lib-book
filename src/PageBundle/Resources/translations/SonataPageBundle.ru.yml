@@ -152,13 +152,6 @@ form:
     label_help: Описание редиректа
     label_page_host: Host
 
-    types:
-        full: Полное совпадение
-        segment: Сегмент
-        regex: Регулярное выражение
-        locale: Локаль
-        starts_with: Начинается с
-
     validation:
         regexp: 'Разрешенные символы: %rule%'
 

@@ -3,14 +3,13 @@
 namespace PageBundle\Admin;
 
 use AdminBundle\Form\Type\CodeMirrorType;
-use PageBundle\Entity\SiteVariable;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Class SiteVariableAdmin
@@ -88,10 +87,11 @@ class SiteVariableAdmin extends AbstractAdmin
                 ])
             ->end()
             ->with('site_variable_form_group.advanced', ['class' => 'col-md-4', 'label' => false])
-                ->add('placement', ChoiceType::class, [
+                ->add('placement', ModelType::class, [
                     'label' => 'form.label_placement',
+                    'translation_domain' => 'SonataPageBundle',
                     'required' => true,
-                    'choices'  => array_flip(SiteVariable::getVariablePosition()),
+                    'btn_add' => false,
                 ])
                 ->add('isActive', CheckboxType::class, [
                     'label' => 'form.label_active',

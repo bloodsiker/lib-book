@@ -7,18 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class SiteVariable
  *
- * @ORM\Entity();
+ * @ORM\Entity(repositoryClass="PageBundle\Entity\SiteVariableRepository");
  * @ORM\Table(name="page_site_variable")
- * })
  * @ORM\HasLifecycleCallbacks
  */
 class SiteVariable
 {
-    const HEAD           = 1;
-    const BODY_BEGIN     = 2;
-    const BODY_END       = 3;
-    const FOOTER_COUNTER = 4;
-
     /**
      * @var int
      *
@@ -38,7 +32,8 @@ class SiteVariable
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", length=3, nullable=true)
+     * @ORM\ManyToOne(targetEntity="PageBundle\Entity\SiteVariablePlacement")
+     * @ORM\JoinColumn(name="placement_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $placement;
 
@@ -244,23 +239,10 @@ class SiteVariable
      *
      * @return $this
      */
-    public function setPlacement(int $placement)
+    public function setPlacement($placement)
     {
         $this->placement = $placement;
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getVariablePosition()
-    {
-        return [
-            self::HEAD           => 'head',
-            self::BODY_BEGIN     => 'body-begin',
-            self::BODY_END       => 'body-end',
-            self::FOOTER_COUNTER => 'footer-counters',
-        ];
     }
 }

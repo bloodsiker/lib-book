@@ -76,11 +76,9 @@ class SiteVariableBlockService extends AbstractAdminBlockService
             return new Response();
         }
 
-        $variableList = array_flip(SiteVariable::getVariablePosition());
-
         $variables = $this->doctrine
             ->getRepository(SiteVariable::class)
-            ->findBy(['placement' => $variableList[$blockContext->getSetting('placement')]]);
+            ->findVariables($blockContext->getSetting('placement'));
 
         return $this->renderResponse($blockContext->getTemplate(), [
             'variables' => $variables,
