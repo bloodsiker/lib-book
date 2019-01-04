@@ -369,7 +369,7 @@ class SeoUpdater
                 $routeParams['page'] = null;
             }
             if ($route = $request->attributes->get('_route')) {
-                $url = $this->generateUrlByRoute($route, $routeParams, $request->attributes->get('_locale'));
+                $url = $this->generateUrlByRoute($route, $routeParams);
                 if ($showCanonicalUrl) {
                     $this->seoPage->setLinkCanonical($url);
                 }
@@ -430,14 +430,11 @@ class SeoUpdater
     /**
      * @param string $route
      * @param array  $routeParams
-     * @param string $locale
      *
      * @return string
      */
-    private function generateUrlByRoute($route, array $routeParams, $locale = null)
+    private function generateUrlByRoute($route, array $routeParams)
     {
-        $routeParams['_locale'] = $locale ?: $this->getRequest()->getLocale();
-
         return $this->router->generate($route, $routeParams, UrlGenerator::ABSOLUTE_URL);
     }
 

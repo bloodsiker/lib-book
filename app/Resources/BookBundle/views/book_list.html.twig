@@ -2,8 +2,7 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            {% set countBook = series.getBooks().count() %}
-            <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
+            <h2>Новые книги</h2>
         </div>
 
         <div class="movies clearfix grid grid-list">
@@ -12,9 +11,8 @@
             sonata_block_render(
                 { 'type': 'book.block.list' },
                 {
-                    'items_count' : 20,
-                    'page': app.request.get('page') ? app.request.get('page') : 1,
-                    'series': series,
+                    'items_count' : 15,
+                    'page': app.request.get('page') ? app.request.get('page') : 1
                 }
             )
             }}
