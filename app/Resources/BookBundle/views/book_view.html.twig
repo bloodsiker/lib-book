@@ -80,51 +80,26 @@
                         <div class="but to-view"><i class="fa fa-arrow-down"></i> Скачать</div>
                     </div>
 
+                    {% if book.bookHasRelated|length > 2 %}
+                        <div class="section related">
+                            <div class="section-title"><h2>Похожие книги:</h2></div>
+                            <div class="rel-box" id="owl-rel">
+                                {% for relate in book.bookHasRelated %}
+                                    <a class="rel-book img-box"
+                                       href="{{ path('book_view', { 'id': relate.relatedBook.id, 'slug': relate.relatedBook.slug }) }}">
+                                        <img data-src="{{ asset(relate.relatedBook.poster.path) }}"
+                                             alt="Если один уйдет" class="lazyOwl"/>
+                                        <div class="rel-book-title">{{ relate.relatedBook.name }}</div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
                 </div>
 
             </div>
 
-            <div class="section related">
-                <div class="section-title"><h2>Похожие книги:</h2></div>
-                <div class="rel-box" id="owl-rel">
-                    <a class="rel-book img-box"
-                       href="https://knigolub.net/romance-fiction/605-esli-odin-uydet.html">
-                        <img data-src="1539940783_marina-efiminiuk_pervaia-nevesta-chiernoknizhnika.jpg"
-                             alt="Если один уйдет" class="lazyOwl"/>
-                        <div class="rel-book-title">Если один уйдет</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/science-fiction/290-devchonka-s-iznanki-aprel.html">
-                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
-                             alt="Девчонка с изнанки. Апрель" class="lazyOwl"/>
-                        <div class="rel-book-title">Девчонка с изнанки. Апрель</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/romance-fiction/273-opasaysya-dvernyh-ruchek.html">
-                        <img data-src="1540378357_svobodina_naslednitsa_proklyatogo_mira.jpg"
-                             alt="Опасайся дверных ручек" class="lazyOwl"/>
-                        <div class="rel-book-title">Опасайся дверных ручек</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/fantasy/266-hozyayka-logova.html">
-                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
-                             alt="Хозяйка «Логова»" class="lazyOwl"/>
-                        <div class="rel-book-title">Хозяйка «Логова»</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/space-fantasy/206-poteryatsya-sredi-zvezd-chtob-nayti-tebya.html">
-                        <img data-src="1543582139_zinina_karilskiy_tsikl_9_bastard_korolevskoy_krovi_kniga_2.jpg"
-                             alt="Потеряться среди звезд, чтоб найти тебя!" class="lazyOwl"/>
-                        <div class="rel-book-title">Потеряться среди звезд, чтоб</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/cyberpunk/161-stremlenie-k-zvezdam.html">
-                        <img data-src="1541869831_kvin_1-plohaya-primeta-ili-za-muzhem-ne-propast.jpg"
-                             alt="Стремление к звездам" class="lazyOwl"/>
-                        <div class="rel-book-title">Стремление к звездам</div>
-                    </a><a class="rel-book img-box"
-                           href="https://knigolub.net/detective-fiction/67-lgunya.html">
-                        <img data-src="1541773248_gron_olga_gravitatsiya_mejdu_nami.jpg"
-                             alt="Лгунья" class="lazyOwl"/>
-                        <div class="rel-book-title">Лгунья</div>
-                    </a>
-                </div>
-            </div>
 
             <div class="download-section">
 

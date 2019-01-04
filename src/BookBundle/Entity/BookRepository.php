@@ -22,7 +22,7 @@ class BookRepository extends EntityRepository
         $qb = $this->createQueryBuilder('b');
         $qb
             ->where('b.isActive = 1')
-            ->orderBy('b.createdAt', 'DESC')
+            ->orderBy('b.id', 'DESC')
         ;
 
         return $qb;

@@ -201,7 +201,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .book-desc {background-color:#f7f7f7; color:#5c5c5c; border-radius:3px; box-shadow:inset 0 0 0 1px #e3e3e3;
     padding:15px; line-height:18px; margin:15px 0;}
 .book-text .mi-item {padding:0; margin-top:5px;}
-.mi-item span {font-weight:700; display:inline-block; width:130px;}
+.mi-item span {font-weight:700; display:inline-block; width:100px;}
 .mi-item a {display: inline-block; text-decoration:underline; color:#5c5c5c;}
 .mi-item a:hover {text-decoration:none;}
 .book-stats {display: flex; flex-flow: wrap row; margin: 12px 0 14px;}
@@ -396,7 +396,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .m-desc {}
 .m-info .mi-item {padding:7px 5px;}
 .m-info .mi-item:nth-child(2n+1) {background-color:#f6f6f6;}
-.m-info .mi-item span {width:105px; display: inline-block; text-transform:none;}
+.m-info .mi-item span {width:107px; display: inline-block; text-transform:none;}
 .mi-item i {font-weight:400; margin-right:7px; color:#fed718;}
 .long span {width:100% !important; margin-bottom:5px;}
 .book-file {display: flex; flex-flow: row wrap; justify-content: center; padding: 20px 0}

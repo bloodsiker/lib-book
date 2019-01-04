@@ -88,10 +88,15 @@ class BookController extends Controller
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => $book->getName().' - '.$authors.' -  скачать книгу в fb2, epub, pdf, txt | "Тоббук" - социальная сеть любителей книг',
-            'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
+            'description' => mb_substr($book->getDescription(), 0, 150),
             'keywords' => $book->getName().', '.$authors.', скачать книги, отзывы на книги, краткое содержание',
             'og' => [
+                'og:site_name' => 'Topbook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
+                'og:type' => 'article',
+                'og:title' => $book->getName(),
                 'og:url' => $request->getSchemeAndHttpHost(),
+                'og:image' => $request->getSchemeAndHttpHost().$book->getPoster()->getPath(),
+                'og:description' => mb_substr($book->getDescription(), 0, 150),
             ],
         ]);
 

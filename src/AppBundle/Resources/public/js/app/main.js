@@ -247,7 +247,7 @@ $(document).ready(function(){
         slideSpeed : 300,
         paginationSpeed : 400,
         singleItem:false,
-        itemsCustom: [[0, 2], [470, 3], [590, 4], [760, 4], [950, 4], [1220, 6]],
+        itemsCustom: [[0, 2], [470, 3], [590, 4], [760, 4], [950, 3], [1220,4]],
         autoPlay:false,
         pagination: false,
         lazyLoad : true
