@@ -400,7 +400,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .mi-item i {font-weight:400; margin-right:7px; color:#fed718;}
 .long span {width:100% !important; margin-bottom:5px;}
 .book-file {display: flex; flex-flow: row wrap; justify-content: center; padding: 20px 0}
-.book-file > .block > span > a {background: #414141; color: #fff; padding: 15px 30px; margin: 0 5px; line-height: 1.4; text-align: center;
+.book-file > .block > span > a {background: #414141; color: #fff; padding: 15px 20px; margin: 0 5px; line-height: 1.4; text-align: center;
     white-space: nowrap; vertical-align: middle;}
 
 .screens-section {text-align:center; margin:-5px -8px 15px -8px;}
