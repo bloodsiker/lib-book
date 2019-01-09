@@ -75,11 +75,12 @@ class GenreController extends Controller
                 'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
             ]);
             $breadcrumb->addBreadcrumb(['title' => $subGenre->getName()]);
+            $titleGenre = 'Жанр '.$subGenre->getName();
         } else {
             $breadcrumb->addBreadcrumb(['title' => $genre->getName()]);
+            $titleGenre = 'Жанр '.$genre->getName();
         }
 
-        $titleGenre = 'Жанр '.$subGenre ? $subGenre->getName() : $genre->getName();
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => $titleGenre.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
             'description' => 'Скачать бесплатно книги без регистрации '.$titleGenre,
