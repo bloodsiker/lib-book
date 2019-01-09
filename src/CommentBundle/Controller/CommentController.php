@@ -27,6 +27,15 @@ class CommentController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Последние комментарии']);
 
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Комментарии | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
+            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
         return $this->render('CommentBundle::last_comments_list.html.twig');
     }
 

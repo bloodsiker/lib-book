@@ -27,6 +27,18 @@ class GenreController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Жанры']);
 
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Все жанры | ТопБук',
+            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:site_name' => 'TopBook.com.ua - электронная библиотека',
+                'og:type' => 'website',
+                'og:title' => 'Все жанры | ТопБук',
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
         return $this->render('GenreBundle::genre_list.html.twig');
     }
 
@@ -66,6 +78,19 @@ class GenreController extends Controller
         } else {
             $breadcrumb->addBreadcrumb(['title' => $genre->getName()]);
         }
+
+        $titleGenre = 'Жанр '.$subGenre ? $subGenre->getName() : $genre->getName();
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => $titleGenre.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+            'description' => 'Скачать бесплатно книги без регистрации '.$titleGenre,
+            'keywords' => $titleGenre.'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:site_name' => 'TopBook.com.ua - электронная библиотека',
+                'og:type' => 'website',
+                'og:title' => $titleGenre.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
 
         return $this->render('GenreBundle::book_list.html.twig', [
             'genre' => $genre,

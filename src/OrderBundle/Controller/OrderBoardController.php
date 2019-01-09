@@ -33,6 +33,18 @@ class OrderBoardController extends Controller
             $breadcrumb->addBreadcrumb(['title' => $this->get('translator')->trans(OrderBoard::getNameStatus($request->get('status')), [], 'OrderBundle')]);
         }
 
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Стол заказов | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
+            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:site_name' => 'TopBook.com.ua - электронная библиотека',
+                'og:type' => 'website',
+                'og:title' => 'Стол заказов | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
         return $this->render('OrderBundle::orders_board_list.html.twig');
     }
 

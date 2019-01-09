@@ -33,7 +33,7 @@ class BookController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Новинки книг']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Последние новинки книг в библиотеке "Топбук"',
+            'title' => 'Последние новинки книг в библиотеке "ТопБук"',
             'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
@@ -87,11 +87,11 @@ class BookController extends Controller
         $authors = mb_substr($authors, 0, -2);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $book->getName().' - '.$authors.' -  скачать книгу в fb2, epub, pdf, txt | "Тоббук" - социальная сеть любителей книг',
+            'title' => $book->getName().' - '.$authors.' -  скачать книгу без регистрации в fb2, epub, pdf, txt | "ТопБук" - социальная сеть любителей книг',
             'description' => mb_substr($book->getDescription(), 0, 150),
-            'keywords' => $book->getName().', '.$authors.', скачать книги, отзывы на книги, краткое содержание',
+            'keywords' => $book->getName().', '.$authors.', скачать книги, отзывы на книги, краткое содержание, без регистрации',
             'og' => [
-                'og:site_name' => 'Topbook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
+                'og:site_name' => 'TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
                 'og:type' => 'article',
                 'og:title' => $book->getName(),
                 'og:url' => $request->getSchemeAndHttpHost(),
@@ -133,9 +133,9 @@ class BookController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $year.' год']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Книги за '.$year.' год | "Тоббук" - социальная сеть любителей книг',
+            'title' => 'Книги за '.$year.' год | "ТопБук" - социальная сеть любителей книг',
             'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
-            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
+            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
