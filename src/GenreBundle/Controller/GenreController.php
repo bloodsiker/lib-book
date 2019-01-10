@@ -84,7 +84,7 @@ class GenreController extends Controller
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => $titleGenre.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
             'description' => 'Скачать бесплатно книги без регистрации '.$titleGenre,
-            'keywords' => $titleGenre.'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'keywords' => $titleGenre.', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',

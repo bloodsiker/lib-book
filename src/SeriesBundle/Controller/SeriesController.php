@@ -27,6 +27,18 @@ class SeriesController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Серии']);
 
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Все серии | ТопБук',
+            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:site_name' => 'TopBook.com.ua - электронная библиотека',
+                'og:type' => 'website',
+                'og:title' => 'Все серии | ТопБук',
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
         return $this->render('SeriesBundle::series_list.html.twig');
     }
 
@@ -50,6 +62,19 @@ class SeriesController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Серии', 'href' => $router->generate('series_list')]);
         $breadcrumb->addBreadcrumb(['title' => 'Серия "'.$series->getTitle().'"']);
+
+        $titleSeries = 'Серия '.$series->getTitle();
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+            'description' => 'Скачать бесплатно книги без регистрации ',
+            'keywords' => $series->getTitle().', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'og' => [
+                'og:site_name' => 'TopBook.com.ua - электронная библиотека',
+                'og:type' => 'website',
+                'og:title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
 
         return $this->render('SeriesBundle::series_books.html.twig', ['series' => $series]);
     }
