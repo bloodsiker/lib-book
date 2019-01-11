@@ -756,6 +756,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 @media screen and (max-width: 950px) {
     .center {max-width:768px;}
+    .col-cont{width: 100%}
     .top-nav, .section-actors {background-image:none; background: linear-gradient(to left, #647589 0%,#2d5972 100%);}
     .cols {padding:15px 0; overflow:hidden;}
     .col-side {width:320px; margin-left:-320px; padding:0 5px; display:none;}
@@ -783,11 +784,15 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .filter-header {border-radius:0 !important;}
 
     .rate3 {width:100%; margin-top:10px; text-align:center;}
+
+    .form > .inputs input{width: 85%;}
+    .form > .inputs button{ width: 15%;}
 }
 
 @media screen and (max-width: 760px) {
     .genres-list {column-count: 2; margin-top: 25px;}
     .center {max-width:640px;}
+    .col-cont{width: 100%}
     .have-brand .wrap {margin-top:0;}
     .have-brand .brand-link {display:none;}
     .head {height:110px;padding:10px 15px;}
@@ -827,10 +832,14 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
     .rates {display:block; text-align:center; padding-bottom:0;}
     .rates > div {margin:0 0 10px 0;}
+
+    .form > .inputs input{width: 80%;}
+    .form > .inputs button{ width: 20%;}
 }
 
 @media screen and (max-width: 590px) {
     .center {max-width:480px;}
+    .col-cont{width: 100%}
     .genres-list {column-count: 1; margin-top: 25px;}
 
     .book-item {width:31.33%;}
@@ -855,11 +864,16 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     #dofullsearch, #searchsuggestions span.seperator {display:none !important;}
     .attach .download-link {margin:0 -15px 0 0; float:none; display:block; padding:0 10px;}
     .attach-info {float:none;}
+
+    .form > .inputs input{width: 75%;}
+    .form > .inputs button{ width: 25%;}
+    .author-filter li {display: inline-block; margin: 0 5px 20px 0}
 }
 
 @media screen and (max-width: 470px) {
     .genres-list {column-count: 1; margin-top: 25px;}
     .center22 {max-width:320px;}
+    .col-cont{width: 100%}
     .top-nav-title h2 {display:none;}
     .section-title h2, .section-title h1 {font-size:14px;}
 
@@ -885,6 +899,10 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .comm-author, .comm-date {margin:0; display:block; float:none;}
     .comm-date {display:none;}
     .login-social:before {display:block; line-height:30px; margin-right:0;}
+
+    .form > .inputs input{width: 75%;}
+    .form > .inputs button{ width: 25%;}
+    .author-filter li {display: inline-block; margin: 0 5px 20px 0}
 }
 
 
