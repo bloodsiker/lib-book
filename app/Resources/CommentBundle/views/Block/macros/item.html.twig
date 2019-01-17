@@ -3,18 +3,23 @@
         <div class="comm-container">
             {% if show_title %}
                 <div class="comm-link">
-                    <span>Комментарий к книге: </span>
                     <a href="{{ path('book_view', { 'slug': comment.book.slug, 'id': comment.book.id }) }}">{{ comment.book.name }}</a>
                 </div>
             {% endif %}
             <div class="comm-item">
                 <div class="comm-left">
-                    <img src="{{ comment.user ? comment.user.id : asset('public/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : 'Гость '~comment.userName }}"/>
+                    {% if show_title %}
+                        <a href="{{ path('book_view', { 'slug': comment.book.slug, 'id': comment.book.id }) }}">
+                            <img src="{{ asset(comment.book.poster.path) }}" alt="{{ comment.book.name }}">
+                        </a>
+                    {% else %}
+                        <img src="{{ comment.user ? comment.user.id : asset('public/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : comment.userName }}"/>
+                    {% endif %}
                 </div>
                 <div class="comm-right">
                     <div class="comm-top-info clearfix">
                         <div class="comm-info-line">
-                            <div class="comm-author">{{ comment.user ? comment.user.username : 'Гость '~comment.userName }}</div>
+                            <div class="comm-author">{{ comment.user ? comment.user.username : comment.userName }}</div>
                             <div class="comm-date">{{ comment.createdAt|date_time_humanize }}</div>
 
                             <div class="comm-rate {{ comment.rating == 0 ? null : comment.rating > 0 ? 'pos-comm' : 'neg-comm' }}">

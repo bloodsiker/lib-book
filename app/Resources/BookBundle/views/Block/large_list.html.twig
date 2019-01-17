@@ -53,9 +53,22 @@
                     </div>
                 {% endif %}
 
+                {% if book.series is not empty %}
+                    <div class="mi-item">
+                        <span>Серия:</span>
+                        <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
+                    </div>
+                {% endif %}
+
                 {% if book.pages is not empty %}
                     <div class="mi-item">
                         <span>Страниц:</span> {{ book.pages }}
+                    </div>
+                {% endif %}
+
+                {% if book.restrictAge is not empty %}
+                    <div class="mi-item">
+                        <span>Ограничение:</span> {{ book.restrictAge }}+
                     </div>
                 {% endif %}
 

@@ -73,7 +73,17 @@
                         }}
                     </div>
 
+                    {% if book.getTags is not empty %}
+                        <div class="book-tags">
+                            <strong><i class="fa fa-tags"></i> Теги: </strong>
+                            {% for tag in book.getTags %}
+                                <a href="{{ path('tag_list') }}">{{ tag.name }}</a>{{ loop.last ? '' : ' , ' }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
                     <div class="m-desc full-text slice-this" itemprop="description">
+                        <h2><strong>Описание книги</strong></h2>
                         {{ book.description|raw }}
                     </div>
                     <div class="m-buttons">
@@ -97,7 +107,6 @@
                     {% endif %}
 
                 </div>
-
             </div>
 
 

@@ -403,6 +403,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .book-file > .block > span > a {background: #414141; color: #fff; padding: 15px 20px; margin: 0 5px; line-height: 1.4; text-align: center;
     white-space: nowrap; vertical-align: middle;}
 
+.book-tags {margin-bottom: 15px}
+
 .screens-section {text-align:center; margin:-5px -8px 15px -8px;}
 .screens-section > .highslide, .screens-section > img {display:inline-block; width:22.8%; height:90px; overflow:hidden; margin:5px 1%;}
 .screens-section br {display:none;}
@@ -483,7 +485,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .download-drop img {margin:0; border:0; display:block;}
 .full-text a {text-decoration:underline;}
 .full-text a:hover {text-decoration:underline;}
-.full-text h2, .full-text h3, .full-text h4, .full-text h5 {color:#007ac2; font-style:italic; font-family:Georgia, "Times New Roman", Times, serif;}
+.full-text h2, .full-text h3, .full-text h4, .full-text h5 {color:#2a2a37; margin-bottom: 14px!important;}
 .full-text h2 {font-size:22px;}
 .full-text h3 {font-size:20px;}
 .full-text h4 {font-size:18px;}
@@ -881,7 +883,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .trailer-item {height:110px !important;}
     .grid-list .book-item {padding:0 0 30px 0;}
     .grid-list .book-img {margin:0 auto; float:none;}
-    .grid-list .book-text {float:none; padding-left:0; margin-top:10px;}
+    .grid-list .book-text {width:100% ;float:none; padding-left:0; margin-top:10px;}
     .grid-list .new-mark {left:0; top:0;}
     .actor-img {height:115px;}
     .short-actor {width:42%; margin:0 4% 30px 4%;}
