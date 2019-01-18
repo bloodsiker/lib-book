@@ -85,6 +85,8 @@ $('#quick-search').on('input', function () {
 
         var url = $(this).data('ajax-url');
 
+        $('.search-box').append('<span id="search-close" onclick="searchClear()"></span>');
+
         $.ajax({
             type: 'POST',
             url: url,
@@ -95,18 +97,31 @@ $('#quick-search').on('input', function () {
             }
         });
     } else {
+        removeElem('#search-close');
         $('.result-search').hide();
         $('.wrap').removeClass('bluer');
     }
 });
 
+function searchClear() {
+    removeElem('#search-close');
+    $('#quick-search').val('');
+    $('.result-search').show().html('');
+    $('.wrap').removeClass('bluer');
+};
+
 $(document).mouseup(function (e) {
     var container = $('.search-wrap');
     if (container.has(e.target).length === 0){
+        removeElem('#search-close');
         $('.wrap').removeClass('bluer');
         $('.result-search').html('').hide();
     }
 });
+
+function removeElem(element) {
+    $(element).remove();
+}
 
 function showAlert(text, type){
     var err = $('<div class="message '+ type +'">'+text+'</div>');

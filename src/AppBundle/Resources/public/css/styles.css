@@ -116,8 +116,10 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .search-box button {position:absolute; left:0; top:0; border-radius:0;
     padding:0; text-align:center; width:40px; height:40px; line-height:40px; color:#fed718; background-color:transparent;}
 .bluer {-webkit-filter: blur(3px); filter: blur(3px);}
+.search-box > #search-close {position: absolute; right: 8px; top: 5px; height: 30px; width: 30px; cursor: pointer}
+.search-box > #search-close:after {content: '\2718'; font-size: 28px; margin-left: 5px}
 .result-search {position: absolute; top: 41px; width: 100%; background: #f7f7f7; color: #5c5c5c; border-radius: 3px;
-    box-shadow: 0 0 1.6em rgba(0,0,0, 0.2); display: none}
+    box-shadow: 0 0 1.6em rgba(0,0,0, 0.2); display: none; z-index: 10;}
 .result-search > .search-item {display: flex; flex-flow: row wrap; padding: 10px; border-bottom: 1px solid #e3e3e3; margin-bottom: 10px;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1); background: linear-gradient(to top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0) 70px);}
 .result-search > .search-item:hover {color: #2a2a2a}
@@ -805,7 +807,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .to-top-link i {display:none;}
     .to-top-link span {margin:0;}
 
-    .book-img {height:180px;}
+    .grid-list .book-text {width: 74%}
+    .grid-list .book-img {width: 26%; height:270px;}
     .trailer-item {height:180px !important; width:48%; margin:0 1% 10px 1% !important;}
     .trailer-title {font-size:14px !important;}
     .trailer-item i {display:none;}
@@ -837,6 +840,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
     .form > .inputs input{width: 80%;}
     .form > .inputs button{ width: 20%;}
+    .search-box {width: 100%; margin-left: 98px;}
 }
 
 @media screen and (max-width: 590px) {
@@ -847,6 +851,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .book-item {width:31.33%;}
     .book-text-inner .mi-item, .book-text-inner .button {display:none !important}
     .grid-list .book-item {padding:0 0 30px 140px;}
+    .grid-list .book-text {width: 100%}
     .grid-list .book-img {width:140px; height:190px; margin-left:-140px;}
     .grid-list .book-desc {margin:12px 0 0 0;}
     .trailer-item {height:150px !important;}
@@ -870,6 +875,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .form > .inputs input{width: 75%;}
     .form > .inputs button{ width: 25%;}
     .author-filter li {display: inline-block; margin: 0 5px 20px 0}
+    .search-box {margin-left: 50px;}
 }
 
 @media screen and (max-width: 470px) {
@@ -905,6 +911,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .form > .inputs input{width: 75%;}
     .form > .inputs button{ width: 25%;}
     .author-filter li {display: inline-block; margin: 0 5px 20px 0}
+    .search-box {width: 85%; margin-left: 86px;}
 }
 
 
