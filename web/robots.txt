@@ -10,9 +10,5 @@ Disallow: /order-board/vote
 Disallow: /comment/vote
 Disallow: /inc_download/book
 
-#Sitemap: https://www.segodnya.ua/cache/sitemaps/index.xml.gz
-#Sitemap: https://www.segodnya.ua/xml/gnews_new.html
-#Sitemap: https://www.segodnya.ua/cache/sitemaps_video/index.xml.gz
-#Sitemap: https://www.segodnya.ua/cache/sitemaps/www_sitemap_latest.xml.gz
-
+Sitemap: http://topbook.com.ua/sitemap.xml
 Host: http://topbook.com.ua
