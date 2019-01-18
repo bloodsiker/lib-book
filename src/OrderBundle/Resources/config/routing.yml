@@ -14,4 +14,4 @@ order_board_status:
     defaults:
         _controller: OrderBundle:OrderBoard:list
     requirements:
-        type: "new|completed|cancel|top"
+        status: "new|completed|cancel|top"

@@ -14,6 +14,13 @@ search:
   defaults:
     _controller: AppBundle:Default:search
 
+sitemap:
+  path: /sitemap.{_format}
+  defaults:
+    _controller: AppBundle:Default:sitemap
+  requirements:
+    _format: "xml"
+
 block__ajax:
   path: /_block/ajax/{blockType}/{blockId}
   defaults:

@@ -776,8 +776,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .download-section {margin:0 -15px 20px -15px;}
     .tabs li {font-size:12px;}
 
-    .comm-item {padding:0 10px 15px 70px;}
-    .comm-right {padding-left:10px;}
+    .comm-item {padding:0 10px 15px 10px;}
     .comm-author, .comm-date {font-size:12px;}
     .ac-protect {width:75%;}
     .form-wrap {margin:0 -15px;}
@@ -791,6 +790,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
     .form > .inputs input{width: 85%;}
     .form > .inputs button{ width: 15%;}
+
+    .search-box {width: 80%; margin-left: 98px;}
 }
 
 @media screen and (max-width: 760px) {
@@ -878,9 +879,20 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .search-box {margin-left: 50px;}
 }
 
-@media screen and (max-width: 470px) {
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    .center {max-width:480px;}
+    .search-box {width: 66%; margin-left: 89px;}
+}
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
     .genres-list {column-count: 1; margin-top: 25px;}
-    .center22 {max-width:320px;}
+    .center {max-width:480px;}
     .col-cont{width: 100%}
     .top-nav-title h2 {display:none;}
     .section-title h2, .section-title h1 {font-size:14px;}
@@ -903,7 +915,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     {width: 100% !important; height:250px;}
     .ac-protect {margin:-10px -10px 0 -10px;}
     .comm-item {padding:0 10px 15px 50px;}
-    .comm-left {margin-left:-40px; width:40px; height:40px;}
+    .comm-left {margin-left:-40px; width:65px; padding: 0}
     .comm-author, .comm-date {margin:0; display:block; float:none;}
     .comm-date {display:none;}
     .login-social:before {display:block; line-height:30px; margin-right:0;}
@@ -911,7 +923,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .form > .inputs input{width: 75%;}
     .form > .inputs button{ width: 25%;}
     .author-filter li {display: inline-block; margin: 0 5px 20px 0}
-    .search-box {width: 85%; margin-left: 86px;}
+    .search-box {width: 66%; margin-left: 89px;}
 }
 
 

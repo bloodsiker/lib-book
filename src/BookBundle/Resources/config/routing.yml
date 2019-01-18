@@ -21,3 +21,5 @@ year_books:
     path: /year/{year}
     defaults:
         _controller: BookBundle:Book:yearList
+    requirements:
+        year: "\\d+"

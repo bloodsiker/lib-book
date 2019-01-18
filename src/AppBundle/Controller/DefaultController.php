@@ -3,6 +3,9 @@
 namespace AppBundle\Controller;
 
 use BookBundle\Entity\Book;
+use GenreBundle\Entity\Genre;
+use SeriesBundle\Entity\Series;
+use ShareBundle\Entity\Author;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,5 +77,77 @@ class DefaultController extends Controller
         ]);
 
         return $this->render('AppBundle:search:search.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function sitemapAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $urls = [];
+        $hostname = $request->getSchemeAndHttpHost();
+        $router = $this->get('router');
+        $urls[] = ['loc' => $router->generate('index'), 'changefreq' => 'weekly', 'priority' => '1.0'];
+        $urls[] = ['loc' => $router->generate('top_100'), 'changefreq' => 'weekly', 'priority' => '0.75'];
+
+        $urls[] = ['loc' => $router->generate('book_list'), 'changefreq' => 'weekly', 'priority' => '0.75'];
+        $books = $em->getRepository(Book::class)->findBy(['isActive' => true]);
+        foreach ($books as $book) {
+            $urls[] = ['loc' => $router->generate('book_view', ['id' => $book->getId(), 'slug' => $book->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.75'];
+        }
+
+        $years = $em->getRepository(Book::class)->getUniqueYear();
+        foreach ($years as $year) {
+            $urls[] = ['loc' => $router->generate('year_books', ['year' => (int) $year->getYear()]), 'changefreq' => 'weekly', 'priority' => '0.3'];
+        }
+
+        $urls[] = ['loc' => $router->generate('search'), 'changefreq' => 'weekly', 'priority' => '0.3'];
+        $urls[] = ['loc' => $router->generate('order_board'), 'changefreq' => 'weekly', 'priority' => '0.3'];
+        $statuses = ['new', 'completed', 'cancel', 'top'];
+        foreach ($statuses as $status) {
+            $urls[] = ['loc' => $router->generate('order_board_status', ['status' => $status]), 'changefreq' => 'weekly', 'priority' => '0.3'];
+        }
+
+        $urls[] = ['loc' => $router->generate('series_list'), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        $series = $em->getRepository(Series::class)->findBy(['isActive' => true]);
+        foreach ($series as $serie) {
+            $urls[] = ['loc' => $router->generate('series_books', ['slug' => $serie->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        }
+
+        $urls[] = ['loc' => $router->generate('genre_list'), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        $genres = $em->getRepository(Genre::class)->findBy(['isActive' => true, 'parent' => null]);
+        foreach ($genres as $genre) {
+            $urls[] = ['loc' => $router->generate('genre_books', ['genre' => $genre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+            if ($genre->getChildren()->count()) {
+                foreach ($genre->getChildren()->getValues() as $subGenre) {
+                    $urls[] = ['loc' => $router->generate('sub_genre_books',
+                        ['genre' => $genre->getSlug(), 'sub_genre' => $subGenre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+                }
+            }
+        }
+
+        $urls[] = ['loc' => $router->generate('author_list'), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        $letter = $em->getRepository(Author::class)->uniqLetterByAuthor();
+        foreach ($letter as $let) {
+            if (isset($let[1])) {
+                $urls[] = ['loc' => $router->generate('author_list_letter', ['letter' => $let[1]]), 'changefreq' => 'weekly', 'priority' => '0.3'];
+            }
+        }
+
+        $authors = $em->getRepository(Author::class)->findBy(['isActive' => true]);
+        foreach ($authors as $author) {
+            $urls[] = ['loc' => $router->generate('author_books', ['slug' => $author->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        }
+
+        $urls[] = ['loc' => $router->generate('last_comments'), 'changefreq' => 'weekly', 'priority' => '0.3'];
+
+        $response = new Response($this->renderView('AppBundle:Block:sitemap.html.twig', ['urls' => $urls, 'hostname' => $hostname]));
+        $response->headers->set('Content-Type', 'application/xml; charset=utf-8');
+
+        return $response;
     }
 }

@@ -193,6 +193,21 @@ class BookRepository extends EntityRepository
     }
 
     /**
+     * @return mixed
+     */
+    public function getUniqueYear()
+    {
+        $qb = $this->baseBookQueryBuilder();
+
+        return $qb
+            ->groupBy('b.year')
+            ->resetDQLPart('orderBy')
+            ->orderBy('b.seriesNumber')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Returns current date and time, rounded to nearest minute
      *
      * @return \DateTime
