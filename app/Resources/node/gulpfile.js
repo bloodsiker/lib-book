@@ -15,8 +15,11 @@ const cached = require('gulp-cached');
 const browserSync = require('browser-sync').create();
 const debug = require('gulp-debug');
 
+const directory = '../../../src/AppBundle/Resources/public/';
+const frontend = '../../../web/public/';
+
 gulp.task('styles', function () {
-    return gulp.src('../../../src/AppBundle/Resources/public/css/**/*.css')
+    return gulp.src(directory+'css/**/*.css')
     // return gulp.src('frontend/css/**/*.css')
         .pipe(cached('styles'))
         .pipe(sourcemaps.init())
@@ -25,14 +28,14 @@ gulp.task('styles', function () {
         .pipe(sourcemaps.write())
         .pipe(cleanCSS())
         .pipe(concat('all.css'))
-        .pipe(gulp.dest('../../../web/public/css'));
+        .pipe(gulp.dest(frontend+'css'));
 });
 
 gulp.task('assets', function () {
-    return gulp.src('../../../src/AppBundle/Resources/public/assets/**', {since: gulp.lastRun('assets')})
-        .pipe(newer('../../../web/public/assets'))
+    return gulp.src(directory+'assets/**', {since: gulp.lastRun('assets')})
+        .pipe(newer(frontend+'assets'))
         // .pipe(debug())
-        .pipe(gulp.dest('../../../web/public/assets'))
+        .pipe(gulp.dest(frontend+'assets'))
 });
 
 gulp.task('clean', function () {
@@ -42,12 +45,12 @@ gulp.task('clean', function () {
 gulp.task('build', gulp.series('clean', gulp.parallel('styles', 'assets')));
 
 gulp.task('watch', function () {
-    gulp.watch('../../../src/AppBundle/Resources/public/css/**/*.*', gulp.series('styles')).on('unlink', function (filepath) {
+    gulp.watch(directory+'css/**/*.*', gulp.series('styles')).on('unlink', function (filepath) {
         remember.forget('styles', path.resolve(filepath));
         delete cached.caches.styles[path.resolve(filepath)];
     });
 
-    gulp.watch('../../../src/AppBundle/Resources/public/assets/**/*.*', gulp.series('assets'));
+    gulp.watch(directory+'assets/**/*.*', gulp.series('assets'));
 });
 
 gulp.task('server', function () {

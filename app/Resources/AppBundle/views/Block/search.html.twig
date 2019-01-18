@@ -3,7 +3,6 @@
         {% set block_ajax_path = block.page is defined ? sonata_page_ajax_url(block) : block_ajax_url(block) %}
         <input id="quick-search" name="search" placeholder="Поиск...(название книги, автор)" data-ajax-url="{{ block_ajax_path }}" autocomplete="off" type="text"/>
         <button type="submit" title="Найти"><i class="fa fa-search"></i></button>
-
         <div class="result-search"></div>
     </div>
 </form>
