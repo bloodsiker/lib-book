@@ -74,7 +74,7 @@ class SearchBlockService extends AbstractAdminBlockService
         $resolver->setDefaults([
             'list_type'   => null,
             'search'      => null,
-            'items_count' => 5,
+            'items_count' => 20,
             'page'        => 1,
             'template'    => self::DEFAULT_TEMPLATE,
         ]);
