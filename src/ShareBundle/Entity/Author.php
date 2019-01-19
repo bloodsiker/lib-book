@@ -257,7 +257,7 @@ class Author
      *
      * @param \BookBundle\Entity\Book $book
      */
-    public function removeAuthor(\BookBundle\Entity\Book $book)
+    public function removeBook(\BookBundle\Entity\Book $book)
     {
         $this->books->removeElement($book);
     }

@@ -6,6 +6,7 @@ use BookBundle\Entity\Book;
 use GenreBundle\Entity\Genre;
 use SeriesBundle\Entity\Series;
 use ShareBundle\Entity\Author;
+use ShareBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -118,14 +119,21 @@ class DefaultController extends Controller
             $urls[] = ['loc' => $router->generate('series_books', ['slug' => $serie->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
         }
 
+        $tags = $em->getRepository(Tag::class)->findBy(['isActive' => true]);
+        foreach ($tags as $tag) {
+            $urls[] = ['loc' => $router->generate('tag_books', ['slug' => $tag->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        }
+
         $urls[] = ['loc' => $router->generate('genre_list'), 'changefreq' => 'weekly', 'priority' => '0.5'];
         $genres = $em->getRepository(Genre::class)->findBy(['isActive' => true, 'parent' => null]);
         foreach ($genres as $genre) {
             $urls[] = ['loc' => $router->generate('genre_books', ['genre' => $genre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
             if ($genre->getChildren()->count()) {
                 foreach ($genre->getChildren()->getValues() as $subGenre) {
-                    $urls[] = ['loc' => $router->generate('sub_genre_books',
-                        ['genre' => $genre->getSlug(), 'sub_genre' => $subGenre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+                    if ($subGenre->getIsActive()) {
+                        $urls[] = ['loc' => $router->generate('sub_genre_books',
+                            ['genre' => $genre->getSlug(), 'sub_genre' => $subGenre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+                    }
                 }
             }
         }

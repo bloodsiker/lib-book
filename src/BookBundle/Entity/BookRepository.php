@@ -105,10 +105,8 @@ class BookRepository extends EntityRepository
      */
     public function filterByTag(QueryBuilder $qb, Tag $tag) : QueryBuilder
     {
-        return $qb->innerJoin('b.tags', 'tag', 'WITH', 'tag.id = :tag')->setParameter(
-            'tag',
-            $tag
-        );
+        return $qb->innerJoin('b.tags', 'tag', 'WITH', 'tag.id = :tag')
+            ->setParameter('tag', $tag);
     }
 
     /**

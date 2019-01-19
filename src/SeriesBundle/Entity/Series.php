@@ -39,6 +39,21 @@ class Series
     protected $slug;
 
     /**
+     * @var \SeriesBundle\Entity\Series
+     *
+     * @ORM\ManyToOne(targetEntity="SeriesBundle\Entity\Series", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $parent;
+
+    /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="SeriesBundle\Entity\Series", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
@@ -67,6 +82,7 @@ class Series
         $this->isActive = true;
         $this->createdAt = new \DateTime('now');
         $this->books = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -154,6 +170,66 @@ class Series
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \SeriesBundle\Entity\Series $parent
+     *
+     * @return $this
+     */
+    public function setParent(\SeriesBundle\Entity\Series $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \SeriesBundle\Entity\Series
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add children.
+     *
+     * @param \SeriesBundle\Entity\Series $child
+     *
+     * @return $this
+     */
+    public function addChild(\SeriesBundle\Entity\Series $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove children.
+     *
+     * @param \SeriesBundle\Entity\Series $child
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeChild(\SeriesBundle\Entity\Series $child)
+    {
+        return $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**

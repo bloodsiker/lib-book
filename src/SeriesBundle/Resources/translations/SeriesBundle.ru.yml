@@ -14,6 +14,7 @@ series:
     fields:
         title: Название
         is_active: Активна
+        parent: Родитель
         slug: Сегмент URL (slug)
         created_at: Дата создания
         id: ID

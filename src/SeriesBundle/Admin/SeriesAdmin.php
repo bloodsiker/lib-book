@@ -6,6 +6,7 @@ use AdminBundle\Admin\BaseAdmin as Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -36,6 +37,9 @@ class SeriesAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'series.fields.title',
             ])
+            ->add('parent', null, [
+                'label' => 'series.fields.parent',
+            ])
             ->add('isActive', null, [
                 'label' => 'series.fields.is_active',
                 'editable'  => true,
@@ -54,6 +58,9 @@ class SeriesAdmin extends Admin
         $datagridMapper
             ->add('title', null, [
                 'label' => 'series.fields.title',
+            ])
+            ->add('parent', null, [
+                'label' => 'series.fields.parent',
             ])
             ->add('isActive', null, [
                 'label' => 'series.fields.is_active',
@@ -82,6 +89,10 @@ class SeriesAdmin extends Admin
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])
                 ->add('isActive', null, [
                     'label' => 'series.fields.is_active',
+                    'required' => false,
+                ])
+                ->add('parent', ModelListType::class, [
+                    'label' => 'series.fields.parent',
                     'required' => false,
                 ])
                 ->add('createdAt', DateTimePickerType::class, [

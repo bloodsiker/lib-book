@@ -115,6 +115,7 @@ $(document).mouseup(function (e) {
     if (container.has(e.target).length === 0){
         removeElem('#search-close');
         $('.wrap').removeClass('bluer');
+        $('#quick-search').val('');
         $('.result-search').html('').hide();
     }
 });
@@ -262,7 +263,7 @@ $(document).ready(function(){
         slideSpeed : 300,
         paginationSpeed : 400,
         singleItem:false,
-        itemsCustom: [[0, 2], [470, 3], [590, 4], [760, 4], [950, 3], [1220,4]],
+        itemsCustom: [[0, 2], [470, 3], [590, 4], [760, 4], [950, 4], [1220,5]],
         autoPlay:false,
         pagination: false,
         lazyLoad : true

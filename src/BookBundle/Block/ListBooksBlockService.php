@@ -71,6 +71,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
             'author'           => null,
             'series'           => null,
             'year'             => null,
+            'tag'              => null,
             'top_book'         => false,
             'template'         => 'BookBundle:Block:large_list.html.twig',
         ]);
@@ -122,6 +123,10 @@ class ListBooksBlockService extends AbstractAdminBlockService
 
         if ($blockContext->getSetting('year')) {
             $repository->filterByYear($qb, $blockContext->getSetting('year'));
+        }
+
+        if ($blockContext->getSetting('tag')) {
+            $repository->filterByTag($qb, $blockContext->getSetting('tag'));
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));

@@ -179,7 +179,7 @@ class Book
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag")
+     * @ORM\ManyToMany(targetEntity="ShareBundle\Entity\Tag", inversedBy="books")
      * @ORM\JoinTable(name="book_tags",
      *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")}

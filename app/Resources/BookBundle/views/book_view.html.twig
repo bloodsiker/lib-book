@@ -77,7 +77,7 @@
                         <div class="book-tags">
                             <strong><i class="fa fa-tags"></i> Теги: </strong>
                             {% for tag in book.getTags %}
-                                <a href="{{ path('tag_list', {'slug': tag.slug }) }}">{{ tag.name }}</a>{{ loop.last ? '' : ' , ' }}
+                                <a href="{{ path('tag_books', {'slug': tag.slug }) }}">{{ tag.name }}</a>{{ loop.last ? '' : ' , ' }}
                             {% endfor %}
                         </div>
                     {% endif %}

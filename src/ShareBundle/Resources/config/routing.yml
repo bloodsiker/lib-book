@@ -1,8 +1,13 @@
 # genre ========================================================
 tag_list:
-    path: /tag/{slug}
+    path: /tags
     defaults:
         _controller: ShareBundle:Tag:list
+
+tag_books:
+    path: /tag/{slug}
+    defaults:
+        _controller: ShareBundle:Tag:tagBook
     requirements:
         slug: "([a-zA-Z\\-0-9\\_]+)?"
 
