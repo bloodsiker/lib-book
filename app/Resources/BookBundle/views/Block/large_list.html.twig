@@ -66,6 +66,12 @@
                     </div>
                 {% endif %}
 
+                {% if book.isbn is not empty %}
+                    <div class="mi-item">
+                        <span>ISBN:</span> {{ book.isbn }}
+                    </div>
+                {% endif %}
+
                 {% if book.restrictAge is not empty %}
                     <div class="mi-item">
                         <span>Ограничение:</span> {{ book.restrictAge }}+

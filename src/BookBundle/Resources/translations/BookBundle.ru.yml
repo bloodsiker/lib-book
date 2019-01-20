@@ -28,6 +28,7 @@ book:
         poster: Изображение книги
         authors: Автор(ы)
         series: Серия
+        isbn: ISBN
         series_number: 'номер # в серии'
         pages: Страниц
         year: Год издания

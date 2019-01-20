@@ -55,6 +55,12 @@
                             </div>
                         {% endif %}
 
+                        {% if book.isbn is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-align-justify"></i>ISBN:</span> {{ book.isbn }}
+                            </div>
+                        {% endif %}
+
                         {% if book.restrictAge is not empty %}
                             <div class="mi-item">
                                 <span><i class="fa fa fa-child"></i>Ограничение:</span> {{ book.restrictAge }}+

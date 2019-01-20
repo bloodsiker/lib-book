@@ -188,6 +188,13 @@ class Book
     protected $tags;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    protected $isbn;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -725,6 +732,30 @@ class Book
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set isbn
+     *
+     * @param \DateTime $isbn
+     *
+     * @return Book
+     */
+    public function setIsbn($isbn)
+    {
+        $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    /**
+     * Get isbn
+     *
+     * @return \DateTime
+     */
+    public function getIsbn()
+    {
+        return $this->isbn;
     }
 
     /**

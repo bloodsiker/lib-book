@@ -224,6 +224,10 @@ class BookAdmin extends Admin
                     'label' => 'book.fields.series_number',
                     'required' => false,
                 ])
+                ->add('isbn', TextType::class, [
+                    'label' => 'book.fields.isbn',
+                    'required' => false,
+                ])
                 ->add('pages', IntegerType::class, [
                     'label' => 'book.fields.pages',
                     'required' => false,

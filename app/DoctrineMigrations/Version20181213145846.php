@@ -30,6 +30,9 @@ final class Version20181213145846 extends AbstractMigration
         $series->addIndex(['parent_id']);
         $series->addForeignKeyConstraint($schema->getTable('series'), ['parent_id'], ['id'], ['onDelete' => 'set null']);
 
+        $book = $schema->getTable('series');
+        $book->addColumn('isbn', 'string', array('length' => 30, 'notnull' => false));
+
     }
 
     /**
