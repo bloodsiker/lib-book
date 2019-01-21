@@ -3,7 +3,7 @@
 
 User-agent: *
 #Allow: /
-Disallow: /files/*
+Disallow: /files/media_file/*
 Disallow: /_block/
 Disallow: /_page/
 Disallow: /order-board/vote
