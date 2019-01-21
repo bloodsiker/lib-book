@@ -27,8 +27,14 @@ class AuthorController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Авторы']);
 
+        if ($request->get('letter')) {
+            $title = "Авторы на букву {$request->get('letter')} | ТопБук";
+        } else {
+            $title = 'Все авторы | ТопБук';
+        }
+
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Все авторы | ТопБук',
+            'title' => $title,
             'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
