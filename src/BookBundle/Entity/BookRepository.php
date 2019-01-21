@@ -198,6 +198,7 @@ class BookRepository extends EntityRepository
         $qb = $this->baseBookQueryBuilder();
 
         return $qb
+            ->where('b.year IS NOT NULL')
             ->groupBy('b.year')
             ->resetDQLPart('orderBy')
             ->orderBy('b.seriesNumber')
