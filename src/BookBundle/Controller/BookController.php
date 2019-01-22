@@ -3,6 +3,7 @@
 namespace BookBundle\Controller;
 
 use BookBundle\Entity\Book;
+use MediaBundle\Entity\MediaFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -142,5 +143,38 @@ class BookController extends Controller
         ]);
 
         return $this->render('BookBundle::year_list.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function downloadAction(Request $request)
+    {
+        $repo = $this->getDoctrine()->getManager()->getRepository(MediaFile::class);
+        $file = $repo->find((int) $request->get('file_id'));
+        $baseWebDir = $this->getParameter('media_base_path');
+
+        if (file_exists($baseWebDir.$file->getPath())) {
+            $name = explode('/', $file->getPath());
+            if (ob_get_level()) {
+                ob_end_clean();
+            }
+
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename='.basename(end($name)));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: '.$file->getSize());
+
+            readfile($baseWebDir.$file->getPath());
+            die;
+        }
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

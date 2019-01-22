@@ -23,3 +23,10 @@ year_books:
         _controller: BookBundle:Book:yearList
     requirements:
         year: "\\d+"
+
+book_download:
+    path: /download/book_file/{file_id}
+    defaults:
+        _controller: BookBundle:Book:download
+    requirements:
+        file_id: "\\d+"

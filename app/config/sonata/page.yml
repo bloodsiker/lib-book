@@ -33,6 +33,7 @@ sonata_page:
         - order_board_vote
         - comment_vote
         - inc_book_download
+        - book_download
 
     ignore_uri_patterns:
         - "^/admin\\/"   # ignore admin route, ie route containing 'admin'
