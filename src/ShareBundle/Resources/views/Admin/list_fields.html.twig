@@ -3,7 +3,7 @@
 {% block field %}
     {% if object is instanceof('\\ShareBundle\\Entity\\Author') %}
         {% if field_description.name == 'photo' %}
-            {% set v = asset('bundles/admin/images/preview_placeholder.png') %}
+            {% set v = asset('bundles/admin/images/person_no_foto.png') %}
             {% set image_preview_path = value ? value.path : null %}
             <img src="{{ image_preview_path|default(v) }}?{{ random() }}" style="max-height: 100px;"/>
         {% endif %}

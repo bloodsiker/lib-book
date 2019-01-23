@@ -219,8 +219,6 @@ class Book
         $this->views = 0;
         $this->ratePlus = 0;
         $this->rateMinus = 0;
-        $dateTime = new \DateTime('now');
-        $this->createdAt = $dateTime;
 
         $this->genres         = new ArrayCollection();
         $this->tags           = new ArrayCollection();
