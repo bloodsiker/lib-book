@@ -288,7 +288,7 @@ class BookAdmin extends Admin
                     'format' => 'dd-MM-YYYY HH:mm',
                     'attr' => [
                         'readonly' => true,
-                        'value' => $this->getSubject()->getId() ? $this->getSubject()->getCreatedAt() : $now->format('Y-m-d H:i:s'),
+                        'value' => $this->getSubject()->getId() ? $this->getSubject()->getCreatedAt() : $now->format('d-m-Y H:i'),
                     ],
                 ])
             ->end()
