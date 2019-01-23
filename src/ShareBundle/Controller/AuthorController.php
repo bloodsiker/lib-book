@@ -28,19 +28,19 @@ class AuthorController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Авторы']);
 
         if ($request->get('letter')) {
-            $title = "Авторы на букву {$request->get('letter')} | ТопБук";
+            $title = "Авторы на букву {$request->get('letter')} | ТопБук - электронная библиотека";
         } else {
-            $title = 'Все авторы | ТопБук';
+            $title = 'Все авторы | ТопБук - электронная библиотека';
         }
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => $title,
-            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'description' => 'Список авторов | ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
-                'og:title' => 'Все авторы | ТопБук',
+                'og:title' => $title,
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
         ]);
@@ -70,13 +70,13 @@ class AuthorController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $author->getName()]);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
-            'description' => 'Скачать бесплатно книги без регистрации '.$author->getName(),
-            'keywords' => $author->getName().', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
+            'description' => "Скачать книги автора {$author->getName()} бесплатно и без регистрации",
+            'keywords' => "книги автора {$author->getName()}, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук",
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
-                'og:title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+                'og:title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
         ]);

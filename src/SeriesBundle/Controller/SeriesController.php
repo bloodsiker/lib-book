@@ -28,9 +28,9 @@ class SeriesController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Серии']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Все серии | ТопБук',
-            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
-            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'title' => 'Серии | '.$request->get('page', 1).' | ТопБук - электронная библиотека',
+            'description' => 'Серии | список книг по сериям | ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'keywords' => 'книги по сериям, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
@@ -65,8 +65,8 @@ class SeriesController extends Controller
 
         $titleSeries = 'Серия '.$series->getTitle();
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
-            'description' => 'Скачать бесплатно книги без регистрации ',
+            'title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
+            'description' => "Скачать книги из серии {$series->getTitle()} бесплатно и без регистрации",
             'keywords' => $series->getTitle().', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',

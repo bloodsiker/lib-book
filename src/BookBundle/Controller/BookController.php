@@ -33,8 +33,10 @@ class BookController extends Controller
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => 'Новинки книг']);
 
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Последние новинки книг в библиотеке "ТопБук"',
+            'title' => 'Последние новинки книг в библиотеке ТопБук'.$page,
             'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
@@ -86,15 +88,17 @@ class BookController extends Controller
             return $value;
         });
         $authors = mb_substr($authors, 0, -2);
+        $series = $book->getSeries() ? "Серия: {$book->getSeries()->getTitle()}, " : null;
+        $title = $book->getName().' - '.$authors.' -  скачать книгу без регистрации в fb2, epub, pdf, txt | ТопБук - Электронная библиотека для любителей книг';
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $book->getName().' - '.$authors.' -  скачать книгу без регистрации в fb2, epub, pdf, txt | "ТопБук" - социальная сеть любителей книг',
-            'description' => mb_substr($book->getDescription(), 0, 150),
+            'title' => $title,
+            'description' => "Автор: {$authors}, ".$series.'Анотация: '.mb_substr($book->getDescription(), 0, 150),
             'keywords' => $book->getName().', '.$authors.', скачать книги, отзывы на книги, краткое содержание, без регистрации',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
                 'og:type' => 'article',
-                'og:title' => $book->getName(),
+                'og:title' => $title,
                 'og:url' => $request->getSchemeAndHttpHost(),
                 'og:image' => $request->getSchemeAndHttpHost().$book->getPoster()->getPath(),
                 'og:description' => mb_substr($book->getDescription(), 0, 150),
@@ -134,8 +138,8 @@ class BookController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $year.' год']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Книги за '.$year.' год | "ТопБук" - социальная сеть любителей книг',
-            'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
+            'title' => 'Книги за '.$year.' год | ТопБук - Электронная библиотека для любителей книг',
+            'description' => "Список книг за {$year} год | ТопБук - Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
