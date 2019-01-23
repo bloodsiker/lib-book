@@ -25,8 +25,8 @@
                             <div class="comm-rate {{ comment.rating == 0 ? null : comment.rating > 0 ? 'pos-comm' : 'neg-comm' }}">
                                 <a href="#"
                                    onclick="voteComment(1, {{ comment.id }}, '{{ path('comment_vote') }}'); return false;">+</a>
-                                <span class="ignore-select" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                                        <span class="ratingtypeplusminus ratingzero" itemprop="ratingValue" data-comment-id="{{ comment.id }}">{{ comment.rating }}</span>
+                                <span class="ignore-select">
+                                        <span class="ratingtypeplusminus ratingzero" data-comment-id="{{ comment.id }}">{{ comment.rating }}</span>
                                     </span>
                                 <a href="#"
                                    onclick="voteComment(0, {{ comment.id }}, '{{ path('comment_vote') }}'); return false;">-</a>
