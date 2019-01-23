@@ -11,7 +11,7 @@
 {% endmacro %}
 
 {% if breadcrumbs|length %}
-    <section class="breadcrumb"  itemprop="breadcrumb">>
+    <section class="breadcrumb"  itemprop="breadcrumb">
         <ul>
             {{ macro.macro('Главная', path('index')) }}
             {% for link in breadcrumbs %}
