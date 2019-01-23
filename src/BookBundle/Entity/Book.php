@@ -749,7 +749,7 @@ class Book
     /**
      * Get isbn
      *
-     * @return \DateTime
+     * @return string
      */
     public function getIsbn()
     {
@@ -759,13 +759,13 @@ class Book
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @return $this
      *
-     * @return Book
+     * @throws \Exception
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime('now');
 
         return $this;
     }

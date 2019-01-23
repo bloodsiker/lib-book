@@ -149,7 +149,6 @@ class BookAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $context = $this->getPersistentParameter('context');
-        $now = new \DateTime('now');
 
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
@@ -286,10 +285,7 @@ class BookAdmin extends Admin
                     'label'     => 'book.fields.created_at',
                     'required' => true,
                     'format' => 'dd-MM-YYYY HH:mm',
-                    'attr' => [
-                        'readonly' => true,
-                        'value' => $this->getSubject()->getId() ? $this->getSubject()->getCreatedAt() : $now->format('d-m-Y H:i'),
-                    ],
+                    'attr' => ['readonly' => true],
                 ])
             ->end()
         ;
