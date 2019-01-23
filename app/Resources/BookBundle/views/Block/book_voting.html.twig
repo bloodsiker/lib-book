@@ -2,7 +2,7 @@
 {% set sumVote = book.ratePlus + book.rateMinus %}
 {% set percent = sumVote >= book.ratePlus - book.rateMinus and sumVote > 0 ? book.ratePlus*100/(sumVote) : 0 %}
 
-<div class="rrange" itemprop="reviewCount" content="{{ book.ratePlus + book.rateMinus }}">
+<div class="rrange" itemprop="ratingCount" content="{{ book.ratePlus + book.rateMinus }}">
     Оценка читателей<span itemprop="ratingValue">{{ percent|round(1) }}%</span>
     <div class="rbar">
         <div class="rfill" style="width: {{ percent|round(1) }}%;"></div>
