@@ -158,4 +158,17 @@ class DefaultController extends Controller
 
         return $response;
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function openSearchAction(Request $request)
+    {
+        $response = new Response($this->renderView('AppBundle:Block:open_searche.html.twig'));
+        $response->headers->set('Content-Type', 'application/xml; charset=utf-8');
+
+        return $response;
+    }
 }

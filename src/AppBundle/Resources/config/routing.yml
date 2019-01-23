@@ -21,6 +21,14 @@ sitemap:
   requirements:
     _format: "xml"
 
+opensearch:
+  path: /opensearch.{_format}
+  defaults:
+    _format: "xml"
+    _controller: AppBundle:Default:openSearch
+  requirements:
+    _format: "xml"
+
 block__ajax:
   path: /_block/ajax/{blockType}/{blockId}
   defaults:

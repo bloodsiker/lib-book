@@ -5,9 +5,11 @@
         {% endif %}
         <hr class="line">
 
-        <form action="{{ path('search') }}" class="form">
+        <meta itemprop="url" content="{{ app.request.schemeAndHttpHost }}"/>
+        <form action="{{ path('search') }}" class="form" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+            <meta itemprop="target" content="{{ url('search') }}/search?search={search}"/>
             <div class="inputs">
-                <input type="text" name="search" placeholder="Искать...(название книги, автор)" value="{{ app.request.get('search') }}">
+                <input type="text" name="search" itemprop="query-input" placeholder="Искать...(название книги, автор)" value="{{ app.request.get('search') }}">
                 <button>Искать</button>
             </div>
         </form>
