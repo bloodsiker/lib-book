@@ -88,12 +88,22 @@ class BookController extends Controller
             return $value;
         });
         $authors = mb_substr($authors, 0, -2);
+        if ($book->getTags()->count()) {
+            $tags = 'Теги: ';
+            $book->getTags()->map(function ($value) use (&$tags) {
+                $tags .= $value->getName().', ';
+
+                return $value;
+            });
+        }
+
+        $tags = $tags ?? null;
         $series = $book->getSeries() ? "Серия: {$book->getSeries()->getTitle()}, " : null;
         $title = $book->getName().' - '.$authors.' -  скачать книгу без регистрации в fb2, epub, pdf, txt | ТопБук - Электронная библиотека для любителей книг';
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => $title,
-            'description' => "Автор: {$authors}, ".$series.'Анотация: '.mb_substr($book->getDescription(), 0, 150),
+            'description' => "Автор: {$authors}, ".$tags.$series.'Анотация: '.mb_substr($book->getDescription(), 0, 150),
             'keywords' => $book->getName().', '.$authors.', скачать книги, отзывы на книги, краткое содержание, без регистрации',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',

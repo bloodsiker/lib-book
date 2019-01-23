@@ -1,5 +1,5 @@
 <div class="col-cont">
-    <div itemscope itemtype="http://schema.org/Book">
+    <div itemprop="mainEntity" itemscope itemtype="http://schema.org/Book">
         <article class="full-page">
 
             <div class="page-cols">
@@ -21,7 +21,9 @@
                             <div class="mi-item">
                                 <span><i class="fa fa-users"></i>Автор:</span>
                                 {% for author in book.getAuthors %}
-                                    <a href="{{ path('author_books', { 'slug': author.slug }) }}">{{ author.name }}</a>{{ loop.last ? '' : ' / ' }}
+                                    <a href="{{ path('author_books', { 'slug': author.slug }) }}" itemprop="author">
+                                        <em>{{ author.name }}</em>
+                                    </a>{{ loop.last ? '' : ' / ' }}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -30,7 +32,7 @@
                             <div class="mi-item">
                                 <span><i class="fa fa-info-circle"></i>Жанр:</span>
                                 {% for genre in book.getGenres %}
-                                    <a href="{{ genre_path(genre) }}">{{ genre.name }}</a>{{ loop.last ? '' : ' / ' }}
+                                    <a href="{{ genre_path(genre) }}" itemprop="genre"><em>{{ genre.name }}</em></a>{{ loop.last ? '' : ' / ' }}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -38,39 +40,41 @@
                         {% if book.year is not empty %}
                             <div class="mi-item">
                                 <span><i class="fa fa-calendar-o"></i>Год:</span>
-                                <a href="{{ path('year_books', { 'year': book.year }) }}">{{ book.year }}</a>
+                                <a href="{{ path('year_books', { 'year': book.year }) }}"><em>{{ book.year }}</em></a>
                             </div>
                         {% endif %}
 
                         {% if book.series is not empty %}
                             <div class="mi-item">
                                 <span><i class="fa fa-pencil-square"></i>Серия:</span>
-                                <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
+                                <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">
+                                    <em>{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</em>
+                                </a>
                             </div>
                         {% endif %}
 
                         {% if book.pages is not empty %}
                             <div class="mi-item">
-                                <span><i class="fa fa fa-book"></i>Страниц:</span> {{ book.pages }}
+                                <span><i class="fa fa fa-book"></i>Страниц:</span> <em itemprop="numberOfPages">{{ book.pages }}</em>
                             </div>
                         {% endif %}
 
                         {% if book.isbn is not empty %}
                             <div class="mi-item">
-                                <span><i class="fa fa-align-justify"></i>ISBN:</span> {{ book.isbn }}
+                                <span><i class="fa fa-align-justify"></i>ISBN:</span> <em itemprop="isbn">{{ book.isbn }}</em>
                             </div>
                         {% endif %}
 
                         {% if book.restrictAge is not empty %}
                             <div class="mi-item">
-                                <span><i class="fa fa fa-child"></i>Ограничение:</span> {{ book.restrictAge }}+
+                                <span><i class="fa fa fa-child"></i>Ограничение:</span> <em>{{ book.restrictAge }}+</em>
                             </div>
                         {% endif %}
 
                     </div>
 
                     <br>
-                    <div id="result-rates" class="rates">
+                    <div id="result-rates" class="rates" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                         {{
                         sonata_block_render(
                             { 'type': 'book.block.book_voting' },
@@ -83,14 +87,14 @@
                         <div class="book-tags">
                             <strong><i class="fa fa-tags"></i> Теги: </strong>
                             {% for tag in book.getTags %}
-                                <a href="{{ path('tag_books', {'slug': tag.slug }) }}">{{ tag.name }}</a>{{ loop.last ? '' : ' , ' }}
+                                <a href="{{ path('tag_books', {'slug': tag.slug }) }}">{{ tag.name }}</a>{{ loop.last ? '' : ', ' }}
                             {% endfor %}
                         </div>
                     {% endif %}
 
-                    <div class="m-desc full-text slice-this" itemprop="description">
+                    <div class="m-desc full-text slice-this">
                         <h2><strong>Описание книги</strong></h2>
-                        {{ book.description|raw }}
+                        <div itemprop="description">{{ book.description|raw }}</div>
                     </div>
                     <div class="m-buttons">
                         <div class="but to-view"><i class="fa fa-arrow-down"></i> Скачать</div>
