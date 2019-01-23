@@ -32,7 +32,6 @@ final class Version20181213145846 extends AbstractMigration
 
         $book = $schema->getTable('series');
         $book->addColumn('isbn', 'string', array('length' => 30, 'notnull' => false));
-
     }
 
     /**

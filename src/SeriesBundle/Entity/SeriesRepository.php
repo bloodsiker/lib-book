@@ -18,7 +18,7 @@ class SeriesRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s');
         $qb
             ->where('s.isActive = 1')
-            ->orderBy('s.createdAt', 'DESC')
+            ->orderBy('s.id', 'DESC')
         ;
 
         return $qb;

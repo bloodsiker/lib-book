@@ -38,6 +38,7 @@ author:
         is_active: Активен
         is_allow_download: Разрешено для скачивания
         created_at: Дата создания
+        photo: Фото
         slug: Сегмент URL (slug)
         parent: Родительский жанр
         id: ID

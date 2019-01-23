@@ -79,10 +79,10 @@ class BookAdmin extends Admin
             ->add('id', null, [
                 'label' => 'book.fields.id',
             ])
-            ->add('poster', null, array(
+            ->add('poster', null, [
                 'label'     => 'book.fields.poster',
                 'template'  => 'BookBundle:Admin:list_fields.html.twig',
-            ))
+            ])
             ->addIdentifier('name', null, [
                 'label' => 'book.fields.name',
             ])

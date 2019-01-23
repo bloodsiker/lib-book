@@ -32,6 +32,14 @@ class Author
     protected $name;
 
     /**
+     * @var \MediaBundle\Entity\MediaImage
+     *
+     * @ORM\ManyToOne(targetEntity="MediaBundle\Entity\MediaImage")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $photo;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=100, nullable=false)
@@ -139,6 +147,30 @@ class Author
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \MediaBundle\Entity\MediaImage $photo
+     *
+     * @return $this
+     */
+    public function setPhoto(\MediaBundle\Entity\MediaImage $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \MediaBundle\Entity\MediaImage
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 
     /**

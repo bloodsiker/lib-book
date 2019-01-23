@@ -94,7 +94,7 @@ class BookRepository extends EntityRepository
      */
     public function filterByTop(QueryBuilder $qb) : QueryBuilder
     {
-        return $qb->resetDQLPart('orderBy')->orderBy('b.views');
+        return $qb->resetDQLPart('orderBy')->orderBy('b.ratePlus - b.rateMinus', 'DESC');
     }
 
     /**
@@ -123,9 +123,9 @@ class BookRepository extends EntityRepository
 
         $qb
             ->andWhere('b.createdAt > :timeAgo')
-            ->setParameter('timeAgo', $timeAgo)
-            ->resetDQLPart('orderBy')
-            ->orderBy('b.views', 'DESC');
+            ->setParameter('timeAgo', $timeAgo);
+
+        $this->filterByTop($qb);
 
         return $qb;
     }

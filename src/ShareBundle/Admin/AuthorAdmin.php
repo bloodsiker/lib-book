@@ -6,6 +6,7 @@ use AdminBundle\Admin\BaseAdmin as Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -29,6 +30,10 @@ class AuthorAdmin extends Admin
         $listMapper
             ->add('id', null, [
                 'label' => 'author.fields.id',
+            ])
+            ->add('photo', null, [
+                'label'     => 'author.fields.photo',
+                'template'  => 'ShareBundle:Admin:list_fields.html.twig',
             ])
             ->addIdentifier('name', null, [
                 'label' => 'author.fields.name',
@@ -90,6 +95,10 @@ class AuthorAdmin extends Admin
                 ])
                 ->add('isAllowDownload', null, [
                     'label' => 'author.fields.is_allow_download',
+                    'required' => false,
+                ])
+                ->add('photo', ModelListType::class, [
+                    'label' => 'author.fields.photo',
                     'required' => false,
                 ])
                 ->add('createdAt', DateTimePickerType::class, [

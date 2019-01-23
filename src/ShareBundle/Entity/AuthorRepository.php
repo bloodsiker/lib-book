@@ -18,7 +18,7 @@ class AuthorRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $qb
             ->where('a.isActive = 1')
-            ->orderBy('a.createdAt', 'DESC')
+            ->orderBy('a.id', 'DESC')
         ;
 
         return $qb;
