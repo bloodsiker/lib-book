@@ -32,10 +32,12 @@ class OrderBoardController extends Controller
             $breadcrumb->addBreadcrumb(['title' => 'Стол заказов', 'href' => $router->generate('order_board')]);
             $breadcrumb->addBreadcrumb(['title' => $this->get('translator')->trans(OrderBoard::getNameStatus($request->get('status')), [], 'OrderBundle')]);
         }
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Стол заказов | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах',
-            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
+            'title' => 'Стол заказов | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах'.$page,
+            'description' => $pageDesc.'Если на сайте нет книги, которую Вы хотите прочитать - нажмите кнопку "Добавить заказ" и мы постараемся ее добавить | ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги без регистрации',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',

@@ -81,9 +81,12 @@ class GenreController extends Controller
             $titleGenre = 'Жанр '.$genre->getName();
         }
 
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
+
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $titleGenre.' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
-            'description' => "Скачать книги из жанра {$titleGenre} бесплатно и без регистрации",
+            'title' => $titleGenre.' | Книги'.$page.' | ТопБук - электронная библиотека',
+            'description' => $pageDesc."Скачать книги из жанра {$titleGenre} бесплатно и без регистрации",
             'keywords' => $titleGenre.', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',

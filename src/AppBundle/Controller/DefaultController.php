@@ -26,9 +26,13 @@ class DefaultController extends Controller
 //        $metaTitle = $this->get('translator')->trans('app.frontend.meta.meta_title_index', ['%YEAR%' => date("Y")], 'AppBundle');
 //        $metaDescription = $this->get('translator')->trans('app.frontend.meta.meta_description_index', ['%YEAR%' => date("Y")], 'AppBundle');
 //        $metaKeywords = $this->get('translator')->trans('app.frontend.meta.meta_keywords_index', ['%YEAR%' => date("Y")], 'AppBundle');
+
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} | " : null;
+
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
-            'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
+            'title' => 'TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах'.$page,
+            'description' => $pageDesc.'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
@@ -48,7 +52,7 @@ class DefaultController extends Controller
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => '100 лучших книг на сайте | TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
-            'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
+            'description' => '100 лучших книг на сайте | Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
@@ -72,8 +76,8 @@ class DefaultController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Поиск']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => '100 лучших книг на сайте | TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
-            'description' => 'ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги',
+            'title' => 'Поиск по каталогу книг | TopBook.com.ua - скачать книги в fb2, epub, pdf, txt форматах',
+            'description' => 'Поиск по каталогу книг | ТопБук - электронная библиотека. Тут Вы можете скачать бесплатно книги',
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
         ]);
 

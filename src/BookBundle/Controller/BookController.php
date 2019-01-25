@@ -34,10 +34,11 @@ class BookController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Новинки книг']);
 
         $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => 'Последние новинки книг в библиотеке ТопБук'.$page,
-            'description' => 'Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.',
+            'description' => "{$pageDesc} Последние новинки книг | Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
@@ -69,11 +70,11 @@ class BookController extends Controller
                 $genre = $book->getGenres()[0];
                 $breadcrumb->addBreadcrumb([
                     'title' => $genre->getParent()->getName(),
-                    'href' => $router->generate('sub_genre_books', ['genre' => $genre->getSlug(), 'sub_genre' => $genre->getParent()->getSlug()]),
+                    'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
                 ]);
                 $breadcrumb->addBreadcrumb([
                     'title' => $genre->getName(),
-                    'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
+                    'href' => $router->generate('sub_genre_books', ['genre' => $genre->getSlug(), 'sub_genre' => $genre->getParent()->getSlug()]),
                 ]);
             } else {
                 $breadcrumb->addBreadcrumb(['title' => $book->getGenres()[0]->getName(), 'href' => $router->generate('genre_books')]);
@@ -144,13 +145,15 @@ class BookController extends Controller
     public function yearListAction(Request $request)
     {
         $year = $request->get('year');
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
         $breadcrumb = $this->get('app.breadcrumb');
         $breadcrumb->addBreadcrumb(['title' => $year.' год']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Книги за '.$year.' год | ТопБук - Электронная библиотека для любителей книг',
-            'description' => "Список книг за {$year} год | ТопБук - Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
-            'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
+            'title' => 'Книги за '.$year.' год | ТопБук - Электронная библиотека для любителей книг'.$page,
+            'description' => "{$pageDesc} Список книг за {$year} год | ТопБук - Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
+            'keywords' => "{$page} год, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук",
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
