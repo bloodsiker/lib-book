@@ -70,11 +70,11 @@ class BookController extends Controller
                 $genre = $book->getGenres()[0];
                 $breadcrumb->addBreadcrumb([
                     'title' => $genre->getParent()->getName(),
-                    'href' => $router->generate('genre_books', ['genre' => $genre->getSlug()]),
+                    'href' => $router->generate('genre_books', ['genre' => $genre->getParent()->getSlug()]),
                 ]);
                 $breadcrumb->addBreadcrumb([
                     'title' => $genre->getName(),
-                    'href' => $router->generate('sub_genre_books', ['genre' => $genre->getSlug(), 'sub_genre' => $genre->getParent()->getSlug()]),
+                    'href' => $router->generate('sub_genre_books', ['genre' => $genre->getParent()->getSlug(), 'sub_genre' => $genre->getSlug()]),
                 ]);
             } else {
                 $breadcrumb->addBreadcrumb(['title' => $book->getGenres()[0]->getName(), 'href' => $router->generate('genre_books')]);
