@@ -174,23 +174,35 @@ class BookController extends Controller
         $baseWebDir = $this->getParameter('media_base_path');
 
         if (file_exists($baseWebDir.$file->getPath())) {
-            $name = explode('/', $file->getPath());
-            if (ob_get_level()) {
-                ob_end_clean();
-            }
+            $filename = explode('/', $file->getPath());
+            $content = file_get_contents($baseWebDir.$file->getPath());
 
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename='.basename(end($name)));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: '.$file->getSize());
+            $response = new Response();
+            $response->headers->set('Content-Type', 'mime/type');
+            $response->headers->set('Content-Disposition', 'attachment;filename="'.end($filename));
+            $response->setContent($content);
 
-            readfile($baseWebDir.$file->getPath());
-            die;
+            return $response;
         }
+
+//        if (file_exists($baseWebDir.$file->getPath())) {
+//            $name = explode('/', $file->getPath());
+//            if (ob_get_level()) {
+//                ob_end_clean();
+//            }
+//
+//            header('Content-Description: File Transfer');
+//            header('Content-Type: application/octet-stream');
+//            header('Content-Disposition: attachment; filename='.basename(end($name)));
+//            header('Content-Transfer-Encoding: binary');
+//            header('Expires: 0');
+//            header('Cache-Control: must-revalidate');
+//            header('Pragma: public');
+//            header('Content-Length: '.$file->getSize());
+//
+//            readfile($baseWebDir.$file->getPath());
+//            die;
+//        }
 
         return $this->redirect($request->headers->get('referer'));
     }
