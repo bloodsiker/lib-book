@@ -76,6 +76,9 @@ sonata_page_cache:
 # FOS User Bundle =============================================================
 fos_user_resetting_request:
     path: /resetting/request
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 # =============================================================================
 
 # Liip Imagine ================================================================

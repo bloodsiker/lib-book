@@ -9,6 +9,13 @@ parameters:
 #    security.acl.permission.map.class: "Sonata\\AdminBundle\\Security\\Acl\\Permission\\AdminPermissionMap"
 
 services:
+    app.security.authentication_handler:
+        class: AppBundle\Handler\AuthenticationHandler
+        public: false
+        arguments:
+            - "@router"
+            - "@session"
+
 #    session.handler.pdo:
 #        class: "Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\PdoSessionHandler"
 #        public: false

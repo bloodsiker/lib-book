@@ -8,9 +8,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class MatchesCommand
+ * Class BookCommand
  */
-class MatchesCommand extends ContainerAwareCommand
+class BookCommand extends ContainerAwareCommand
 {
     private $entityManager;
     private $output;

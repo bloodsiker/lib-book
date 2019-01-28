@@ -42,12 +42,21 @@ security:
         main:
             pattern:             .*
             context:             user
+            guard:
+                authenticators:
+                    - AppBundle\Security\LoginFormAuthenticator
             form_login:
-                provider:       fos_userbundle
-                login_path:     /login
-                use_forward:    false
-                check_path:     /login_check
-                failure_path:   null
+#                provider:       fos_userbundle
+#                login_path:     /login
+#                use_forward:    false
+#                check_path:     /login_check
+#                failure_path:   null
+
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                check_path: fos_user_security_check
+                success_handler: app.security.authentication_handler
+                failure_handler: app.security.authentication_handler
             logout:             true
             anonymous:          true
 
