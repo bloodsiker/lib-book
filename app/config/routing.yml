@@ -74,11 +74,15 @@ sonata_page_cache:
 # =============================================================================
 
 # FOS User Bundle =============================================================
+user_registration:
+    path:     /register
+    defaults: { _controller: UserBundle:Registration:register }
+
 fos_user_resetting_request:
     path: /resetting/request
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 # =============================================================================
 
 # Liip Imagine ================================================================

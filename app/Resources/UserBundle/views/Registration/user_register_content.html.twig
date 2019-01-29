@@ -1,0 +1,14 @@
+
+
+<div class="modal-wrap">
+        {#{{ dump(form.getErrorMessages()) }}#}
+        {#{{ dump(form.getErrorMessages()) }}#}
+
+    <div class="modal_form registration"><!-- Сaмo oкнo -->
+        <span class="modal_close"></span> <!-- Кнoпкa зaкрыть -->
+
+        <form data-url="{{ path('fos_user_registration_register') }}"   method="POST" class="ajax-popup-block-form">
+        {% include 'UserBundle:Registration:base_user_register_content.html.twig' %}
+        </form><!-- /form -->
+    </div><!-- /.modal_form registration -->
+</div><!-- /.modal-wrap -->

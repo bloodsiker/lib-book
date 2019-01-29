@@ -1,0 +1,6 @@
+{% form_theme form 'UserBundle:Form:registerFormTheming.html.twig' %}
+<h2>{{ 'base.interface.register'|trans({}, 'SonataUserBundle') }} <a class="modal-window" data-toggle="auth">{{ 'base.interface.login'|trans({}, 'SonataUserBundle') }}</a></h2>
+{{ form_widget(form, {'attr': {'novalidate': true }}) }}
+<div class="btn-wrap">
+    <button type="submit" class="btn btn-default">{{ 'login.form.btn.register_submit'|trans({}, 'SonataUserBundle') }}</button>
+</div>

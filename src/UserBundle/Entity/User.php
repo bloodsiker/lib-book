@@ -7,7 +7,6 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
  * Class User
- * @package UserBundle\Entity
  *
  * @ORM\Entity
  * @ORM\Table(name="user_users")
@@ -15,7 +14,7 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})

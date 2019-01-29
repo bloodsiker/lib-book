@@ -2,6 +2,8 @@
 
 namespace AppBundle\Security;
 
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,6 +67,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getCredentials(Request $request)
     {
+        if ($request->getPathInfo() !== '/login_check') {
+            return;
+        }
+
         $credentials = [
             '_username' => $request->request->get('_username'),
             '_password' => $request->request->get('_password'),
@@ -91,7 +97,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['_username']]);
+        $user = $userProvider->loadUserByUsername($credentials['_username']);
 
         if (!$user) {
             // fail authentication with a custom error
@@ -109,7 +115,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['_password']);
+        if ($this->passwordEncoder->isPasswordValid($user, $credentials['_password'])) {
+            return true;
+        }
+
+        throw new BadCredentialsException();
     }
 
     /**
@@ -123,12 +133,30 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
+        return new RedirectResponse($request->query->get('referrer', '/'));
+    }
 
-        // For example : return new RedirectResponse($this->router->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+    /**
+     * @param Request                 $request
+     * @param AuthenticationException $exception
+     *
+     * @return RedirectResponse
+     */
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+
+        $url = $this->router->generate('login');
+
+        return new RedirectResponse($url);
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportsRememberMe()
+    {
+        return false;
     }
 
     /**
@@ -137,5 +165,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     protected function getLoginUrl()
     {
         return $this->router->generate('login');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultSuccessRedirectUrl()
+    {
+        return $this->router->generate('index');
     }
 }
