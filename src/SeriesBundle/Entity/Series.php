@@ -15,6 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Series
 {
+    const TYPE_AUTHOR = 1;
+    const TYPE_PUBLISHING = 2;
+
     /**
      * @var int
      *
@@ -37,6 +40,13 @@ class Series
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     protected $slug;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", length=1, nullable=false)
+     */
+    protected $type;
 
     /**
      * @var \SeriesBundle\Entity\Series
@@ -68,6 +78,13 @@ class Series
     protected $books;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="BookBundle\Entity\Book", mappedBy="seriesPublishing")
+     */
+    protected $booksPublishing;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -82,6 +99,7 @@ class Series
         $this->isActive = true;
         $this->createdAt = new \DateTime('now');
         $this->books = new ArrayCollection();
+        $this->booksPublishing = new ArrayCollection();
         $this->children = new ArrayCollection();
     }
 
@@ -313,5 +331,72 @@ class Series
     public function getBooks()
     {
         return $this->books;
+    }
+
+    /**
+     * Add booksPublishing
+     *
+     * @param \BookBundle\Entity\Book $books
+     *
+     * @return $this
+     */
+    public function addBookPublishing(\BookBundle\Entity\Book $books)
+    {
+        $this->booksPublishing[] = $books;
+
+        return $this;
+    }
+
+    /**
+     * Remove booksPublishing
+     *
+     * @param \BookBundle\Entity\Book $books
+     */
+    public function removeBookPublishing(\BookBundle\Entity\Book $books)
+    {
+        $this->booksPublishing->removeElement($books);
+    }
+
+    /**
+     * Get booksPublishing
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBooksPublishing()
+    {
+        return $this->booksPublishing;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param int $type
+     *
+     * @return $this
+     */
+    public function setType(int $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTypeList()
+    {
+        return [
+            self::TYPE_AUTHOR     => 'author',
+            self::TYPE_PUBLISHING => 'publishing',
+        ];
     }
 }

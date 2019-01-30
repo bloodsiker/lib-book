@@ -90,6 +90,15 @@ class Book
     protected $series;
 
     /**
+     * @var \SeriesBundle\Entity\Series
+     *
+     * @ORM\ManyToOne(targetEntity="SeriesBundle\Entity\Series", inversedBy="booksPublishing")
+     * @ORM\JoinColumn(name="series_publishing_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $seriesPublishing;
+
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer", length=4, nullable=true)
@@ -493,6 +502,30 @@ class Book
     public function getSeries()
     {
         return $this->series;
+    }
+
+    /**
+     * Set seriesPublishing
+     *
+     * @param \SeriesBundle\Entity\Series $seriesPublishing
+     *
+     * @return Book
+     */
+    public function setSeriesPublishing(\SeriesBundle\Entity\Series $seriesPublishing = null)
+    {
+        $this->seriesPublishing = $seriesPublishing;
+
+        return $this;
+    }
+
+    /**
+     * Get seriesPublishing
+     *
+     * @return \SeriesBundle\Entity\Series
+     */
+    public function getSeriesPublishing()
+    {
+        return $this->seriesPublishing;
     }
 
     /**

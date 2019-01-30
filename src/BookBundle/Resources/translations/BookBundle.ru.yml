@@ -27,7 +27,8 @@ book:
         is_allow_download: Скачивания
         poster: Изображение книги
         authors: Автор(ы)
-        series: Серия
+        series_publishing: Издательская серия
+        series: Авторская серия
         isbn: ISBN
         series_number: 'номер # в серии'
         pages: Страниц

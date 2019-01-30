@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -26,6 +27,15 @@ class SeriesAdmin extends Admin
     ];
 
     /**
+     * {@inheritdoc}
+     */
+    public function setTranslationDomain($translationDomain)
+    {
+        $this->translationDomain = $translationDomain;
+        $this->formOptions['translation_domain'] = $translationDomain;
+    }
+
+    /**
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
@@ -36,6 +46,11 @@ class SeriesAdmin extends Admin
             ])
             ->addIdentifier('title', null, [
                 'label' => 'series.fields.title',
+            ])
+            ->add('type', 'choice', [
+                'label' => 'series.fields.type',
+                'choices' => array_flip($this->getTypes()),
+                'catalogue' => $this->getTranslationDomain(),
             ])
             ->add('parent', null, [
                 'label' => 'series.fields.parent',
@@ -58,6 +73,14 @@ class SeriesAdmin extends Admin
         $datagridMapper
             ->add('title', null, [
                 'label' => 'series.fields.title',
+            ])
+            ->add('type', null, [
+                'label' => 'series.fields.type',
+            ], ChoiceType::class, [
+                'choices' => $this->getTypes(),
+                'choice_translation_domain' => $this->getTranslationDomain(),
+                'expanded' => false,
+                'multiple' => false,
             ])
             ->add('parent', null, [
                 'label' => 'series.fields.parent',
@@ -91,6 +114,11 @@ class SeriesAdmin extends Admin
                     'label' => 'series.fields.is_active',
                     'required' => false,
                 ])
+                ->add('type', ChoiceType::class, [
+                    'label' => 'series.fields.type',
+                    'choices' => $this->getTypes(),
+                    'required' => true,
+                ])
                 ->add('parent', ModelListType::class, [
                     'label' => 'series.fields.parent',
                     'required' => false,
@@ -102,5 +130,22 @@ class SeriesAdmin extends Admin
                     'attr' => ['readonly' => true],
                 ])
             ->end();
+    }
+
+    /**
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    private function getTypes()
+    {
+        $entity = $this->getClass();
+        $types = $entity::getTypeList();
+
+        foreach ($types as $key => $value) {
+            $typeChoice['series.form.types.'.$value] = $key;
+        }
+
+        return $typeChoice;
     }
 }

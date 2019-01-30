@@ -216,6 +216,10 @@ class BookAdmin extends Admin
                     'btn_catalogue' => $this->translationDomain,
                     'minimum_input_length' => 2,
                 ])
+                ->add('seriesPublishing', ModelListType::class, [
+                    'label' => 'book.fields.series_publishing',
+                    'required' => false,
+                ])
                 ->add('series', ModelListType::class, [
                     'label' => 'book.fields.series',
                     'required' => false,

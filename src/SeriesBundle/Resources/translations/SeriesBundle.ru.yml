@@ -18,3 +18,8 @@ series:
         slug: Сегмент URL (slug)
         created_at: Дата создания
         id: ID
+        type: Тип
+    form:
+        types:
+            author: Авторския
+            publishing: Издательская
