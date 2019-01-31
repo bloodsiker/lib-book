@@ -69,11 +69,21 @@ class BookRepository extends EntityRepository
      */
     public function filterBySeries(QueryBuilder $qb, Series $series) : QueryBuilder
     {
-        return $qb
-            ->resetDQLPart('orderBy')
-            ->andWhere('b.series = :series')
+         $qb->resetDQLPart('orderBy');
+
+        if ($series->getType() === Series::TYPE_AUTHOR) {
+            $qb
+                ->andWhere('b.series = :series');
+        } elseif ($series->getType() === Series::TYPE_PUBLISHING) {
+            $qb
+                ->andWhere('b.seriesPublishing = :series');
+        };
+
+        $qb
             ->setParameter('series', $series)
             ->orderBy('b.seriesNumber');
+
+        return $qb;
     }
 
     /**

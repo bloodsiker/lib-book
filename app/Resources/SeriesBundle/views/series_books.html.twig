@@ -2,7 +2,8 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            {% set countBook = series.getBooks().count() + series.getBooksPublishing().count() %}
+            {% set countBook = series.type == constant('SeriesBundle\\Entity\\Series::TYPE_AUTHOR') ? series.getBooks().count() :
+                series.type == constant('SeriesBundle\\Entity\\Series::TYPE_PUBLISHING') ? series.getBooksPublishing().count() : null %}
             <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
         </div>
 
