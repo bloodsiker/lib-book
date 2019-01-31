@@ -118,6 +118,10 @@ class DefaultController extends Controller
         }
 
         $urls[] = ['loc' => $router->generate('series_list'), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        $types = ['author', 'publishing'];
+        foreach ($types as $type) {
+            $urls[] = ['loc' => $router->generate('series_list_type', ['type' => $type]), 'changefreq' => 'weekly', 'priority' => '0.5'];
+        }
         $series = $em->getRepository(Series::class)->findBy(['isActive' => true]);
         foreach ($series as $serie) {
             $urls[] = ['loc' => $router->generate('series_books', ['slug' => $serie->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];

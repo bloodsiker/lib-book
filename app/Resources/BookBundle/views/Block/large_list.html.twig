@@ -1,5 +1,5 @@
 {% for book in books %}
-    <div class="book-item">
+    <div class="book-item" itemscope itemtype="http://schema.org/Book">
         <div class="book-img img-box pseudo-link"
              data-link="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">
             <div class="book-rates">
@@ -20,19 +20,19 @@
                     </span>
                 </div>
             </div>
-            <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}"/>
+            <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image" />
         </div>
         <div class="book-text">
 
             {% set number = settings['series'] and book.seriesNumber ? '#'~book.seriesNumber : null %}
-            <a class="book-title" href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">{{ book.name }} {{ number }}</a>
+            <a class="book-title" href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}" itemprop="name">{{ book.name }} {{ number }}</a>
 
             <div class="book-text-inner">
                 {% if book.getAuthors is iterable %}
                     <div class="mi-item">
                         <span>Автор:</span>
                         {% for author in book.getAuthors %}
-                            <a href="{{ path('author_books', { 'slug': author.slug }) }}">{{ author.name }}</a>{{ loop.last ? '' : ' / ' }}
+                            <a href="{{ path('author_books', { 'slug': author.slug }) }}" itemprop="author"><em>{{ author.name }}</em></a>{{ loop.last ? '' : ' / ' }}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -41,7 +41,7 @@
                     <div class="mi-item">
                         <span>Жанр:</span>
                         {% for genre in book.getGenres %}
-                            <a href="{{ genre_path(genre) }}">{{ genre.name }}</a>{{ loop.last ? '' : ' / ' }}
+                            <a href="{{ genre_path(genre) }}" itemprop="genre"><em>{{ genre.name }}</em></a>{{ loop.last ? '' : ' / ' }}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -49,36 +49,46 @@
                 {% if book.year is not empty %}
                     <div class="mi-item">
                         <span>Год:</span>
-                        <a href="{{ path('year_books', { 'year': book.year }) }}">{{ book.year }}</a>
+                        <a href="{{ path('year_books', { 'year': book.year }) }}"><em>{{ book.year }}</em></a>
                     </div>
                 {% endif %}
 
                 {% if book.series is not empty %}
                     <div class="mi-item">
-                        <span>Серия:</span>
-                        <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</a>
+                        <span>Авторская серия:</span>
+                        <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">
+                            <em>{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</em>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if book.seriesPublishing is not empty %}
+                    <div class="mi-item">
+                        <span>Издательская серия:</span>
+                        <a href="{{ path('series_books', { 'slug': book.seriesPublishing.slug }) }}"><em>{{ book.seriesPublishing }}</em></a>
                     </div>
                 {% endif %}
 
                 {% if book.pages is not empty %}
                     <div class="mi-item">
-                        <span>Страниц:</span> {{ book.pages }}
+                        <span>Страниц:</span>
+                        <em itemprop="numberOfPages">{{ book.pages }}</em>
                     </div>
                 {% endif %}
 
                 {% if book.isbn is not empty %}
                     <div class="mi-item">
-                        <span>ISBN:</span> {{ book.isbn }}
+                        <span>ISBN:</span> <em itemprop="isbn">{{ book.isbn }}</em>
                     </div>
                 {% endif %}
 
                 {% if book.restrictAge is not empty %}
                     <div class="mi-item">
-                        <span>Ограничение:</span> {{ book.restrictAge }}+
+                        <span>Ограничение:</span> <em>{{ book.restrictAge }}+</em>
                     </div>
                 {% endif %}
 
-                <div class="book-desc">{{ book.description|truncate(280, true)|raw }}</div>
+                <div class="book-desc" itemprop="description">{{ book.description|truncate(280, true)|raw }}</div>
 
                 <div class="book-stats">
                     <span class="stats-item">Просмотров <i class="fa fa-eye" aria-hidden="true"></i> {{ book.views|number_format(0, '.', ' ') }}</span>

@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="section-title clearfix">
-            {% set countBook = series.getBooks().count() %}
+            {% set countBook = series.getBooks().count() + series.getBooksPublishing().count() %}
             <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
         </div>
 

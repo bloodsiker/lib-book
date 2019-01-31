@@ -62,6 +62,7 @@ class ListSeriesBlockService extends AbstractAdminBlockService
             'items_count' => 20,
             'page'        => 1,
             'search'      => null,
+            'type'        => null,
             'template'    => 'SeriesBundle:Block:series_list.html.twig',
         ]);
     }
@@ -89,6 +90,14 @@ class ListSeriesBlockService extends AbstractAdminBlockService
 
         if ($blockContext->getSetting('search')) {
             $repository->searchBySeries($qb, $blockContext->getSetting('search'));
+        }
+
+        $type = $blockContext->getSetting('type');
+        if ($type) {
+            $typeList = array_flip(Series::getTypeList());
+            if (array_key_exists($type, $typeList)) {
+                $repository->filterByType($qb, $typeList[$type]);
+            }
         }
 
         $paginator = new Pagerfanta(new DoctrineORMAdapter($qb, true, false));

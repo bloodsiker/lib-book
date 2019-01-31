@@ -26,6 +26,17 @@ class SeriesRepository extends EntityRepository
 
     /**
      * @param QueryBuilder $qb
+     * @param int          $type
+     *
+     * @return QueryBuilder
+     */
+    public function filterByType(QueryBuilder $qb, int $type): QueryBuilder
+    {
+        return $qb->andWhere("s.type = :type")->setParameter('type', $type);
+    }
+
+    /**
+     * @param QueryBuilder $qb
      * @param string       $search
      *
      * @return QueryBuilder

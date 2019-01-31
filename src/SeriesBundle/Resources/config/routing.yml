@@ -4,6 +4,13 @@ series_list:
     defaults:
         _controller: SeriesBundle:Series:list
 
+series_list_type:
+    path: /series-{type}
+    defaults:
+        _controller: SeriesBundle:Series:list
+    requirements:
+        type: "author|publishing"
+
 series_books:
     path: /series/{slug}
     defaults:

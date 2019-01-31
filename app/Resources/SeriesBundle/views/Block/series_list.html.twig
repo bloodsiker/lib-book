@@ -1,12 +1,24 @@
-{% if app.request.get('search') %}
-    <h1>Серии. Результаты поиска по запросу <span class="highlight">{{ app.request.get('search')|raw }}</span> ({{ series.count }})</h1>
+{% set typeSeries = 'front.series.'~settings.type ?? 'all' %}
+{% if settings.search %}
+    <h1>{{ typeSeries| trans({}, 'SeriesBundle') }}. Результаты поиска по запросу <span class="highlight">{{ settings.search|raw }}</span> ({{ series.count }})</h1>
 {% else %}
-    <h1>Серии ({{ series.count }})</h1>
+    <h1>{{ typeSeries| trans({}, 'SeriesBundle') }} ({{ series.count }})</h1>
 {% endif %}
 
 <hr class="line">
 
-<form action="{{ path('series_list') }}" class="form">
+<ul class="author-filter">
+    <li><a href="{{ path('series_list') }}">{{ 'front.series.all'| trans({}, 'SeriesBundle') }}</a></li>
+    <li>
+        <a href="{{ path('series_list_type', { 'type': 'author' }) }}">{{ 'front.series.author'| trans({}, 'SeriesBundle') }}</a>
+    </li>
+    <li>
+        <a href="{{ path('series_list_type', { 'type': 'publishing' }) }}">{{ 'front.series.publishing'| trans({}, 'SeriesBundle') }}</a>
+    </li>
+</ul>
+
+{% set searchUrl = settings.type ? path('series_list_type', { 'type': settings.type }) : path('series_list') %}
+<form action="{{ searchUrl }}" class="form">
     <div class="inputs">
         <input type="text" name="search" placeholder="Искать..">
         <button>Искать</button>
@@ -17,7 +29,10 @@
     {% for serie in series %}
         <tr>
             <td>
-                <i aria-hidden="true" class="fa fa-book"></i> {{ serie.getBooks().count() }}
+                {% set countBook = settings.type and settings.type == 'author' ? serie.getBooks().count() :
+                    settings.type and settings.type == 'publishing' ? serie.getBooksPublishing().count() :
+                    serie.getBooks().count() + serie.getBooksPublishing().count() %}
+                <i aria-hidden="true" class="fa fa-book"></i> {{ countBook }}
             </td>
             <td class="title">
                 <a href="{{ path('series_books', { 'slug': serie.slug }) }}">{{ replace_highlight(serie.title, app.request.get('search'))|raw }}</a>

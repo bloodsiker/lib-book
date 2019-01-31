@@ -399,4 +399,19 @@ class Series
             self::TYPE_PUBLISHING => 'publishing',
         ];
     }
+
+    /**
+     * @param string $type
+     *
+     * @return mixed
+     */
+    public static function getNameType($type)
+    {
+        $types = [
+            'author'     => 'front.series.author',
+            'publishing' => 'front.series.publishing',
+        ];
+
+        return $types[$type];
+    }
 }

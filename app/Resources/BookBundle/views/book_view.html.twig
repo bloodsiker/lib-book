@@ -46,9 +46,18 @@
 
                         {% if book.series is not empty %}
                             <div class="mi-item">
-                                <span><i class="fa fa-pencil-square"></i>Серия:</span>
+                                <span><i class="fa fa-pencil-square"></i>Авторская серия:</span>
                                 <a href="{{ path('series_books', { 'slug': book.series.slug }) }}">
                                     <em>{{ book.series }} {{ book.seriesNumber ? '#'~book.seriesNumber : null }}</em>
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        {% if book.seriesPublishing is not empty %}
+                            <div class="mi-item">
+                                <span><i class="fa fa-pencil-square"></i>Издательская серия:</span>
+                                <a href="{{ path('series_books', { 'slug': book.seriesPublishing.slug }) }}">
+                                    <em>{{ book.seriesPublishing }}</em>
                                 </a>
                             </div>
                         {% endif %}

@@ -24,14 +24,24 @@ class SeriesController extends Controller
      */
     public function listAction(Request $request)
     {
+        $router = $this->get('router');
         $breadcrumb = $this->get('app.breadcrumb');
-        $breadcrumb->addBreadcrumb(['title' => 'Серии']);
+
+        if (!$request->get('type')) {
+            $title = 'Серии';
+            $breadcrumb->addBreadcrumb(['title' => $title]);
+        } else {
+            $title = $this->get('translator')->trans(Series::getNameType($request->get('type')), [], 'SeriesBundle');
+            $breadcrumb->addBreadcrumb(['title' => 'Серии', 'href' => $router->generate('series_list')]);
+            $breadcrumb->addBreadcrumb(['title' => $title]);
+        }
+
         $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
         $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Серии'.$page.' | ТопБук - электронная библиотека',
-            'description' => $pageDesc.'Серии | список книг по сериям | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации',
+            'title' => $title.$page.' | ТопБук - электронная библиотека',
+            'description' => $pageDesc.$title.' | список книг по сериям | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации',
             'keywords' => 'книги по сериям, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',

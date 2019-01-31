@@ -23,3 +23,9 @@ series:
         types:
             author: Авторския
             publishing: Издательская
+
+front:
+    series:
+        all: Все серии
+        author: Авторские серии
+        publishing: Издательские серии
