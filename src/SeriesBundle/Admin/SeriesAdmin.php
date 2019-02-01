@@ -36,6 +36,27 @@ class SeriesAdmin extends Admin
     }
 
     /**
+     * @param string $context
+     *
+     * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+     */
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery();
+
+        if ('list' === $context) {
+            $type = (int) $this->getRequest()->get('type');
+
+            if ($type) {
+                $query->andWhere($query->expr()->eq($query->getRootAlias().'.type', ':type'));
+                $query->setParameter('type', $type);
+            }
+        }
+
+        return $query;
+    }
+
+    /**
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
