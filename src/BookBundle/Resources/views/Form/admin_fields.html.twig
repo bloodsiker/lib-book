@@ -264,7 +264,7 @@
 
             <span class="btn-group">
                 {% if sonata_admin.field_description.associationadmin.hasroute('list') and sonata_admin.field_description.associationadmin.isGranted('LIST') and btn_list %}
-                    {% if sonata_admin.value is instanceof('\\SeriesBundle\\Entity\\Series') %}
+                    {% if sonata_admin.field_description.associationAdmin is instanceof('\\SeriesBundle\\Admin\\SeriesAdmin') %}
                         {% if sonata_admin.field_description.name == 'series' %}
                             {% set seriesType = constant('SeriesBundle\\Entity\\Series::TYPE_AUTHOR') %}
                         {% elseif sonata_admin.field_description.name == 'seriesPublishing' %}
