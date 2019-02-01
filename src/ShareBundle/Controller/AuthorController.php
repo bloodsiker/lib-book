@@ -28,10 +28,10 @@ class AuthorController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Авторы']);
 
         if ($request->get('letter')) {
-            $title = "Авторы на букву {$request->get('letter')} | ТопБук - электронная библиотека";
+            $title = "Авторы на букву {$request->get('letter')} | TopBook.com.ua - скачать книги бесплатно и без регистрации";
             $description = "Список авторов фамилия которых начинается на букву {$request->get('letter')}";
         } else {
-            $title = 'Все авторы | ТопБук - электронная библиотека';
+            $title = 'Все авторы | TopBook.com.ua - скачать книги бесплатно и без регистрации';
             $description = "Список авторов";
         }
 
@@ -72,13 +72,13 @@ class AuthorController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $author->getName()]);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
+            'title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
             'description' => "Скачать книги автора {$author->getName()} бесплатно и без регистрации",
             'keywords' => "книги автора {$author->getName()}, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук",
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
-                'og:title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | ТопБук - электронная библиотека',
+                'og:title' => $author->getName().' | Книги | Страница '.$request->get('page', 1).' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
         ]);

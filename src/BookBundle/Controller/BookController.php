@@ -38,7 +38,7 @@ class BookController extends Controller
 
         $this->get('app.seo.updater')->doMagic(null, [
             'title' => 'Последние новинки книг в библиотеке ТопБук'.$page,
-            'description' => "{$pageDesc} Последние новинки книг | Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
+            'description' => "{$pageDesc} Последние новинки книг | Электронная библиотека, скачать книги бесплатно и без регичтрации, читать рецензии, отзывы, книжные рейтинги.",
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, топбук',
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
@@ -151,8 +151,8 @@ class BookController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $year.' год']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Книги за '.$year.' год | ТопБук - Электронная библиотека для любителей книг'.$page,
-            'description' => "{$pageDesc} Список книг за {$year} год | ТопБук - Электронная библиотека, скачать книги, читать рецензии, отзывы, книжные рейтинги.",
+            'title' => 'Книги за '.$year.' год | TopBook.com.ua - скачать книги бесплатно и без регистрации'.$page,
+            'description' => "{$pageDesc} Список книг за {$year} год | ТопБук - Электронная библиотека, скачать книги в форматах fb2, epub, pdf, txt, читать рецензии, отзывы, книжные рейтинги.",
             'keywords' => "{$page} год, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук",
             'og' => [
                 'og:url' => $request->getSchemeAndHttpHost(),
@@ -184,25 +184,6 @@ class BookController extends Controller
 
             return $response;
         }
-
-//        if (file_exists($baseWebDir.$file->getPath())) {
-//            $name = explode('/', $file->getPath());
-//            if (ob_get_level()) {
-//                ob_end_clean();
-//            }
-//
-//            header('Content-Description: File Transfer');
-//            header('Content-Type: application/octet-stream');
-//            header('Content-Disposition: attachment; filename='.basename(end($name)));
-//            header('Content-Transfer-Encoding: binary');
-//            header('Expires: 0');
-//            header('Cache-Control: must-revalidate');
-//            header('Pragma: public');
-//            header('Content-Length: '.$file->getSize());
-//
-//            readfile($baseWebDir.$file->getPath());
-//            die;
-//        }
 
         return $this->redirect($request->headers->get('referer'));
     }

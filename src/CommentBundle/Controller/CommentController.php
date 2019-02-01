@@ -30,7 +30,7 @@ class CommentController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Последние комментарии']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Комментарии | TopBook.com.ua - скачать книги без регистрации в fb2, epub, pdf, txt форматах'.$page,
+            'title' => 'Комментарии | TopBook.com.ua - скачать книги бесплатно и без регистрации в fb2, epub, pdf, txt форматах'.$page,
             'description' => "{$pageDesc} Последние комментарии по книгам | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации",
             'keywords' => 'скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [

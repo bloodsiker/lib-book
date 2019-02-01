@@ -28,8 +28,8 @@ class GenreController extends Controller
         $breadcrumb->addBreadcrumb(['title' => 'Жанры']);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Все жанры | ТопБук - электронная библиотека',
-            'description' => 'Жанры | список книг по жанрам | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации',
+            'title' => 'Все жанры | TopBook.com.ua - скачать книги бесплатно и без регистрации',
+            'description' => 'Жанры | список книг по жанрам | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации в форматах fb2, epub, pdf, txt',
             'keywords' => 'книги по жанрам, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
@@ -85,8 +85,8 @@ class GenreController extends Controller
         $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $titleGenre.' | Книги'.$page.' | ТопБук - электронная библиотека',
-            'description' => $pageDesc."Скачать книги из жанра {$titleGenre} бесплатно и без регистрации",
+            'title' => $titleGenre.' | Книги'.$page.' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
+            'description' => $pageDesc."Скачать книги из жанра {$titleGenre} бесплатно и без регистрации в форматах fb2, epub, pdf, txt",
             'keywords' => $titleGenre.', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',

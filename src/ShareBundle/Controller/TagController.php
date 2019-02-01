@@ -46,13 +46,13 @@ class TagController extends Controller
         $breadcrumb->addBreadcrumb(['title' => $tag->getName()]);
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => 'Книги по тегу ' . $tag->getName().' | Страница '.$request->get('page', 1).' | ТопБук',
+            'title' => 'Книги по тегу ' . $tag->getName().' | Страница '.$request->get('page', 1).' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
             'description' => 'Скачать бесплатно книги без регистрации по тегу '.$tag->getName(),
             'keywords' => $tag->getName().', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
-                'og:title' => 'Книги по тегу ' . $tag->getName().' | Страница '.$request->get('page', 1).' | ТопБук',
+                'og:title' => 'Книги по тегу ' . $tag->getName().' | Страница '.$request->get('page', 1).' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
         ]);

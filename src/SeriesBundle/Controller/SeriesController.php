@@ -40,7 +40,7 @@ class SeriesController extends Controller
         $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
 
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $title.$page.' | ТопБук - электронная библиотека',
+            'title' => $title.$page.' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
             'description' => $pageDesc.$title.' | список книг по сериям | ТопБук - электронная библиотека. Здесь Вы можете скачать бесплатно книги без регистрации',
             'keywords' => 'книги по сериям, скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
@@ -80,13 +80,13 @@ class SeriesController extends Controller
 
         $titleSeries = 'Серия '.$series->getTitle();
         $this->get('app.seo.updater')->doMagic(null, [
-            'title' => $titleSeries.' | Книги'.$page.' | ТопБук - электронная библиотека',
-            'description' => "{$pageDesc} Скачать книги из серии {$series->getTitle()} бесплатно и без регистрации",
+            'title' => $titleSeries.' | Книги'.$page.' | TopBook.com.ua - скачать книги бесплатно и без регистрации',
+            'description' => "{$pageDesc} Скачать книги из серии {$series->getTitle()} бесплатно и без регистрации в форматах fb2, epub, pdf, txt",
             'keywords' => $series->getTitle().', скачать книги, рецензии, отзывы на книги, цитаты из книг, краткое содержание, без регистрации, топбук',
             'og' => [
                 'og:site_name' => 'TopBook.com.ua - электронная библиотека',
                 'og:type' => 'website',
-                'og:title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | ТопБук',
+                'og:title' => $titleSeries.' | Книги | Страница '.$request->get('page', 1).' | TopBook.com.ua - скачать книги бесплатно и без регистрации в форматах fb2, epub, pdf, txt',
                 'og:url' => $request->getSchemeAndHttpHost(),
             ],
         ]);
