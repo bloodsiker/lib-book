@@ -89,7 +89,7 @@ class DefaultView implements ViewInterface
      */
     protected function getDefaultProximity()
     {
-        return 4;
+        return 3;
     }
 
     /**
@@ -154,7 +154,13 @@ class DefaultView implements ViewInterface
     {
         $this->calculateStartAndEndPage();
 
-        return $this->pages();
+        return $this->first().
+            $this->secondIfStartIs3().
+            $this->dotsIfStartIsOver3().
+            $this->pages().
+            $this->dotsIfEndIsUnder3ToLast().
+            $this->secondToLastIfEndIs3ToLast().
+            $this->last();
     }
 
 
@@ -238,6 +244,16 @@ class DefaultView implements ViewInterface
     /**
      * @return string
      */
+    private function first()
+    {
+        if ($this->startPage > 1) {
+            return $this->template->first();
+        }
+    }
+
+    /**
+     * @return string
+     */
     private function previous()
     {
         if ($this->pagerfanta->hasPreviousPage()) {
@@ -258,6 +274,16 @@ class DefaultView implements ViewInterface
     }
 
     /**
+     *  @return string
+     */
+    private function dotsIfStartIsOver3()
+    {
+        if ($this->startPage > 3) {
+            return $this->template->separator();
+        }
+    }
+
+    /**
      * @return string
      */
     private function pages()
@@ -272,6 +298,16 @@ class DefaultView implements ViewInterface
     }
 
     /**
+     * @return string
+     */
+    private function dotsIfEndIsUnder3ToLast()
+    {
+        if ($this->endPage < $this->toLast(3)) {
+            return $this->template->separator();
+        }
+    }
+
+        /**
      * @param int $page
      *
      * @return string
@@ -308,12 +344,23 @@ class DefaultView implements ViewInterface
     /**
      * @return string
      */
+    private function last()
+    {
+        if ($this->pagerfanta->getNbPages() > $this->endPage) {
+            return $this->template->last($this->pagerfanta->getNbPages());
+        }
+    }
+
+    /**
+     * @return string
+     */
     private function next()
     {
         if ($this->pagerfanta->hasNextPage()) {
             return $this->template->nextEnabled($this->pagerfanta->getNextPage());
         }
 
-        return null;
+//        return null;
+        return $this->template->nextDisabled();
     }
 }
