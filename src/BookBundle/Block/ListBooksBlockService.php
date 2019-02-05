@@ -133,6 +133,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
         $paginator->setAllowOutOfRangePages(true);
         $paginator->setMaxPerPage($limit);
         $paginator->setCurrentPage($page);
+        dump($paginator->getIterator());
 
         $template = !is_null($blockContext->getSetting('list_type'))
             ? $blockContext->getSetting('list_type') : $blockContext->getTemplate();
