@@ -274,17 +274,19 @@ $(document).ready(function(){
     });
 
 
-    $('.head').append('<div class="show-sidebar button"><i class="fa fa-bars"></i></div>' +
-        '<div class="show-menu button"><i class="fa fa-bars"></i></div>' +
-        '<div class="show-auth button"><i class="fa fa-user"></i></div>');
+    $('.head').append('<div class="show-sidebar button">Жанры</div>' +
+        '<div class="show-menu button"><i class="fa fa-bars"></i></div>'
+        // '<div class="show-auth button"><i class="fa fa-user"></i></div>'
+    );
 
     $(".show-menu").click(function(){
-        $(".top-nav").slideToggle(200);
+        $(".top-nav-title").slideToggle(200);
         $(this).find('i').toggleClass('fa-bars fa-times');
     });
 
     $(".show-sidebar").click(function(){
         $(".cols, .slider-wrap").toggleClass('vis-side');
+        $(".col-cont").toggleClass('hidden');
         $(this).find('i').toggleClass('fa-bars fa-times');$('html, body').animate({
             scrollTop: $("#cols-r").offset().top
         }, 800);
