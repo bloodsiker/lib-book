@@ -29,3 +29,5 @@ front:
         all: Все серии
         author: Авторские серии
         publishing: Издательские серии
+        label_author: Авторския серия
+        label_publishing: Издательская серия

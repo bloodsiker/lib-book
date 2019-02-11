@@ -115,7 +115,6 @@ $(document).mouseup(function (e) {
     if (container.has(e.target).length === 0){
         removeElem('#search-close');
         $('.wrap').removeClass('bluer');
-        $('#quick-search').val('');
         $('.result-search').html('').hide();
     }
 });
@@ -275,9 +274,16 @@ $(document).ready(function(){
     });
 
 
-    $('.head').append('<div class="show-menu button"><i class="fa fa-bars"></i></div><div class="show-auth button"><i class="fa fa-user"></i></div>');
+    $('.head').append('<div class="show-sidebar button"><i class="fa fa-bars"></i></div>' +
+        '<div class="show-menu button"><i class="fa fa-bars"></i></div>' +
+        '<div class="show-auth button"><i class="fa fa-user"></i></div>');
 
     $(".show-menu").click(function(){
+        $(".top-nav").slideToggle(200);
+        $(this).find('i').toggleClass('fa-bars fa-times');
+    });
+
+    $(".show-sidebar").click(function(){
         $(".cols, .slider-wrap").toggleClass('vis-side');
         $(this).find('i').toggleClass('fa-bars fa-times');$('html, body').animate({
             scrollTop: $("#cols-r").offset().top

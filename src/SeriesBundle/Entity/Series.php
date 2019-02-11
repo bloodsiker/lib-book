@@ -401,16 +401,29 @@ class Series
     }
 
     /**
-     * @param string $type
+     * @param string|int $type
      *
      * @return mixed
      */
     public static function getNameType($type)
     {
-        $types = [
-            'author'     => 'front.series.author',
-            'publishing' => 'front.series.publishing',
-        ];
+        if (is_string($type)) {
+            $types = [
+                'author'     => 'front.series.author',
+                'publishing' => 'front.series.publishing',
+            ];
+        } elseif (is_int($type)) {
+            $types = [
+                self::TYPE_AUTHOR     => [
+                    'class' => 'author',
+                    'name'  => 'front.series.label_author',
+                ],
+                self::TYPE_PUBLISHING => [
+                    'class' => 'publishing',
+                    'name'  => 'front.series.label_publishing',
+                ],
+            ];
+        }
 
         return $types[$type];
     }

@@ -36,6 +36,8 @@
             </td>
             <td class="title">
                 <a href="{{ path('series_books', { 'slug': serie.slug }) }}">{{ replace_highlight(serie.title, app.request.get('search'))|raw }}</a>
+                {% set sType = serie.getNameType(serie.type) %}
+                <span class="lable lable-{{ sType.class }}">{{ sType.name| trans({}, 'SeriesBundle') }}</span>
             </td>
         </tr>
     {% endfor %}
