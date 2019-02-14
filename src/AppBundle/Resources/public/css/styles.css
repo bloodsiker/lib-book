@@ -374,7 +374,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .foot-line {display: flex; flex-flow: row wrap; }
 .foot-line {padding:30px 15px; min-height:70px; background-color:#252c35; color:#FFF; border-top:5px solid #ffb900}
 .foot-line a {text-decoration:underline; color:#fff;}
-.foot-line .live-internet {margin-left: auto}
+.foot-line .counters {margin-left: auto; display: flex; flex-flow: row wrap;}
+.counters .bigmir,.live-internet {margin: 0 3px;}
 
 
 /* FULL STORY bookS
