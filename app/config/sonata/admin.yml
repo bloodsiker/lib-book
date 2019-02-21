@@ -68,6 +68,7 @@ sonata_admin:
                 icon: <i class="fa fa-sitemap"></i>
                 items:
                     - sonata.page.admin.page
+                    - sonata.page.admin.page_redirect
                     - sonata.page.admin.site
                     - sonata.page.admin.site_variables
                     - sonata.page.admin.site_variables_placement

@@ -20,3 +20,14 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, ['SonataPageBundle'] ]
+
+    sonata.page.admin.page_redirect:
+        class: "PageBundle\\Admin\\PageRedirectAdmin"
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'sonata_page', label: 'sonata_page.page_redirect_editor' }
+        arguments:
+            - ~
+            - "PageBundle\\Entity\\PageRedirect"
+            - ~
+        calls:
+            - [ setTranslationDomain, ['SonataPageBundle'] ]
