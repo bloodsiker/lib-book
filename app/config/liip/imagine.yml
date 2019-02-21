@@ -4,7 +4,7 @@
 
 liip_imagine:
     data_loader: filesystem #default
-    driver: imagick #gd
+    driver: gd #imagick
 
     loaders:
         default:
