@@ -36,6 +36,21 @@ class SeriesAdmin extends Admin
     }
 
     /**
+     * @return mixed
+     */
+    public function getNewInstance()
+    {
+        $instance = parent::getNewInstance();
+
+        $type = (int) $this->getRequest()->get('type');
+        if ($this->hasRequest() && !is_null($type)) {
+            $instance->setType($type);
+        }
+
+        return $instance;
+    }
+
+    /**
      * @param string $context
      *
      * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
