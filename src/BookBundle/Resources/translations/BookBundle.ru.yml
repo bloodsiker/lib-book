@@ -3,6 +3,7 @@ Book List: Книги
 Book Create: Создать книгу
 
 btn_search_related: Показать релевантные книги по тегам
+btn_search_tags: Показать релевантные теги по тексту
 not_found: Ничего не найдено...
 no_tags_selected: Нет выбранных тегов в книге...
 

@@ -71,6 +71,7 @@ class BookAdmin extends Admin
     {
 //        $collection->add('preview', 'preview');
         $collection->add('related_by_tags', 'related-by-tags');
+        $collection->add('find_tags_in_text', 'find-tags-in-text');
     }
 
     /**

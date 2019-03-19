@@ -55,4 +55,31 @@ class BookAdminController extends Controller
 
         return $this->renderJson($result);
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws \Exception
+     */
+    public function findTagsInTextAction(Request $request)
+    {
+        $excludeTags = array_map(
+            function ($value) { return (int) $value; },
+            $request->request->get('tags', [])
+        );
+
+        $bookFile = array_map(function ($value) {
+            return (int) $value;
+        }, $request->request->get('bookFile', []));
+
+        $text = $request->request->get('textContent', '');
+
+
+        $tagFinder = $this->container->get('share.tag.finder');
+        $result = $tagFinder->findTagsInText($text, $excludeTags, $bookFile);
+
+        return $this->renderJson($result);
+    }
 }

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Tag
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ShareBundle\Entity\TagRepository")
  * @ORM\Table(name="share_tags")
  * @ORM\HasLifecycleCallbacks
  *

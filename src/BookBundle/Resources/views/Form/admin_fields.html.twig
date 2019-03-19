@@ -136,6 +136,22 @@
     {#{% endif %}#}
 {#{%- endblock radio_widget %}#}
 
+{% block sonata_admin_book_tags_sonata_type_model_autocomplete_widget %}
+    {% include '@SonataAdmin/Form/Type/sonata_type_model_autocomplete.html.twig' %}
+
+    <a href="#" onclick="return start_field_search_{{ id }}(this);" class="btn btn-primary btn-sm sonata-ba-action pull-right" title="" id="btn_search_tags_{{ id }}">
+        <i class="fa fa-refresh"></i>
+        {{ 'btn_search_tags'|trans({}, btn_catalogue) }}
+    </a>
+    <script>
+        jQuery('#btn_search_tags_{{ id }}').appendTo('#field_actions_{{ id }}');
+    </script>
+
+    <div id="field_search_tags_{{ id }}" style="max-height: 300px;overflow: auto;margin-top:10px;"></div>
+
+    {% include 'BookBundle:CRUD/Association:edit_tags_script.html.twig' %}
+{% endblock %}
+
 {% block sonata_admin_book_bookHasRelated_sonata_type_collection_widget %}
     {#{% include '@SonataAdmin/CRUD//Association/edit_one_to_many.html.twig' %}#}
 
