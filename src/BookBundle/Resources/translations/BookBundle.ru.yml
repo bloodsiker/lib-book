@@ -51,6 +51,7 @@ book_has_file:
         book: Книга
         file: Файл
         type: Тип
+        order_num: ''
 
 book_has_related:
     fields:

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -78,5 +79,9 @@ class BookHasFileAdmin extends Admin
                 ])
             ;
         }
+        $formMapper
+            ->add('orderNum', HiddenType::class, [
+                'label' => 'book_has_file.fields.order_num',
+            ]);
     }
 }
