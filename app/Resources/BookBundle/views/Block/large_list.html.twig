@@ -94,6 +94,7 @@
                     <span class="stats-item">Просмотров <i class="fa fa-eye" aria-hidden="true"></i> {{ book.views|number_format(0, '.', ' ') }}</span>
                     {#<span class="stats-item"><i class="fa fa-comments" aria-hidden="true"></i> {{ book.getComments|length|number_format(0, '.', ' ') }}</span>#}
                     <span class="stats-item">Скачиваний <i class="fa fa-cloud-download" aria-hidden="true"></i> {{ book.download|number_format(0, '.', ' ') }}</span>
+                    <time>{{ book.createdAt|date_time_humanize('d MMMM Y') }}</time>
                 </div>
             </div>
         </div>
