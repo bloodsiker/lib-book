@@ -3,6 +3,7 @@
 namespace BookBundle\Controller;
 
 use BookBundle\Entity\Book;
+use BookBundle\Entity\BookInfoDownload;
 use MediaBundle\Entity\MediaFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,12 +126,23 @@ class BookController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
      */
     public function incDownloadAction(Request $request)
     {
         $repo = $this->getDoctrine()->getManager()->getRepository(Book::class);
         $bookId = $request->get('bookId');
         $repo->incDownloadCounter($bookId);
+
+        $book = $repo->find($bookId);
+
+        $infoDownload = new BookInfoDownload();
+        $infoDownload->setBook($book);
+
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $em->persist($infoDownload);
+        $em->flush();
 
         return new Response();
     }

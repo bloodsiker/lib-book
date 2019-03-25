@@ -1,6 +1,8 @@
 Action: Действия
 Book List: Книги
 Book Create: Создать книгу
+Book Info Download List: Список скачиваний
+Book Info Download Create: Добавить
 
 btn_search_related: Показать релевантные книги по тегам
 btn_search_tags: Показать релевантные теги по тексту
@@ -16,6 +18,7 @@ group:
     book_editor: Книги
     book_file_editor: Файлы книг
     book_has_file_editor: Файлы для книги
+    book_info_download: Скачивание книг
 
 book:
     fields:
@@ -58,3 +61,9 @@ book_has_related:
         book: Книга
         book_related: Похожая книги
         order_num: Позиция
+
+book_download:
+    fields:
+        id: ID
+        book: Книга
+        download_at: Дата

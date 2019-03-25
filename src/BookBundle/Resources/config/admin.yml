@@ -31,3 +31,14 @@ services:
           - ~
         calls:
           - [ setTranslationDomain, [BookBundle] ]
+
+    sonata.admin.book_info_download:
+      class: "BookBundle\\Admin\\BookInfoDownloadAdmin"
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_info_download"}
+      arguments:
+        - ~
+        - "BookBundle\\Entity\\BookInfoDownload"
+        - ~
+      calls:
+        - [ setTranslationDomain, [BookBundle] ]

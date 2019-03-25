@@ -1,0 +1,88 @@
+<?php
+
+namespace BookBundle\Admin;
+
+use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
+
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+
+/**
+ * Class BookInfoDownloadAdmin
+ */
+class BookInfoDownloadAdmin extends Admin
+{
+    /**
+     * @var array $datagridValues
+     */
+    protected $datagridValues = [
+        '_page'       => 1,
+        '_per_page'   => 25,
+        '_sort_by'    => 'id',
+        '_sort_order' => 'DESC',
+    ];
+
+    /**
+     * @param ListMapper $listMapper
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('id', null, [
+                'label' => 'book_download.fields.id',
+            ])
+            ->add('book', null, [
+                'label' => 'book_download.fields.book',
+            ])
+            ->add('downloadAt', null, [
+                'label' => 'book_download.fields.download_at',
+                'pattern' => 'dd MMMM yyyy, HH:mm',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'delete' => [],
+                ],
+            ])
+        ;
+    }
+
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('book', null, [
+                'label' => 'book_download.fields.book',
+            ])
+            ->add('downloadAt', null, [
+                'label' => 'book_download.fields.download_at',
+            ]);
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
+                ->add('downloadAt', DateTimePickerType::class, [
+                    'label'     => 'book_download.fields.download_at',
+                    'required' => false,
+                    'format' => 'dd-MM-YYYY HH:mm',
+                    'attr' => ['readonly' => true],
+                ])
+            ->end()
+            ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
+                ->add('book', ModelListType::class, [
+                    'label' => 'book_download.fields.book',
+                    'required' => false,
+                ])
+            ->end()
+        ;
+    }
+}
