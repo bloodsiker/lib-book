@@ -10,7 +10,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -25,7 +24,7 @@ class CommentAdmin extends Admin
         '_page'       => 1,
         '_per_page'   => 25,
         '_sort_by'    => 'id',
-        '_sort_order' => 'ASC',
+        '_sort_order' => 'DESC',
     ];
 
     /**

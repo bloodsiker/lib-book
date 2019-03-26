@@ -5,6 +5,7 @@ User-agent: *
 #Allow: /
 Disallow: /files/media_file/*
 Disallow: /_block/
+Disallow: /admin/*
 Disallow: /_page/
 Disallow: /order-board/vote
 Disallow: /comment/vote
