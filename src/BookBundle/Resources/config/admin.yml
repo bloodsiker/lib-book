@@ -9,6 +9,7 @@ services:
           - BookBundle:BookAdmin
         calls:
           - [ setTranslationDomain, [BookBundle] ]
+          - [ setTemplate, ['edit', 'BookBundle:Admin:edit.html.twig'] ]
 
     sonata.admin.book_has_files:
         class: "BookBundle\\Admin\\BookHasFileAdmin"

@@ -24,6 +24,9 @@ use Symfony\Component\Validator\Constraints\Valid;
  */
 class BookAdmin extends Admin
 {
+    /**
+     * @var array
+     */
     protected $datagridValues = [
         '_page'       => 1,
         '_per_page'   => 25,
@@ -66,7 +69,9 @@ class BookAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-//        $collection->add('preview', 'preview');
+        $collection->remove('acl');
+
+        $collection->add('preview', 'preview');
         $collection->add('related_by_tags', 'related-by-tags');
         $collection->add('find_tags_in_text', 'find-tags-in-text');
     }
