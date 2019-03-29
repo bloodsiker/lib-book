@@ -137,8 +137,10 @@ class BookController extends Controller
 
         $book = $repo->find($bookId);
 
+        $ip = $request->server->get('REMOTE_ADDR');
         $infoDownload = new BookInfoDownload();
         $infoDownload->setBook($book);
+        $infoDownload->setIp($ip);
 
         $em = $this->container->get('doctrine.orm.entity_manager');
         $em->persist($infoDownload);

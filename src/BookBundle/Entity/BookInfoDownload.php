@@ -38,6 +38,13 @@ class BookInfoDownload
     protected $downloadAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    protected $ip;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -101,5 +108,29 @@ class BookInfoDownload
     public function getDownloadAt()
     {
         return $this->downloadAt;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string|null $ip
+     *
+     * @return $this
+     */
+    public function setIp(string $ip = null)
+    {
+        $this->ip = $ip;
+
+        return $this;
     }
 }

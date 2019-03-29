@@ -29,6 +29,7 @@ final class Version20190325083156 extends AbstractMigration
         $infoDownload->addColumn('id', 'integer', ['unsigned' => true, 'notnull' => true, 'autoincrement' => true]);
         $infoDownload->addColumn('book_id', 'integer', ['unsigned' => true, 'notnull' => false]);
         $infoDownload->addColumn('download_at', 'datetime', ['notnull' => true]);
+        $infoDownload->addColumn('ip', 'string', ['length' => 20, 'notnull' => true]);
         $infoDownload->setPrimaryKey(['id']);
         $infoDownload->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'set null']);
     }

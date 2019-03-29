@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Class BookInfoDownloadAdmin
@@ -31,7 +32,7 @@ class BookInfoDownloadAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, [
+            ->addIdentifier('id', null, [
                 'label' => 'book_download.fields.id',
             ])
             ->add('book', null, [
@@ -40,6 +41,9 @@ class BookInfoDownloadAdmin extends Admin
             ->add('downloadAt', null, [
                 'label' => 'book_download.fields.download_at',
                 'pattern' => 'dd MMMM yyyy, HH:mm',
+            ])
+            ->add('ip', null, [
+                'label' => 'book_download.fields.ip',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -70,6 +74,10 @@ class BookInfoDownloadAdmin extends Admin
     {
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
+                ->add('ip', TextType::class, [
+                    'label' => 'book_download.fields.ip',
+                    'required' => false,
+                ])
                 ->add('downloadAt', DateTimePickerType::class, [
                     'label'     => 'book_download.fields.download_at',
                     'required' => false,

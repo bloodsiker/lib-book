@@ -74,3 +74,4 @@ book_download:
         id: ID
         book: Книга
         download_at: Дата
+        ip: IP
