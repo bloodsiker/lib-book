@@ -114,7 +114,7 @@ class ListBooksBlockService extends AbstractAdminBlockService
         }
 
         if ($blockContext->getSetting('series')) {
-            $repository->filterBySeries($qb, $blockContext->getSetting('series'));
+            $repository->filterBySeries($qb, $blockContext->getSetting('series'), true);
         }
 
         if ($blockContext->getSetting('top_book')) {

@@ -1,5 +1,10 @@
+{% import "SeriesBundle:Block/macros:item.html.twig" as macros %}
 <div class="col-cont">
     <div class="container">
+
+        <div class="tree">
+            {{ macros.build_tree(series) }}
+        </div>
 
         <div class="section-title clearfix">
             {% set countBook = series.type == constant('SeriesBundle\\Entity\\Series::TYPE_AUTHOR') ? series.getBooks().count() :

@@ -67,21 +67,33 @@ class BookRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function filterBySeries(QueryBuilder $qb, Series $series) : QueryBuilder
+    public function filterBySeries(QueryBuilder $qb, Series $series, $childBooks = false) : QueryBuilder
     {
          $qb->resetDQLPart('orderBy');
 
-        if ($series->getType() === Series::TYPE_AUTHOR) {
-            $qb
-                ->andWhere('b.series = :series');
-        } elseif ($series->getType() === Series::TYPE_PUBLISHING) {
-            $qb
-                ->andWhere('b.seriesPublishing = :series');
-        };
+        if ($childBooks) {
+            $seriesIds = [$series->getId()];
+            if ($series->getChildren()->count()) {
+                foreach ($series->getChildren()->getValues() as $child) {
+                    if ($child->getIsActive()) {
+                        $seriesIds[] = $child->getId();
+                    }
+                }
+            }
 
-        $qb
-            ->setParameter('series', $series)
-            ->orderBy('b.seriesNumber');
+            $qb->andWhere('b.series IN (:series) OR b.seriesPublishing IN (:series)')
+                ->setParameter('series', $seriesIds);;
+        } else {
+            if ($series->getType() === Series::TYPE_AUTHOR) {
+                $qb->andWhere('b.series = :series');
+            } elseif ($series->getType() === Series::TYPE_PUBLISHING) {
+                $qb->andWhere('b.seriesPublishing = :series');
+            };
+
+            $qb
+                ->setParameter('series', $series)
+                ->orderBy('b.seriesNumber');
+        }
 
         return $qb;
     }

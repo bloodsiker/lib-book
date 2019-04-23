@@ -9,12 +9,16 @@
                     <button type="button" class="btn btn-default">{{ file.bookFile.path|file_extension|upper }}</button>
                 {% endfor %}
             </div>
-        {% elseif field_description.name == 'fromPath' %}
-            <a href="{{ admin.generateUrl('edit', { id : object.id }) }}" class="sonata-link-identifier">{{ object.fromPath }}</a>
-            {% if object.help is not empty %}
-                <br>
-                <small>{{ object.help }}</small>
-            {% endif %}
+        {% elseif field_description.name == 'authors' %}
+            {% set route_name = field_description.options.route.name %}
+            {% for author in object.authors %}
+                <a href="{{ field_description.associationadmin.generateObjectUrl(route_name, author, field_description.options.route.parameters) }}" class="label label-warning">{{ author.name }}</a>
+            {% endfor %}
+        {% elseif field_description.name == 'genres' %}
+            {% set route_name = field_description.options.route.name %}
+            {% for genre in object.genres %}
+                <a href="{{ field_description.associationadmin.generateObjectUrl(route_name, genre, field_description.options.route.parameters) }}" class="label label-primary">{{ genre.name }}</a>
+            {% endfor %}
         {% elseif field_description.name == 'poster' %}
             {% set v = asset('bundles/admin/images/preview_placeholder.png') %}
             {% set image_preview_path = value ? value.path : null %}

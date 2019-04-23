@@ -59,7 +59,7 @@ class ListSeriesBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'items_count' => 20,
+            'items_count' => 15,
             'page'        => 1,
             'search'      => null,
             'type'        => null,

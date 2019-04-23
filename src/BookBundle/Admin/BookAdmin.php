@@ -94,9 +94,11 @@ class BookAdmin extends Admin
             ])
             ->add('authors', null, [
                 'label' => 'book.fields.authors',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ])
             ->add('genres', null, [
                 'label' => 'book.fields.genres',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ])
             ->add('files', null, [
                 'label' => 'book.fields.files',

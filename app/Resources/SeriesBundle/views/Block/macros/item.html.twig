@@ -1,0 +1,25 @@
+{% macro build_tree(items, find_parent = true, first = true) %}
+    {% import _self as macros %}
+    {% if find_parent %}
+        {% if items.parent %}
+            {{ macros.build_tree(items.parent, true) }}
+        {% else %}
+            {% set items = { 0: items } %}
+        {% endif %}
+    {% endif %}
+
+    <ul>
+        {% for item in items %}
+            <li>
+                {% set url = path('series_books', { 'slug': item.slug }) %}
+
+                <a href="{{ url }}" {% if url in app.request.pathInfo %} class="active" {% endif %}>{{ item.title }}</a>
+                <span {% if first %}class="first" {% endif %}></span>
+
+                {% if item.children.getValues()|length %}
+                    {{ macros.build_tree(item.children.getValues(), false, false) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
