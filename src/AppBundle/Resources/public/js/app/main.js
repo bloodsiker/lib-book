@@ -226,6 +226,17 @@ $(document).ready(function(){
     })
 });
 
+/* Build Tree */
+$('.tree li > span').each(function () {
+    var thisNewTop = $(this).closest('ul').offset().top - $(this).offset().top;
+    var thisNewHeight = $(this).offset().top - $(this).closest('ul').offset().top + 22;
+
+    $(this).css({
+        top: thisNewTop,
+        height: thisNewHeight
+    })
+});
+
 /***************************************************************************************/
 
 $(document).ready(function(){
