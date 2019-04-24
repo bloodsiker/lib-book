@@ -69,31 +69,19 @@ class BookRepository extends EntityRepository
      */
     public function filterBySeries(QueryBuilder $qb, Series $series, $childBooks = false) : QueryBuilder
     {
-         $qb->resetDQLPart('orderBy');
+        $qb->resetDQLPart('orderBy');
 
-        if ($childBooks) {
-            $seriesIds = [$series->getId()];
-            if ($series->getChildren()->count()) {
-                foreach ($series->getChildren()->getValues() as $child) {
-                    if ($child->getIsActive()) {
-                        $seriesIds[] = $child->getId();
-                    }
-                }
-            }
-
-            $qb->andWhere('b.series IN (:series) OR b.seriesPublishing IN (:series)')
-                ->setParameter('series', $seriesIds);;
-        } else {
-            if ($series->getType() === Series::TYPE_AUTHOR) {
-                $qb->andWhere('b.series = :series');
-            } elseif ($series->getType() === Series::TYPE_PUBLISHING) {
-                $qb->andWhere('b.seriesPublishing = :series');
-            };
-
+        if ($series->getType() === Series::TYPE_AUTHOR) {
             $qb
-                ->setParameter('series', $series)
-                ->orderBy('b.seriesNumber');
-        }
+                ->andWhere('b.series = :series');
+        } elseif ($series->getType() === Series::TYPE_PUBLISHING) {
+            $qb
+                ->andWhere('b.seriesPublishing = :series');
+        };
+
+        $qb
+            ->setParameter('series', $series)
+            ->orderBy('b.seriesNumber');
 
         return $qb;
     }

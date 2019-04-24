@@ -12,8 +12,9 @@
         {% for item in items %}
             <li>
                 {% set url = path('series_books', { 'slug': item.slug }) %}
-
-                <a href="{{ url }}" {% if url in app.request.pathInfo %} class="active" {% endif %}>{{ item.title }}</a>
+                {% set countBook = item.type == constant('SeriesBundle\\Entity\\Series::TYPE_AUTHOR') ? item.getBooks().count() :
+                    item.type == constant('SeriesBundle\\Entity\\Series::TYPE_PUBLISHING') ? item.getBooksPublishing().count() : null %}
+                <a href="{{ url }}" {% if url in app.request.pathInfo %} class="active" {% endif %}>{{ item.title }} - {{ countBook }} {{ book_change_end(countBook) }}</a>
                 <span {% if first %}class="first" {% endif %}></span>
 
                 {% if item.children.getValues()|length %}
