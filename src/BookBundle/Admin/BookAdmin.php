@@ -259,6 +259,18 @@ class BookAdmin extends Admin
                     'multiple' => true,
                     'btn_add' => 'book.buttons.link_add',
                     'attr' => ['class' => 'form-control'],
+                    'callback' => function($admin, $property, $value) {
+                        if (!$value) {
+                            return;
+                        }
+
+                        $datagrid = $admin->getDatagrid();
+                        $queryBuilder = $datagrid->getQuery();
+                        $queryBuilder->andWhere($queryBuilder->getRootAlias() . '.parent IS NOT NULL');
+                        $datagrid->setValue($property, null, $value);
+
+                        return true;
+                    },
                     'btn_catalogue' => $this->translationDomain,
                     'minimum_input_length' => 2,
                 ])
