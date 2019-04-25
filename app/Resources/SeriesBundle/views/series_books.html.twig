@@ -9,7 +9,9 @@
         <div class="section-title clearfix">
             {% set countBook = series.type == constant('SeriesBundle\\Entity\\Series::TYPE_AUTHOR') ? series.getBooks().count() :
                 series.type == constant('SeriesBundle\\Entity\\Series::TYPE_PUBLISHING') ? series.getBooksPublishing().count() : null %}
-            <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
+            {% if countBook > 0 %}
+                <h2>Серия: <span>{{ series.title }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
+            {% endif %}
         </div>
 
         <div class="movies clearfix grid grid-list">
