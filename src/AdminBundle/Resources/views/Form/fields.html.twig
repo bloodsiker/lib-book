@@ -258,6 +258,48 @@
     {#{% endspaceless %}#}
 {#{% endblock %}#}
 
+{% block sonata_admin_book_name_text_counter_widget %}
+    {{ block('form_widget') }}
+
+    <script>
+        var id = jQuery('#{{ form.vars.id }}');
+        var label = jQuery('label[for={{ id }}]');
+        label.after('<div id="duplicate_book"></div>');
+        var container = jQuery('#duplicate_book');
+        jQuery('#{{ id }}').on('input',function() {
+            var bookName = $(this).val();
+            if (bookName.length > 3) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "{{ path('admin_book_book_search_book') }}",
+                    cache: false,
+                    dataType: 'json',
+                    data: { 'bookName': bookName },
+                    success: function (response) {
+                        console.log(response);
+                        if (response) {
+                            var message = '';
+                            for (var i in response) {
+                                message += '<a href="'+ response[i].url +'" style="margin-right: 5px" target="_blank">' + response[i].name + '</a><br/>';
+                            }
+                            container.html(message);
+                        }
+                    }
+                });
+            } else {
+                container.html('');
+            }
+        });
+    </script>
+    <style>
+        #duplicate_book {
+            margin-bottom: 5px;
+            max-height: 100px;
+            overflow-y: scroll;
+        }
+    </style>
+{% endblock %}
+
 {% block text_counter_widget %}
     {{ block('form_widget') }}
     {{ block('counter_widget') }}

@@ -49,7 +49,6 @@ class AuthorAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'author.fields.created_at',
-                'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ]);
     }
 

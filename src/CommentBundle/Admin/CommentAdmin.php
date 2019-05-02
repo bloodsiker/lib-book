@@ -54,7 +54,6 @@ class CommentAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'comment.fields.created_at',
-                'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ]);
     }
 

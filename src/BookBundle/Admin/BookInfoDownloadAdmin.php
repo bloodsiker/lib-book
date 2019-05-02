@@ -40,7 +40,6 @@ class BookInfoDownloadAdmin extends Admin
             ])
             ->add('downloadAt', null, [
                 'label' => 'book_download.fields.download_at',
-                'pattern' => 'dd MMMM yyyy, HH:mm',
             ])
             ->add('ip', null, [
                 'label' => 'book_download.fields.ip',

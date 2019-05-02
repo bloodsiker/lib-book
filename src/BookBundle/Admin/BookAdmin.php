@@ -74,6 +74,7 @@ class BookAdmin extends Admin
         $collection->add('preview', 'preview');
         $collection->add('related_by_tags', 'related-by-tags');
         $collection->add('find_tags_in_text', 'find-tags-in-text');
+        $collection->add('search_book', 'search-book');
     }
 
     /**
@@ -114,7 +115,6 @@ class BookAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'book.fields.created_at',
-                'pattern' => 'dd MMMM yyyy, HH:mm',
             ])
             ->add('_action', 'actions', [
                 'actions' => [

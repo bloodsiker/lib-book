@@ -108,7 +108,6 @@ class MediaImageAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'media.fields.created_at',
-                'pattern' => 'eeee, dd MMMM yyyy, HH:mm',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
