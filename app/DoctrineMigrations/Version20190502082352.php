@@ -26,7 +26,7 @@ final class Version20190502082352 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         $author = $schema->getTable('share_authors');
-        $author->addColumn('biography', 'text', ['length' => 65535, 'notnull' => true]);
+        $author->addColumn('biography', 'text', ['length' => 65535, 'notnull' => false]);
     }
 
     /**
