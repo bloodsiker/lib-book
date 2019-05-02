@@ -35,7 +35,7 @@ fos_ck_editor:
 
         advanced:
             title: false
-            height: 480
+            height: 340
             toolbar: advanced
             skin: "bootstrapck,/bundles/admin/ckeditor/skins/bootstrapck/"
             extraPlugins: 'shortcode,format_buttons,pastecode,symbol,font,horizontalrule,numericinput,wordcount'
@@ -133,7 +133,7 @@ fos_ck_editor:
                 - [ "Link", "Unlink", "Anchor" ]
 #              "Image",
                 - [ "Table", "-", "Iframe", "Flash", "ImageSC", "VideoSC", "GallerySC"]
-                - [ "ReadSC", "ExpertSC", "QuoteSC" ]
+#                - [ "ReadSC", "ExpertSC", "QuoteSC" ]
                 - [ "h2", "HorizontalRule", "PasteCode" ]
                 - [ "Symbol" ]
                 - [ "ShowBlocks" ]

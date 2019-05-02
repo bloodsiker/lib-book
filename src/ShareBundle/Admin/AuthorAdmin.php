@@ -3,6 +3,7 @@
 namespace ShareBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -86,6 +87,14 @@ class AuthorAdmin extends Admin
                     'label' => 'author.fields.slug',
                     'required' => false,
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
+                ])
+                ->add('biography', CKEditorType::class, [
+                    'label' => 'author.fields.biography',
+                    'config_name' => 'advanced',
+                    'required' => false,
+                    'attr' => [
+                        'rows' => 5,
+                    ],
                 ])
             ->end()
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => false])

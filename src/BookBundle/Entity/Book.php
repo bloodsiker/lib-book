@@ -197,6 +197,13 @@ class Book
     protected $tags;
 
     /**
+     * @var
+     *
+     * @ORM\OneToMany(targetEntity="CommentBundle\Entity\Comment", mappedBy="book")
+     */
+    protected $comments;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=30, nullable=true)
@@ -235,6 +242,7 @@ class Book
         $this->authors        = new ArrayCollection();
         $this->bookHasFiles   = new ArrayCollection();
         $this->bookHasRelated = new ArrayCollection();
+        $this->comments       = new ArrayCollection();
     }
 
     /**
@@ -788,6 +796,42 @@ class Book
     public function getIsbn()
     {
         return $this->isbn;
+    }
+
+    /**
+     * Add comment.
+     *
+     * @param \CommentBundle\Entity\Comment $comment
+     *
+     * @return $this
+     */
+    public function addComment(\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment.
+     *
+     * @param \CommentBundle\Entity\Comment $comment
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeComment(\CommentBundle\Entity\Comment $comment)
+    {
+        return $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get children.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**

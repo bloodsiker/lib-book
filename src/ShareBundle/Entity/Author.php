@@ -47,6 +47,13 @@ class Author
     protected $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $biography;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
@@ -302,5 +309,29 @@ class Author
     public function getBooks()
     {
         return $this->books;
+    }
+
+    /**
+     * Get biography
+     *
+     * @return string
+     */
+    public function getBiography()
+    {
+        return $this->biography;
+    }
+
+    /**
+     * Set biography
+     *
+     * @param string $biography
+     *
+     * @return $this
+     */
+    public function setBiography(string $biography)
+    {
+        $this->biography = $biography;
+
+        return $this;
     }
 }

@@ -10,7 +10,7 @@ imports:
     - { resource: sonata/seo.yml }
     - { resource: sonata/page.yml }
     - { resource: fos/user.yml }
-#    - { resource: fos/ckeditor.yml }
+    - { resource: fos/ckeditor.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
     - { resource: liip/imagine.yml }
     - { resource: knplabs/gaufrette.yml }

@@ -40,5 +40,6 @@ author:
         created_at: Дата создания
         photo: Фото
         slug: Сегмент URL (slug)
+        biography: Биография
         parent: Родительский жанр
         id: ID

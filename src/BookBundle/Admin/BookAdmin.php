@@ -165,7 +165,7 @@ class BookAdmin extends Admin
                 ])
                 ->add('description', CKEditorType::class, [
                     'label' => 'book.fields.description',
-//                    'config_name' => 'advanced',
+                    'config_name' => 'advanced',
                     'required' => true,
                     'attr' => [
                         'rows' => 5,
