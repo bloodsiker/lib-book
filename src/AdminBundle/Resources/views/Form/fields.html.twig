@@ -264,17 +264,17 @@
     <script>
         var id = jQuery('#{{ form.vars.id }}');
         var label = jQuery('label[for={{ id }}]');
-        label.after('<div id="duplicate_book"></div>');
+        label.after('<div id="duplicate_book" style="margin-bottom: 5px;max-height: 100px;overflow-y: scroll;"></div>');
         var container = jQuery('#duplicate_book');
         jQuery('#{{ id }}').on('input',function() {
-            var bookName = $(this).val();
-            if (bookName.length > 3) {
+            var name = $(this).val();
+            if (name.length > 3) {
                 jQuery.ajax({
                     method: "GET",
                     url: "{{ path('admin_book_book_search_book') }}",
                     cache: false,
                     dataType: 'json',
-                    data: { 'bookName': bookName },
+                    data: { 'name': name },
                     success: function (response) {
                         console.log(response);
                         if (response) {
@@ -291,13 +291,76 @@
             }
         });
     </script>
-    <style>
-        #duplicate_book {
-            margin-bottom: 5px;
-            max-height: 100px;
-            overflow-y: scroll;
-        }
-    </style>
+{% endblock %}
+
+{% block share_admin_author_name_text_widget %}
+    {{ block('form_widget') }}
+
+    <script>
+        var id = jQuery('#{{ form.vars.id }}');
+        var label = jQuery('label[for={{ id }}]');
+        label.after('<div id="duplicate_author" style="margin-bottom: 5px;max-height: 100px;overflow-y: scroll;"></div>');
+        var container = jQuery('#duplicate_author');
+        jQuery('#{{ id }}').on('input',function() {
+            var name = $(this).val();
+            if (name.length > 3) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "{{ path('admin_share_author_search_author') }}",
+                    cache: false,
+                    dataType: 'json',
+                    data: { 'name': name },
+                    success: function (response) {
+                        console.log(response);
+                        if (response) {
+                            var message = '';
+                            for (var i in response) {
+                                message += '<a href="'+ response[i].url +'" style="margin-right: 5px" target="_blank">' + response[i].name + '</a><br/>';
+                            }
+                            container.html(message);
+                        }
+                    }
+                });
+            } else {
+                container.html('');
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block series_admin_title_text_widget %}
+    {{ block('form_widget') }}
+
+    <script>
+        var id = jQuery('#{{ form.vars.id }}');
+        var label = jQuery('label[for={{ id }}]');
+        label.after('<div id="duplicate_series" style="margin-bottom: 5px;max-height: 100px;overflow-y: scroll;"></div>');
+        var container = jQuery('#duplicate_series');
+        jQuery('#{{ id }}').on('input',function() {
+            var name = $(this).val();
+            if (name.length > 3) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: "{{ path('admin_series_series_search_series') }}",
+                    cache: false,
+                    dataType: 'json',
+                    data: { 'name': name },
+                    success: function (response) {
+                        console.log(response);
+                        if (response) {
+                            var message = '';
+                            for (var i in response) {
+                                message += '<a href="'+ response[i].url +'" style="margin-right: 5px" target="_blank">' + response[i].name + '</a><br/>';
+                            }
+                            container.html(message);
+                        }
+                    }
+                });
+            } else {
+                container.html('');
+            }
+        });
+    </script>
 {% endblock %}
 
 {% block text_counter_widget %}

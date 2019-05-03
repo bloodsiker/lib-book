@@ -5,7 +5,6 @@ namespace BookBundle\Controller;
 use AdminBundle\Controller\CRUDController as Controller;
 
 use BookBundle\Entity\Book;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -92,7 +91,7 @@ class BookAdminController extends Controller
      */
     public function searchBookAction(Request $request)
     {
-        $name = trim($request->get('bookName'));
+        $name = trim($request->get('name'));
         $em = $this->container->get('doctrine')->getManager();
         $router = $this->container->get('router');
         $repository = $em->getRepository(Book::class);

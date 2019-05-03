@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -22,6 +23,17 @@ class AuthorAdmin extends Admin
         '_sort_by'    => 'id',
         '_sort_order' => 'DESC',
     ];
+
+    /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('acl');
+
+        $collection->add('preview', 'preview');
+        $collection->add('search_author', 'search-author');
+    }
 
     /**
      * @param ListMapper $listMapper

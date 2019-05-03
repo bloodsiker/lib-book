@@ -6,6 +6,6 @@ services:
         arguments:
           - ~
           - SeriesBundle\Entity\Series
-          - ~
+          - SeriesBundle:SeriesAdmin
         calls:
           - [ setTranslationDomain, [SeriesBundle] ]

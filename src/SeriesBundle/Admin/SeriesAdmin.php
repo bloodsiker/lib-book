@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -72,7 +73,20 @@ class SeriesAdmin extends Admin
     }
 
     /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('acl');
+
+        $collection->add('preview', 'preview');
+        $collection->add('search_series', 'search-series');
+    }
+
+    /**
      * @param ListMapper $listMapper
+     *
+     * @throws \Exception
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -102,6 +116,8 @@ class SeriesAdmin extends Admin
 
     /**
      * @param DatagridMapper $datagridMapper
+     *
+     * @throws \Exception
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -130,6 +146,8 @@ class SeriesAdmin extends Admin
 
     /**
      * @param FormMapper $formMapper
+     *
+     * @throws \Exception
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
