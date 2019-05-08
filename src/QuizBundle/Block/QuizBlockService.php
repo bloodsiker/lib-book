@@ -100,7 +100,7 @@ class QuizBlockService extends AbstractAdminBlockService
             $quiz = $this->em->getRepository(Quiz::class)->findOneBy(['isActive' => true], ['id' => 'DESC']);
         }
 
-        if (!$quiz->getId()) {
+        if (!$quiz) {
             return new Response();
         }
 
