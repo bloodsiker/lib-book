@@ -54,6 +54,10 @@ sonata_admin:
                 label: group.share
                 label_catalogue: ShareBundle
                 icon: <i class="fa fa-text-width"></i>
+            group.quiz:
+                label: group.quiz
+                label_catalogue: QuizBundle
+                icon: <i class="fa fa-question-circle"></i>
             group.comment:
                 label: group.comment
                 label_catalogue: CommentBundle

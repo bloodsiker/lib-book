@@ -49,6 +49,9 @@ sonata_block:
         share.block.author_list:
             contexts: [cms]
 
+        quiz.block.service.quiz:
+            contexts: [cms]
+
         # OrderBundle Block's
         order.block.order_board_list:
             contexts: [cms]

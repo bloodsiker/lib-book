@@ -1,7 +1,7 @@
 
 var topNav = $('.top-nav').offset().top;
 
-$(window).scroll(function(){
+$(window).scroll(function () {
     var sticky = $('.top-nav'),
         logo = $('.logo-hide'),
         scroll = $(window).scrollTop();
@@ -21,7 +21,7 @@ function voteBook(vote, bookId, url) {
         type: 'POST',
         url: url,
         data: { vote: vote, bookId: bookId },
-        success: function(response) {
+        success: function (response) {
             $('#result-rates').html(response);
             showAlert('Ваш голос засчитан', 'success');
         }
@@ -33,7 +33,7 @@ function voteOrderBoard(count, orderId, url) {
         type: 'POST',
         url: url,
         data: { count: count, orderId: orderId },
-        success: function(response) {
+        success: function (response) {
             var count = $('span[data-order-id="'+orderId+'"]');
             if (response.count > 0) {
                 count.addClass('green');
@@ -49,7 +49,7 @@ function voteComment(vote, commentId, url) {
         type: 'POST',
         url: url,
         data: { vote: vote, commentId: commentId },
-        success: function(response) {
+        success: function (response) {
             var count = $('span[data-comment-id="'+commentId+'"]'),
                 parent = count.parents('.comm-rate');
             if (response.count == 0) {
@@ -73,7 +73,7 @@ function incBookDownload(bookId, url) {
         type: 'POST',
         url: url,
         data: { bookId: bookId },
-        success: function() {
+        success: function () {
         }
     });
 };
@@ -91,7 +91,7 @@ $('#quick-search').on('input', function () {
             type: 'POST',
             url: url,
             data: { search: search },
-            success: function(response) {
+            success: function (response) {
                 $('.result-search').show().html(response);
                 $('.wrap').addClass('bluer');
             }
@@ -112,7 +112,7 @@ function searchClear() {
 
 $(document).mouseup(function (e) {
     var container = $('.search-wrap');
-    if (container.has(e.target).length === 0){
+    if (container.has(e.target).length === 0) {
         removeElem('#search-close');
         $('.wrap').removeClass('bluer');
         $('.result-search').html('').hide();
@@ -129,11 +129,11 @@ function showAlert(text, type){
     err.slideDown(300);
     setTimeout(function(){err.fadeOut(500,function(){$(this).remove()})},4000);
 }
-$(function(){
+$(function () {
     $('body').append('<div class="alert-container"></div>');
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     // Add comments for book
     $('#add-comment').submit(function (e) {
@@ -170,7 +170,7 @@ $(document).ready(function(){
                 type: 'POST',
                 url: url,
                 data: { name: name, email: email, comment: comment, bookId: bookId },
-                success: function(response) {
+                success: function (response) {
                     $('.comments-items').find('.comm-container').first().before(response);
                     $('#add-comment').trigger("reset");
                     showAlert('Комментарий добавлен', 'success');
@@ -216,7 +216,7 @@ $(document).ready(function(){
                 type: 'POST',
                 url: url,
                 data: { name: name, book: book},
-                success: function(response) {
+                success: function (response) {
                     $('table.table').find('tr').first().before(response);
                     $('#add-order-board').trigger("reset");
                     showAlert('Заказ добавлен', 'success');
@@ -235,6 +235,32 @@ $('.tree li > span').each(function () {
         top: thisNewTop,
         height: thisNewHeight
     })
+});
+
+/* Quiz */
+$('.quiz_check').on('change', function () {
+    if ($('.quiz_check').is(':checked')) {
+        $('button.vote-btn').prop('disabled', false);
+    } else {
+        $('button.vote-btn').prop('disabled', true);
+    }
+});
+
+$('button.vote-btn').on('click', function () {
+    var _this = $(this),
+        type = _this.data('type'),
+        answers = $('#quiz_container input:' + type + ':checked').map(function () {return this.value;}).get().join(','),
+        url = _this.data('ajax-url'),
+        quiz = _this.data('quiz-id');
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { answers: answers, quiz: quiz},
+        success: function (response) {
+            $('#side-quiz').html(response);
+        }
+    });
 });
 
 /***************************************************************************************/

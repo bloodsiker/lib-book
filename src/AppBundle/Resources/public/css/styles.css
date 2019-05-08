@@ -176,6 +176,24 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .navigation span.nav_ext {background: #fff; color:#444; box-shadow:0px 1px 3px rgba(0, 0, 0, 0.13);}
 .dle-comments-navigation .pagination {margin-bottom:0; padding-bottom:20px;}
 
+/* GUIZ
+----------------------------------------------- */
+.vote-sub-title {margin-bottom: 10px}
+.vote-questions-container {width: 100%}
+.vote-questions-item {margin: 15px 0}
+.vote-questions-item label {display:flex; cursor: pointer; align-items: center;align-content: center;}
+.vote-questions-item input {margin-right: 5px;}
+.vote-questions-footer {margin-top: 10px}
+.vote-questions-footer .vote-btn {cursor: pointer; line-height: 30px; text-transform: none;}
+.vote-questions-footer .vote-btn:disabled {cursor: default;background-color: #e3e3e3;}
+
+.vote-result-container {width: 100%;}
+.vote-result-item {display: flex;padding: 0 20px 20px 0px;font-size: 13px;line-height: 15px;align-items: center;align-content: center;}
+.vote-result-item-num {flex: 0 0 55px;padding-top: 3px;color: #5b5b5b;;vertical-align: top;}
+.vote-result-item-line {position: relative;flex: 1 1 auto;margin-top: 3px;padding: 3px 8px;color: #000;vertical-align: top;overflow: hidden;background: #e1e7eb;}
+.vote-result-item-line b {position: absolute;display: block;top: 0;left: -100%;height: 100%;width: 100%;z-index: 1;
+    background: rgba(0,133,207,.2);transform: translateX(0);transition: transform 1.6s ease-out;}
+
 /* SHORT STORY bookS
 ----------------------------------------------- */
 .grid {display: flex; flex-flow: wrap row}

@@ -215,35 +215,6 @@ sonata_page:
                     L: content_side_left
                     B: content_bottom
                     F: footer
-
-        lifestyle:
-            path: 'AppBundle:layout:lifestyle.html.twig'
-            name: 'sonata.page.template.lifestyle'
-            containers:
-                header:
-                    name: Header
-                content_top:
-                    name: Top content
-                content:
-                    name: Main content
-                content_bottom:
-                    name: Bottom content
-                footer:
-                    name: Footer
-            matrix:
-                layout: |
-                    HHHHHHHH
-                    TTTTTTTT
-                    CCCCCCCC
-                    CCCCCCCC
-                    BBBBBBBB
-                    FFFFFFFF
-                mapping:
-                    H: header
-                    T: content_top
-                    C: content
-                    B: content_bottom
-                    F: footer
         error:
             path: 'AppBundle:layout:error.html.twig'
             name: 'sonata.page.template.error'

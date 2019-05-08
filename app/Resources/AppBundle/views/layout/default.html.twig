@@ -95,6 +95,14 @@
         )
         }}
 
+        <div class="side-item" id="side-quiz">
+            {{
+            sonata_block_render(
+                { 'type': 'quiz.block.service.quiz' }
+            )
+            }}
+        </div>
+
          {#List tags#}
         {#{{#}
         {#sonata_block_render(#}

@@ -78,6 +78,7 @@ class AppKernel extends Kernel
             new CommentBundle\CommentBundle(),
             new ShareBundle\ShareBundle(),
             new OrderBundle\OrderBundle(),
+            new QuizBundle\QuizBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
