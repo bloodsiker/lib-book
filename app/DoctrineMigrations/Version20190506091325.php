@@ -40,8 +40,8 @@ final class Version20190506091325 extends AbstractMigration
         $quizAnswer->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $quizAnswer->addColumn('title', 'string', array('length' => 255, 'notnull' => false));
         $quizAnswer->addColumn('link', 'string', array('length' => 255, 'notnull' => false));
-        $quizAnswer->addColumn('percent', 'integer', array('precision' => 6, 'scale' => 2, 'notnull' => true, 'default' => 0.00));
-        $quizAnswer->addColumn('counter', 'decimal', array('unsigned' => true, 'notnull' => true, 'default' => 0));
+        $quizAnswer->addColumn('percent', 'decimal', array('precision' => 6, 'scale' => 2, 'notnull' => true, 'default' => 0.00));
+        $quizAnswer->addColumn('counter', 'integer', array('unsigned' => true, 'notnull' => true, 'default' => 0));
         $quizAnswer->setPrimaryKey(['id']);
 
         $quizHasAnswer = $schema->createTable('quiz_quiz_has_answer');
