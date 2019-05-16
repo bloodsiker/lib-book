@@ -1,0 +1,23 @@
+Action: Действия
+Article List: Статьи
+Article Create: Добавить статью
+
+form_group:
+    basic: Основные
+    additional: Дополнительные
+
+group:
+    article: Статьи
+    article_editor: Статьи
+
+article:
+    fields:
+        id: ID
+        poster: Изображение
+        title: Заголовок
+        description: Текст
+        slug: Сегмент URL (slug)
+        views: Просмотры
+        is_active: Активно
+        updated_at: Изменена
+        created_at: Создана

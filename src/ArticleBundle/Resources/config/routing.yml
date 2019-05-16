@@ -1,0 +1,13 @@
+# books ========================================================
+article_view:
+    path: /kollekcii-knig/{id}-{slug}
+    defaults:
+        _controller: ArticleBundle:Article:view
+    requirements:
+        slug: "([a-zA-Z\\-0-9\\_]+)?"
+        id: "\\d+"
+
+article_list:
+    path: /podborki
+    defaults:
+        _controller: ArticleBundle:Article:list

@@ -72,6 +72,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new PageBundle\PageBundle(),
             new MediaBundle\MediaBundle(),
+            new ArticleBundle\ArticleBundle(),
             new GenreBundle\GenreBundle(),
             new SeriesBundle\SeriesBundle(),
             new BookBundle\BookBundle(),

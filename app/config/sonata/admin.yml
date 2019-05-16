@@ -50,6 +50,10 @@ sonata_admin:
                 label: group.series
                 label_catalogue: SeriesBundle
                 icon: <i class="fa fa-list-alt"></i>
+            group.article:
+                label: group.article
+                label_catalogue: ArticleBundle
+                icon: <i class="fa fa-newspaper-o"></i>
             group.share:
                 label: group.share
                 label_catalogue: ShareBundle

@@ -1,0 +1,11 @@
+services:
+    article.admin.article:
+        class: ArticleBundle\Admin\ArticleAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: "group.article", label: "group.article_editor" }
+        arguments:
+          - ~
+          - ArticleBundle\Entity\Article
+          - ~
+        calls:
+          - [ setTranslationDomain, [ArticleBundle] ]

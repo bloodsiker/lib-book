@@ -1,18 +1,4 @@
 services:
-#  quiz.block.service.quiz_origin:
-#    class: "QuizBundle\\Block\\QuizOriginBlockService"
-#    arguments:
-#      - quiz.block.service.quiz_origin
-#      - '@templating'
-#      - '@request_stack'
-#      - '@quiz.entity_manager'
-#      - '@fos_http_cache.cache_manager'
-#      - '%domain%'
-#    calls:
-#      - [setStateValue, ['@?app.save.state.value']]
-#    tags:
-#      - { name: sonata.block }
-#
   quiz.block.service.quiz:
     class: "QuizBundle\\Block\\QuizBlockService"
     arguments:
