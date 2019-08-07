@@ -3,6 +3,8 @@ Book List: Книги
 Book Create: Создать книгу
 Book Info Download List: Список скачиваний
 Book Info Download Create: Добавить
+Book Info View List: Список просмотренных книг
+Book Info View Create: Добавить
 
 btn_search_related: Показать релевантные книги по тегам
 btn_search_tags: Показать релевантные теги по тексту
@@ -26,6 +28,7 @@ group:
     book_file_editor: Файлы книг
     book_has_file_editor: Файлы для книги
     book_info_download: Скачивание книг
+    book_info_view: Просмотр книг
 
 book:
     fields:
@@ -75,3 +78,10 @@ book_download:
         book: Книга
         download_at: Дата
         ip: IP
+
+book_view:
+    fields:
+        id: ID
+        book: Книга
+        view_at: Дата
+        views: Просмотров

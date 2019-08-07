@@ -118,6 +118,7 @@ class BookController extends Controller
         ]);
 
         $repo->incViewCounter($book->getId());
+        $this->container->get('book.helper.views')->doView($book);
 
         return $this->render('BookBundle::book_view.html.twig', ['book' => $book]);
     }

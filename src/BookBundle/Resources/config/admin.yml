@@ -43,3 +43,14 @@ services:
         - ~
       calls:
         - [ setTranslationDomain, [BookBundle] ]
+
+    sonata.admin.book_info_view:
+      class: BookBundle\Admin\BookInfoViewAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_info_view"}
+      arguments:
+        - ~
+        - BookBundle\Entity\BookInfoView
+        - ~
+      calls:
+        - [ setTranslationDomain, [BookBundle] ]
