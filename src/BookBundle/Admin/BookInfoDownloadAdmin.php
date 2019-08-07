@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Sonata\DoctrineORMAdminBundle\Filter\DateFilter;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -61,8 +62,13 @@ class BookInfoDownloadAdmin extends Admin
             ->add('book', null, [
                 'label' => 'book_download.fields.book',
             ])
-            ->add('downloadAt', null, [
-                'label' => 'book_download.fields.download_at',
+            ->add('ip', null, [
+                'label' => 'book_download.fields.ip',
+            ])
+            ->add('downloadAt', DateFilter::class, [
+                'label'         => 'book_download.fields.download_at',
+                'field_type'    => DateTimePickerType::class,
+                'field_options' => array('format' => 'dd.MM.yyyy'),
             ]);
     }
 

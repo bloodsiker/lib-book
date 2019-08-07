@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\DoctrineORMAdminBundle\Filter\DateFilter;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -146,8 +147,10 @@ class BookAdmin extends Admin
             ->add('isActive', null, [
                 'label' => 'book.fields.is_active',
             ])
-            ->add('createdAt', null, [
-                'label' => 'book.fields.created_at',
+            ->add('createdAt', DateFilter::class, [
+                'label'         => 'book.fields.created_at',
+                'field_type'    => DateTimePickerType::class,
+                'field_options' => array('format' => 'dd.MM.yyyy'),
             ]);
     }
 
