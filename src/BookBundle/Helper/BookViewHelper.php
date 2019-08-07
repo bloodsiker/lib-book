@@ -37,10 +37,8 @@ class BookViewHelper
      */
     public function doView(Book $book)
     {
-        $repository = $this->entityManager->getRepository(BookInfoView::class);
-
         $now = new \DateTime('now');
-        $viewBook = $repository->findOneBy(['book' => $book, 'viewAt' => $now]);
+        $viewBook = $this->getBookInfoView($book);
 
         if ($viewBook) {
             $viewBook->doView();
@@ -58,5 +56,44 @@ class BookViewHelper
         }
 
         return true;
+    }
+
+    /**
+     * @param Book $book
+     *
+     * @return bool
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function doDownload(Book $book)
+    {
+        $viewBook = $this->getBookInfoView($book);
+
+        if ($viewBook) {
+            $viewBook->doDownload();
+
+            $this->entityManager->persist($viewBook);
+            $this->entityManager->flush();
+        }
+
+        return true;
+    }
+
+    /**
+     * @param Book $book
+     *
+     * @return BookInfoView|object|null
+     *
+     * @throws \Exception
+     */
+    protected function getBookInfoView(Book $book)
+    {
+        $repository = $this->entityManager->getRepository(BookInfoView::class);
+
+        $now = new \DateTime('now');
+        $viewBook = $repository->findOneBy(['book' => $book, 'viewAt' => $now]);
+
+        return $viewBook;
     }
 }

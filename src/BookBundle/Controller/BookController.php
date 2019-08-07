@@ -147,6 +147,8 @@ class BookController extends Controller
         $em->persist($infoDownload);
         $em->flush();
 
+        $this->container->get('book.helper.views')->doDownload($book);
+
         return new Response();
     }
 

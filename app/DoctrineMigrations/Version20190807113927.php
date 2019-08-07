@@ -30,6 +30,7 @@ final class Version20190807113927 extends AbstractMigration
         $infoView->addColumn('book_id', 'integer', ['unsigned' => true, 'notnull' => false]);
         $infoView->addColumn('view_at', 'date', ['notnull' => true]);
         $infoView->addColumn('views', 'smallint', ['length' => 6, 'notnull' => true, 'default' => 0]);
+        $infoView->addColumn('downloads', 'smallint', ['length' => 6, 'notnull' => true, 'default' => 0]);
         $infoView->setPrimaryKey(['id']);
         $infoView->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'set null']);
 

@@ -38,6 +38,13 @@ class BookInfoView
     protected $views;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint", length=6, nullable=false)
+     */
+    protected $downloads;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="date", nullable=false)
@@ -49,8 +56,9 @@ class BookInfoView
      */
     public function __construct()
     {
-        $this->views  = 0;
-        $this->viewAt = new \DateTime('now');
+        $this->views     = 0;
+        $this->downloads = 0;
+        $this->viewAt    = new \DateTime('now');
     }
 
     /**
@@ -141,5 +149,37 @@ class BookInfoView
     public function doView()
     {
         return $this->views++;
+    }
+
+    /**
+     * @return int
+     */
+    public function doDownload()
+    {
+        return $this->downloads++;
+    }
+
+    /**
+     * Get downloads
+     *
+     * @return int
+     */
+    public function getDownloads()
+    {
+        return $this->downloads;
+    }
+
+    /**
+     * Set downloads
+     *
+     * @param int $downloads
+     *
+     * @return $this
+     */
+    public function setDownloads($downloads)
+    {
+        $this->downloads = $downloads;
+
+        return $this;
     }
 }

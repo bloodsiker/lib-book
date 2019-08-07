@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateFilter;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -45,6 +46,9 @@ class BookInfoViewAdmin extends Admin
             ->add('views', null, [
                 'label' => 'book_view.fields.views',
             ])
+            ->add('downloads', null, [
+                'label' => 'book_view.fields.downloads',
+            ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'delete' => [],
@@ -76,8 +80,12 @@ class BookInfoViewAdmin extends Admin
     {
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
-                ->add('views', TextType::class, [
+                ->add('views', IntegerType::class, [
                     'label' => 'book_view.fields.views',
+                    'required' => false,
+                ])
+                ->add('downloads', IntegerType::class, [
+                    'label' => 'book_view.fields.downloads',
                     'required' => false,
                 ])
                 ->add('viewAt', DateTimePickerType::class, [
