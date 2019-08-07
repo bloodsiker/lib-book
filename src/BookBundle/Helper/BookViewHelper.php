@@ -49,6 +49,7 @@ class BookViewHelper
             $this->entityManager->flush();
         } else {
             $viewBook = new BookInfoView();
+            $viewBook->doView();
             $viewBook->setBook($book);
             $viewBook->setViewAt($now);
 
