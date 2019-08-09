@@ -30,7 +30,7 @@ class BookAdminController extends Controller
 
         $em = $this->container->get('doctrine')->getManager();
         $repository = $em->getRepository($this->admin->getClass());
-        $relatedNews = $repository->getRelatedByTagsBooks($tags, $excludeIds, 40);
+        $relatedNews = $repository->getRelatedByTagsBooks($tags, $excludeIds, 100);
 
         $result = array_map(
             function ($item) {
