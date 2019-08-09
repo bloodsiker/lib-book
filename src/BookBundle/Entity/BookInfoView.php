@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class BookInfoView
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BookBundle\Entity\BookInfoViewRepository")
  * @ORM\Table(name="books_info_view")
  * @ORM\HasLifecycleCallbacks
  */

@@ -1,13 +1,13 @@
 <div class="side-item">
     <div class="side-title icon-left"><i class="fa fa-bookmark-o"></i> Топ месяца</div>
     <div class="side-cont">
-        {% for book in books %}
-            <a class="side-book" href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">
+        {% for bookInfo in books %}
+            <a class="side-book" href="{{ path('book_view', { 'slug': bookInfo.book.slug, 'id': bookInfo.book.id }) }}">
                 <div class="side-book-img img-box">
-                    <img src="{{ asset(book.poster.path) }}"
-                         alt="{{ book.name }}"/>
+                    <img src="{{ asset(bookInfo.book.poster.path) }}"
+                         alt="{{ bookInfo.book.name }}"/>
                 </div>
-                <div class="side-book-title">{{ book.name }}</div>
+                <div class="side-book-title">{{ bookInfo.book.name }}</div>
             </a>
         {% endfor %}
     </div>
