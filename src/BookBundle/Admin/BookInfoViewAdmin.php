@@ -23,10 +23,28 @@ class BookInfoViewAdmin extends Admin
      */
     protected $datagridValues = [
         '_page'       => 1,
-        '_per_page'   => 25,
+        '_per_page'   => 50,
         '_sort_by'    => 'id',
         '_sort_order' => 'DESC',
     ];
+
+    /**
+     * ArticleAdmin constructor.
+     *
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     *
+     * @throws \Exception
+     */
+    public function __construct($code, $class, $baseControllerName)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+
+        $this->datagridValues['viewAt'] = [
+            'value' => (new \DateTime('now'))->format('d-m-Y'),
+        ];
+    }
 
     /**
      * @param ListMapper $listMapper
@@ -70,6 +88,7 @@ class BookInfoViewAdmin extends Admin
                 'label'         => 'book_view.fields.view_at',
                 'field_type'    => DateTimePickerType::class,
                 'field_options' => array('format' => 'dd.MM.yyyy'),
+                'show_filter' => true,
             ]);
     }
 
