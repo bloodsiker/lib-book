@@ -13,7 +13,7 @@
                             <img src="{{ asset(comment.book.poster.path) }}" alt="{{ comment.book.name }}">
                         </a>
                     {% else %}
-                        <img src="{{ comment.user ? comment.user.id : asset('public/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : comment.userName }}"/>
+                        <img src="{{ comment.user ? comment.user.id : asset('bundles/app/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : comment.userName }}"/>
                     {% endif %}
                 </div>
                 <div class="comm-right">

@@ -267,6 +267,9 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .author-filter li a {padding: 6px 15px; border-radius: 3px; background-color: #fec900}
 .author-filter li a:hover {color: #2a2a2a; background-color: #fed718;}
 
+.author-body {margin-bottom: 20px; min-height: 190px;}
+.author-body img {margin: 0 10px 8px 0; border: 4px solid #ccc}
+
 
 .table{margin-top: 10px; width: 100%; border-top: 1px solid #ccc; border-collapse: collapse;}
 .table tr:nth-child(odd){ background: #fafaff;}
@@ -888,9 +891,14 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .book-text-inner .mi-item, .book-text-inner .button {display:none !important}
     .grid-list .book-item {padding:0 0 30px 140px;}
     .grid-list .book-text {width: 100%}
-    .grid-list .book-img {width:140px; height:190px; margin-left:-140px;}
+    .grid-list .book-img {width:170px; height:auto; margin-left:-140px;}
     .grid-list .book-desc {margin:12px 0 0 0;}
     .trailer-item {height:150px !important;}
+
+    .comm-right {padding-left: 10px; text-align: center;}
+    .book-stats {display: block}
+    .book-stats .stats-item {display: block; margin-bottom: 10px}
+    .book-stats time {display: block}
 
     .full-text embed, .full-text object, .full-text video, .full-text iframe, .full-text frame
     {width: 100% !important; height:300px;}
@@ -916,7 +924,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .author-filter li {display: inline-block; margin: 0 5px 20px 0}
     .search-box {margin-left: 50px;}
 
-    .comm-right {padding-left: 10px;}
+    .side-book-img {height: 250px;}
 }
 
 @media only screen

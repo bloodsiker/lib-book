@@ -2,8 +2,19 @@
     <div class="container">
 
         <div class="section-title clearfix">
+            <h2>Автор: <span>{{ author.name }}</span></h2>
+        </div>
+
+        {% if author.photo and author.biography %}
+            <div class="author-body">
+                <img src="{{ author.photo ? asset(author.photo.path) : asset('bundles/app/assets/images/unknown-person.jpg') }}" width="200" height="auto" align="left" alt="{{ author.name|raw }}">
+                {{ author.biography|raw }}
+            </div>
+        {% endif %}
+
+        <div class="section-title clearfix">
             {% set countBook = author.getBooks().count() %}
-            <h2>Автор: <span>{{ author.name }} - {{ countBook }} {{ book_change_end(countBook) }}</span></h2>
+            <h2>Книги:</h2>
         </div>
 
         <div class="movies clearfix grid grid-list">
@@ -12,7 +23,7 @@
             sonata_block_render(
                 { 'type': 'book.block.list' },
                 {
-                    'items_count' : 15,
+                    'items_count' : 20,
                     'page': app.request.get('page') ? app.request.get('page') : 1,
                     'author': author,
                 }
