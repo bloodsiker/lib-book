@@ -267,7 +267,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .author-filter li a {padding: 6px 15px; border-radius: 3px; background-color: #fec900}
 .author-filter li a:hover {color: #2a2a2a; background-color: #fed718;}
 
-.author-body {margin-bottom: 20px; min-height: 190px;}
+.author-body {margin-bottom: 20px; background: #fdc801; padding: 10px;}
 .author-body img {margin: 0 10px 8px 0; border: 4px solid #ccc}
 
 
