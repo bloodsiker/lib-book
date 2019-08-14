@@ -23,7 +23,7 @@ class BookInfoViewAdmin extends Admin
      */
     protected $datagridValues = [
         '_page'       => 1,
-        '_per_page'   => 50,
+        '_per_page'   => 64,
         '_sort_by'    => 'id',
         '_sort_order' => 'DESC',
     ];
