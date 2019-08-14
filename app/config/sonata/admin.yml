@@ -33,6 +33,26 @@ sonata_admin:
 
 
     dashboard:
+        blocks:
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups:
+                      - group.media
+                      - group.book
+                      - group.genre
+                      - group.series
+                      - group.article
+
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups:
+                      - group.share
+                      - group.quiz
+                      - group.comment
+                      - group.order
+                      - sonata_page
         groups:
             group.media:
                 label: group.media
@@ -80,6 +100,3 @@ sonata_admin:
                     - sonata.page.admin.site
                     - sonata.page.admin.site_variables
                     - sonata.page.admin.site_variables_placement
-
-        blocks:
-             - { position: center, type: sonata.admin.block.admin_list }

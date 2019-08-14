@@ -323,10 +323,8 @@ $(document).ready(function(){
 
     $(".show-sidebar").click(function(){
         $(".cols, .slider-wrap").toggleClass('vis-side');
-        $(".col-cont").toggleClass('hidden');
-        $(this).find('i').toggleClass('fa-bars fa-times');$('html, body').animate({
-            scrollTop: $("#cols-r").offset().top
-        }, 800);
+        var text = $('.show-sidebar').text();
+        $('.show-sidebar').text(text == "Жанры" ? "Список" : "Жанры");
     });
     $(".show-auth").click(function(){
         $(".login-buts").slideToggle(200);

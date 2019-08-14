@@ -93,6 +93,7 @@ class BookAdmin extends Admin
             ])
             ->addIdentifier('name', null, [
                 'label' => 'book.fields.name',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ])
             ->add('authors', null, [
                 'label' => 'book.fields.authors',

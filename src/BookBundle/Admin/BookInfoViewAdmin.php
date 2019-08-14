@@ -42,7 +42,7 @@ class BookInfoViewAdmin extends Admin
         parent::__construct($code, $class, $baseControllerName);
 
         $this->datagridValues['viewAt'] = [
-            'value' => (new \DateTime('now'))->format('d-m-Y'),
+            'value' => (new \DateTime('now'))->format('d.m.Y'),
         ];
     }
 
