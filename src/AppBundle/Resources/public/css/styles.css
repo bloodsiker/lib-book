@@ -119,7 +119,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .search-box > #search-close {position: absolute; right: 8px; top: 5px; height: 30px; width: 30px; cursor: pointer}
 .search-box > #search-close:after {content: '\2718'; font-size: 28px; margin-left: 5px}
 .result-search {position: absolute; top: 41px; width: 100%; background: #f7f7f7; color: #5c5c5c; border-radius: 3px;
-    box-shadow: 0 0 1.6em rgba(0,0,0, 0.2); display: none; z-index: 10;}
+    box-shadow: 0 0 1.6em rgba(0,0,0, 0.2); display: none; z-index: 10;max-height: 515px;overflow-y: scroll;}
 .result-search > .search-item {display: flex; flex-flow: row wrap; padding: 10px; border-bottom: 1px solid #e3e3e3; margin-bottom: 10px;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1); background: linear-gradient(to top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0) 70px);}
 .result-search > .search-item:hover {color: #2a2a2a}
@@ -372,14 +372,15 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 
 /* TAGS
 ------------------------------------------------ */
-.tags li {display: inline-block; margin: 0 3px 10px 0}
+.tags li {display: inline-block; margin: 0 4px 16px 0}
 .tags li a {border: 1px solid #444; padding: 1px 8px; border-radius: 16px; color: #444; font-size: 13px;font-weight: 400;}
 .tags li:hover a {border-color: #ffb900; color: #ffb900}
 .tags li a.active {border-color: #ffb900; color: #ffb900}
 .genres {margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e3e3e3; box-shadow: 0 10px 10px -10px rgba(0,0,0,0.1);
     background: linear-gradient(to top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0) 70px);}
-.genres .tags li {margin: 0 3px 12px 0;}
-.genres .tags li a {font-size: 14px; padding: 2px 10px}
+.genres .tags li {margin: 0 4px 16px 0;}
+.genres .tags li a {font-size: 14px; padding: 4px 14px}
+.collection-list .genres {margin-bottom: 0; padding-bottom: 0; border-bottom: none; box-shadow: none;background: none;padding-top: 7px;}
 
 /* SEO DESCRIPTION
 ----------------------------------------------- */
@@ -562,6 +563,44 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .mc-article .rel-book {height:100px;}
 .mc-article .rel-book-title {font-weight:400; text-align:left;}
 
+/* Articles
+----------------------------------------------- */
+.filter_block {
+    display: table;
+    width: 100%;
+}
+.filter_name {
+    display: table-cell;
+    vertical-align: top;
+    color: #757575;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 32px;
+    text-transform: uppercase;
+    padding-right: 10px;
+    width: 75px;
+    box-sizing: border-box;
+}
+.filter_list {
+    display: table-cell;
+    vertical-align: top;
+}
+.collection-list h1 {font-size: 36px;text-align: center;text-transform: uppercase;margin: 30px 0;}
+.collection-list .list {margin-top: 60px;display: flex;flex-wrap: wrap;}
+.collection__item {flex-basis: 21%;text-align: center;background-color: #fff;margin-bottom: 30px;font-size: 14px;
+    margin-left: 2%;margin-right: 2%;}
+.collection__link {display: inline-block;width: 100%;height: 100%;text-decoration: none;box-shadow: 0 8px 16px rgba(0,0,0,.16);
+    -webkit-transition-duration: .15s;transition-duration: .15s;}
+.collection__link:hover {box-shadow: 0 16px 32px 0 rgba(0,0,0,.1);}
+.collection__preview {width: 100%;height: 165px;overflow: hidden;}
+.collection__pic {width: 100%;height: 100%;background-repeat: no-repeat;background-size: cover;
+    background-position: center center;-webkit-transition-duration: .3s;transition-duration: .3s;}
+.collection__link:hover .collection__pic {-webkit-transform: scale(1.1);transform: scale(1.1);}
+.collection__text {margin: 10%;position: relative;height: 165px;}
+.collection__name {font-size: 18px;line-height: 1.5;font-weight: 500;overflow: hidden;
+    max-height: 115px;-webkit-transition-duration: .15s;transition-duration: .15s;}
+.collection__qty {position: absolute;left: 0;bottom: 0;width: 100%;text-transform: uppercase;font-size: 12px;
+    font-weight: 500;color: #9b9b9b;}
 
 /* COMMENTS
 ----------------------------------------------- */

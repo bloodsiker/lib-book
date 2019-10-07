@@ -29,8 +29,8 @@ class ArticleController extends Controller
      */
     public function listAction(Request $request)
     {
-//        $breadcrumb = $this->get('app.breadcrumb');
-//        $breadcrumb->addBreadcrumb(['title' => 'Новинки книг']);
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Подборки']);
 //
 //        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
 //        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
@@ -44,7 +44,7 @@ class ArticleController extends Controller
 //            ],
 //        ]);
 
-        return $this->render('BookBundle::book_list.html.twig');
+        return $this->render('ArticleBundle::article_list.html.twig');
     }
 
     /**
@@ -117,6 +117,6 @@ class ArticleController extends Controller
 //
 //        $repo->incViewCounter($book->getId());
 
-        return new Response('<h1>Podborki</h1>');
+        return $this->render('ArticleBundle::article_list.html.twig');
     }
 }
