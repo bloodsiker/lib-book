@@ -1,8 +1,7 @@
 <?php
 
-namespace BookBundle\Admin;
+namespace ArticleBundle\Admin;
 
-use MediaBundle\Twig\Extension\MediaExtension;
 use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -12,11 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class BookHasFileAdmin
+ * Class ArticleHasBookAdmin
  */
-class BookHasFileAdmin extends Admin
+class ArticleHasBookAdmin extends Admin
 {
-    protected $parentAssociationMapping = 'book';
+    protected $parentAssociationMapping = 'article';
 
     /**
      * @param ListMapper $listMapper
@@ -24,11 +23,11 @@ class BookHasFileAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('book', null, [
-                'label' => 'book_has_file.fields.book',
+            ->add('article', null, [
+                'label' => 'article_has_book.fields.article',
             ])
-            ->add('bookFile', null, [
-                'label' => 'book_has_file.fields.file',
+            ->add('book', null, [
+                'label' => 'article_has_book.fields.book',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -58,29 +57,12 @@ class BookHasFileAdmin extends Admin
         }
 
         $formMapper
-            ->add('bookFile', ModelListType::class, [
-                'label' => 'book_has_file.fields.file',
+            ->add('book', ModelListType::class, [
+                'label' => 'article_has_book.fields.book',
                 'required' => true,
             ], ['link_parameters' => $linkParameters])
-        ;
-        if ($this->getSubject() && $this->getSubject()->getId()) {
-            $extensionFile = MediaExtension::getExtensionFile($this->getSubject()->getBookFile()->getPath());
-            $formMapper
-                ->add('bookFile.mimeType', TextType::class, [
-                    'label' => 'book_has_file.fields.type',
-                    'required' => false,
-                    'empty_data' => $extensionFile,
-                    'attr' => [
-                        'readonly' => true,
-                        'disabled' => true,
-                        'value' => $extensionFile,
-                    ],
-                ])
-            ;
-        }
-        $formMapper
             ->add('orderNum', HiddenType::class, [
-                'label' => 'book_has_file.fields.order_num',
+                'label' => 'article_has_book.fields.order_num',
             ]);
     }
 }

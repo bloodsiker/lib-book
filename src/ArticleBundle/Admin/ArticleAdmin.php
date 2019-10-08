@@ -96,6 +96,8 @@ class ArticleAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $context = $this->getPersistentParameter('context');
+
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
                 ->add('title', TextCounterType::class, [
@@ -109,10 +111,17 @@ class ArticleAdmin extends Admin
                         'rows' => 5,
                     ],
                 ])
-                ->add('slug', TextType::class, [
-                    'label' => 'article.fields.slug',
+                ->add('articleHasBook', CollectionType::class, [
+                    'label' => 'article.fields.books',
                     'required' => false,
-                    'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
+                    'constraints' => new Valid(),
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'orderNum',
+                    'link_parameters' => ['context' => $context],
+                    'admin_code' => 'article.admin.article_has_book',
                 ])
             ->end()
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
@@ -123,6 +132,20 @@ class ArticleAdmin extends Admin
                 ->add('poster', ModelListType::class, [
                     'label' => 'article.fields.poster',
                     'required' => false,
+                ])
+                ->add('genres', ModelAutocompleteType::class, [
+                    'label' => 'article.fields.genres',
+                    'required' => false,
+                    'property' => 'name',
+                    'multiple' => true,
+                    'attr' => ['class' => 'form-control'],
+                    'btn_catalogue' => $this->translationDomain,
+                    'minimum_input_length' => 2,
+                ])
+                ->add('slug', TextType::class, [
+                    'label' => 'article.fields.slug',
+                    'required' => false,
+                    'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
                 ->add('views', IntegerType::class, [
                     'label' => 'article.fields.views',

@@ -85,6 +85,27 @@ class Article
     protected $updatedAt;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\ArticleHasBook",
+     *     mappedBy="article", cascade={"all"}, orphanRemoval=true
+     * )
+     * @ORM\OrderBy({"orderNum" = "ASC"})
+     */
+    protected $articleHasBook;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre")
+     * @ORM\JoinTable(name="article_article_genres",
+     *     joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="genre_id", referencedColumnName="id", onDelete="CASCADE")}
+     *     )
+     */
+    protected $genres;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -92,6 +113,9 @@ class Article
         $this->isActive = true;
         $this->views = 0;
         $this->createdAt = new \DateTime('now');
+
+        $this->articleHasBook = new ArrayCollection();
+        $this->genres         = new ArrayCollection();
     }
 
     /**
@@ -324,5 +348,76 @@ class Article
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Add articleHasBook.
+     *
+     * @param \ArticleBundle\Entity\ArticleHasBook $articleHasBook
+     *
+     * @return Article
+     */
+    public function addArticleHasBook(\ArticleBundle\Entity\ArticleHasBook $articleHasBook)
+    {
+        $articleHasBook->setArticle($this);
+        $this->articleHasBook[] = $articleHasBook;
+
+        return $this;
+    }
+
+    /**
+     * Remove articleHasBook.
+     *
+     * @param \ArticleBundle\Entity\ArticleHasBook $articleHasBook
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeArticleHasBook(\ArticleBundle\Entity\ArticleHasBook $articleHasBook)
+    {
+        return $this->articleHasBook->removeElement($articleHasBook);
+    }
+
+    /**
+     * Get articleHasBook.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticleHasBook()
+    {
+        return $this->articleHasBook;
+    }
+
+    /**
+     * Add genres
+     *
+     * @param \GenreBundle\Entity\Genre $genres
+     *
+     * @return Article
+     */
+    public function addGenre(\GenreBundle\Entity\Genre $genres)
+    {
+        $this->genres[] = $genres;
+
+        return $this;
+    }
+
+    /**
+     * Remove genres
+     *
+     * @param \GenreBundle\Entity\Genre $genres
+     */
+    public function removeGenre(\GenreBundle\Entity\Genre $genres)
+    {
+        $this->genres->removeElement($genres);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGenres()
+    {
+        return $this->genres;
     }
 }

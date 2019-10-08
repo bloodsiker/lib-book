@@ -9,3 +9,14 @@ services:
           - ~
         calls:
           - [ setTranslationDomain, [ArticleBundle] ]
+
+    article.admin.article_has_book:
+        class: ArticleBundle\Admin\ArticleHasBookAdmin
+        tags:
+          - { name: sonata.admin, manager_type: orm, group: 'group.article', label: "group.article_has_book_editor", show_in_dashboard: false }
+        arguments:
+          - ~
+          - ArticleBundle\Entity\ArticleHasBook
+          - ~
+        calls:
+          - [ setTranslationDomain, [ArticleBundle] ]

@@ -17,7 +17,16 @@ article:
         title: Заголовок
         description: Текст
         slug: Сегмент URL (slug)
+        books: Книги
+        genres: Жанры
         views: Просмотры
         is_active: Активно
         updated_at: Изменена
         created_at: Создана
+
+article_has_book:
+    fields:
+        id: ID
+        book: Книга
+        order_num: ''
+        article: Статья
