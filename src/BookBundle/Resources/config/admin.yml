@@ -12,18 +12,18 @@ services:
           - [ setTemplate, ['edit', 'BookBundle:Admin:edit.html.twig'] ]
 
     sonata.admin.book_has_files:
-        class: "BookBundle\\Admin\\BookHasFileAdmin"
+        class: BookBundle\Admin\BookHasFileAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_has_file_editor", show_in_dashboard: false }
         arguments:
           - ~
-          - "BookBundle\\Entity\\BookHasFile"
+          - BookBundle\Entity\BookHasFile
           - ~
         calls:
           - [ setTranslationDomain, [BookBundle] ]
 
     sonata.admin.book_has_related:
-        class: "BookBundle\\Admin\\BookHasRelatedAdmin"
+        class: BookBundle\Admin\BookHasRelatedAdmin
         tags:
           - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_has_related", show_in_dashboard: false }
         arguments:
@@ -34,12 +34,12 @@ services:
           - [ setTranslationDomain, [BookBundle] ]
 
     sonata.admin.book_info_download:
-      class: "BookBundle\\Admin\\BookInfoDownloadAdmin"
+      class: BookBundle\Admin\BookInfoDownloadAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_info_download"}
       arguments:
         - ~
-        - "BookBundle\\Entity\\BookInfoDownload"
+        - BookBundle\Entity\BookInfoDownload
         - ~
       calls:
         - [ setTranslationDomain, [BookBundle] ]
@@ -51,6 +51,28 @@ services:
       arguments:
         - ~
         - BookBundle\Entity\BookInfoView
+        - ~
+      calls:
+        - [ setTranslationDomain, [BookBundle] ]
+
+    sonata.admin.book_collection:
+      class: BookBundle\Admin\BookCollectionAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: "group.book", label: "group.book_collection_editor" }
+      arguments:
+        - ~
+        - BookBundle\Entity\BookCollection
+        - ~
+      calls:
+        - [ setTranslationDomain, [BookBundle] ]
+
+    sonata.admin.book_collection_has_book:
+      class: BookBundle\Admin\BookCollectionHasBookAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: 'group.book', label: "group.book_collection_has_book_editor", show_in_dashboard: false }
+      arguments:
+        - ~
+        - BookBundle\Entity\BookCollectionHasBook
         - ~
       calls:
         - [ setTranslationDomain, [BookBundle] ]

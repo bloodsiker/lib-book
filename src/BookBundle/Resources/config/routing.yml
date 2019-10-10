@@ -30,3 +30,15 @@ book_download:
         _controller: BookBundle:Book:download
     requirements:
         file_id: "\\d+"
+
+collection_view:
+    path: /collection/{slug}
+    defaults:
+        _controller: BookBundle:Book:collection
+    requirements:
+        slug: "([a-zA-Z\\-0-9\\_]+)?"
+
+collection_list:
+    path: /collection
+    defaults:
+        _controller: BookBundle:Book:collectionList

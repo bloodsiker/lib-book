@@ -1,6 +1,6 @@
 <?php
 
-namespace ArticleBundle\Entity;
+namespace BookBundle\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,15 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Class Article
+ * Class BookCollection
  *
  * @ORM\Entity()
- * @ORM\Table(name="article_article")
+ * @ORM\Table(name="books_collection")
  * @ORM\HasLifecycleCallbacks
  *
  * @Vich\Uploadable
  */
-class Article
+class BookCollection
 {
     /**
      * @var int
@@ -87,19 +87,19 @@ class Article
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\ArticleHasBook",
-     *     mappedBy="article", cascade={"all"}, orphanRemoval=true
+     * @ORM\OneToMany(targetEntity="BookBundle\Entity\BookCollectionHasBook",
+     *     mappedBy="collection", cascade={"all"}, orphanRemoval=true
      * )
      * @ORM\OrderBy({"orderNum" = "ASC"})
      */
-    protected $articleHasBook;
+    protected $collectionHasBook;
 
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre")
-     * @ORM\JoinTable(name="article_article_genres",
-     *     joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id", onDelete="CASCADE")},
+     * @ORM\JoinTable(name="books_collection_genres",
+     *     joinColumns={@ORM\JoinColumn(name="collection_id", referencedColumnName="id", onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="genre_id", referencedColumnName="id", onDelete="CASCADE")}
      *     )
      */
@@ -114,8 +114,8 @@ class Article
         $this->views = 0;
         $this->createdAt = new \DateTime('now');
 
-        $this->articleHasBook = new ArrayCollection();
-        $this->genres         = new ArrayCollection();
+        $this->collectionHasBook = new ArrayCollection();
+        $this->genres            = new ArrayCollection();
     }
 
     /**
@@ -351,30 +351,30 @@ class Article
     }
 
     /**
-     * Add articleHasBook.
+     * Add collectionHasBook.
      *
-     * @param \ArticleBundle\Entity\ArticleHasBook $articleHasBook
+     * @param \BookBundle\Entity\BookCollectionHasBook $bookCollectionHasBook
      *
-     * @return Article
+     * @return BookCollection
      */
-    public function addArticleHasBook(\ArticleBundle\Entity\ArticleHasBook $articleHasBook)
+    public function addCollectionHasBook(\BookBundle\Entity\BookCollectionHasBook $bookCollectionHasBook)
     {
-        $articleHasBook->setArticle($this);
-        $this->articleHasBook[] = $articleHasBook;
+        $bookCollectionHasBook->setCollection($this);
+        $this->collectionHasBook[] = $bookCollectionHasBook;
 
         return $this;
     }
 
     /**
-     * Remove articleHasBook.
+     * Remove collectionHasBook.
      *
-     * @param \ArticleBundle\Entity\ArticleHasBook $articleHasBook
+     * @param \BookBundle\Entity\BookCollectionHasBook $bookCollectionHasBook
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeArticleHasBook(\ArticleBundle\Entity\ArticleHasBook $articleHasBook)
+    public function removeCollectionHasBook(\BookBundle\Entity\BookCollectionHasBook $bookCollectionHasBook)
     {
-        return $this->articleHasBook->removeElement($articleHasBook);
+        return $this->collectionHasBook->removeElement($bookCollectionHasBook);
     }
 
     /**
@@ -382,9 +382,9 @@ class Article
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getArticleHasBook()
+    public function getCollectionHasBook()
     {
-        return $this->articleHasBook;
+        return $this->collectionHasBook;
     }
 
     /**
@@ -392,7 +392,7 @@ class Article
      *
      * @param \GenreBundle\Entity\Genre $genres
      *
-     * @return Article
+     * @return BookCollection
      */
     public function addGenre(\GenreBundle\Entity\Genre $genres)
     {

@@ -15,7 +15,7 @@ final class Version20191008075405 extends AbstractMigration
      */
     public function getDescription() : string
     {
-        return "Add ArticleHasBook (ArticleBundle))";
+        return "Add BookCollectionHasBook, BookCollectionGenres (BookBundle))";
     }
 
     /**
@@ -25,24 +25,24 @@ final class Version20191008075405 extends AbstractMigration
      */
     public function up(Schema $schema) : void
     {
-        // articleHasBook
-        $articleHasBook = $schema->createTable('article_article_has_book');
-        $articleHasBook->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
-        $articleHasBook->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
-        $articleHasBook->addColumn('article_id', 'integer', array('unsigned' => true, 'notnull' => true));
-        $articleHasBook->addColumn('order_num', 'integer', array('length' => 11, 'notnull' => true, 'default' => 1));
-        $articleHasBook->setPrimaryKey(['id']);
-        $articleHasBook->addIndex(['book_id', 'article_id']);
-        $articleHasBook->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'restrict']);
-        $articleHasBook->addForeignKeyConstraint($schema->getTable('article_article'), ['article_id'], ['id'], ['onDelete' => 'restrict']);
+        // bookCollectionHasBook
+        $bookCollectionHasBook = $schema->createTable('books_collection_has_book');
+        $bookCollectionHasBook->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
+        $bookCollectionHasBook->addColumn('book_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookCollectionHasBook->addColumn('collection_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookCollectionHasBook->addColumn('order_num', 'integer', array('length' => 11, 'notnull' => true, 'default' => 1));
+        $bookCollectionHasBook->setPrimaryKey(['id']);
+        $bookCollectionHasBook->addIndex(['book_id', 'collection_id']);
+        $bookCollectionHasBook->addForeignKeyConstraint($schema->getTable('books'), ['book_id'], ['id'], ['onDelete' => 'restrict']);
+        $bookCollectionHasBook->addForeignKeyConstraint($schema->getTable('books_collection'), ['collection_id'], ['id'], ['onDelete' => 'restrict']);
 
-        // articleGenres
-        $articleGenres = $schema->createTable('article_article_genres');
-        $articleGenres->addColumn('article_id', 'integer', array('unsigned' => true, 'notnull' => true));
-        $articleGenres->addColumn('genre_id', 'integer', array('unsigned' => true, 'notnull' => true));
-        $articleGenres->addIndex(['article_id', 'genre_id']);
-        $articleGenres->addForeignKeyConstraint($schema->getTable('article_article'), ['article_id'], ['id'], ['onDelete' => 'cascade']);
-        $articleGenres->addForeignKeyConstraint($schema->getTable('genres'), ['genre_id'], ['id'], ['onDelete' => 'cascade']);
+        // bookCollectionGenres
+        $bookCollectionGenres = $schema->createTable('books_collection_genres');
+        $bookCollectionGenres->addColumn('collection_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookCollectionGenres->addColumn('genre_id', 'integer', array('unsigned' => true, 'notnull' => true));
+        $bookCollectionGenres->addIndex(['collection_id', 'genre_id']);
+        $bookCollectionGenres->addForeignKeyConstraint($schema->getTable('books_collection'), ['collection_id'], ['id'], ['onDelete' => 'cascade']);
+        $bookCollectionGenres->addForeignKeyConstraint($schema->getTable('genres'), ['genre_id'], ['id'], ['onDelete' => 'cascade']);
     }
 
     /**
@@ -50,7 +50,7 @@ final class Version20191008075405 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
-        $schema->dropTable('article_article_has_book');
-        $schema->dropTable('article_article_genres');
+        $schema->dropTable('books_collection_has_book');
+        $schema->dropTable('books_collection_genres');
     }
 }

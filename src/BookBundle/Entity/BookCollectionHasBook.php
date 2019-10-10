@@ -1,17 +1,17 @@
 <?php
 
-namespace ArticleBundle\Entity;
+namespace BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class ArticleHasBook
+ * Class BookCollectionHasBook
  *
  * @ORM\Entity()
- * @ORM\Table(name="article_article_has_book")
+ * @ORM\Table(name="books_collection_has_book")
  * @ORM\HasLifecycleCallbacks
  */
-class ArticleHasBook
+class BookCollectionHasBook
 {
     /**
      * @var int
@@ -31,12 +31,12 @@ class ArticleHasBook
     protected $book;
 
     /**
-     * @var \ArticleBundle\Entity\Article
+     * @var \BookBundle\Entity\BookCollection
      *
-     * @ORM\ManyToOne(targetEntity="ArticleBundle\Entity\Article", fetch="EAGER")
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="BookBundle\Entity\BookCollection", inversedBy="collectionHasBook", fetch="EAGER")
+     * @ORM\JoinColumn(name="collection_id", referencedColumnName="id", nullable=false)
      */
-    protected $article;
+    protected $collection;
 
     /**
      * @var int
@@ -78,7 +78,7 @@ class ArticleHasBook
      *
      * @param int $orderNum
      *
-     * @return ArticleHasBook
+     * @return BookCollectionHasBook
      */
     public function setOrderNum($orderNum)
     {
@@ -102,7 +102,7 @@ class ArticleHasBook
      *
      * @param \BookBundle\Entity\Book $book
      *
-     * @return ArticleHasBook
+     * @return BookCollectionHasBook
      */
     public function setBook(\BookBundle\Entity\Book $book)
     {
@@ -122,26 +122,26 @@ class ArticleHasBook
     }
 
     /**
-     * Set article.
+     * Set collection.
      *
-     * @param \ArticleBundle\Entity\Article $article
+     * @param \BookBundle\Entity\BookCollection $collection
      *
-     * @return ArticleHasBook
+     * @return BookCollectionHasBook
      */
-    public function setArticle(\ArticleBundle\Entity\Article $article = null)
+    public function setCollection(\BookBundle\Entity\BookCollection $collection = null)
     {
-        $this->article = $article;
+        $this->collection = $collection;
 
         return $this;
     }
 
     /**
-     * Get article.
+     * Get collection.
      *
-     * @return \ArticleBundle\Entity\Article
+     * @return \BookBundle\Entity\BookCollection
      */
-    public function getRelatedBook()
+    public function getCollection()
     {
-        return $this->article;
+        return $this->collection;
     }
 }

@@ -15,7 +15,7 @@ final class Version20190516131607 extends AbstractMigration
      */
     public function getDescription() : string
     {
-        return "Article (ArticleBundle)";
+        return "BookCollection (BookBundle)";
     }
 
     /**
@@ -26,7 +26,7 @@ final class Version20190516131607 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // book
-        $book = $schema->createTable('article_article');
+        $book = $schema->createTable('books_collection');
         $book->addColumn('id', 'integer', array('unsigned' => true, 'notnull' => true, 'autoincrement' => true));
         $book->addColumn('image_id', 'integer', array('unsigned' => true, 'notnull' => false));
         $book->addColumn('title', 'string', array('length' => 255, 'notnull' => true));
@@ -47,6 +47,6 @@ final class Version20190516131607 extends AbstractMigration
      */
     public function down(Schema $schema) : void
     {
-        $schema->dropTable('books');
+        $schema->dropTable('books_collection');
     }
 }

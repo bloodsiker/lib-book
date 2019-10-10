@@ -204,4 +204,32 @@ class BookController extends Controller
 
         return $this->redirect($request->headers->get('referer'));
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Cache(maxage=60, public=true)
+     */
+    public function collectionListAction(Request $request)
+    {
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Подборки']);
+
+        return $this->render('BookBundle::collection_list.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Cache(maxage=60, public=true)
+     */
+    public function collectionAction(Request $request)
+    {
+
+        return $this->render('BookBundle::collection_list.html.twig');
+    }
 }

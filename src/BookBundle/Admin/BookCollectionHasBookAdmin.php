@@ -1,6 +1,6 @@
 <?php
 
-namespace ArticleBundle\Admin;
+namespace BookBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin as Admin;
 
@@ -8,14 +8,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class ArticleHasBookAdmin
+ * Class BookCollectionHasBookAdmin
  */
-class ArticleHasBookAdmin extends Admin
+class BookCollectionHasBookAdmin extends Admin
 {
-    protected $parentAssociationMapping = 'article';
+    protected $parentAssociationMapping = 'bookCollection';
 
     /**
      * @param ListMapper $listMapper
@@ -24,10 +23,10 @@ class ArticleHasBookAdmin extends Admin
     {
         $listMapper
             ->add('article', null, [
-                'label' => 'article_has_book.fields.article',
+                'label' => 'book_collection_has_book.fields.article',
             ])
             ->add('book', null, [
-                'label' => 'article_has_book.fields.book',
+                'label' => 'book_collection_has_book.fields.book',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
@@ -58,11 +57,11 @@ class ArticleHasBookAdmin extends Admin
 
         $formMapper
             ->add('book', ModelListType::class, [
-                'label' => 'article_has_book.fields.book',
+                'label' => 'book_collection_has_book.fields.book',
                 'required' => true,
             ], ['link_parameters' => $linkParameters])
             ->add('orderNum', HiddenType::class, [
-                'label' => 'article_has_book.fields.order_num',
+                'label' => 'book_collection_has_book.fields.order_num',
             ]);
     }
 }

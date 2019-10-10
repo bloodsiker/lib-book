@@ -1,6 +1,6 @@
 <?php
 
-namespace ArticleBundle\Admin;
+namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
 use AdminBundle\Form\Type\TextCounterType;
@@ -13,16 +13,14 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Valid;
 
 /**
- * Class ArticleAdmin
+ * Class BookCollectionAdmin
  */
-class ArticleAdmin extends Admin
+class BookCollectionAdmin extends Admin
 {
     /**
      * @var array
@@ -49,25 +47,25 @@ class ArticleAdmin extends Admin
     {
         $listMapper
             ->add('id', null, [
-                'label' => 'article.fields.id',
+                'label' => 'book_collection.fields.id',
             ])
             ->add('poster', null, [
-                'label'     => 'article.fields.poster',
-                'template'  => 'ArticleBundle:Admin:list_fields.html.twig',
+                'label'     => 'book_collection.fields.poster',
+                'template'  => 'BookBundle:Admin:list_fields.html.twig',
             ])
             ->addIdentifier('title', null, [
-                'label' => 'article.fields.title',
+                'label' => 'book_collection.fields.title',
             ])
             ->add('isActive', null, [
-                'label' => 'article.fields.is_active',
+                'label' => 'book_collection.fields.is_active',
                 'editable'  => true,
             ])
             ->add('createdAt', null, [
-                'label' => 'article.fields.created_at',
+                'label' => 'book_collection.fields.created_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'preview' => ['template' => 'ArticleBundle:CRUD:list__action_preview.html.twig'],
+                    'preview' => ['template' => 'BookBundle:CRUD:list__action_preview.html.twig'],
                     'edit' => [],
                 ],
             ])
@@ -81,13 +79,13 @@ class ArticleAdmin extends Admin
     {
         $datagridMapper
             ->add('title', null, [
-                'label' => 'article.fields.title',
+                'label' => 'book_collection.fields.title',
             ])
             ->add('isActive', null, [
-                'label' => 'article.fields.is_active',
+                'label' => 'book_collection.fields.is_active',
             ])
             ->add('createdAt', null, [
-                'label' => 'article.fields.created_at',
+                'label' => 'book_collection.fields.created_at',
             ]);
     }
 
@@ -101,18 +99,18 @@ class ArticleAdmin extends Admin
         $formMapper
             ->with('form_group.basic', ['class' => 'col-md-8', 'name' => null])
                 ->add('title', TextCounterType::class, [
-                    'label' => 'article.fields.title',
+                    'label' => 'book_collection.fields.title',
                 ])
                 ->add('description', CKEditorType::class, [
-                    'label' => 'article.fields.description',
+                    'label' => 'book_collection.fields.description',
                     'config_name' => 'advanced',
                     'required' => true,
                     'attr' => [
                         'rows' => 5,
                     ],
                 ])
-                ->add('articleHasBook', CollectionType::class, [
-                    'label' => 'article.fields.books',
+                ->add('collectionHasBook', CollectionType::class, [
+                    'label' => 'book_collection.fields.books',
                     'required' => false,
                     'constraints' => new Valid(),
                     'by_reference' => false,
@@ -121,20 +119,20 @@ class ArticleAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'orderNum',
                     'link_parameters' => ['context' => $context],
-                    'admin_code' => 'article.admin.article_has_book',
+                    'admin_code' => 'sonata.admin.book_collection_has_book',
                 ])
             ->end()
             ->with('form_group.additional', ['class' => 'col-md-4', 'name' => null])
                 ->add('isActive', null, [
-                    'label' => 'article.fields.is_active',
+                    'label' => 'book_collection.fields.is_active',
                     'required' => false,
                 ])
                 ->add('poster', ModelListType::class, [
-                    'label' => 'article.fields.poster',
+                    'label' => 'book_collection.fields.poster',
                     'required' => false,
                 ])
                 ->add('genres', ModelAutocompleteType::class, [
-                    'label' => 'article.fields.genres',
+                    'label' => 'book_collection.fields.genres',
                     'required' => false,
                     'property' => 'name',
                     'multiple' => true,
@@ -143,17 +141,17 @@ class ArticleAdmin extends Admin
                     'minimum_input_length' => 2,
                 ])
                 ->add('slug', TextType::class, [
-                    'label' => 'article.fields.slug',
+                    'label' => 'book_collection.fields.slug',
                     'required' => false,
                     'attr' => ['readonly' => !$this->getSubject()->getId() ? false : true],
                 ])
                 ->add('views', IntegerType::class, [
-                    'label' => 'article.fields.views',
+                    'label' => 'book_collection.fields.views',
                     'required' => false,
                     'attr' => ['readonly' => true],
                 ])
                 ->add('updatedAt', DateTimePickerType::class, [
-                    'label'     => 'article.fields.updated_at',
+                    'label'     => 'book_collection.fields.updated_at',
                     'required' => false,
                     'format' => 'dd-MM-YYYY HH:mm',
                     'attr' => ['readonly' => true],
