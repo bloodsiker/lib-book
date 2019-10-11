@@ -936,7 +936,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
     .grid-list .book-desc {margin:12px 0 0 0;}
     .trailer-item {height:150px !important;}
 
-    .comm-right {padding-left: 10px; text-align: center;}
+    .comm-right {padding-left: 10px;}
     .book-stats {display: block; text-align: center;}
     .book-stats .stats-item {display: block; margin-bottom: 10px}
     .book-stats time {display: block}
