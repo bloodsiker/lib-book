@@ -1,6 +1,6 @@
 services:
     book.entity_manager:
-        class: "Doctrine\\ORM\\EntityManager"
+        class: Doctrine\ORM\EntityManager
         factory: ['@doctrine', getManager]
         public: false
 

@@ -55,6 +55,13 @@ class Genre
     protected $children;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $countBook;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", nullable=false)
@@ -73,6 +80,8 @@ class Genre
      */
     public function __construct()
     {
+        $this->countBook = 0;
+
         $this->isActive = true;
         $this->createdAt = new \DateTime('now');
         $this->children = new ArrayCollection();
@@ -272,5 +281,29 @@ class Genre
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Get countBook
+     *
+     * @return int
+     */
+    public function getCountBook()
+    {
+        return $this->countBook;
+    }
+
+    /**
+     * Set countBook
+     *
+     * @param int $countBook
+     *
+     * @return $this
+     */
+    public function setCountBook(int $countBook)
+    {
+        $this->countBook = $countBook;
+
+        return $this;
     }
 }

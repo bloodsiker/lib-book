@@ -17,4 +17,5 @@ genre:
         created_at: Дата создания
         slug: Сегмент URL (slug)
         parent: Родительский жанр
+        count_book: Количество книг
         id: ID

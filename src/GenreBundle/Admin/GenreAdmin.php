@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
@@ -36,6 +37,9 @@ class GenreAdmin extends Admin
             ])
             ->add('parent', null, [
                 'label' => 'genre.fields.parent',
+            ])
+            ->add('countBook', null, [
+                'label' => 'genre.fields.count_book',
             ])
             ->add('isActive', null, [
                 'label' => 'genre.fields.is_active',
@@ -91,6 +95,11 @@ class GenreAdmin extends Admin
                     'label' => 'genre.fields.parent',
                     'required' => false,
                 ))
+                ->add('countBook', IntegerType::class, [
+                    'label' => 'genre.fields.count_book',
+                    'required' => false,
+                    'attr' => ['readonly' => true],
+                ])
                 ->add('createdAt', DateTimePickerType::class, [
                     'label'     => 'genre.fields.created_at',
                     'required' => true,

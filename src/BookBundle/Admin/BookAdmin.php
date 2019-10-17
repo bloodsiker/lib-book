@@ -4,6 +4,8 @@ namespace BookBundle\Admin;
 
 use AdminBundle\Admin\BaseAdmin as Admin;
 use AdminBundle\Form\Type\TextCounterType;
+use BookBundle\Entity\Book;
+use Doctrine\ORM\EntityManager;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -25,6 +27,12 @@ use Symfony\Component\Validator\Constraints\Valid;
  */
 class BookAdmin extends Admin
 {
+
+    /**
+     * @var EntityManager $entityManager
+     */
+    protected $entityManager;
+
     /**
      * @var array
      */
@@ -36,6 +44,16 @@ class BookAdmin extends Admin
     ];
 
     /**
+     * @param EntityManager $entityManager
+     *
+     * @return EntityManager
+     */
+    public function setEntityManager(EntityManager $entityManager)
+    {
+        return $this->entityManager = $entityManager;
+    }
+
+    /**
      * @return array
      */
     public function getFormTheme()
@@ -44,6 +62,70 @@ class BookAdmin extends Admin
             parent::getFormTheme(),
             ['BookBundle:Form:admin_fields.html.twig']
         );
+    }
+
+    /**
+     * @param Book $object
+     */
+    public function prePersist($object)
+    {
+        $this->changeEntity($object);
+    }
+
+    /**
+     * @param $object
+     */
+    public function preUpdate($object)
+    {
+        $this->changeEntity($object);
+    }
+
+    /**
+     * @param $object
+     */
+    protected function changeEntity($object)
+    {
+        $genres = $object->getGenres()->getValues();
+
+        $parents = [];
+
+        foreach ($genres as $genre) {
+            $count = $this->getCountBook($genre);
+            $genre->setCountBook($count);
+            $this->entityManager->persist($genre);
+            $this->entityManager->flush();
+
+            if ($genre->getParent()) {
+                if (!array_key_exists($genre->getParent()->getId(), $parents)) {
+                    $parents[] = $genre->getParent()->getId();
+                    $parent = $genre->getParent();
+
+                    $count = $this->getCountBook($parent);
+                    $parent->setCountBook($count);
+                    $this->entityManager->persist($parent);
+                    $this->entityManager->flush();
+                }
+            }
+        }
+    }
+
+    /**
+     * @param $genre
+     *
+     * @return int
+     */
+    protected function getCountBook($genre): int
+    {
+        $repo = $this->entityManager->getRepository(Book::class);
+
+        $qb = $repo->baseBookQueryBuilder();
+        $countBook = $repo->filterByGenre($qb, $genre)
+            ->distinct()
+            ->resetDQLPart('select')
+            ->addSelect('count(b) as count')
+            ->getQuery()->getSingleResult();
+
+        return $countBook['count'];
     }
 
     /**
