@@ -17,7 +17,7 @@
                 <ul>
                     {% for child in genre.children.getValues() %}
                         {% if child.isActive %}
-                            <li><a href="{{ genre_path(child) }}">{{ child.name }}</a>&nbsp;&nbsp;&nbsp;<nobr><span style="font-size: 13px;color: #999;">{{ child.countBook }}</span></nobr></li>
+                            <li><a href="{{ genre_path(child) }}">{{ child.name }}</a>&nbsp;&nbsp;&nbsp;<span style="font-size: 13px;color: #999;">{{ child.countBook }}</span></li>
                         {% endif %}
                     {% endfor %}
                 </ul>
