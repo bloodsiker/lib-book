@@ -18,6 +18,7 @@ order_board:
         vote: Голосы
         status: Статус
         created_at: Дата создания
+        book: Книга
         id: ID
         statuses:
             new: Новый заказ

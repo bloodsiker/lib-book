@@ -63,6 +63,14 @@ class OrderBoard
     protected $vote;
 
     /**
+     * @var \BookBundle\Entity\Book
+     *
+     * @ORM\ManyToOne(targetEntity="BookBundle\Entity\Book")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $book;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
@@ -250,6 +258,30 @@ class OrderBoard
     public function increaseVote()
     {
         return $this->vote++;
+    }
+
+    /**
+     * Get book
+     *
+     * @return \BookBundle\Entity\Book
+     */
+    public function getBook()
+    {
+        return $this->book;
+    }
+
+    /**
+     * Set book
+     *
+     * @param \BookBundle\Entity\Book $book
+     *
+     * @return $this
+     */
+    public function setBook(\BookBundle\Entity\Book $book = null)
+    {
+        $this->book = $book;
+
+        return $this;
     }
 
     /**

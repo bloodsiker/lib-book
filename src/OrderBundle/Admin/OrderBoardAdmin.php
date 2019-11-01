@@ -122,6 +122,12 @@ class OrderBoardAdmin extends Admin
                     'choices' => $this->getStatuses(),
                     'required' => true,
                 ])
+                ->add('book', ModelListType::class, [
+                    'label' => 'order_board.fields.book',
+                    'btn_add' => false,
+                    'btn_edit' => false,
+                    'required' => false,
+                ])
                 ->add('vote', IntegerType::class, [
                     'label' => 'order_board.fields.vote',
                     'required' => false,
