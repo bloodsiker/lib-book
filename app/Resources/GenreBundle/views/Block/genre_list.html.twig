@@ -12,7 +12,7 @@
 {% elseif settings.list_type == constant('GenreBundle\\Block\\ListGenreBlockService::LIST_GENRES') %}
     {% for genre in genres %}
         <div class="sub-genre">
-            <h2><a href="{{ genre_path(genre) }}">{{ genre.name }}</a>&nbsp;&nbsp;<nobr><span style="font-size: 14px;color: #999;">{{ genre.countBook }}</span></nobr></h2>
+            <h2><a href="{{ genre_path(genre) }}">{{ genre.name }}</a>&nbsp;&nbsp;<span style="font-size: 14px;color: #999;">{{ genre.countBook }}</span></h2>
             {% if genre.children.getValues()|length %}
                 <ul>
                     {% for child in genre.children.getValues() %}
