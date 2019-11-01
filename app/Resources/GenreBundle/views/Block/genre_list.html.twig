@@ -4,7 +4,7 @@
         <div class="side-cont">
             <ul class="menu-2col navi">
                 {% for genre in genres %}
-                    <li><a href="{{ genre_path(genre) }}" class="{{ app.request.get('genre') == genre.slug ? 'active' : null }}">{{ genre.name }}&nbsp;&nbsp;<nobr><span style="font-size: 12px;color: #999;">{{ genre.countBook }}</span></nobr></a></li>
+                    <li><a href="{{ genre_path(genre) }}" class="{{ app.request.get('genre') == genre.slug ? 'active' : null }}">{{ genre.name }}&nbsp;&nbsp;<span style="font-size: 12px;color: #999;">{{ genre.countBook }}</span></a></li>
                 {% endfor %}
             </ul>
         </div>
