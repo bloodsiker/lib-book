@@ -35,10 +35,11 @@
         <div class="top-nav-title">
             <a href="" class="to-top-link logo-hide" style="display: none"></a>
             <a class="to-top-link {{ path('top_100') in app.request.requestUri ? 'active' : null }}" href="{{ path('top_100') }}"><span>&nbsp;ТОП-100 книг&nbsp;</span></a>
-            <a class="to-top-link {{ path('book_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('book_list') }}"><span>Новинки книг</span></a>
+{#            <a class="to-top-link {{ path('book_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('book_list') }}"><span>Новинки книг</span></a>#}
             <a class="to-top-link {{ path('genre_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('genre_list') }}"><span>Жанры</span></a>
             <a class="to-top-link {{ path('author_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('author_list') }}"><span>Авторы</span></a>
             <a class="to-top-link {{ path('series_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('series_list') }}"><span>Серии</span></a>
+            <a class="to-top-link {{ path('collection_list') in app.request.requestUri ? 'active' : null }}" href="{{ path('collection_list') }}"><span>Подборки</span></a>
             <a class="to-top-link {{ path('last_comments') in app.request.requestUri ? 'active' : null }}" href="{{ path('last_comments') }}"><span>Последние комментарии</span></a>
             <a class="to-top-link {{ path('order_board') in app.request.requestUri ? 'active' : null }}" href="{{ path('order_board') }}"><span>Стол заказов</span></a>
         </div>

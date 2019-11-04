@@ -31,6 +31,13 @@ book_download:
     requirements:
         file_id: "\\d+"
 
+collection_category:
+    path: /collection/g_{genre}
+    defaults:
+        _controller: BookBundle:Book:collectionList
+    requirements:
+        genre: "([a-zA-Z\\-0-9\\_]+)?"
+
 collection_view:
     path: /collection/{slug}
     defaults:

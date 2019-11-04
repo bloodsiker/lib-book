@@ -36,6 +36,10 @@ sonata_block:
             contexts: [cms]
         book.block.popular:
             contexts: [cms]
+        book.block.collection_list:
+            contexts: [cms]
+        book.block.collection_genre:
+            contexts: [cms]
 
         # GenreBundle Block's
         genre.block.genre_list:

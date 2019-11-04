@@ -34,78 +34,23 @@
         </div>
     </div>
 
-    <div class="list">
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/a78/photo_1507679799987_c73779587ccf-_1_.jpg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
+{#    {{#}
+{#    sonata_block_render(#}
+{#        { 'type': 'book.block.collection_genre' },#}
+{#        {#}
+{#            'genre': genre,#}
+{#        }#}
+{#    )#}
+{#    }}#}
 
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/2a0/luchshaya_elektronnaya_kniga.jpg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
-
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/c48/pexels_photo_905874.jpeg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
-
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/2a0/luchshaya_elektronnaya_kniga.jpg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
-
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/a78/photo_1507679799987_c73779587ccf-_1_.jpg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
-
-        <div class="collection__item">
-            <a href="" class="collection__link">
-                <div class="collection__preview">
-                    <div class="collection__pic" style="background-image:url(https://images.eksmo.ru/upload/iblock/2a0/luchshaya_elektronnaya_kniga.jpg)"></div>
-                </div>
-                <div class="collection__text">
-                    <div class="collection__name">Выбор читателей: электронные книги ЭКСМО</div>
-                    <div class="collection__qty">131 книга</div>
-                </div>
-            </a>
-        </div>
-    </div>
+    {{
+    sonata_block_render(
+        { 'type': 'book.block.collection_list' },
+        {
+            'page': app.request.get('page') ? app.request.get('page') : 1,
+            'genre': genre,
+        }
+    )
+    }}
 
 </div>

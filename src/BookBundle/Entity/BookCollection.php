@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Class BookCollection
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BookBundle\Entity\BookCollectionRepository")
  * @ORM\Table(name="books_collection")
  * @ORM\HasLifecycleCallbacks
  *

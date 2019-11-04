@@ -26,3 +26,21 @@ services:
         - '@?doctrine'
       tags:
         - { name: sonata.block }
+
+    book.block.collection_list:
+      class: BookBundle\Block\ListCollectionBlockService
+      arguments:
+        - book.block.collection_list
+        - '@templating'
+        - '@?doctrine'
+      tags:
+        - { name: sonata.block }
+
+    book.block.collection_genre:
+      class: BookBundle\Block\CollectionGenreBlockService
+      arguments:
+        - book.block.collection_genre
+        - '@templating'
+        - '@?doctrine'
+      tags:
+        - { name: sonata.block }

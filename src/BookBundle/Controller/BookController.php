@@ -3,7 +3,9 @@
 namespace BookBundle\Controller;
 
 use BookBundle\Entity\Book;
+use BookBundle\Entity\BookCollection;
 use BookBundle\Entity\BookInfoDownload;
+use GenreBundle\Entity\Genre;
 use MediaBundle\Entity\MediaFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -215,9 +217,24 @@ class BookController extends Controller
     public function collectionListAction(Request $request)
     {
         $breadcrumb = $this->get('app.breadcrumb');
-        $breadcrumb->addBreadcrumb(['title' => 'Подборки']);
 
-        return $this->render('BookBundle::collection_list.html.twig');
+        $genreSlug = $request->get('genre');
+        if ($genreSlug) {
+            $repo = $this->getDoctrine()->getManager()->getRepository(Genre::class);
+            $genre = $repo->findOneBy(['slug' => $genreSlug, 'isActive' => true]);
+            $router = $this->get('router');
+
+            $breadcrumb->addBreadcrumb([
+                'title' => 'Подборки',
+                'href' => $router->generate('collection_list'),
+            ]);
+
+            $breadcrumb->addBreadcrumb(['title' => $genre->getName()]);
+        } else {
+            $breadcrumb->addBreadcrumb(['title' => 'Подборки']);
+        }
+
+        return $this->render('BookBundle::collection_list.html.twig', ['genre' => $genre ?? null]);
     }
 
     /**
@@ -229,7 +246,24 @@ class BookController extends Controller
      */
     public function collectionAction(Request $request)
     {
+        $repo = $this->getDoctrine()->getManager()->getRepository(BookCollection::class);
+        $collection = $repo->findOneBy(['slug' => $request->get('slug'), 'isActive' => true]);
 
-        return $this->render('BookBundle::collection_list.html.twig');
+        if (!$collection || !$collection->getIsActive()) {
+            throw $this->createNotFoundException(self::BOOK_404);
+        }
+
+        $router = $this->get('router');
+
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb([
+            'title' => 'Подборки',
+            'href' => $router->generate('collection_list'),
+        ]);
+        $breadcrumb->addBreadcrumb(['title' => $collection->getTitle()]);
+
+        $repo->incViewCounter($collection->getId());
+
+        return $this->render('BookBundle::collection_view.html.twig', ['bookCollection' => $collection]);
     }
 }
