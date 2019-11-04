@@ -54,7 +54,9 @@ class BookAdminController extends Controller
             $relatedNews
         );
 
-        return $this->renderJson(shuffle($result));
+        shuffle($result);
+
+        return $this->renderJson($result);
     }
 
     /**
