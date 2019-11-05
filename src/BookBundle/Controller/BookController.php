@@ -218,11 +218,17 @@ class BookController extends Controller
     {
         $breadcrumb = $this->get('app.breadcrumb');
 
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
+
         $genreSlug = $request->get('genre');
         if ($genreSlug) {
             $repo = $this->getDoctrine()->getManager()->getRepository(Genre::class);
             $genre = $repo->findOneBy(['slug' => $genreSlug, 'isActive' => true]);
             $router = $this->get('router');
+
+            $title = 'Тематические подборки книг на тему ' . $genre->getName() . ' ' . $page;
+            $description = "{$pageDesc} Лучшие подборки книг на тему {$genre->getName()}, самые читаемые и популярные издания.";
 
             $breadcrumb->addBreadcrumb([
                 'title' => 'Подборки',
@@ -232,7 +238,19 @@ class BookController extends Controller
             $breadcrumb->addBreadcrumb(['title' => $genre->getName()]);
         } else {
             $breadcrumb->addBreadcrumb(['title' => 'Подборки']);
+
+            $title = 'Тематические подборки книг на Topbook.com.ua'.$page;
+            $description = "{$pageDesc} Лучшие подборки книг на разные темы, самые читаемые и популярные издания.";
         }
+
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => $title,
+            'description' => $description,
+            'keywords' => 'тематические, подборки, книги, лучшие, популярные, читаемые',
+            'og' => [
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
 
         return $this->render('BookBundle::collection_list.html.twig', ['genre' => $genre ?? null]);
     }
@@ -261,6 +279,15 @@ class BookController extends Controller
             'href' => $router->generate('collection_list'),
         ]);
         $breadcrumb->addBreadcrumb(['title' => $collection->getTitle()]);
+
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => $collection->getTitle(),
+            'description' => $collection->getDescription(),
+            'keywords' => 'тематические, подборки, книги, лучшие, популярные, читаемые,' . $collection->getTitle(),
+            'og' => [
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
 
         $repo->incViewCounter($collection->getId());
 

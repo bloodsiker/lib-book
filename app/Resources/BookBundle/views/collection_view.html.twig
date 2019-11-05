@@ -4,7 +4,7 @@
         {{ bookCollection.description|raw }}
     </div>
 
-    {% if bookCollection.collectionHasBook|length > 2 %}
+    {% if bookCollection.collectionHasBook|length > 0 %}
         <div class="list">
             {% for item in bookCollection.collectionHasBook %}
                 <div class="collection__item_preview">
