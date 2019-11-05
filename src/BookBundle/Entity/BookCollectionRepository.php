@@ -3,6 +3,7 @@
 namespace BookBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use GenreBundle\Entity\Genre;
 
@@ -42,13 +43,22 @@ class BookCollectionRepository extends EntityRepository
      */
     public function getGenresCollection()
     {
-        $qb = $this->baseCollectionQueryBuilder();
+        $sql = 'SELECT 
+                    g.*
+                FROM genres g
+                INNER JOIN books_collection_genres bcg
+                    ON bcg.genre_id = g.id
+                WHERE g.is_active = 1
+                GROUP BY g.id';
 
-        $qb
-            ->addSelect('genre')
-            ->innerJoin('bc.genres', 'genre');
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult(Genre::class, 'g');
+        $rsm->addFieldResult('g', 'id', 'id');
+        $rsm->addFieldResult('g', 'name', 'name');
+        $rsm->addFieldResult('g', 'slug', 'slug');
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
 
-        return $qb->getQuery()->getResult();
+        return $query->getResult();
     }
 
     /**

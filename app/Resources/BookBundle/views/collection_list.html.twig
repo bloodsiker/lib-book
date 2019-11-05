@@ -1,47 +1,11 @@
 <div class="container collection-list">
     <h1>Подборки</h1>
 
-    <div class="filter_block">
-        <div class="filter_name">
-            Темы:
-        </div>
-        <div class="filter_list">
-            <div class="genres">
-                <ul class="tags">
-                    <li><a href="/genres/nauchno-obrazovatelnaya/alternativnaya-medicina" class="">Альтернативная медицина</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/analiticheskaya-himiya" class="">Аналитическая химия</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/astronomiya-i-kosmos" class="">Астрономия и Космос</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/biologiya" class="">Биология</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/biohimiya" class="">Биохимия</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/matematika" class="">Математика</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/medicina" class="">Медицина</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/obshchestvoznanie" class="">Обществознание</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/organicheskaya-himiya" class="">Органическая химия</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/pedagogika" class="">Педагогика</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/psihologiya" class="">Психология</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/religiovedenie" class="">Религиоведение</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/seks-i-semeynaya-psihologiya" class="">Секс и семейная психология</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/tehnicheskie-nauki" class="">Технические науки</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/uchebniki" class="">Учебники</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/fizika" class="">Физика</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/fizicheskaya-himiya" class="">Физическая химия</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/himiya" class="">Химия</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/ekologiya" class="">Экология</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/yazykoznanie" class="">Языкознание</a></li>
-                    <li><a href="/genres/nauchno-obrazovatelnaya/sociologiya" class="">Социология</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-{#    {{#}
-{#    sonata_block_render(#}
-{#        { 'type': 'book.block.collection_genre' },#}
-{#        {#}
-{#            'genre': genre,#}
-{#        }#}
-{#    )#}
-{#    }}#}
+    {{
+    sonata_block_render(
+        { 'type': 'book.block.collection_genre' }
+    )
+    }}
 
     {{
     sonata_block_render(

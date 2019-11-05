@@ -4,8 +4,6 @@ namespace BookBundle\Block;
 
 use BookBundle\Entity\BookCollection;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -59,8 +57,7 @@ class CollectionGenreBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'genre'         => null,
-            'template'      => 'BookBundle:Block:collection_list.html.twig',
+            'template'      => 'BookBundle:Block:collection_genres.html.twig',
         ]);
     }
 
@@ -83,8 +80,6 @@ class CollectionGenreBlockService extends AbstractAdminBlockService
         $repository = $this->doctrine->getRepository(BookCollection::class);
 
         $genres = $repository->getGenresCollection();
-
-        dump($genres);die;
 
         return $this->renderResponse($blockContext->getTemplate(), [
             'genres'      => $genres,
