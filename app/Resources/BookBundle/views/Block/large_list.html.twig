@@ -24,7 +24,7 @@
         </div>
         <div class="book-text">
 
-            {% set number = settings['series'] and book.seriesNumber ? '#'~book.seriesNumber : null %}
+            {% set number = settings['series'] is defined and settings['series'] and book.seriesNumber ? '#'~book.seriesNumber : null %}
             <a class="book-title" href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}" itemprop="name">{{ book.name }} {{ number }}</a>
 
             <div class="book-text-inner">
