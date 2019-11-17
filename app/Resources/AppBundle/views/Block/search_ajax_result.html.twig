@@ -1,7 +1,7 @@
 {% if books %}
     {% for book in books %}
         <a href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}" class="search-item">
-            <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}">
+            <img class="lazyload" data-src="{{ asset(book.poster.path) }}" alt="{{ book.name }}">
             <div>
                 <h3>{{ replace_highlight(book.name, search)|raw }}</h3>
                 <span><b>Автор(ы):</b>

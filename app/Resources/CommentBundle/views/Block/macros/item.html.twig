@@ -10,10 +10,10 @@
                 <div class="comm-left">
                     {% if show_title %}
                         <a href="{{ path('book_view', { 'slug': comment.book.slug, 'id': comment.book.id }) }}">
-                            <img src="{{ asset(comment.book.poster.path) }}" alt="{{ comment.book.name }}">
+                            <img class="lazyload" data-src="{{ asset(comment.book.poster.path) }}" alt="{{ comment.book.name }}">
                         </a>
                     {% else %}
-                        <img src="{{ comment.user ? comment.user.id : asset('bundles/app/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : comment.userName }}"/>
+                        <img class="lazyload" data-src="{{ comment.user ? comment.user.id : asset('bundles/app/assets/images/noavatar.png') }}" alt="{{ comment.user ? comment.user.username : comment.userName }}"/>
                     {% endif %}
                 </div>
                 <div class="comm-right">

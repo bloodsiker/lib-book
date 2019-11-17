@@ -20,7 +20,7 @@
                     </span>
                 </div>
             </div>
-            <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image" />
+            <img class="lazyload" data-src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image" />
         </div>
         <div class="book-text">
 

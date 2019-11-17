@@ -7,7 +7,7 @@
 
         {% if author.biography %}
             <div class="author-body clearfix">
-                <img src="{{ author.photo ? asset(author.photo.path) : asset('bundles/app/assets/images/unknown-person.jpg') }}" width="200" height="auto" align="left" alt="{{ author.name|raw }}">
+                <img class="lazyload" data-src="{{ author.photo ? asset(author.photo.path) : asset('bundles/app/assets/images/unknown-person.jpg') }}" width="200" height="auto" align="left" alt="{{ author.name|raw }}">
                 {{ author.biography|raw }}
             </div>
         {% endif %}

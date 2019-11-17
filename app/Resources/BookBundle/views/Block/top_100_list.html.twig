@@ -3,7 +3,7 @@
         <li class="tops-item">
             <a href="{{ path('book_view', { 'slug': book.slug, 'id': book.id }) }}">
                 <div class="tops-img img-box">
-                    <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}"/>
+                    <img class="lazyload" data-src="{{ asset(book.poster.path) }}" alt="{{ book.name }}"/>
                 </div>
             </a>
         </li>

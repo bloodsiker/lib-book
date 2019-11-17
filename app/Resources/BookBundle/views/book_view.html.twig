@@ -7,7 +7,7 @@
                 <div class="page-col-left">
 
                     <div class="m-img">
-                        <img src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image"/>
+                        <img class="lazyload" data-src="{{ asset(book.poster.path) }}" alt="{{ book.name }}" itemprop="image"/>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                                     <a class="rel-book img-box"
                                        href="{{ path('book_view', { 'id': relate.relatedBook.id, 'slug': relate.relatedBook.slug }) }}">
                                         <img data-src="{{ asset(relate.relatedBook.poster.path) }}"
-                                             alt="Если один уйдет" class="lazyOwl"/>
+                                             alt="Если один уйдет" class=" lazyload"/>
                                         <div class="rel-book-title">{{ relate.relatedBook.name }}</div>
                                     </a>
                                 {% endfor %}
