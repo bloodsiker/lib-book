@@ -245,7 +245,7 @@ class Author
      *
      * @return Author
      */
-    public function setIsAllowDownload(bool $isAllowDownload)
+    public function setIsAllowDownload($isAllowDownload)
     {
         $this->isAllowDownload = $isAllowDownload;
 
@@ -328,7 +328,7 @@ class Author
      *
      * @return $this
      */
-    public function setBiography(string $biography)
+    public function setBiography($biography = null)
     {
         $this->biography = $biography;
 
