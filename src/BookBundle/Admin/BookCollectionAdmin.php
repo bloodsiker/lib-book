@@ -60,6 +60,9 @@ class BookCollectionAdmin extends Admin
                 'label' => 'book_collection.fields.is_active',
                 'editable'  => true,
             ])
+            ->add('views', null, [
+                'label' => 'book_collection.fields.views',
+            ])
             ->add('createdAt', null, [
                 'label' => 'book_collection.fields.created_at',
             ])

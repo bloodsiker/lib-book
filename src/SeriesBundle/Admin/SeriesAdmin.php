@@ -73,6 +73,22 @@ class SeriesAdmin extends Admin
     }
 
     /**
+     * @return array
+     */
+    public function getPersistentParameters()
+    {
+        if (!$this->hasRequest()) {
+            return [];
+        }
+
+        $parameters = array_filter($this->getRequest()->query->all(), function ($param) {
+            return !is_array($param);
+        });
+
+        return $parameters;
+    }
+
+    /**
      * @param RouteCollection $collection
      */
     protected function configureRoutes(RouteCollection $collection)

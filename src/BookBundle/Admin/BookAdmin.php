@@ -7,6 +7,7 @@ use AdminBundle\Form\Type\TextCounterType;
 use BookBundle\Entity\Book;
 use Doctrine\ORM\EntityManager;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use SeriesBundle\Entity\Series;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -313,10 +314,14 @@ class BookAdmin extends Admin
                 ->add('seriesPublishing', ModelListType::class, [
                     'label' => 'book.fields.series_publishing',
                     'required' => false,
+                ], [
+                    'link_parameters' => ['type' => Series::TYPE_PUBLISHING]
                 ])
                 ->add('series', ModelListType::class, [
                     'label' => 'book.fields.series',
                     'required' => false,
+                ], [
+                    'link_parameters' => ['type' => Series::TYPE_AUTHOR]
                 ])
                 ->add('seriesNumber', IntegerType::class, [
                     'label' => 'book.fields.series_number',
