@@ -839,7 +839,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .comm-author {font-size:14px; font-weight:bold; margin:0 10px 0 0; color:#232323;}
 .comm-author a {color:#232323;}
 .comm-date {color:#aaaaaa; font-size:14px;}
-.comm-text {margin:10px 0; min-height:20px; color:#626262;}
+.comm-text {margin:10px 0; min-height:20px; color:#626262; word-wrap:break-word}
 .signature {font:italic 11px Georgia, "Times New Roman", Times, serif; margin-top:10px; padding-top:10px; border-top:1px dashed #e3e3e3;}
 .comm-bottom-info {}
 .comm-bottom-info ul {text-align:right; display: flex; flex-flow: row wrap}
