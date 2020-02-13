@@ -136,6 +136,16 @@
     {#{% endif %}#}
 {#{%- endblock radio_widget %}#}
 
+{% block sonata_admin_book_rating_text_widget %}
+    <div class="btn-group">
+        <div class="btn btn-success">+{{ sonata_admin.admin.subject.ratePlus }}</div>
+        <div class="btn btn-danger">{{ sonata_admin.admin.subject.rateMinus ? '-'~sonata_admin.admin.subject.rateMinus : sonata_admin.admin.subject.rateMinus }}</div>
+        <div class="btn btn-default">=</div>
+        {% set resultRating = sonata_admin.admin.subject.ratePlus - sonata_admin.admin.subject.rateMinus %}
+        <div class="btn btn-{{ resultRating > -1 ? 'success' : 'danger' }}">{{ resultRating }}</div>
+    </div>
+{% endblock %}
+
 {% block sonata_admin_book_tags_sonata_type_model_autocomplete_widget %}
     {% include '@SonataAdmin/Form/Type/sonata_type_model_autocomplete.html.twig' %}
 
