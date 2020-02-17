@@ -143,6 +143,7 @@
         <div class="btn btn-default">=</div>
         {% set resultRating = sonata_admin.admin.subject.ratePlus - sonata_admin.admin.subject.rateMinus %}
         <div class="btn btn-{{ resultRating > -1 ? 'success' : 'danger' }}">{{ resultRating }}</div>
+        <div class="hidden">{{ form_widget(form) }}</div>
     </div>
 {% endblock %}
 
