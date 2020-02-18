@@ -2545,16 +2545,16 @@
         },
         {
             "name": "oneup/uploader-bundle",
-            "version": "2.1.1",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
-                "reference": "fa28731786627e4378a205e6c2a265c404e19204"
+                "reference": "a6011449b716f163fe1ae323053077e59212350c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/fa28731786627e4378a205e6c2a265c404e19204",
-                "reference": "fa28731786627e4378a205e6c2a265c404e19204",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/a6011449b716f163fe1ae323053077e59212350c",
+                "reference": "a6011449b716f163fe1ae323053077e59212350c",
                 "shasum": ""
             },
             "require": {
@@ -2625,7 +2625,7 @@
                 "plupload",
                 "upload"
             ],
-            "time": "2018-12-03T08:32:12+00:00"
+            "time": "2020-02-04T10:37:36+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -5649,6 +5649,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2018-08-13T20:36:59+00:00"
         },
         {
@@ -5703,6 +5704,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         },
         {
@@ -5768,6 +5770,7 @@
                 "test",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-diagnostics",
             "time": "2018-09-17T16:14:52+00:00"
         }
     ],
@@ -5824,6 +5827,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
+            "abandoned": "symfony/maker-bundle",
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
