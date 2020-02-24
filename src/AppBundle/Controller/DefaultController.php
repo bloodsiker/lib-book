@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use BookBundle\Entity\Book;
+use BookBundle\Entity\BookCollection;
 use GenreBundle\Entity\Genre;
 use SeriesBundle\Entity\Series;
 use ShareBundle\Entity\Author;
@@ -98,11 +99,22 @@ class DefaultController extends Controller
         $router = $this->get('router');
         $urls[] = ['loc' => $router->generate('index'), 'changefreq' => 'weekly', 'priority' => '1.0'];
         $urls[] = ['loc' => $router->generate('top_100'), 'changefreq' => 'weekly', 'priority' => '0.75'];
+        $urls[] = ['loc' => $router->generate('collection_list'), 'changefreq' => 'weekly', 'priority' => '0.75'];
 
         $urls[] = ['loc' => $router->generate('book_list'), 'changefreq' => 'weekly', 'priority' => '0.75'];
         $books = $em->getRepository(Book::class)->findBy(['isActive' => true]);
         foreach ($books as $book) {
             $urls[] = ['loc' => $router->generate('book_view', ['id' => $book->getId(), 'slug' => $book->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.75'];
+        }
+
+        $collectionsGenres = $em->getRepository(BookCollection::class)->getGenresCollection();
+        foreach ($collectionsGenres as $collectionsGenre) {
+            $urls[] = ['loc' => $router->generate('collection_category', ['genre' => $collectionsGenre->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.75'];
+        }
+
+        $collections = $em->getRepository(BookCollection::class)->findBy(['isActive' => true]);
+        foreach ($collections as $collection) {
+            $urls[] = ['loc' => $router->generate('collection_view', ['slug' => $collection->getSlug()]), 'changefreq' => 'weekly', 'priority' => '0.5'];
         }
 
         $years = $em->getRepository(Book::class)->getUniqueYear();
