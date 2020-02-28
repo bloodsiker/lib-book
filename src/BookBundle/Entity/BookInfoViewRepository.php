@@ -50,6 +50,27 @@ class BookInfoViewRepository extends EntityRepository
     }
 
     /**
+     * @param QueryBuilder $qb
+     * @param int          $difference
+     *
+     * @return QueryBuilder
+     *
+     * @throws \Exception
+     */
+    public function filterPopularByMonth(QueryBuilder $qb, int $difference = 0): QueryBuilder
+    {
+        $firstDay = (new \DateTime("first day of -$difference month midnight"))->format('Y-m-d');
+        $lastDay = (new \DateTime("last day of -$difference month midnight"))->format('Y-m-d');
+
+        $qb
+            ->andWhere('biv.viewAt BETWEEN :first AND :last')
+            ->setParameter('first', $firstDay)
+            ->setParameter('last', $lastDay);
+
+        return $qb;
+    }
+
+    /**
      * Returns current date and time, rounded to nearest minute
      *
      * @return \DateTime

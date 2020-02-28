@@ -62,9 +62,9 @@ class PopularBooksBlockService extends AbstractAdminBlockService
         $resolver->setDefaults([
             'list_type'        => null,
             'items_count'      => 20,
-            'popular'          => false,
-            'popular_days_ago' => 30,
+            'popular_days_ago' => 0,
             'top_book'         => false,
+            'by_month'         => false,
             'template'         => self::POPULAR_LIST,
         ]);
     }
@@ -91,9 +91,12 @@ class PopularBooksBlockService extends AbstractAdminBlockService
 
         $qb = $repository->baseBookInfoViewQueryBuilder();
 
-        $popularDaysAgo = $blockContext->getSetting('popular_days_ago');
-        if ($blockContext->getSetting('popular') && $popularDaysAgo) {
-            $repository->filterPopularByDaysAgo($qb, (int) $popularDaysAgo);
+        if ($blockContext->getSetting('popular_days_ago')) {
+            $repository->filterPopularByDaysAgo($qb, (int) $blockContext->getSetting('popular_days_ago'));
+        }
+
+        if ($blockContext->getSetting('by_month')) {
+            $repository->filterPopularByMonth($qb, (int) 0);
         }
 
         $result = $qb->setFirstResult(0)
