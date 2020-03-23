@@ -32,13 +32,6 @@
         {% endblock %}
         <link rel="search" type="application/opensearchdescription+xml" href="{{ url('opensearch') }}" title="TopBook" />
 
-		{#{{#}
-            {#sonata_block_render(#}
-                {#{ 'type': 'app.block.service.get_state_value' },#}
-                {#{ 'key': 'custom_meta_tags' }#}
-            {#)#}
-		{#}}#}
-
         {% block stylesheets %}
             {% if app.debug is defined and app.debug %}
                 {#<link rel="stylesheet" type="text/css" href="{{ asset('public/css/styles.css') }}" />#}
