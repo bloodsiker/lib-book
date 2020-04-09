@@ -207,9 +207,9 @@ class AppExtension extends \Twig_Extension
             return $this->translator->trans('app.datetime.yesterday', [], 'AppBundle');
         }
 
-        if (true === $hideYearIfCurrent && $now->format('Y') !== $datetime->format('Y')) {
-            $formatDay .= ' y';
-        }
+//        if (true === $hideYearIfCurrent && $now->format('Y') !== $datetime->format('Y')) {
+//            $formatDay .= ' y';
+//        }
 
         return datefmt_format_object($datetime, $formatDay);
     }
