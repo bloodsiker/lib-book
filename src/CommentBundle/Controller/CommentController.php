@@ -44,6 +44,32 @@ class CommentController extends Controller
     /**
      * @param Request $request
      *
+     * @return Response
+     *
+     * @Cache(maxage=60, public=true)
+     */
+    public function swapBookAction(Request $request)
+    {
+        $page = $request->get('page') ? " | Страница {$request->get('page', 1)}" : null;
+        $pageDesc = $request->get('page') ? "Страница {$request->get('page', 1)} |" : null;
+        $breadcrumb = $this->get('app.breadcrumb');
+        $breadcrumb->addBreadcrumb(['title' => 'Обмен книгами']);
+
+        $this->get('app.seo.updater')->doMagic(null, [
+            'title' => 'Обмен книгами | TopBook.com.ua - скачать книги бесплатно и без регистрации в fb2, epub, pdf, txt форматах'.$page,
+            'description' => "{$pageDesc} Чтобы попросить книгу, укажите название книги и автора.",
+            'keywords' => 'название, книги, автора, без регистрации, попросить, топбук',
+            'og' => [
+                'og:url' => $request->getSchemeAndHttpHost(),
+            ],
+        ]);
+
+        return $this->render('CommentBundle::swap_list.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     *
      * @return JsonResponse
      */
     public function commentVoteAction(Request $request)

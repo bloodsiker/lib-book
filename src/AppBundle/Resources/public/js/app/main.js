@@ -15,6 +15,35 @@ $(window).scroll(function () {
     }
 });
 
+var toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote'],
+    //['code-block'],
+
+    //[{ 'header': 1 }, { 'header': 2 }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    //[{ 'script': 'sub'}, { 'script': 'super' }],
+    //[{ 'indent': '-1'}, { 'indent': '+1' }],
+    //[{ 'direction': 'rtl' }],
+
+    //[{ 'size': ['small', false, 'large', 'huge'] }],
+    //[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ 'color': [] }, { 'background': [] }],
+    //[{ 'font': [] }],
+    [{ 'align': [] }],
+
+    ['clean']
+];
+
+var quill = new Quill('#content-editor', {
+    modules: {
+        toolbar: toolbarOptions
+    },
+    theme: 'snow',
+    placeholder: 'Сообщение...',
+});
+
 // Ajax voted book
 function voteBook(vote, bookId, url) {
     $.ajax({
@@ -141,8 +170,10 @@ $(document).ready(function () {
         var name_input = $('input[name="name"]'),
             name = name_input.val(),
             email = $('input[name="email"]').val(),
-            comment_input = $('textarea[name="comment"]'),
-            comment = comment_input.val(),
+            // comment_input = $('textarea[name="comment"]'),
+            comment_input = $('#content-editor > .ql-editor'),
+            // comment = comment_input.val(),
+            comment = comment_input.html(),
             bookId = $('input[name="book"]').val(),
             url = $(this).data('ajax-url'),
             error = false;
@@ -173,7 +204,54 @@ $(document).ready(function () {
                 success: function (response) {
                     $('.comments-items').find('.comm-container').first().before(response);
                     $('#add-comment').trigger("reset");
+                    comment_input.html('');
                     showAlert('Комментарий добавлен', 'success');
+                }
+            });
+        }
+    });
+
+    // Add swap
+    $('#add-swap').submit(function (e) {
+        e.preventDefault();
+        var name_input = $('input[name="name"]'),
+            name = name_input.val(),
+            email = $('input[name="email"]').val(),
+            // content_input = $('textarea[name="content"]'),
+            content_input = $('#content-editor > .ql-editor'),
+            // content = content_input.val(),
+            content = content_input.html(),
+            url = $(this).data('ajax-url'),
+            error = false;
+
+        if (!name) {
+            name_input.css('border-color', 'red');
+            showAlert('Имя обьязательное для заполнения', 'error');
+            error = true;
+        } else {
+            name_input.removeAttr('style');
+        }
+
+        if (!content) {
+            content_input.css('border-color', 'red');
+            showAlert('Текст сообщения обьязательно для заполнения', 'error');
+            error = true;
+        } else {
+            content_input.removeAttr('style');
+        }
+
+        if (error) {
+            return false;
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { name: name, email: email, content: content },
+                success: function (response) {
+                    $('.comments-items').find('.comm-container').first().before(response);
+                    $('#add-swap').trigger("reset");
+                    content_input.html('');
+                    showAlert('Сообщение добавлено', 'success');
                 }
             });
         }

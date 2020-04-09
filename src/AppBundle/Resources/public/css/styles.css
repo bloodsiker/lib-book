@@ -141,6 +141,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .to-top-link span {margin:0 10px; font-weight: 500}
 .to-top-link:not(.logo-hide):hover {background-color:#fed718; border-bottom: 3px solid #000}
 .to-top-link.active {background-color:#fed718; border-bottom: 3px solid #000}
+.fixed > .top-nav-title >.to-top-link{padding: 0 16px;}
 
 /* SLIDER
 ----------------------------------------------- */
@@ -836,6 +837,8 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .comm-top-info {}
 .comm-info-line {position:relative; padding-right:120px;}
 .comm-author, .comm-date {float:left; color:#888; font-size:10px; display:inline-block;}
+.comm-email {color:#888; display:block; clear:both;}
+.comm-email a {color:#888; font-size:12px;}
 .comm-author {font-size:14px; font-weight:bold; margin:0 10px 0 0; color:#232323;}
 .comm-author a {color:#232323;}
 .comm-date {color:#aaaaaa; font-size:14px;}

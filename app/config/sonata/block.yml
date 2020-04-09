@@ -69,6 +69,10 @@ sonata_block:
             contexts: [cms]
         comment.block.add_comment:
             contexts: [cms]
+        comment.block.list_swaps:
+            contexts: [cms]
+        comment.block.add_swap:
+            contexts: [cms]
 #
 #        # UserBundle's Blocks
 #        sonata.user.block.account: # used to display menu option (login option)
