@@ -54,8 +54,6 @@ class MediaNamer implements NamerInterface
     {
         $date = new \DateTime();
         list($year, $month) = explode('/', $date->format('Y/m'));
-//        $year = $date->format('Y');
-//        $month = $date->format('m');
         if (null !== $this->pathImage) {
             $pattern = ['[YEAR]', '[MONTH]', '[FILE]'];
             $replace = [$year, $month, $name];

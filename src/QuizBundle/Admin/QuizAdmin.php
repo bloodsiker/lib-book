@@ -148,7 +148,8 @@ class QuizAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions'   => [
-                    'delete'    => [],
+                    'edit'   => [],
+                    'delete' => [],
                 ],
             ])
         ;

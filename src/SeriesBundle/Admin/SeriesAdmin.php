@@ -127,6 +127,11 @@ class SeriesAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'series.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

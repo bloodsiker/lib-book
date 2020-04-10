@@ -48,6 +48,11 @@ class SwapAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'swap.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

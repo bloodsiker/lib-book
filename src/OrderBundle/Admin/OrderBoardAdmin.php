@@ -68,6 +68,11 @@ class OrderBoardAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'order_board.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

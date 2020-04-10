@@ -47,6 +47,11 @@ class GenreAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'genre.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

@@ -54,6 +54,11 @@ class CommentAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'comment.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 

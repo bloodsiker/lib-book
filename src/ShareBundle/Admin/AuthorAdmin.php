@@ -61,6 +61,11 @@ class AuthorAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'author.fields.created_at',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 
