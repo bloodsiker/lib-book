@@ -36,7 +36,7 @@ var toolbarOptions = [
     ['clean']
 ];
 
-var quill = new Quill('#content-editor', {
+const quill = new Quill('#content-editor', {
     modules: {
         toolbar: toolbarOptions
     },
@@ -178,6 +178,8 @@ $(document).ready(function () {
             url = $(this).data('ajax-url'),
             error = false;
 
+        var delta = quill.getContents();
+
         if (!name) {
             name_input.css('border-color', 'red');
             showAlert('Имя обьязательное для заполнения', 'error');
@@ -186,7 +188,7 @@ $(document).ready(function () {
             name_input.removeAttr('style');
         }
 
-        if (!comment) {
+        if (!delta.ops[0].insert) {
             comment_input.css('border-color', 'red');
             showAlert('Текст комментария обьязательно для заполнения', 'error');
             error = true;
@@ -224,6 +226,8 @@ $(document).ready(function () {
             url = $(this).data('ajax-url'),
             error = false;
 
+        var delta = quill.getContents();
+
         if (!name) {
             name_input.css('border-color', 'red');
             showAlert('Имя обьязательное для заполнения', 'error');
@@ -232,7 +236,7 @@ $(document).ready(function () {
             name_input.removeAttr('style');
         }
 
-        if (!content) {
+        if (!delta.ops[0].insert) {
             content_input.css('border-color', 'red');
             showAlert('Текст сообщения обьязательно для заполнения', 'error');
             error = true;

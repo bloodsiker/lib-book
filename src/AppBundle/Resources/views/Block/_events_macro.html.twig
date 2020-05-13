@@ -1,8 +1,0 @@
-{% macro event_title(event) %}
-    <em class="text__photo__sub-title">{{ event.date|format_date('d MMMM yyyy') }}</em>
-    <span class="text__photo__main-title">{{ event.translate.title }}</span>
-{% endmacro %}
-
-{% macro event_url(event) %}
-    {{- path('event_gallery', {'slug': event.slug}) -}}
-{% endmacro %}

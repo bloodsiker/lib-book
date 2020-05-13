@@ -1,4 +1,0 @@
-{% if htmlPage %}
-    {{ include(template_from_string(preg_replace('/{{(.)+?}}/', '', preg_replace('/{%((?!( |)include ).)+?%}/' , '', htmlPage.getHtml())))) }}
-{% endif %}
-

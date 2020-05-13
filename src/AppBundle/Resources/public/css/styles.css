@@ -851,6 +851,7 @@ button, .overlay-close, .actor-img, .actor-item img, .side-book-img img, .show-l
 .comm-bottom-info ul li a {font-size:12px;}
 .comm-bottom-info ul li i {margin-right:10px;}
 .comments-tree-list .comments-tree-list {background-color:#f6f6f6; padding-top:15px; margin-top:-15px;}
+#content-editor {height: 120px;}
 
 .comm-rate {position:absolute; right:0; top:-8px; line-height:30px; border-radius:4px;}
 .comm-rate span.ratingtypeplusminus {display:block; padding:0 30px;  color:#444;

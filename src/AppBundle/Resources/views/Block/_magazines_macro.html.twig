@@ -1,8 +1,0 @@
-{# build magazine URL #}
-{%- macro magazine_url(magazine) -%}
-    {{ path('magazine', {'slug': magazine.slug}) }}
-{%- endmacro -%}
-
-{% macro magazine_title(magazine) %}
-    {{ magazine.releasedAt|format_date('MMM Y') }}
-{% endmacro %}
